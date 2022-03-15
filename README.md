@@ -1,4 +1,4 @@
-# dfuse Documentation
+# Firehose Documentation
 
 We welcome contributions to improve the documentation. Simply open a pull request to start collaborating!
 
