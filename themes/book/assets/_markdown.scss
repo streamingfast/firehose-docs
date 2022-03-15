@@ -1,0 +1,138 @@
+@import 'variables';
+
+.markdown {
+  h1, h2, h3, h4, h5 {
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+  .admonition-note {
+    background-color: $gray-100;
+    border-left-color: $color-link;
+    .admonition-title {
+      color: $color-link;
+    }
+    pre code {
+      color: $ternary-1000;
+      white-space: pre-wrap;
+    }
+  }
+
+  h4 {
+    border-bottom: 1px solid hsl(231.3, 20%, 85%);
+    margin-bottom: 30px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 14px;
+    padding-bottom: 5px;
+    padding-left: 3px;
+  }
+
+  // remove margin at the beginning of page
+  > :first-child {
+    margin-top: 0;
+  }
+
+  b, optgroup, strong {
+    font-weight: bolder;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      color: $color-link-hover;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  code {
+    padding: 1px 4px;
+    background: $ternary-200;
+    border-radius: 4px;
+    font-size: .875em;
+    font-weight: bold;
+    color: $ternary-900;
+  }
+  .section.bg-ternary-100 code {
+    background: $ternary-300;
+  }
+
+  pre {
+    padding: $padding-16;
+    background: none;
+    border-radius: none;
+    overflow-x: auto;
+
+    code {
+      color: white;
+      padding: 0;
+      background: none;
+    }
+  }
+
+  blockquote {
+    margin: $padding-16 0;
+    padding: $padding-4 ($padding-16 - $padding-4); //to keep total left space 16dp
+
+    border-left: $padding-4 solid $gray-200;
+    border-radius: $border-radius;
+
+    :first-child { margin-top: 0; }
+    :last-child { margin-bottom: 0; }
+  }
+
+  table {
+    overflow: auto;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-top: $padding-16;
+    margin-bottom: $padding-16;
+
+    tr th, tr td {
+      padding: $padding-8 $padding-16;
+      line-height: 1;
+      border: $padding-1 solid $gray-200;
+    }
+
+    tr:nth-child(2n) {
+      background: $gray-100;
+    }
+
+    code {
+      word-break: keep-all;
+    }
+  }
+
+  hr {
+    height: $padding-1;
+    border: none;
+    background: $gray-200;
+    margin: 30px 0;
+  }
+
+  ul, ol {
+    padding-left: $padding-16 * 2;
+  }
+  ul {
+    list-style: square;
+    ul {
+      list-style: square;
+    }
+  }
+  dl {
+    // padding-left: $padding-16;
+    dt {
+      font-weight: bolder;
+      margin-top: $padding-16;
+    }
+
+    dd {
+      margin-left: $padding-16 * 2;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+
+<head>
+  {{ partial "docs/html-head" . }}
+  {{ partial "docs/inject/head" . }}
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" name="menu-secondary" id="menu-control" />
+
+  <main class="flex container">
+    {{ block "nav" . }}{{ partial "site-nav.html" . }}{{ end }}
+
+    <div class="book-page full-width fixed">
+      {{- .Content -}}
+    </div>
+
+  </main>
+
+  {{ partial "docs/inject/body" . }}
+  {{ template "_internal/google_analytics_async.html" . }}
+
+</body>
+
+</html>

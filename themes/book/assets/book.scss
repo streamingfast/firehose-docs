@@ -1,0 +1,385 @@
+@import "normalize";
+@import "variables";
+@import "utils";
+@import "markdown";
+@import "shortcodes";
+
+html {
+  font-size: $font-size-base;
+  letter-spacing: 0.33px;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  min-width: $body-min-width;
+  overflow-x: hidden;
+}
+
+body {
+  color: $body-font-color;
+  background: $body-background;
+
+  font-family: sans-serif;
+  font-weight: $body-font-weight;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  box-sizing: border-box;
+  * {
+    box-sizing: inherit;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: $body-font-weight;
+}
+
+a {
+  text-decoration: none;
+  color: $color-link;
+  &:visited {
+    color: $color-link;
+  }
+  &:hover {
+    color: $color-link-hover;
+  }
+}
+
+img {
+  vertical-align: baseline;
+}
+
+aside nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  .nav-expand-control {
+    display: none; // hides the checkbox
+
+    // Hides the collapsed menus
+    &:not(:checked) ~ ul {
+      display: none;
+    }
+  }
+
+  li {
+    margin: 1em 0;
+  }
+
+  a {
+    display: block;
+
+    &:hover {
+      color: $color-visited-link;
+    }
+    &.active {
+      font-weight: bold;
+    }
+  }
+
+  span,
+  label {
+/*     color: hsl(231.3, 10%, 70%); */
+  }
+
+  label[for] {
+    cursor: pointer;
+  }
+
+  ul {
+    padding-left: $padding-16;
+  }
+}
+
+ul.pagination {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+
+  .page-item a {
+    padding: $padding-16;
+  }
+}
+
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+}
+
+.book-brand {
+  margin-top: 0;
+
+  img {
+    height: 1.5em;
+    width: auto;
+    vertical-align: middle;
+    margin-right: $padding-8;
+  }
+}
+
+.book-menu {
+  flex: 0 0 $menu-width;
+  font-size: $font-size-14;
+
+  nav {
+    width: $menu-width;
+    padding: 2rem 1rem;
+
+    & > h2 {
+      margin-top: 0;
+    }
+
+    @include fixed;
+  }
+
+  @include dark-links;
+}
+
+.book-section-flat {
+  margin-bottom: $padding-16 * 2;
+
+  &:not(:first-child) {
+    margin-top: $padding-16 * 2;
+  }
+
+  > a,
+  > span,
+  > label {
+    font-weight: bolder;
+  }
+
+  > ul {
+    padding-left: 0;
+  }
+}
+
+.book-page {
+  min-width: $body-min-width;
+  flex-grow: 1;
+  padding: 120px 5rem 5rem;
+  max-width: 60rem;
+
+  ul li, ol li {
+    margin-bottom: 10px;
+  }
+}
+
+.book-header {
+  margin-bottom: $padding-16;
+  display: none;
+}
+
+.book-search {
+  position: relative;
+  margin: $padding-16 0;
+  border-bottom: 1px solid transparent;
+
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+
+  input {
+    width: 100%;
+    padding: $padding-8;
+
+    border: 0;
+    border-radius: $padding-4;
+
+    background: $gray-100;
+
+    &:required + .book-search-spinner {
+      display: block;
+    }
+  }
+
+  .book-search-spinner {
+    position: absolute;
+    margin: $padding-8;
+    right: 0;
+    top: 0;
+
+    width: $padding-16;
+    height: $padding-16;
+
+    border: $padding-1 solid transparent;
+    border-top-color: $body-font-color;
+    border-radius: 50%;
+
+    @include spin(1s);
+  }
+}
+
+.book-toc {
+  flex: 0 0 $toc-width;
+  font-size: $font-size-12;
+
+  nav {
+    width: $toc-width;
+    padding: $padding-16;
+    padding-top: 5rem;
+
+    @include fixed;
+  }
+
+  img {
+    height: 1em;
+  }
+
+  nav > ul > li:first-child {
+    margin-top: 0;
+  }
+
+  nav > ul {
+    border-left: 1px solid $color-link;
+    padding: 5px 0 2px 15px;
+  }
+
+  // Classes to hide nested levels of ToC (can be replaced by @for, but it's more clear like this)
+  &.level-1 ul ul,
+  &.level-2 ul ul ul,
+  &.level-3 ul ul ul ul,
+  &.level-4 ul ul ul ul ul,
+  &.level-5 ul ul ul ul ul ul,
+  &.level-6 ul ul ul ul ul ul ul {
+    display: none;
+  }
+}
+
+.book-footer {
+  font-size: $font-size-14;
+  border-top: 1px solid $gray-200;
+  padding-top: 30px;
+  margin-top: 80px;
+
+  img {
+    height: 1em;
+  }
+
+  .git-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.book-posts {
+  min-width: $body-min-width;
+  max-width: $body-min-width * 2;
+  flex-grow: 1;
+  padding: $padding-16;
+
+  article {
+    padding-bottom: $padding-16;
+  }
+}
+
+.book-home {
+  padding: $padding-16;
+}
+
+// Responsive styles
+aside nav,
+.book-page,
+.book-posts,
+.markdown {
+  transition: 0.2s ease-in-out;
+  transition-property: transform, margin-left, opacity;
+  will-change: transform, margin-left;
+}
+
+.book-tabs {
+  position: relative;
+}
+.markdown-inner:hover .copy-code-button {
+  display:flex;
+}
+.copy-code-button {
+  display:none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid $primary-1000;
+  height: 31px;
+  border-radius: 15px;
+  padding: 0 15px;
+  color: #34cfbd;
+  font-weight: 700;
+  position: absolute;
+  top: 53px;
+  right: 15px;
+  cursor: pointer;
+  outline: 0;
+  background: rgba(11,36,59,.7);
+  align-items: center;
+
+  &:hover {
+    background-color: $primary-1000;
+    color:$white;
+  }
+  &:active {
+    background-color: #D9D9D9;
+  }
+}
+
+
+@media screen and (max-width: $md-breakpoint) {
+  .book-toc {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $sm-breakpoint) {
+  .book-menu {
+    margin-left: -$menu-width;
+    font-size: $font-size-base;
+  }
+
+  .book-page {
+    padding: 2rem 1rem;
+  }
+
+  .book-header {
+    display: flex;
+  }
+
+  #menu-control:checked + main {
+    .book-menu nav,
+    .book-page,
+    .book-posts {
+      transform: translateX($menu-width);
+    }
+
+    .book-header label {
+      transform: rotate(90deg);
+    }
+
+    .markdown {
+      opacity: 0.25;
+    }
+  }
+}
+
+// Extra space for big screens
+@media screen and (min-width: $container-max-width) {
+  .book-page,
+  .book-posts,
+  .book-menu nav,
+  .book-toc nav {
+    padding: $padding-16 * 2 $padding-16;
+  }
+}
+
+// Add fonts
+@import "fonts";
+
+// Add custom defined styles
+@import "custom";

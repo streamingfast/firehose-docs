@@ -1,0 +1,16 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ partial "docs/variables/title" . }} | {{ .Site.Title -}}</title>
+
+{{- $styles := resources.Get "book.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+
+{{ range .Site.Params.CustomCss -}}
+  <link rel="stylesheet" href="{{ . | absURL }}">
+{{- end }}
+
+<script defer src="/scripts/main.js"></script>
+
+<link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/x-icon">
+
+<meta name="viewport" content="width=device-width, user-scalable=no" />

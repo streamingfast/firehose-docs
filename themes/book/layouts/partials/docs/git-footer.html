@@ -1,0 +1,34 @@
+<div class="book-footer">
+  {{ if or .NextInSection .PrevInSection }}
+    <div class="next-pages-buttons {{ if not .NextInSection }}justify-end{{ else }}justify-between{{ end }}">
+      {{ if .NextInSection }}
+        <a class="btn-previous-page btn-outline" href="{{.NextInSection.Permalink}}">
+            <i class="fas fa-chevron-left"></i>
+          {{ partial "docs/variables/title" .NextInSection }}
+        </a>
+      {{end}}
+      {{if .PrevInSection}}
+        <a class="btn-next-page btn-outline" href="{{.PrevInSection.Permalink}}">
+          {{ partial "docs/variables/title" .PrevInSection }}
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      {{end}}
+    </div>
+  {{ end }}
+
+  <div class="git-footer">
+    {{ with .GitInfo }}
+    <div>
+      {{ $date := .AuthorDate.Local.Format (default "January 2, 2006" $.Site.Params.BookDateFormat) }}
+      <p>Last modified {{ $date }}</p>
+    </div>
+    {{ end }}
+    {{ with .Site.Params.BookEditPath }}
+    <div>
+      {{ if $.File }}<a href="{{ $.Site.Params.BookRepo }}/{{ . }}/{{ $.File.Path }}" target="_blank" rel="noopener">
+        <i class="far fa-edit"></i>&nbsp;Edit this page
+      </a>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>

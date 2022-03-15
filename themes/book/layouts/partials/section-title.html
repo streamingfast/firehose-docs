@@ -1,0 +1,37 @@
+{{ $title := .Title }}
+{{ $audience := .Audience }}
+{{ $sinceVersion := .SinceVersion }}
+<div class="row sub-section-title-row sub-section-title-row-h1">
+  <div class="col-12">
+    {{ with (eq $audience "operators") }}
+      <div class="pill-icon-wrapper">
+        <div class="pill-icon-content">
+          <div class="pill-icon" style="background-image: url('/img/icon-section-operators.svg');">
+          </div>
+        </div>
+      </div>
+    {{ end }}
+    {{ with (eq $audience "integrators") }}
+      <div class="pill-icon-wrapper">
+        <div class="pill-icon-content">
+          <div class="pill-icon" style="background-image: url('/img/icon-section-integrators.svg');">
+          </div>
+        </div>
+      </div>
+    {{ end }}
+    {{ with (eq $audience "developers") }}
+      <div class="pill-icon-wrapper">
+        <div class="pill-icon-content">
+          <div class="pill-icon" style="background-image: url('/img/icon-section-developers.svg');">
+          </div>
+        </div>
+      </div>
+    {{ end }}
+    <h1 class="sub-section-title">
+      {{ $title }}
+      {{ if $sinceVersion }}
+        <div class="tag tag-h1 tag-{{ $sinceVersion }}">{{ $sinceVersion }}</div>
+      {{ end }}
+    </h1>
+  </div>
+</div>

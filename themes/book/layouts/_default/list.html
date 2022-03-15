@@ -1,0 +1,15 @@
+{{ define "main" }}
+  {{ $title := partial "docs/variables/title" . }}
+  {{ $audience := partial "docs/variables/audience" . }}
+  {{ $sinceVersion := partial "docs/variables/since_version" . }}
+  <article class="markdown">
+    <div class="container sub-section">
+      {{ partial "section-title" (dict "Title" $title "Audience" $audience "SinceVersion" $sinceVersion) . }}
+      {{- .Content -}}
+    </div>
+  </article>
+{{ end }}
+
+{{ define "toc" }}
+    {{ partial "docs/toc" . }}
+{{ end }}

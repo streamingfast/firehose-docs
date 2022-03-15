@@ -1,0 +1,34 @@
+{
+  "baseURL": "/",
+  "languageCode": "en-us",
+  "title": "Firehose Documentation",
+  "theme": "book",
+  "enableGitInfo": true,
+  "params": {
+    "DfuseLogo": "firehose-logo-white.png",
+    "BookToC": 5,
+    "BookSections": {
+      "operators": "show",
+      "integrators": "show",
+      "developers": "show"
+    },
+    "PerSectionTagline": {
+      "operators": "Operators Documentation",
+      "integrators": "Integrators Documentation",
+      "developers": "Developers Documentation",
+      "topLevel": "Documentation"
+    },
+    "CustomCss": ["css/fontawesome.all.css", "css/override.css"],
+    "BookRepo": "https://github.com/streamingfast/docs",
+    "BookEditPath": "edit/master/content",
+    "SectionPagesMenu": "main"
+  },
+  "markup": {
+    "goldmark": {
+      "renderer": {
+        "unsafe": true
+      }
+    }
+  },
+  "ignoreFiles": ["shared/*"]
+}
