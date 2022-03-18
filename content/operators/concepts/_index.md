@@ -9,17 +9,17 @@ menu:
     weight: 10
 ---
 
-The best way to start to fully understand the power of the Firehose product, its architecture, 
-the various components that its made of and how data is flowing through the Firehose stack up 
-to the final consumer through the gRPC connection.
+This section aims to be the best way to fully understand the power of the Firehose system, its architecture, 
+the various components that it's made of, and how data flows through the Firehose stack up to the final consumer 
+through the gRPC connection.
 
 ---
 
-![firehose](/img/firehose-architecture.svg)
+![firehose](/drawings/firehose-architecture.svg)
 
 ---
 
-In this section, we'll cover:
+In the following pages, we'll cover:
 
 - [Goals and Motivations](/operators/concepts/goals/)
 - [Principles and Approach](/operators/concepts/principles/)

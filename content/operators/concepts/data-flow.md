@@ -8,7 +8,7 @@ with a detailed explanation of the various components involved.
 
 ---
 
-![firehose](/img/firehose-architecture.svg)
+![firehose](/drawings/firehose-architecture.svg)
 
 ---
 
@@ -21,9 +21,11 @@ At a high level, the Firehose is constituted by:
 - The `Firehose` service receives blocks from either a file source (merged blocks) or a live source (relayer), and 
 provides them in a “joined” manner to the consumers, through a gRPC connection.
 
-In deeper detail, how it’s stored and moved around within the various components 
-that form the Firehose stack. We will go from the very low level up to the gRPC streaming layer, 
-talking along the way about the tradeoffs and benefits of the various elements.
+---
+
+In deeper detail, we'll now see how block data is stored and moved around within the various components 
+that form the `Firehose` stack. We will go from the very low level up to the gRPC streaming layer, 
+discussing the tradeoffs and benefits of each element.
 
 ---
 
@@ -32,10 +34,10 @@ talking along the way about the tradeoffs and benefits of the various elements.
 Our pipeline begins with an instrumented version of the process used to sync the target blockchain. 
 The patch (which we internally baptized `Deep Mind`), is built directly in the node’s source code, where we manually 
 instrument critical block and transaction processing code paths. We currently have such a patch for 
-Geth (and a few of its derivatives), for OpenEthereum, for Solana and for another high-throughput chain 
+Geth (and a few of its derivatives), for OpenEthereum, for Solana, and for another high-throughput chain 
 (which was merged in the upstream repository).
 
-The instrumented code actually outputs small chunks of data using a simple text based protocol over the standard 
+The instrumented code actually outputs small chunks of data using a simple text-based protocol over the standard 
 output pipe, for simplicity, performance and reliability. The messages sent can be seen as small events like 
 `START BLOCK`, `START TRANSACTION`, `RECORD STATE CHANGE`, `RECORD LOG`, `STOP TRANSACTION`, `STOP BLOCK`. 
 Each message contains the specific payload for the event like block number and block hash for the start block.
@@ -64,7 +66,7 @@ Those messages are then read by the `Extractor` component. It's responsible for 
 connecting to its standard output pipe and reading the `DMLOG` messages. It collects and organizes the various 
 small chunks, assembling state changes, calls and transactions forming a fully-fledged block for a specific protocol. 
 
-The assembled block is actually a protocol buffer generated object, taken from our protocol buffer definitions. 
+The assembled block is actually a protocol buffer generated object, taken from our protobuf definitions. 
 Once a block has been formed, it is then serialized in binary format, stored into a persistent storage, and 
 at the same time broadcast to all listeners using gRPC streaming. 
 
@@ -118,15 +120,22 @@ Filtering is applied usually on the smallest execution unit (EVM call on Ethereu
 Transactions that have no matching unit are removed from the block and execution units are flagged as matching/not 
 matching the filter expression. Block metadata is always sent, even with no matches, to guarantee sequentiality on the receiving end.
 
+{{< alert type="note" >}}
+We've recently added Index filtering to the `Firehose` as an experimental feature. 
+
+This kind of filtering allows the `Firehose` to sift through the data it returns much faster, 
+concerning itself only with the blocks that correspond to a given query.
+{{< /alert >}}
+
 ---
 
 ## `bstream`
 
-The underlying library that powers all of the components above is `bstream` (for Block Stream) 
+The underlying library that powers all of the components above is `bstream` (a portmanteau for Block Stream) 
 available [on our Github organization](https://github.com/dfuse-io/bstream/blob/develop/README.md). 
 
 It is the core code within our stack which abstracts away the files and the streaming of blocks from 
-an instrumented blockchain node, to present to the user an extremely simple interface that deals with all reorgs. 
+an instrumented protocol node, to present to the user an extremely simple interface that deals with all reorgs. 
 The library was built, tweaked and enhanced over several years with high speed and fast throughput in mind. 
 For example, the file source has features like downloading multiple files in parallel, decoding multiple blocks in 
 parallel, inline filtering, etc.
@@ -134,7 +143,7 @@ parallel, inline filtering, etc.
 Inside `bstream`, one of the most important elements for proper blockchain linearity is the `ForkDB`, a graph-based 
 data structure that mimics the forking logic used by the native node. `ForkDB` receives all blocks and orders them 
 based on the parent-child relationship defined by the chain, keeping around active forked branches and reorgs that 
-happen in the chain. 
+happen on-chain. 
 
 When a branch of blocks becomes the longest chain of blocks, the `ForkDB` will switch to it, emitting a series of 
 events for proper handling of forks (like `new 1b`, `new 2b`, `undo 2b`, `new 2a`, `new 3a`, etc.). Active forks are 
@@ -153,4 +162,5 @@ decoded by the consumer to one of the supported chain-specific `Block` definitio
 
 ---
 
-We now have seen everything required to stream blocks using Firehose, from data acquisition to a consumable stream of blocks.
+We've now covered everything required to understand the `Firehose` data flow, from data acquisition to producing 
+a consumable stream of blocks.
