@@ -3,12 +3,14 @@ weight: 20
 title: Principles & Approach
 ---
 
-This section discusses the design principles of the Firehose, which were greatly inspired by the large scale 
+This section discusses the design principles of the `Firehose` system, which were greatly inspired by the large-scale 
 data-science machinery and processes previously developed by the StreamingFast team.
 
-## General data science approach
+---
 
-Here are a few principles that drove our design:
+## Data science approach
+
+Our North Star when designing the `Firehose` system consisted of a few ground truths:
 
 - A flat file is better than a CPU/RAM-consuming process
 - Data is messy, design for fast iteration of any data processes
@@ -23,15 +25,19 @@ making these very important:
     - Versioning
     - Performance
 
-## Principles applied
+---
+
+## Principles
 
 ### Extraction
 
 Find the shortest path from deterministic execution of blocks/transactions to a flat file.
 
-- Develop laser-focused processes which are simple and robust (extractor, merger, relayer, firehose, see graphs below).
+- Develop laser-focused processes which are simple and robust (`Extractor`, `Merger`, `Relayer`, `Firehose`).
 - Avoid coupling extraction with indexing itself (or other services).
 - Ensure minimal impact on performance on the node executing the write operations of a given protocol.
+
+---
 
 ### Data Completeness
 
@@ -44,10 +50,10 @@ It also allows for integrity checks to ensure no data is inconsistent. For examp
 should have a `previous_data` of `200` before it changes to something else, otherwise there’s a problem with 
 the extraction mechanisms, and data quality will suffer.
 
-Making the data complete means that the relation between a transaction, the block’s schedule, execution, expiration, 
-events produced by its side effects, call tree, each call’s state transition and effects, are safeguarded with their 
-relation. Figuring out relations after the fact can only be a source of pain, and of missed opportunities 
-for potential data applications.
+Making the data complete means that the relationships between a transaction, its block’s schedule, its execution, 
+its expiration, the events produced by its side effects, the call tree, and each call’s state transition and effects, 
+are all known and accounted for. Figuring out relations after the fact can only be a source of pain, and of missed 
+opportunities for potential data applications.
 
 Some protocols offer JSON-RPC requests that allow querying either transaction status or state, but separately. 
 A data process that is triggered by an Ethereum Log event might greatly benefit from checking if the parent contract 
@@ -60,10 +66,12 @@ queried and consumed, often by his own application.
 
 Richer external data processes allow devs to simplify contracts, and lower on-chain operation costs.
 
+---
+
 ### Modeling With Extreme Care
 
 The data model we use to ingest protocol data was modeled with extreme care. 
-We discovered peculiarities of many different protocols the hard way.
+We discovered peculiarities of several protocols the hard way.
 
 Some subtle interpretations of bits of data produced by a blockchain (e.g.: the meaning of a reverted call within the 
 call stack of an Ethereum transaction) are such that, if enough information is not surfaced from the source, 
@@ -73,32 +81,40 @@ are complete and leave no bit of data in a node that we know that we can serve a
 Conceptually, the data extracted from a node should be so complete that one could write a program that takes 
 that data, and rebuilds a full archive node out of it, and is able to boot it.
 
+---
+
 ### Use Files and Streams of Pure Data
 
 As opposed to requests/responses model, we've chosen to use flat-files and data streams, to alleviate the challenges 
-of querying pools of (often load-balanced) nodes in a master-to-master replication setup (like most blockchains act by default). 
+of querying pools of (often load-balanced) nodes in a master-to-master replication configuration.
 
 This avoids massive consistency issues, their retries, the incurred latency, and greatly simplifies the consuming code.
+
+Additionally, by adopting the flat-file and data stream abstractions we return to the Unix philosophy of 
+writing programs that do one thing, do it well, and work together with other programs by handling streams of 
+data as input and output.
+
+---
 
 ### State Transition Hiearchy
 
 We use state transitions scoped to a call, indexed within a transaction, indexed within a block.
 
-Most blockchains “round up” state changes for all transactions into a block to facilitate consensus.[1] 
+Most blockchains “round up” state changes for all transactions into a block to facilitate consensus.
 But the basic unit of execution remains a single smart contract execution 
 (a single EVM call alone, where calling another contract means a second execution).
 
-Precision in state is therefore lost for what happens mid-block: the state of a contract changes in the middle of a 
-transaction, in the middle of a block. If you want to know the balance at the *exact* point because it's required 
-for some calculations (when you’re processing a log event for instance), you’re out of luck, because the node will 
-provide the response that is true at the *end* of that block. And you cannot know if there are other transactions 
-after the one you are indexing that mutated the same state again. So querying a node will potentially throw you off, 
+Precision in state is therefore lost for what happens mid-block, i.e. when the state of a contract changes in the 
+middle of a transaction, in the middle of a block. If you want to know the balance at the *exact* point because 
+it's required for some calculations (when you’re processing a log event for instance), you’re out of luck, because the 
+node will provide the response that is true at the *end* of that block. It's thus impossible to know if there are 
+other transactions after the one you are indexing that mutated the same state again. Querying a node will potentially throw you off, 
 sometimes egregiously so.
 
-Not all chains make consuming the actual state easy (Solidity makes that pretty opaque, 
-in the form of a bytes32 => bytes32 mapping, although there are ways to decode it). 
-But making that state usable creates tremendous opportunities for indexing.
+Not all chains make consuming the actual state easy (Solidity makes that pretty opaque, in the form of a 
+bytes32 => bytes32 mapping, although there are ways to decode it). But making that state usable creates 
+tremendous opportunities for indexing.
 
 Regarding versioning, compatibility and speed of file content, we found Google’s Protocol Buffers version 3 
-to meet these last requirements, while striving for simplicity 
-(e.g. as attested by their removal of optional/required fields in version 3).
+to meet these last requirements, while striving for simplicity (e.g. as attested by their removal of optional/required 
+fields in version 3).
