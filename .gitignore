@@ -14,3 +14,4 @@ hugo.linux
 
 # localdev
 .idea/
+.DS_Store
