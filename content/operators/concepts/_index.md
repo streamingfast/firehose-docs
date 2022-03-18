@@ -15,4 +15,14 @@ to the final consumer through the gRPC connection.
 
 ---
 
-![image firehose](firehose.png)
+![firehose](/img/firehose-architecture.svg)
+
+---
+
+In this section, we'll cover:
+
+- [Goals and Motivations](/operators/concepts/goals/)
+- [Principles and Approach](/operators/concepts/principles/)
+- [Data Flow](/operators/concepts/data-flow/) 
+- [Components](/operators/concepts/components/)
+- [Data Stores and Artifacts](/operators/concepts/data-stores-artifacts/)
