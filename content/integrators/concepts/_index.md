@@ -9,6 +9,20 @@ menu:
     weight: 10
 ---
 
-Within this section, we are going to give a broad overview of all the concepts you will need to properly integrate Firehose into another blockchain technology also known internally as a protocol.
+This section aims to be the best way to fully understand the power of the Firehose system, its architecture, 
+the various components that it's made of, and how data flows through the Firehose stack up to the final consumer 
+through the gRPC connection.
 
-In addition, we are going to present you the various chain agnostic repositories that form up the Firehose stack and giving you insights about where to look out for various information you will require throughout your journey.
+---
+
+![firehose](/drawings/firehose-architecture.svg)
+
+---
+
+In the following pages, we'll cover:
+
+- [Goals and Motivations](/operators/concepts/goals/)
+- [Principles and Approach](/operators/concepts/principles/)
+- [Data Flow](/operators/concepts/data-flow/) 
+- [Components](/operators/concepts/components/)
+- [Data Stores and Artifacts](/operators/concepts/data-stores-artifacts/)
