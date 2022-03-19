@@ -1,6 +1,6 @@
 ---
 weight: 1
-title: StreamingFast - Firehose streaming blockchain's data
+title: Home
 layout: full-width
 ---
 

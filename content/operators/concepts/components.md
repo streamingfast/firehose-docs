@@ -4,7 +4,9 @@ title: Components
 ---
 
 As a complement to the [Data Flow]({{< ref "./data-flow" >}}) section, below we'll discuss in more detail each of 
-the components which constitue the `Firehose` system.
+the components which constitute the `Firehose` system.
+
+---
 
 ## Architecture
 
@@ -16,6 +18,8 @@ store to conserve the merged blocks files.
 For a highly-available setup (which the system is designed to allow), you will need a few more components.
 
 ![firehose](/drawings/firehose-architecture.svg)
+
+---
 
 ## Video Series
 
@@ -132,6 +136,8 @@ It is the _same_ interface that `Extractor` exposes to the `Relayer`s.
 #### High Availability
 
 `Relayer`s feed from all of the `Extractor` nodes, to get a complete view of all possible forks.
+
+---
 
 ## Firehose
 

@@ -1,6 +1,6 @@
 ---
 weight: 10
-title: EOSIO
+title: Operators
 layout: full-width
 ---
 
