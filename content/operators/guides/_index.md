@@ -9,5 +9,9 @@ menu:
     weight: 20
 ---
 
-Within this section, you will find various guides about how to sync your chain of choice.
+In this section, we provide a gew guides on how to sync different blockchains.
 
+- [Ethereum](/operators/guides/ethereum/)
+- [NEAR](/operators/guides/near/)
+- [Tendermint](/operators/guides/tendermint/)
+- [Solana](/operators/guides/solana/)
