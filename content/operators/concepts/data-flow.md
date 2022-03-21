@@ -112,11 +112,7 @@ As such, if a consumer’s request is for historical blocks, they are simply fet
 passed inside a `ForkDB` (more info about that below), and sent to the consumer with a cursor which uniquely identifies 
 the block as well as its position in the chain. In so doing, we can resume even from forked blocks, as they are all preserved.
 
-The `Firehose` component also has the responsibility of filtering a block’s content according to the request’s 
-filter expression. The filter expression uses CEL syntax and while the syntax is common to all supported chains, 
-the actual languages and available variables vary on a chain by chain basis. 
-
-Filtering is applied usually on the smallest execution unit (EVM call on Ethereum, Instruction on Solana). 
+The `Firehose` component also has the responsibility of filtering a block’s content according to the request’s filter expression. 
 Transactions that have no matching unit are removed from the block and execution units are flagged as matching/not 
 matching the filter expression. Block metadata is always sent, even with no matches, to guarantee sequentiality on the receiving end.
 

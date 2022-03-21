@@ -103,32 +103,44 @@ cp <path-to-binary>/sfeth ./sf-firehose/sfeth
 We're assuming that all future commands will be run inside the working directory we just created.
 
 Now, we are going to create a configuration file that will help us run `sfeth`. Copy the following content to an `eth-mainnet.yaml` file in your working directory
+
+
+{{< alert type="important" >}}
+The configuration below will sync from mainnet, but is not production-ready. 
+{{< /alert >}}
+
 ```yaml
 ---
 start:
   args:
   - mindreader-node
+  - firehose
+
   flags:
+    # Sets the verbosity of the application
     verbose: 2
+
+    # Specifies the path where `sfeth` will store all data for all sub processes
     data-dir: eth-data
+
+    # Logs to STDOUT
     log-to-file: false
+
+    # ETH chain ID (from EIP-155) as returned from JSON-RPC `eth_chainId` call
     common-chain-id: "1"
+
+    # ETH network ID as returned from JSON-RPC `net_version` call
     common-network-id: "1"
+
+    # Path to the Geth binary we downloaded in Step 1
     mindreader-node-path: ./geth_linux
-    
-    # You can tweak command line arguments like syncing with Ropsten
-    # (don't forget to update `data-dir`, `common-chain-id` and `common-network-id`)
-    # mindreader-node-arguments: "+--ropsten"
+
+    # Tells the Firehose to run without a live stream (i.e. Relayer)
+    common-blockstream-addr: ""
+
+    # Instructs the mindreader-node (aka. Extractor) to produce merged-blocks without a Merger
     mindreader-node-merge-and-store-directly: true
-
-    # Once fully live with chain, those should be removed, they are used so that Firehose serves
-    # blocks even if the chain is not live yet.
-    firehose-realtime-tolerance: 999999999s
-    relayer-max-source-latency: 999999999s
 ```
-
-In the above configuration file you will notice a line that says `mindreader-node-path: ./geth_linux`. 
-This configuration specifies the path of the `geth` binary we downloaded in step 1.
 
 ---
 
@@ -137,7 +149,7 @@ This configuration specifies the path of the `geth` binary we downloaded in step
 Launch `sfeth` to start indexing the chain.
 
 ```bash
-./sfeth -c eth-mainnet.yaml start mindreader-node
+./sfeth -c eth-mainnet.yaml start
 ```
 
 You should start seeing logs similar to this:
@@ -257,33 +269,14 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 
 ## Overview and Explanation
 
-As mentioned earlier `sfeth` Is an application that runs a few small, isolated processes.
-
-```bash
-./sfeth -c eth-mainnet.yaml start mindreader-node
-```
-
-The command above runs the `mindreader-node` process and supplies the config file `eth-mainet.yml`.
-
-Let's walk through the different flags in our `eth-mainnet.yaml` configuration file
-
-- `verbose: 2` : Sets the verbosity of the application
-- `data-dir: eth-data` : Specifies the path where `sfeth` will store all data for all sub processes
-- `common-chain-id: "1"` :  ETH chain ID (from EIP-155) as returned from JSON-RPC `eth_chainId` call
-- `common-network-id: "1"` : ETH network ID as returned from JSON-RPC `net_version` call
-- `mindreader-node-path: ./geth_linux` : Path to the Geth binary
-- `mindreader-node-merge-and-store-directly: true` : Indicates to the `mindreader-node` to skip writing individual one block files and merge the block data into 100-blocks merged files
-- `firehose-realtime-tolerance: 999999999s` : Block time delay that is used to determine if the data is realtime. While syncing from block 0 we want these to be massive. Once the chain is fully synced we can remove this flag
-- `relayer-max-source-latency: 999999999s` : Block time delay that is used to determine if the data is realtime. While syncing from block 0 we want these to be massive. Once the chain is fully synced we can remove this flag
-
 The `mindreader-node` is a process that runs and manages the blockchain node `Geth`. It consumes the blockchain data 
-that is extracted from our instrumented `Geth` node. The instrumented Geth node outputs individual block data.
+that is extracted from our instrumented `Geth` node. The instrumented `Geth` node outputs individual block data.
 
 The `mindreader-node` process will either write individual block data into separate files called one-block files, 
-or merge 100 blocks data together and write into a file called a 100-blocks file.
+or merge 100 blocks data together and write into a file called a `100-blocks file`.
 
 This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag. When running 
-the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enable, we say the 
+the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, we say the 
 "mindreader is running in merged mode". When the flag is disabled, we will refer to the mindreader as running in 
 its normal mode of operation.
 
@@ -291,9 +284,9 @@ In the scenario where the `mindreader-node` process stores one-block files, we c
 side which would merge the one-block files into 100-block files. When we are syncing the chain we will 
 run the `mindreader-node` process in merged mode.
 
-When we are synced we will run the `mindreader-node` in it's regular mode of operation (storing one-block files)
+When we are synced we will run the `mindreader-node` in its regular mode of operation (storing one-block files)
 
-The one-block files and 100-block files will be store in `data-dir/storage/merged-blocks` and  
+The one-block files and 100-block files will be stored in `data-dir/storage/merged-blocks` and  
 `data-dir/storage/one-blocks` respectively. The naming convention of the file is the number 
 of the first block in the file.
 
