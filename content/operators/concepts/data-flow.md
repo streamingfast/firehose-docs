@@ -16,10 +16,12 @@ At a high level, the Firehose is constituted by:
 
 - An instrumented version of the native node process, which streams pieces of block data in a custom text-based protocol.
 - The `Extractor`, reading from that stream, reassembles the chunks into a Firehose block, writing it to persistent storage and broadcasting downstream.
-- The `Merger` bundles the Firehose blocks together in batches of 100 merged blocks, and stores them to an object store or to disk.
 - The `Relayer` reads the broadcasted blocks to provide a live source of blocks from multiple `Extractor` instances.
-- The `Firehose` service receives blocks from either a file source (merged blocks) or a live source (relayer), and 
-provides them in a “joined” manner to the consumers, through a gRPC connection.
+- The `Merger` bundles the Firehose blocks together in batches of 100 merged blocks, and stores them to an object store or to disk.
+- The `Indexer`, whose job it is to provide a targeted summary of the contents of each 100-blocks file, represented by an index file.
+- The `IndexProvider`, that knows how to unpack the index files and provide fast responses about block contents for filtering purposes.
+- The `Firehose` service receives blocks from either a file source (merged blocks), a live source (relayer), or an 
+indexed file source (indexer + index provider), and returns them in a “joined” manner to the consumers, through a gRPC connection.
 
 ---
 
@@ -76,6 +78,19 @@ reprocessing tools to slice and dice different sections of the chain at will.
 
 ---
 
+## Relayer
+
+A multiplexer called the `Relayer` connects to multiple `Extractor` instances, and receives live blocks from them.
+
+Multiple connections enable redundancy in case the `Extractor` crashes or needs maintenance.
+It deduplicates incoming blocks, so will serve its own clients at the speed of the fastest `Extractor`.
+
+We like to say that they race to push data to consumers!
+
+The relayer then becomes the "live source" of blocks in the system, as it serves the same interface as the extractor in a simple (non-HA) setup.
+
+---
+
 ## Merger
 
 The `Merger` is responsible for creating bundles of blocks (100 per bundle) from persisted one-block files. 
@@ -87,16 +102,26 @@ The bundled blocks become the "file source" (a.k.a historical source) of blocks 
 
 ---
 
-## Relayer
+## Indexer
 
-A multiplexer called the `Relayer` connects to multiple `Extractor` instances, and receives live blocks from them. 
+The `Indexer` is a background process which digests the contents of merged blocks, and creates targeted summaries 
+of their contents. It writes these summaries to object storage as index files.
 
-Multiple connections enable redundancy in case the `Extractor` crashes or needs maintenance. 
-It deduplicates incoming blocks, so will serve its own clients at the speed of the fastest `Extractor`. 
+The targeted summaries are variable in nature, and are generated when an incoming `Firehose` query contains optional
+`Transforms`, which in turn contain the desired properties of a series of blocks. The `Transforms` can be likened to 
+filter expressions, and are represented by protobuf definitions.
 
-We like to say that they race to push data to consumers! 
+---
 
-The relayer then becomes the "live source" of blocks in the system, as it serves the same interface as the extractor in a simple (non-HA) setup.
+## Index Provider
+
+The `Index Provider` is a chain-agnostic component, whose job it is to accept `Firehose` queries containing `Transforms`.
+
+It will interpret these `Transforms` expressions according to their protobuf definitions, and pass them along 
+to chain-specific filter functions that will apply the desired filtering to Blocks in the stream.
+
+Indeed, the `Index Provider` delivers knowledge about the presence (or absence!) of specific data in large ranges
+of Block data. This helps us avoid unnecessary operations on merged block files.
 
 ---
 
@@ -112,16 +137,12 @@ As such, if a consumer’s request is for historical blocks, they are simply fet
 passed inside a `ForkDB` (more info about that below), and sent to the consumer with a cursor which uniquely identifies 
 the block as well as its position in the chain. In so doing, we can resume even from forked blocks, as they are all preserved.
 
-The `Firehose` component also has the responsibility of filtering a block’s content according to the request’s filter expression. 
+The `Firehose` component also has the responsibility of filtering a block’s content according to the request’s 
+filter expression, represented by a `Transform`. This filtering is achieved by querying the `Index Provider`.
+
 Transactions that have no matching unit are removed from the block and execution units are flagged as matching/not 
-matching the filter expression. Block metadata is always sent, even with no matches, to guarantee sequentiality on the receiving end.
-
-{{< alert type="note" >}}
-We've recently added Index filtering to the `Firehose` as an experimental feature. 
-
-This kind of filtering allows the `Firehose` to sift through the data it returns much faster, 
-concerning itself only with the blocks that correspond to a given query.
-{{< /alert >}}
+matching the filter expression. Block metadata is always sent, even with no matches, to guarantee sequentiality 
+on the receiving end.
 
 ---
 
