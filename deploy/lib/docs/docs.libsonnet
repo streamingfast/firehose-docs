@@ -23,7 +23,7 @@ local ingress = k.networking.v1.ingress;
           replicas=2,
           labels=labels,
           containers=[
-            container.new(c.frontend.name, c.imageTemplate % [c.frontend.name, c.version]) +
+            container.new(c.frontend.name, c.imageTemplate % [c.project, c.version]) +
             container.withImagePullPolicy('Always') +
             container.withPorts([port.new('ui', c.frontend.port)]) +
             k.util.resourcesRequests('100m', '50Mi') +
