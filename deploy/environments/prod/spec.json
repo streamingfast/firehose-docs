@@ -1,0 +1,14 @@
+{
+  "apiVersion": "tanka.dev/v1alpha1",
+  "kind": "Environment",
+  "metadata": {
+    "name": "environments/prod"
+  },
+  "spec": {
+    "apiServer": "https://35.232.212.60",
+    "namespace": "firehose-docs-prod",
+    "resourceDefaults": {},
+    "expectVersions": {},
+    "injectLabels": true
+  }
+}
