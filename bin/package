@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+
+force=
+push_now=
+
+main() {
+  pushd "$ROOT" &> /dev/null
+
+  while getopts "hpf" opt; do
+    case $opt in
+      h) usage && exit 0;;
+      f) force=true;;
+      p) push_now=true;;
+      \?) usage_error "Invalid option: -$OPTARG";;
+    esac
+  done
+  shift $((OPTIND-1))
+
+  set -e
+
+  platform="$1"
+  if [[ $platform == "" ]]; then
+    platform="linux/amd64"
+  fi
+
+  if [ ! -z "$(git status --porcelain)" ]; then
+    if [[ $force == "" ]]; then
+      echo "Your git directory is not clean, refusing to package in this state"
+      exit 1
+    fi
+  fi
+
+  version=`git rev-parse --short HEAD`
+
+  rm -rf public
+  ./bin/build
+
+  echo "Packaging version $version"
+  registry="gcr.io/eoscanada-shared-services"
+
+  build_docker "docs" "$registry" "firehose-docs" "$version" "$platform"
+}
+
+build_docker() {
+  component="$1"
+  registry="$2"
+  container_name="$3"
+  version="$4"
+  platform="$5"
+  platform_tag=`printf $platform | sed 's|/|-|g'`
+
+  local_tag="$container_name:$version.$platform_tag"
+  latest_tag="$registry/$container_name:latest.$platform_tag"
+  version_tag="$registry/$container_name:$version.$platform_tag"
+
+  docker buildx build \
+    -f Dockerfile.$component \
+    --platform $platform \
+    -t "$local_tag" \
+    -t "$latest_tag" \
+    -t "$version_tag" \
+    --load \
+    .
+
+  if [[ -n $push_now ]]; then
+    echo "Pushing $version_tag"
+    docker push "$version_tag"
+
+    echo "Pushing $latest_tag"
+    docker push "$latest_tag"
+  fi
+}
+
+usage_error() {
+  message="$1"
+  exit_code="$2"
+
+  echo "ERROR: $message"
+  echo ""
+  usage
+  exit ${exit_code:-1}
+}
+
+usage() {
+  echo "usage: package [-l] [-p] <version> [<platform>]"
+  echo ""
+  echo "Package all elements into a Docker image targetting the <platform> argument."
+  echo "If the <platform> argument is empty 'linux/amd64' is used, images are **not**"
+  echo "pushed automatically by defaul, use '-p' to push it right now."
+  echo ""
+  echo "Other useful platform depending on your workstation:"
+  echo ""
+  echo "- linux/arm64     Apple M1"
+  echo ""
+  echo "Options"
+  echo "    -h          Display help about this script"
+  echo "    -p          Push packages toregistry right away"
+}
+
+main "$@"
