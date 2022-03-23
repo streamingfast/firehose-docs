@@ -29,6 +29,7 @@ main() {
 
   ./bin/package -p "linux/amd64"
 
+  version=`git rev-parse --short HEAD`
   environment="deploy/environments/prod/main.jsonnet"
   regexp="version: *'.*'"
   replacement="s/$regexp/version: '$version'/g"
