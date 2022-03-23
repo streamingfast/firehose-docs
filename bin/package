@@ -20,11 +20,6 @@ main() {
 
   set -e
 
-  platform="$1"
-  if [[ $platform == "" ]]; then
-    platform="linux/amd64"
-  fi
-
   if [ ! -z "$(git status --porcelain)" ]; then
     if [[ $force == "" ]]; then
       echo "Your git directory is not clean, refusing to package in this state"
@@ -33,6 +28,7 @@ main() {
   fi
 
   version=`git rev-parse --short HEAD`
+  platform="${1:-linux/amd64}"
 
   rm -rf public
   ./bin/build
@@ -63,6 +59,8 @@ build_docker() {
     -t "$version_tag" \
     --load \
     .
+
+  echo "Built $version_tag"
 
   if [[ -n $push_now ]]; then
     echo "Pushing $version_tag"
