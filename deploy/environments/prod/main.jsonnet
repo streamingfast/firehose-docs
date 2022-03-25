@@ -1,6 +1,6 @@
 (import 'docs/docs.libsonnet') +
 {
   _config+:: {
-    version: 'f300726',
+    version: 'aaded1f',
   },
 }
