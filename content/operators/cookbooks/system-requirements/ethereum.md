@@ -9,6 +9,7 @@ The Firehose stack is extremely elastic, and supports handling networks of varie
 
 The deployment efforts will be proportional to the size of history, and the density of the chain at hand.
 
+
 ## Network shapes
 
 This document outlines requirements for different shapes of networks
@@ -19,7 +20,7 @@ In order to scale easily, you will want to decouple [components]({{< ref "/opera
 
 The storage requirements will vary depending on these metrics:
 
-* **The length of history**: which will affect the quantity of search indexes that need to existe in `dstore` storage, and being served by `search-archive` nodes, thus the amount of RAM
+* **The length of history**: whether or not you are serving all the blocks through the firehose
 * **Throughput in transactions and calls**: Calls on Ethereum are the smallest units of execution to produce meaningful data, transaction overhead becomes negligible once you have 2-3 calls in a transaction. A single ERC20 transfer generally has 1 call, 2 calls when there is a proxy contract involved. A Uniswap swap is usually composes of a few dozens of calls.
 
 The CPU/RAM requirements will depend on these factors:
@@ -32,3 +33,5 @@ These stats are from March 2022, but chains of similar density and similar age w
 {{< /alert >}}
 
 #### Ethereum Mainnet
+
+`This section is incomplete.`
