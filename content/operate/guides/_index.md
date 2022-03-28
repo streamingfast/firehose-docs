@@ -11,10 +11,10 @@ menu:
 
 How to sync different blockchains, and produce Firehose files.
 
-- [Ethereum](/operators/guides/ethereum/)
-- [NEAR](/operators/guides/near/)
-- [Tendermint](/operators/guides/tendermint/)
-- [Solana](/operators/guides/solana/)
+- [Ethereum](/operate/guides/ethereum/)
+- [NEAR](/operate/guides/near/)
+- [Tendermint](/operate/guides/tendermint/)
+- [Solana](/operate/guides/solana/)
 
 
 

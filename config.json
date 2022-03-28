@@ -8,9 +8,9 @@
     "SiteLogo": "firehose-logo.png",
     "BookToC": 5,
     "BookSections": {
-      "operators": "show",
-      "integrators": "show",
-      "developers": "show"
+      "operate": "show",
+      "integrate": "show",
+      "develop": "show"
     },
     "PerSectionTagline": {
       "operators": "Operators Documentation",

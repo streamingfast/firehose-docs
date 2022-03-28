@@ -1,18 +1,18 @@
 ---
 weight: 10
-title: Walkthrough Sample Integration
+title: HOWTO Integrate
 sideNavRoot: true
 menu:
   integrators:
-    name: Walkthrough
-    identifier: walkthrough
+    name: HOWTO Integrate
+    identifier: howto
     weight: 20
 ---
 
 {{< alert type="important" >}}
-Make sure you have a solid understanding of the [Firehose Concepts & Architecture.]({{< ref "/operators/concepts" >}}).
+Make sure you have a solid understanding of the [Firehose Concepts & Architecture.]({{< ref "/operate/concepts" >}}).
 
-Review the [Principles & Approach documentation]({{< ref "/operators/concepts/principles" >}}) to align your integration with the goals of Firehose.
+Review the [Principles & Approach documentation]({{< ref "/operate/concepts/principles" >}}) to align your integration with the goals of Firehose.
 {{< /alert >}}
 
 
@@ -47,7 +47,7 @@ Modify `devel/standard/standard.yaml` to point to the dummy chain implementation
 
 ## Integrate your chain
 
-Modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to your blockchain node's binary. Learn more about those parameters in the [Operator's manual](../operators/running-the-node).
+Modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to your blockchain node's binary. Learn more about those parameters in the [Operator's manual]({{#< ref "/operate/running-the-node" >#}}).
 
 Modify `devel/standard/start.sh` to
 

@@ -1,6 +1,6 @@
 ---
 weight: 20
-title: Guiding Principles
+title: Design Principles
 ---
 
 This section discusses the design principles of the `Firehose` system, which were heavily inspired by the large-scale
@@ -8,18 +8,18 @@ data-science machinery and processes previously developed by the StreamingFast t
 
 ---
 
-## Data science approach
+## The Firehose North Star
 
-Our North Star when designing the `Firehose` system consisted of a few ground truths:
+We designed the `Firehose` around a few ground truths/assumptions:
 
-- A flat file is better than a CPU/RAM-consuming process
-- Data is messy, thus design for fast iteration of any data processes
-- Separate concerns, isolate tasks, build small and robust components
-- Always try to make tasks/processes parallelizable or shardable
-- Define clear “data contracts” between tasks/processes (APIs, RPC query formats, data model definitions)
+- Flat files are better than live running CPU/RAM-consuming processes
+- Data is messy, design for fast iteration of any data processes
+- Data agility is only possible if processes can be parallelized
+- Clear “data contracts” between tasks/processes (APIs, RPC query formats, data model definitions) are critical
 - Be excruciatingly precise when defining, referencing, or identifying concepts or data models. Leave no stone unturned.
 - The only guarantee in data-science is that your data processes will change and evolve
 - Migrating data is annoying, thus we must be thorough when considering:
+
     - File formats
     - Forward/backward-compatibility
     - Versioning
@@ -27,9 +27,7 @@ Our North Star when designing the `Firehose` system consisted of a few ground tr
 
 ---
 
-## Principles
-
-### Extraction
+## Extraction
 
 We aim to find the shortest path from deterministic execution of blocks/transactions to a flat file.
 
@@ -39,7 +37,7 @@ We aim to find the shortest path from deterministic execution of blocks/transact
 
 ---
 
-### Data Completeness
+## Data Completeness
 
 We strive to Extract All The Data from the nodes, so we literally never need to go back and query them.
 We want our data to be complete, rich and verifiable.
@@ -68,7 +66,7 @@ Richer external data processes allow devs to simplify contracts, and lower on-ch
 
 ---
 
-### Modeling With Extreme Care
+## Modeling With Extreme Care
 
 The data model we use to ingest protocol data was modeled with extreme care. We discovered peculiarities of
 several protocols the hard way.
@@ -83,7 +81,7 @@ that data, and rebuilds a full archive node out of it, and is able to boot it.
 
 ---
 
-### Use Files and Streams of Pure Data
+## Use Files and Streams of Pure Data
 
 As opposed to requests/responses model, we've chosen to use flat-files and data streams, to alleviate the challenges
 of querying pools of (often load-balanced) nodes in a master-to-master replication configuration.
@@ -96,7 +94,7 @@ data as input and output.
 
 ---
 
-### State Transition Hiearchy
+## State Transition Hiearchy
 
 We use state transitions scoped to a call, indexed within a transaction, indexed within a block.
 

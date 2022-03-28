@@ -3,7 +3,7 @@ weight: 70
 title: Data Storage
 ---
 
-This section is about **what is stored where**.
+This section is about **what is stored where** in a Firehose deployment.
 
 ---
 
@@ -24,11 +24,10 @@ over its compatible S3 API as the distributed storage system.
 
 ## Artifacts
 
-### Firehose Artifacts
+The `Firehose` stack uses [Protocol Buffers version 3](https://developers.google.com/protocol-buffers) for serialization, pretty much throughout.
 
-In general, the `Firehose` stack uses [Protocol Buffers version 3](https://developers.google.com/protocol-buffers) for serialization.
 
-#### Merged Blocks Files
+### Merged Blocks Files
 
 Also called `100-blocks files`, or merged blocks files, or merged bundles, these are all used interchangeably.
 
@@ -48,7 +47,8 @@ They are consumed by the [bstream](https://github.com/streamingfast/bstream) lib
 The protocol specific decoded block objects (for [Ethereum](https://github.com/streamingfast/proto-ethereum/blob/develop/sf/ethereum/codec/v1/codec.proto) as an example)
 are what circulate amongst all processes that work with executed block data.
 
-#### One Block Files
+
+### One Block Files
 
 These are transient files, destined to ensure that the `Merger` gathers all visible forks from
 the `Extractor` instances, in an HA setup.

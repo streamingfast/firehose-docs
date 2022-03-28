@@ -4,11 +4,11 @@ title: Ethereum
 showH2InSideNav: true
 ---
 
-Below, we'll show you how to use [Firehose](/operators/concepts/) to sync and stream Ethereum Mainnet.
+Below, we'll show you how to use [Firehose](/operate/concepts/) to sync and stream Ethereum Mainnet.
 
 {{< alert type="important" >}}
-If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries 
-could do nothing at all when ran from the terminal. 
+If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries
+could do nothing at all when ran from the terminal.
 
 To fix the problem, remove the quarantine attribute on the file using the following command against the binary:
 
@@ -24,11 +24,11 @@ You'll only need to do this once.
 
 ## Install Geth
 
-The first step is to install a StreamingFast-instrumented version of `Geth`. 
+The first step is to install a StreamingFast-instrumented version of `Geth`.
 
 [`Geth`](https://github.com/ethereum/go-ethereum) is the official Golang
 implementation of the Ethereum Protocol. We have instrumented `Geth` to have the ability to extract the
-raw blockchain data from the node. 
+raw blockchain data from the node.
 
 The instrumented version source code can be found [on our Github organization](https://github.com/streamingfast/go-ethereum).
 
@@ -59,15 +59,15 @@ Version: 1.10.16-dm-stable
 ...
 ```
 
-Note that you may have a different version than `1.10.16`; the important thing is the `dm` in the version name. 
+Note that you may have a different version than `1.10.16`; the important thing is the `dm` in the version name.
 `dm` stands for `DeepMind`, and denotes our instrumented version of Geth.
 
 ---
 
 ## Install sfeth
 
-`sfeth`, a.k.a. Ethereum on Streamingfast, is an application that runs a few small, isolated processes, 
-that together form the `Firehose` stack. A thorough discussion of the [Concepts & Architecture]({{< ref "/operators/concepts" >}})
+`sfeth`, a.k.a. Ethereum on Streamingfast, is an application that runs a few small, isolated processes,
+that together form the `Firehose` stack. A thorough discussion of the [Concepts & Architecture]({{< ref "/operate/concepts" >}})
 is discussed elsewhere. Needless to say, you must run `sfeth` to run a `Firehose` locally.
 
 You can download the latest version of `sfeth` [here](https://github.com/streamingfast/sf-ethereum/releases/latest)
@@ -84,7 +84,7 @@ To verify the installation was successful, run
 sfeth --version
 ```
 
-Great! At this point we have installed our instrumented `Geth` application as well as our `sfeth` application. 
+Great! At this point we have installed our instrumented `Geth` application as well as our `sfeth` application.
 
 In the following steps we will setup configuration files so that you can start syncing & running an Ethereum Mainnet Firehose!
 
@@ -106,7 +106,7 @@ Now, we are going to create a configuration file that will help us run `sfeth`. 
 
 
 {{< alert type="important" >}}
-The configuration below will sync from mainnet, but is not production-ready. 
+The configuration below will sync from mainnet, but is not production-ready.
 {{< /alert >}}
 
 ```yaml
@@ -227,7 +227,7 @@ You should start seeing logs similar to this:
 ...
 ```
 
-After a short delay, you should start to see the blocks syncing in. 
+After a short delay, you should start to see the blocks syncing in.
 
 ```bash
 ...
@@ -245,7 +245,7 @@ After a short delay, you should start to see the blocks syncing in.
 ```
 
 {{< alert type="important" >}}
-At any point in time you can stop the process with `Ctrl + C`. 
+At any point in time you can stop the process with `Ctrl + C`.
 
 The process will shutdown gracefully and on restart it will continue where it left off.
 {{< /alert >}}
@@ -269,25 +269,25 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 
 ## Overview and Explanation
 
-The `mindreader-node` is a process that runs and manages the blockchain node `Geth`. It consumes the blockchain data 
+The `mindreader-node` is a process that runs and manages the blockchain node `Geth`. It consumes the blockchain data
 that is extracted from our instrumented `Geth` node. The instrumented `Geth` node outputs individual block data.
 
-The `mindreader-node` process will either write individual block data into separate files called one-block files, 
+The `mindreader-node` process will either write individual block data into separate files called one-block files,
 or merge 100 blocks data together and write into a file called a `100-blocks file`.
 
-This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag. When running 
-the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, we say the 
-"mindreader is running in merged mode". When the flag is disabled, we will refer to the mindreader as running in 
+This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag. When running
+the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, we say the
+"mindreader is running in merged mode". When the flag is disabled, we will refer to the mindreader as running in
 its normal mode of operation.
 
-In the scenario where the `mindreader-node` process stores one-block files, we can run a `merger` process on the 
-side which would merge the one-block files into 100-block files. When we are syncing the chain we will 
+In the scenario where the `mindreader-node` process stores one-block files, we can run a `merger` process on the
+side which would merge the one-block files into 100-block files. When we are syncing the chain we will
 run the `mindreader-node` process in merged mode.
 
 When we are synced we will run the `mindreader-node` in its regular mode of operation (storing one-block files)
 
-The one-block files and 100-block files will be stored in `data-dir/storage/merged-blocks` and  
-`data-dir/storage/one-blocks` respectively. The naming convention of the file is the number 
+The one-block files and 100-block files will be stored in `data-dir/storage/merged-blocks` and
+`data-dir/storage/one-blocks` respectively. The naming convention of the file is the number
 of the first block in the file.
 
 Finally, we have built tools that allow you to introspect the block files:
@@ -310,18 +310,18 @@ Let's pick up where we left off, assuming we're no longer syncing eth-mainnet:
 ./sfeth -c eth-mainnet.yaml start mindreader-node
 ```
 
-The current state of affairs is that we have an `sfeth` running a `mindreader-node` process. 
-The process is extracting and merging 100-bock data. 
+The current state of affairs is that we have an `sfeth` running a `mindreader-node` process.
+The process is extracting and merging 100-bock data.
 
-While still running the `mindreader-node` process in a separate terminal (still in the working directory), 
+While still running the `mindreader-node` process in a separate terminal (still in the working directory),
 launch the firehose:
 
 ```bash
 ./sfeth -c eth-mainnet.yaml start relayer firehose
 ```
 
-The `sfeth` command launches 2 processes, the `Relayer` and `Firehose`. Both processes work together to provide 
-the `Firehose` data stream. Once the `Firehose` process is running, it will be listening on port `13042`. 
+The `sfeth` command launches 2 processes, the `Relayer` and `Firehose`. Both processes work together to provide
+the `Firehose` data stream. Once the `Firehose` process is running, it will be listening on port `13042`.
 
 At its core, the `Firehose` is a gRPC stream. We can list the available gRPC services with `grpcurl`
 

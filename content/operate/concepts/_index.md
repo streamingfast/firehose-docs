@@ -37,11 +37,10 @@ Ultimately, the `Firehose` provides a way to index and provide blockchain data w
 
 In the following pages, we'll cover:
 
-- [Goals and Motivations](/operators/concepts/goals/)
-- [Principles and Approach](/operators/concepts/principles/)
-- [Data Flow](/operators/concepts/data-flow/)
-- [Components](/operators/concepts/components/)
-- [Data Stores and Artifacts](/operators/concepts/data-storage/)
+- [Principles and Approach](/operate/concepts/principles/)
+- [Data Flow](/operate/concepts/data-flow/)
+- [Components](/operate/concepts/components/)
+- [Data Stores and Artifacts](/operate/concepts/data-storage/)
 
 ---
 
