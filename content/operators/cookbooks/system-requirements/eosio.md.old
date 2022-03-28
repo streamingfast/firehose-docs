@@ -7,7 +7,7 @@ title: System Requirements
 The **goal of this page** is to set expectations and get you to understand what is required to run dfuse, at different scale.
 {{< /alert >}}
 
-The dfuse platform is extremely elastic, and supports handling networks of varied sizes and shapes. It is also heavy on data, so **make sure you have a good understanding** of the [different data stores, artifacts and databases]({{< ref "./data-stores-artifacts" >}}) required for dfuse to run.
+The dfuse platform is extremely elastic, and supports handling networks of varied sizes and shapes. It is also heavy on data, so **make sure you have a good understanding** of the [different data stores, artifacts and databases]({{< ref "./data-storage" >}}) required for dfuse to run.
 
 The deployment efforts will be proportional to the size of history,
 and the density of the chain at hand.

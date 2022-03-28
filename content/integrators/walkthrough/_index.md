@@ -9,6 +9,13 @@ menu:
     weight: 20
 ---
 
+{{< alert type="important" >}}
+Make sure you have a solid understanding of the [Firehose Concepts & Architecture.]({{< ref "/operators/concepts" >}}).
+
+Review the [Principles & Approach documentation]({{< ref "/operators/concepts/principles" >}}) to align your integration with the goals of Firehose.
+{{< /alert >}}
+
+
 This document walks you through a brand new Firehose integration.
 
 ## Clone the ACME repo
