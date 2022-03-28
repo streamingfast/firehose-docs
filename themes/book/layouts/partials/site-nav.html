@@ -13,7 +13,7 @@
 
         <div id="logo-main-nav">
             <a href="/">
-                <img src="/img/{{ .Site.Params.DfuseLogo }}" alt="{{ .Site.Title }}">
+                <img src="/img/{{ .Site.Params.SiteLogo }}" alt="{{ .Site.Title }}">
             </a>
             <div id="tagline" >
                 {{ if .Page.Section }}{{ index .Site.Params.PerSectionTagline .Page.Section }}{{ else }}{{ .Site.Params.PerSectionTagline.topLevel }}{{ end }}
