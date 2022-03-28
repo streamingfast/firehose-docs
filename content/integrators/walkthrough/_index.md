@@ -1,6 +1,6 @@
 ---
 weight: 10
-title: Walkthrough Sample Implementation
+title: Walkthrough Sample Integration
 sideNavRoot: true
 menu:
   integrators:
