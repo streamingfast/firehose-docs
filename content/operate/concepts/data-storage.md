@@ -9,7 +9,7 @@ This section is about **what is stored where** in a Firehose deployment.
 
 ## Stores
 
-There is a single data store used by the Firehose stack: Object stores, for small or large files.
+_Stores_ used by the Firehose are abstractions on top of Object Storage.
 
 These use the `Firehose` [dstore abstraction library](https://github.com/streamingfast/dstore) to support
 Azure, GCP, S3 (and on-premise solution supporting the S3 API interface like [minio](https://min.io/)

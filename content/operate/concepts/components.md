@@ -17,7 +17,37 @@ store to conserve the merged blocks files.
 
 For a highly-available setup (which the system is designed to allow), you will need a few more components.
 
-![firehose](/drawings/firehose-architecture.svg)
+{{< mermaid >}}
+
+flowchart BT
+
+  dstore[("Object Store\n(S3, GCS, Azure Blobs, NFS, Ceph, Filesystem)")]
+  click dstore "{{< ref "/operate/concepts/data-storage" >}}" "More on Data Storage"
+
+  extractors[["firehose-enabled blockchain node(s)"]]
+
+  relayers[["relayer(s)"]]
+
+  merger
+
+  click merger "{{< ref "/operate/concepts/components" >}}" "More on the merger"
+
+  firehoses[["firehose servers"]]
+
+  relayers --> |gRPC| extractors
+
+  firehoses --> |gRPC| relayers
+
+  user([User])-->|gRPC|firehoses
+
+  extractors-.->|one-block files|merger
+
+  merger -.-> |writes merged blocks| dstore
+  dstore -.-> |consumes merged blocks| relayers
+  dstore -.-> |consumes merged blocks| firehoses
+
+
+{{< /mermaid >}}
 
 ---
 

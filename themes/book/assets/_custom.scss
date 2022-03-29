@@ -311,6 +311,13 @@ article {
 }
 #logo-main-nav a   {line-height:8px; }
 
+.mermaidTooltip {
+    position: absolute;
+    background: white;
+    padding: 5px 10px;
+    border: 1px solid black;
+}
+
 #top-nav-wrapper {
   margin-left: auto;
   justify-content: flex-end;
