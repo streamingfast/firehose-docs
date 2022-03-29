@@ -21,7 +21,7 @@ For a highly-available setup (which the system is designed to allow), you will n
 
 flowchart BT
 
-  dstore[("Object Store\n(S3, GCS, Azure Blobs, NFS, Ceph, Filesystem)")]
+  dstore[("Object Store")]
   click dstore "{{< ref "/operate/concepts/data-storage" >}}" "More on Data Storage"
 
   extractors[["firehose-enabled blockchain node(s)"]]
@@ -46,10 +46,11 @@ flowchart BT
   dstore -.-> |consumes merged blocks| relayers
   dstore -.-> |consumes merged blocks| firehoses
 
-
 {{< /mermaid >}}
 
 ---
+
+<!--
 
 ## Video Series
 
@@ -58,6 +59,7 @@ StreamingFast and father of the Firehose stack recorded engaging video overviews
 
 If you're looking for written information, keep scrolling!
 
+
 ### Firehose Architecture Series
 
 {{< alert type="note" >}}
@@ -65,8 +67,7 @@ Those videos were recorded for the EOSIO protocol.
 
 However, all the explanations translate relatively well to our other supported chains like Ethereum, NEAR, Solana, etc.
 
-Also, you might hear Alex talking about `dfuse` in the videos. `dfuse` is our old branding,
-which is now referred to as Firehose on `<Protocol>`; for example, Firehose on Ethereum.
+Also, you might hear Alex talking about `dfuse` in the videos. `dfuse` is our old branding.
 {{< /alert >}}
 
 * [General Overview](https://www.youtube.com/watch?v=q3Mi1S4nvcU)
@@ -75,6 +76,9 @@ which is now referred to as Firehose on `<Protocol>`; for example, Firehose on E
 * [The `bstream` library - Part 1](https://www.youtube.com/watch?v=LX7_Q7b5pyc)
 * [The `bstream` library - Part 2](https://www.youtube.com/watch?v=3HK95ng51ZM)
 * [High Availability](https://www.youtube.com/watch?v=yG-lxgp7g10)
+-->
+
+Stay tuned for a video series on the Firehose components.
 
 ---
 
