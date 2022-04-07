@@ -1,6 +1,6 @@
 ---
-weight: 45
-title: Ethereum
+weight: 10
+title: System Requirements
 ---
 
 The **goal of this page** is to set expectations and get you to understand what is required to run Firehose for Ethereum, for different protocols.

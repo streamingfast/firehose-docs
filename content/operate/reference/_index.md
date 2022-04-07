@@ -1,19 +1,24 @@
 ---
 weight: 10
-title: Cookbooks
+title: Reference
 sideNavRoot: true
 menu:
   operators:
-    name: Cookbooks
-    identifier: cookbooks
+    name: Reference
+    identifier: reference
     weight: 30
 ---
 
-Various cookbooks like content like parallel chain syncing, high-availability, Grafana dashboards, tools, etc.
+This section contains reference material on specifications, strategies and recommendations for chain-specific tooling.
 
-
-- [Ethereum Reference Flags](reference-flags/ethereum)
-- [Ethereum System Requirements](system-requirements/ethereum)
+- Ethereum
+  - [Reference Flags]()
+- NEAR
+  - [Reference Flags]()
+- Solana
+  - [Reference Flags]()
+- Tendermint
+  - [Reference Flags]()
 
 `This section is incomplete.`
 

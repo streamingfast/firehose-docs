@@ -1,6 +1,6 @@
 ---
-weight: 10
-title: Ethereum
+weight: 20
+title: Syncing
 showH2InSideNav: true
 ---
 

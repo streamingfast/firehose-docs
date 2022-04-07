@@ -1,6 +1,6 @@
 ---
 weight: 20
-title: Syncing Guides
+title: Guides
 sideNavRoot: true
 menu:
   operators:
