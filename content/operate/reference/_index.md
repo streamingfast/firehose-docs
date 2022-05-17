@@ -17,7 +17,7 @@ This section contains reference material on specifications, strategies and recom
   - [Reference Flags]()
 - Solana
   - [Reference Flags]()
-- Tendermint
+- Cosmos
   - [Reference Flags]()
 
 `This section is incomplete.`

@@ -1,6 +1,6 @@
 ---
-weight: 40
-title: Tendermint
+weight: 15
+title: Cosmos
 sideNavRoot: false
 ---
 
