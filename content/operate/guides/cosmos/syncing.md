@@ -4,7 +4,7 @@ title: Syncing
 showH2InSideNav: true
 ---
 
-Below, we'll show you how to use [Firehose](/operate/concepts/) to sync and stream Cosmos (Tendermint) Based Chains.
+Below, we'll show you how to use [Firehose](/operate/concepts/) to sync and stream Cosmos Based Chains.
 
 ---
 
@@ -14,19 +14,25 @@ Below, we'll show you how to use [Firehose](/operate/concepts/) to sync and stre
 that together form the `Firehose` stack. A thorough discussion of the [Concepts & Architecture]({{< ref "/operate/concepts" >}})
 is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a `Firehose` locally.
 
-You can download the latest version of `firehose-cosmos` [here](https://github.com/figment-networks/firehose-cosmos/releases)
+You can download the latest version of `firehose-cosmos` [here](https://github.com/figment-networks/firehose-cosmos/releases),
+however we recommend you use the dockerfile located in the `firehose-cosmos` repository located [here](https://github.com/figment-networks/firehose-cosmos)
 
 Once downloaded you must unzip the bundle or alternatively you can clone the repository and run `make install` to install it locally.
 
-To verify the installation was successful, run
+To verify the installation was successful, run:
 
 ```bash
 firehose-cosmos --version
 ```
 
-`firehose-cosmos` provides scripts for setting up and running the following mainnet networks:
-* [Cosmoshub4](https://github.com/figment-networks/firehose-cosmos/blob/main/devel/cosmoshub4)
-* [Osmosis1](https://github.com/figment-networks/firehose-cosmos/blob/main/devel/osmosis1)
+`firehose-cosmos` provides scripts for setting up and running the following mainnet networks,
+however these are limited in the range of supported Operating systems and configuration so we recommend following the guides for getting these chains running.
+
+
+These scripts are only really used for testing and should not be used for running this process.
+
+- [Cosmoshub4](https://github.com/figment-networks/firehose-cosmos/blob/main/devel/cosmoshub4)
+- [Osmosis1](https://github.com/figment-networks/firehose-cosmos/blob/main/devel/osmosis1)
 
 ---
 
@@ -43,14 +49,10 @@ enabled = true
 output_file = "stdout"
 ```
 
-## Configuration
+## Firehose-Cosmos Configuration
 
 If you wish to use a configuration file instead of setting all CLI flags, you may create a new firehose.yml file in your current working directory.
-
-{{< alert type="note" >}}
-If you are using the startup scripts located in `/devel/`, you do not need to provide a configuration file
-{{< /alert >}}
-
+You can point to your instrumented binary using the `ingestor-node-path` flag and this will start the binary for you.
 
 Example:
 
@@ -67,10 +69,12 @@ start:
 
     # Ingestor specific flags
     ingestor-mode: node
-    ingestor-node-path: path/to/node/bin
+    ingestor-node-path: path/to/gaiad_or_osmosisd
     ingestor-node-args: start --x-crisis-skip-assert-invariants
     ingestor-node-env: "KEY=VALUE,KEY=VALUE"
 ```
+
+---
 
 ### Logs input mode
 
@@ -95,49 +99,27 @@ start:
     # Configure the pattern if not using .log extension
     # ingestor-logs-pattern: *.log
 ```
+
 ---
 
-## Syncing cosmoshub-4
+## Binary configuration
 
-{{< alert type="note" >}}
-The bootstrapping and setup is the same for Cosmoshub-4 or Osmosis-1. You will just need to run it from the required folder inside `devel`.
+As the Cosmos based binaries have been modified, you will need to include the following in your node configuration file:
 
-{{< /alert >}}
-
-Inside the `devel` folder, you'll find scripts that will setup your folder structure and download the required binaries,
-
-To start firehose for the Cosmoshub4 network, first run the bootstraping script:
-
-```bash
-cd devel/cosmoshub4
-./bootstrap.sh
+```YAML
+#######################################################
+###       Extractor Configuration Options           ###
+#######################################################
+[extractor]
+enabled = true
+output_file = "stdout"
 ```
 
-In case if you'd like to reset your local copy, remove the `./tmp` directory, or run the script with an extra environment variable:
+## Syncing your chain
 
-```bash
-CLEANUP=1 ./bootstrap.sh
-Using MAINNET
-Deleting all local data
-Setting up working directory
-../firehose-cosmos/devel/cosmoshub4/tmp ../firehose-cosmos/devel/cosmoshub4
-Your platform is Darwin/arm64
-Downloading gaiad v4.2.1 binary
-Configuring home directory
-Downloading genesis file
-Downloading address book
-
-```
-
-After bootstrapping is complete, the script will finish and you can start the firehose services:
-
-```bash
-./start.sh
-```
-
-This will start the node from genesis, so give it some time until it start syncing.
-
-You may check on the node's status (if its running) by opening `http://localhost:26657/status` in your browser.
+One you begin running `firehose-cosmos`, you will begin to see your blocks streaming through if it is successfully instrumented.
+If this is the first time you have run the node, this will start the node from genesis, so give it some time until it start syncing.
+You may check on the node's status (if its running locally) by opening `http://localhost:26657/status` in your browser.
 
 To test if firehose is ready to stream blocks, you can use the grpcurl command:
 
@@ -150,13 +132,13 @@ Make sure you have both `grpcurl` and `jq` installed. If you don't, you should b
 You should start seeing logs similar to this:
 
 ```bash
-2022-05-30T22:30:11.142+0100 (ingestor) creating mindreader plugin (mindreader/mindreader.go:99) {"archive_store_url": "file:///Users/myuser/firehose-cosmos/devel/cosmoshub4/tmp/fh-data/storage/one-blocks", "merge_archive_store_url": "file:///Users/myuser/firehose-cosmos/devel/cosmoshub4/tmp/fh-data/storage/merged-blocks", "oneblock_suffix": "", "batch_mode": false, "merge_threshold_age": "2562047h47m16.854775807s", "working_directory": "/Users/myuser/firehose-cosmos/devel/cosmoshub4/tmp/fh-data/workdir", "start_block_num": 0, "stop_block_num": 0, "channel_capacity": 0, "with_head_block_update_func": true, "with_shutdown_func": true, "fail_on_non_continuous_blocks": true, "wait_upload_complete_on_shutdown": "10s"}
+2022-05-30T22:30:11.142+0100 (ingestor) creating mindreader plugin (mindreader/mindreader.go:99) {"archive_store_url": "file:///../fh-data/storage/one-blocks", "merge_archive_store_url": "file:///../fh-data/storage/merged-blocks", "oneblock_suffix": "", "batch_mode": false, "merge_threshold_age": "2562047h47m16.854775807s", "working_directory": "/../fh-data/workdir", "start_block_num": 0, "stop_block_num": 0, "channel_capacity": 0, "with_head_block_update_func": true, "with_shutdown_func": true, "fail_on_non_continuous_blocks": true, "wait_upload_complete_on_shutdown": "10s"}
 2022-05-30T22:30:11.142+0100 (ingestor) creating new mindreader plugin (mindreader/mindreader.go:185)
-2022-05-30T22:30:11.143+0100 (merger) running merger (merger/app.go:60) {"config": {"StorageOneBlockFilesPath":"file:///Users/myuser/firehose-cosmos/devel/cosmoshub4/tmp/fh-data/storage/one-blocks","StorageMergedBlocksFilesPath":"file:///Users/myuser/firehose-cosmos/devel/cosmoshub4/tmp/fh-data/storage/merged-blocks","GRPCListenAddr":"0.0.0.0:9020","WritersLeewayDuration":10000000000,"TimeBetweenStoreLookups":5000000000,"StateFile":"/Users/myuser/firehose-cosmos/devel/cosmoshub4/tmp/fh-data/merger/merger.seen.gob","OneBlockDeletionThreads":10,"MaxOneBlockOperationsBatchSize":2000,"NextExclusiveHighestBlockLimit":0}}
-2022-05-30T22:30:11.143+0100 (firehose) running firehose (firehose/app.go:84) {"config": {"BlockStoreURLs":["file:///Users/myuser/firehose-cosmos/devel/cosmoshub4/tmp/fh-data/storage/merged-blocks"],"IrreversibleBlocksIndexStoreURL":"","IrreversibleBlocksBundleSizes":[100000,10000,1000,100],"BlockStreamAddr":"localhost:9000","GRPCListenAddr":"0.0.0.0:9030","GRPCShutdownGracePeriod":0,"RealtimeTolerance":359996400000000000}}
+2022-05-30T22:30:11.143+0100 (merger) running merger (merger/app.go:60) {"config": {"StorageOneBlockFilesPath":"file:///../fh-data/storage/one-blocks","StorageMergedBlocksFilesPath":"file:///../fh-data/storage/merged-blocks","GRPCListenAddr":"0.0.0.0:9020","WritersLeewayDuration":10000000000,"TimeBetweenStoreLookups":5000000000,"StateFile":"/../fh-data/merger/merger.seen.gob","OneBlockDeletionThreads":10,"MaxOneBlockOperationsBatchSize":2000,"NextExclusiveHighestBlockLimit":0}}
+2022-05-30T22:30:11.143+0100 (firehose) running firehose (firehose/app.go:84) {"config": {"BlockStoreURLs":["file:///../fh-data/storage/merged-blocks"],"IrreversibleBlocksIndexStoreURL":"","IrreversibleBlocksBundleSizes":[100000,10000,1000,100],"BlockStreamAddr":"localhost:9000","GRPCListenAddr":"0.0.0.0:9030","GRPCShutdownGracePeriod":0,"RealtimeTolerance":359996400000000000}}
 2022-05-30T22:30:11.144+0100 (firehose) setting up subscription hub (firehose/app.go:211)
 2022-05-30T22:30:11.143+0100 (ingestor) starting mindreader (mindreader/mindreader.go:205)
-2022-05-30T22:30:11.144+0100 (merger) failed to load bundle  (merger/app.go:98) {"file_name": "/Users/myuser/firehose-cosmos/devel/cosmoshub4/tmp/fh-data/merger/merger.seen.gob"}
+2022-05-30T22:30:11.144+0100 (merger) failed to load bundle  (merger/app.go:98) {"file_name": "/../fh-data/merger/merger.seen.gob"}
 2022-05-30T22:30:11.144+0100 (firehose) creating gRPC server (firehose/app.go:127) {"live_support": true}
 2022-05-30T22:30:11.144+0100 (ingestor) serving gRPC (over HTTP router) (plain-text) (dgrpc/server.go:184) {"listen_addr": "0.0.0.0:9000"}
 2022-05-30T22:30:11.145+0100 (ingestor) starting one block(s) uploads (mindreader/archiver_selector.go:343)
@@ -261,7 +243,7 @@ A graceful shutdown should look something similar to the below:
 10:39PM INF finalized dmlog block block=5200810 module=deepmind
 2022-05-30T22:39:38.444+0100 (firehose.hub.js) incoming live block (bstream/joiningsource.go:333) {"block": "#5200810 (119D8EC24EE734EB93895B89CA9629D721E5C63AC941933F582BDEB47BEB3107)", "live_pass_through": false}
 2022-05-30T22:39:38.444+0100 (firehose.hub.js) added live block to buffer (bstream/joiningsource.go:374) {"block": "#5200810 (119D8EC24EE734EB93895B89CA9629D721E5C63AC941933F582BDEB47BEB3107)", "buffer_size": 19}
-2022-05-30T22:39:38.819+0100 (firehose.hub.js.file) reading from blocks store: file does not (yet?) exist, retrying in (bstream/filesource.go:194) {"filename": "/Users/myuser/firehose-cosmos/devel/cosmoshub4/tmp/fh-data/storage/merged-blocks/0005200700.dbin.zst", "base_filename": "0005200700", "retry_delay": "4s", "secondary_blocks_stores_count": 0}
+2022-05-30T22:39:38.819+0100 (firehose.hub.js.file) reading from blocks store: file does not (yet?) exist, retrying in (bstream/filesource.go:194) {"filename": "/../fh-data/storage/merged-blocks/0005200700.dbin.zst", "base_filename": "0005200700", "retry_delay": "4s", "secondary_blocks_stores_count": 0}
 10:39PM INF exiting...
 2022-05-30T22:39:39.414+0100 (ingestor) mindreader is stopping (mindreader/mindreader.go:241)
 2022-05-30T22:39:39.414+0100 (ingestor) waiting until consume read flow (i.e. blocks) is actually done processing blocks... (mindreader/mindreader.go:255)
@@ -284,125 +266,19 @@ A graceful shutdown should look something similar to the below:
 
 ## Overview and Explanation
 
-The `ingestor` is a process that consumes the blockchain data
-that is extracted from our instrumented `Cosmos` node. The instrumented `Cosmos` node outputs individual block data.
+The `ingestor` process is responsible for reading events from the node process either through Flat files, or STDOUT depending on configuration in the Extractor process
 
 The `merger` process will either write individual block data into separate files called one-block files,
 or merge 100 blocks data together and write them into files inside the `merged-block` folder with a naming convention that matches the blocks inside the file. e.g. `0005200700.dbin.zst` contains the blocks from `5200700 - 5200799`.
 
-This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag. When running
-the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, we say the
-"mindreader is running in merged mode". When the flag is disabled, we will refer to the mindreader as running in
-its normal mode of operation.
+The `relayer` process uses gRPC to connect to the `ingestor` process and consume real-time block updates. It can also use the `merger` as a back-up mechanism in the case there are missing files.
 
-In the scenario where the `mindreader-node` process stores one-block files, we can run a `merger` process on the
-side which would merge the one-block files into 100-block files. When we are syncing the chain we will
-run the `mindreader-node` process in merged mode.
-
-When we are synced we will run the `mindreader-node` in its regular mode of operation (storing one-block files)
-
-The one-block files and 100-block files will be stored in `data-dir/storage/merged-blocks` and
-`data-dir/storage/one-blocks` respectively. The naming convention of the file is the number
-of the first block in the file.
-
-Finally, we have built tools that allow you to introspect the block files:
-
-```bash
-./sfeth tools print blocks --store ./eth-data/storage/merged-blocks 10000
-```
-
-```bash
-./sfeth tools print one-block --store ./eth-data/storage/one-blocks 10000
-```
-
----
-
-## Launch the Firehose
-
-Let's pick up where we left off, assuming we're no longer syncing eth-mainnet:
-
-```bash
-./sfeth -c eth-mainnet.yaml start mindreader-node
-```
-
-The current state of affairs is that we have an `sfeth` running a `mindreader-node` process.
-The process is extracting and merging 100-bock data.
-
-While still running the `mindreader-node` process in a separate terminal (still in the working directory),
-launch the firehose:
-
-```bash
-./sfeth -c eth-mainnet.yaml start relayer firehose
-```
-
-The `sfeth` command launches 2 processes, the `Relayer` and `Firehose`. Both processes work together to provide
-the `Firehose` data stream. Once the `Firehose` process is running, it will be listening on port `13042`.
-
-At its core, the `Firehose` is a gRPC stream. We can list the available gRPC services with `grpcurl`
-
-```bash
-grpcurl -plaintext localhost:13042 list
-```
-
-We can start streaming blocks with the `sf.firehose.v1.Stream` Service:
-
-```bash
-grpcurl -plaintext -d '{"start_block_num": 10}' localhost:13042 sf.firehose.v1.Stream.Blocks
-```
-
-You should see block streaming. Like so
-
-```json
-{
-  "block": {
-    "@type": "type.googleapis.com/sf.ethereum.codec.v1.Block",
-    "balanceChanges": [
-      {
-        "address": "KJIeTiydhPTA8MDOuZH0V1Gg/pM=",
-        "oldValue": {
-          "bytes": "M//VkvdcOeAA"
-        },
-        "newValue": {
-          "bytes": "NEU5JHmhLeAA"
-        },
-        "reason": "REASON_REWARD_MINE_BLOCK"
-      }
-    ],
-    "hash": "rWCqFYquYxvCh1Iy3w4OPNjtdRWloidwH+aAy7Cp6I8=",
-    "header": {
-      "parentHash": "2UDI+9iNUQ6fR13LTotFhgw9tYW3AP7gIjSNAIo/MWg=",
-      "uncleHash": "HcxN6N7HXXqrhbVntszUGtMSRRuUinQT8KFC/UDUk0c=",
-      "coi^Cnbase": "KJIeTiydhPTA8MDOuZH0V1Gg/pM=",
-      "stateRoot": "RSVmg4SxOM9mawD5Z4isp+mRTPmb+gxfAmNu00UBEog=",
-      "transactionsRoot": "VugfFxvMVab/g0XmksD4bltI4BuZbK3AAWIvteNjtCE=",
-      "receiptRoot": "VugfFxvMVab/g0XmksD4bltI4BuZbK3AAWIvteNjtCE=",
-      "logsBloom": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-      "difficulty": {
-        "bytes": "CDbKnao="
-      },
-      "number": "1488",
-      "gasLimit": "5000",
-      "timestamp": "2015-07-30T16:20:30Z",
-      "extraData": "R2V0aC92MS4wLjAvbGludXgvZ28xLjQuMg==",
-      "mixHash": "zMVn27pvcFYbAQsBJNFNjsQCIOV03Wv5s2z6QBuIV5c=",
-      "nonce": "8306990282153570439",
-      "hash": "rWCqFYquYxvCh1Iy3w4OPNjtdRWloidwH+aAy7Cp6I8="
-    },
-    "number": "1488",
-    "size": "539",
-    "ver": 1
-  },
-  "step": "STEP_NEW",
-  "cursor": "CFAZVtrTEjPGpZJWNJE2h6WwLpcyB15nXQG0fhdB1Nr39XqUjMigA2AnOx_Yl6zy3he_HVr53orORypzp5RXudDvkr017yM_QXstxdzo87S8KqHyaANOebM0VeuMat_RXT_eZw3_frMD5tSzMqWPbkI1NsEgL2exiWwBotRdc6ESu3E0xD71c8aE0amR8oJA-LNxRbepkymgBzZ8fx0Maw=="
-}
-```
+The `firehose` process will connect to the `relayer(s)` via gRPC and to the data store in order to provide a live feed of blocks in a joined manner. The end consumer can connect to it via gRPC to read from the stream.
 
 ---
 
 ## What's next
 
-Congratulations! You're now streaming ETH block data from mainnet.
+Congratulations! You're now streaming blocks data from a Cosmos based chain.
 
-At this point, Ethereum and ERC20 networks are yours to discover. Slice and dice this data to your heart's content.
-
-You might also want to move on to other sections, to start streaming data from other protocols.
+At this point, Cosmos networks, such as CosmosHub and Osmosis are yours to discover. Slice and dice this data to your heart's content.
