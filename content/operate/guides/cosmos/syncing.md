@@ -15,32 +15,36 @@ that together form the `Firehose` stack. A thorough discussion of the [Concepts 
 is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a `Firehose` locally.
 
 You can download the latest version of `firehose-cosmos` [here](https://github.com/figment-networks/firehose-cosmos/releases),
-however we recommend you use the dockerfile located in the `firehose-cosmos` repository located [here](https://github.com/figment-networks/firehose-cosmos)
+however we recommend you use the Dockerfile provided in the `firehose-cosmos` repository located [here](https://github.com/figment-networks/firehose-cosmos).
 
-Once downloaded you must unzip the bundle or alternatively you can clone the repository and run `make install` to install it locally.
+As of the time of writing this, the latest release is v0.4.0, you can get a copy of this from [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). The latest release will always be listed on the [Github Releases Page](https://github.com/figment-networks/firehose-cosmos/releases). Ensure you always use the most up to version of `firehose-cosmos` to ensure you have the latest functionality.
+
+```bash
+docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
+```
+
+Alternatively you can clone the repository and run `make install` to install it locally.
 
 To verify the installation was successful, run:
 
 ```bash
 firehose-cosmos --version
+# or
+docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose --version
 ```
-
-`firehose-cosmos` provides scripts for setting up and running the following mainnet networks,
-however these are limited in the range of supported Operating systems and configuration so we recommend following the guides for getting these chains running.
-
-
-These scripts are only really used for testing and should not be used for running this process.
-
-- [Cosmoshub4](https://github.com/figment-networks/firehose-cosmos/blob/main/devel/cosmoshub4)
-- [Osmosis1](https://github.com/figment-networks/firehose-cosmos/blob/main/devel/osmosis1)
-
 ---
 
 ## Install and run instrumented nodes
 
-In order to index Cosmos based nodes with `firehose-cosmos`, you will need to insure you are using the correctly modified binaries for the chain you are targetting. Figment provide these for CosmosHub and you can find them on the `Gaia-DM` releases page located [here](https://github.com/figment-networks/gaia-dm/releases). You will need to also include the following in your node configuration file:
+In order to index Cosmos based nodes with `firehose-cosmos`, you will need to insure you are using the correctly modified binaries for the chain you are targetting. Figment provide these for CosmosHub and you can find them on the `Gaia-DM` releases page located [here](https://github.com/figment-networks/gaia-dm/releases). Alternatively, they also provide the prebuilt Docker Images which you can find listed on [their Dockerhub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). These prebuilt Dockerfiles also start the `firehose-cosmos` process for you. Below is an example for v7.0.4 of the Osmosis testnet. You can modify this to use whichever version of the chain node you are indexing.
 
-```YAML
+```bash
+docker run --rm -it figmentnetworks/firehose-cosmos:fh-v0.4.0-osmosis1-testnet-v7.0.4 /app/firehose start
+```
+
+In the situation that you wish the run the nodes outside of Docker, you would need to ensure you are running the Figment modified node and then change the node configuration file to include the following:
+
+```ini
 #######################################################
 ###       Extractor Configuration Options           ###
 #######################################################
@@ -51,8 +55,7 @@ output_file = "stdout"
 
 ## Firehose-Cosmos Configuration
 
-If you wish to use a configuration file instead of setting all CLI flags, you may create a new firehose.yml file in your current working directory.
-You can point to your instrumented binary using the `ingestor-node-path` flag and this will start the binary for you.
+If you wish to use a configuration file instead of setting all CLI flags, you can pass it with a `-c ./configfile.ini` argument.
 
 Example:
 
@@ -69,51 +72,10 @@ start:
 
     # Ingestor specific flags
     ingestor-mode: node
-    ingestor-node-path: path/to/gaiad_or_osmosisd
-    ingestor-node-args: start --x-crisis-skip-assert-invariants
-    ingestor-node-env: "KEY=VALUE,KEY=VALUE"
+    ingestor-node-path: path/to/node_binary
+    ingestor-node-args: start
 ```
-
 ---
-
-### Logs input mode
-
-It's possible to run the firehose ingestor from the static logs, mostly for development/testing purposes.
-
-Example config:
-
-```YAML
-start:
-  args:
-    - ingestor
-    - merger
-    - relayer
-    - firehose
-  flags:
-    # ... other config options
-
-    # Ingestor specific flags
-    ingestor-mode: logs
-    ingestor-logs-dir: /path/to/logs/dir
-
-    # Configure the pattern if not using .log extension
-    # ingestor-logs-pattern: *.log
-```
-
----
-
-## Binary configuration
-
-As the Cosmos based binaries have been modified, you will need to include the following in your node configuration file:
-
-```YAML
-#######################################################
-###       Extractor Configuration Options           ###
-#######################################################
-[extractor]
-enabled = true
-output_file = "stdout"
-```
 
 ## Syncing your chain
 
@@ -127,7 +89,7 @@ To test if firehose is ready to stream blocks, you can use the grpcurl command:
 grpcurl -plaintext localhost:9030 sf.firehose.v1.Stream.Blocks | jq
 ```
 
-Make sure you have both `grpcurl` and `jq` installed. If you don't, you should be able to find them on your preferred package manager
+Make sure you have both [grpcurl](https://github.com/fullstorydev/grpcurl) and [jq](https://github.com/stedolan/jq) installed. If you don't, you should be able to find them on your preferred package manager
 
 You should start seeing logs similar to this:
 
@@ -266,14 +228,13 @@ A graceful shutdown should look something similar to the below:
 
 ## Overview and Explanation
 
-The `ingestor` process is responsible for reading events from the node process either through Flat files, or STDOUT depending on configuration in the Extractor process
+The `ingestor` process consumes data from the node and saves it as one-blocks files.
 
-The `merger` process will either write individual block data into separate files called one-block files,
-or merge 100 blocks data together and write them into files inside the `merged-block` folder with a naming convention that matches the blocks inside the file. e.g. `0005200700.dbin.zst` contains the blocks from `5200700 - 5200799`.
+The `merger` process downloads these single block files and creates bigger 100 blocks files inside the `merged-block` folder with a naming convention that matches the blocks inside the file. e.g. `0005200700.dbin.zst` contains the blocks from `5200700 - 5200799`.
 
 The `relayer` process uses gRPC to connect to the `ingestor` process and consume real-time block updates. It can also use the `merger` as a back-up mechanism in the case there are missing files.
 
-The `firehose` process will connect to the `relayer(s)` via gRPC and to the data store in order to provide a live feed of blocks in a joined manner. The end consumer can connect to it via gRPC to read from the stream.
+The `firehose` process will connect to the `relayer(s)` via gRPC and to the data store in order to provide a live feed of blocks in a joined manner. The end consumer can connect to it via gRPC to read from the stream. It uses the merged-block files created by the `merger` process to serve this data to the services downstream.
 
 ---
 

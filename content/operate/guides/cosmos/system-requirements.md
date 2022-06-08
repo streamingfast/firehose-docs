@@ -31,3 +31,12 @@ The CPU/RAM requirements will depend on these factors:
 {{< alert type="note" >}}
 These stats are from March 2022, but chains of similar density and similar age will behave similarly.
 {{< /alert >}}
+
+#### Cosmoshub-4 Mainnet
+
+`This section is incomplete.`
+
+#### Osmosis-1 Mainnet
+
+`This section is incomplete.`
+
