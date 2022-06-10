@@ -28,10 +28,6 @@ The CPU/RAM requirements will depend on these factors:
 * **High Availability**: highly available deployments will require **2 times the resources** (or more) listed in the following examples, as a general rule.
 * **Throughput of queries**: the Firehose stack is built for horizontal scalability, the more requests per second you want to fulfill, the larger the deployment, the more CPU/RAM you will need to allocate to your cluster.
 
-{{< alert type="note" >}}
-These stats are from March 2022, but chains of similar density and similar age will behave similarly.
-{{< /alert >}}
-
 #### Cosmoshub-4 Mainnet
 
 `This section is incomplete.`

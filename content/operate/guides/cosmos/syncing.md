@@ -4,7 +4,7 @@ title: Syncing
 showH2InSideNav: true
 ---
 
-Below, we'll show you how to use [Firehose](/operate/concepts/) to sync and stream Cosmos Based Chains.
+Below, we'll show you how to use [Firehose](/operate/concepts/) to sync and stream Cosmos Chains.
 
 ---
 
@@ -17,7 +17,7 @@ is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a
 You can download the latest version of `firehose-cosmos` [here](https://github.com/figment-networks/firehose-cosmos/releases),
 however we recommend you use the Dockerfile provided in the `firehose-cosmos` repository located [here](https://github.com/figment-networks/firehose-cosmos).
 
-As of the time of writing this, the latest release is v0.4.0, you can get a copy of this from [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). The latest release will always be listed on the [Github Releases Page](https://github.com/figment-networks/firehose-cosmos/releases). Ensure you always use the most up to version of `firehose-cosmos` to ensure you have the latest functionality.
+As of the time of writing this, the latest release is v0.4.0, you can get a copy of this from [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). The latest release will always be listed on the [Github Releases Page](https://github.com/figment-networks/firehose-cosmos/releases). Ensure you always use the most up to date version of `firehose-cosmos` to ensure you have the latest functionality.
 
 ```bash
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
@@ -36,7 +36,7 @@ docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose --versio
 
 ## Install and run instrumented nodes
 
-In order to index Cosmos based nodes with `firehose-cosmos`, you will need to insure you are using the correctly modified binaries for the chain you are targetting. Figment provide these for CosmosHub and you can find them on the `Gaia-DM` releases page located [here](https://github.com/figment-networks/gaia-dm/releases). Alternatively, they also provide the prebuilt Docker Images which you can find listed on [their Dockerhub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). These prebuilt Dockerfiles also start the `firehose-cosmos` process for you. Below is an example for v7.0.4 of the Osmosis testnet. You can modify this to use whichever version of the chain node you are indexing.
+In order to index Cosmos nodes with `firehose-cosmos`, you will need to insure you are using the correctly modified binaries for the chain you are targetting. Figment provide these for CosmosHub and Osmosis, mainnet and testnet chains as prebuilt Docker Images which you can find listed on [their Dockerhub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). These Dockerfiles also start the `firehose-cosmos` process for you. Below is an example for v7.0.4 of the Osmosis testnet. You can modify this to use whichever version of the chain node you are indexing.
 
 ```bash
 docker run --rm -it figmentnetworks/firehose-cosmos:fh-v0.4.0-osmosis1-testnet-v7.0.4 /app/firehose start
@@ -240,6 +240,6 @@ The `firehose` process will connect to the `relayer(s)` via gRPC and to the data
 
 ## What's next
 
-Congratulations! You're now streaming blocks data from a Cosmos based chain.
+Congratulations! You're now streaming blocks data from a Cosmos chain.
 
 At this point, Cosmos networks, such as CosmosHub and Osmosis are yours to discover. Slice and dice this data to your heart's content.
