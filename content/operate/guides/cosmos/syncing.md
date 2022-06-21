@@ -53,9 +53,9 @@ enabled = true
 output_file = "stdout"
 ```
 
-## Firehose-Cosmos Configuration
+## firehose-cosmos Configuration
 
-If you wish to use a configuration file instead of setting all CLI flags, you can pass it with a `-c ./configfile.ini` argument.
+If you wish to use a configuration file instead of setting all CLI flags, you can pass it with a `-c ./configfile.yaml` argument.
 
 Example:
 
@@ -89,7 +89,7 @@ To test if firehose is ready to stream blocks, you can use the grpcurl command:
 grpcurl -plaintext localhost:9030 sf.firehose.v1.Stream.Blocks | jq
 ```
 
-Make sure you have both [grpcurl](https://github.com/fullstorydev/grpcurl) and [jq](https://github.com/stedolan/jq) installed. If you don't, you should be able to find them on your preferred package manager
+Make sure you have both [grpcurl](https://github.com/fullstorydev/grpcurl) and [jq](https://github.com/stedolan/jq) installed. If you don't, you should be able to find them on your preferred package manager.
 
 You should start seeing logs similar to this:
 
@@ -228,13 +228,7 @@ A graceful shutdown should look something similar to the below:
 
 ## Overview and Explanation
 
-The `ingestor` process consumes data from the node and saves it as one-blocks files.
-
-The `merger` process downloads these single block files and creates bigger 100 blocks files inside the `merged-block` folder with a naming convention that matches the blocks inside the file. e.g. `0005200700.dbin.zst` contains the blocks from `5200700 - 5200799`.
-
-The `relayer` process uses gRPC to connect to the `ingestor` process and consume real-time block updates. It can also use the `merger` as a back-up mechanism in the case there are missing files.
-
-The `firehose` process will connect to the `relayer(s)` via gRPC and to the data store in order to provide a live feed of blocks in a joined manner. The end consumer can connect to it via gRPC to read from the stream. It uses the merged-block files created by the `merger` process to serve this data to the services downstream.
+For a full breakdown of the services used, you can refer to the [components page](/operate/concepts/components). For firehose-cosmos, the extractor component is labeled as `ingestor` but functions the same.
 
 ---
 
