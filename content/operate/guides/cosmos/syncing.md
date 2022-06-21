@@ -36,10 +36,10 @@ docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose --versio
 
 ## Install and run instrumented nodes
 
-In order to index Cosmos nodes with `firehose-cosmos`, you will need to insure you are using the correctly modified binaries for the chain you are targetting. Figment provide these for CosmosHub and Osmosis, mainnet and testnet chains as prebuilt Docker Images which you can find listed on [their Dockerhub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). These Dockerfiles also start the `firehose-cosmos` process for you. Below is an example for v7.0.4 of the Osmosis testnet. You can modify this to use whichever version of the chain node you are indexing.
+In order to index Cosmos nodes with `firehose-cosmos`, you will need to insure you are using the correctly modified binaries for the chain you are targetting. Figment provide these for CosmosHub and Osmosis, mainnet and testnet chains as prebuilt Docker Images which you can find listed on [their Dockerhub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). These Dockerfiles also start the `firehose-cosmos` process for you. Below is an example for v7.0.4 of the Osmosis testnet. You can modify this to use whichever version of the chain node you are indexing. You should also pass the path to your chain data volume storage. If you don't pass this, the chain will instead start from Genesis each time.
 
 ```bash
-docker run --rm -it figmentnetworks/firehose-cosmos:fh-v0.4.0-osmosis1-testnet-v7.0.4 /app/firehose start
+docker run --rm -it figmentnetworks/firehose-cosmos:fh-v0.4.0-osmosis1-testnet-v7.0.4 /app/firehose start -v data:/path/to/chain/data
 ```
 
 In the situation that you wish the run the nodes outside of Docker, you would need to ensure you are running the Figment modified node and then change the node configuration file to include the following:
