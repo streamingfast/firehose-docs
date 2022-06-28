@@ -13,8 +13,8 @@ How to sync different blockchains, and produce Firehose files.
 
 - [Ethereum](/operate/guides/ethereum/)
 - [NEAR](/operate/guides/near/)
-- [Cosmos](/operate/guides/cosmos/)
 - [Solana](/operate/guides/solana/)
+- [Cosmos](/operate/guides/cosmos/)
 
 
 
