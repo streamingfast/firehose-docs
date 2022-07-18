@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Home](README.md)
+  * [Firehose Overview](\_index/firehose-overview.md)
 * [integrate](integrate/README.md)
   * [Integrate](integrate/\_index.md)
   * [HOWTO Integrate](integrate/howto.md)
