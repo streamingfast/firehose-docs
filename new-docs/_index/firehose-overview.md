@@ -18,4 +18,4 @@ The Firehose instrumentation service is added to a node for efficient capture an
 
 Firehose is intended to stand as a replacement for The Graph’s original blockchain data extraction layer. [The Graph](https://thegraph.com/) is an indexing protocol used for the organization of blockchain data.
 
-To get started with Firehose the first step is understanding some of the core design concepts. The next step is to find the documentation for the specific blockchain you intend on working with. &#x20;
+To get started with Firehose the first step is understanding its core concepts. The next step is to find the documentation for the specific blockchain you intend on working with. &#x20;
