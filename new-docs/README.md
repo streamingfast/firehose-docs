@@ -12,7 +12,7 @@ This page serves as the primary entry point to the Firehose product documentatio
 
 If you're new to Firehose, the Firehose Overview is the perfect place to start.&#x20;
 
-If you already understand the core Firehose concepts and architecture or have Firehose running please feel free to access the blockchain-specific documentation from the menu.&#x20;
+If you already understand the core Firehose concepts and architecture please feel free to access the blockchain-specific documentation from the menu.&#x20;
 
 The official GitHub repository for Firehose can be found at [https://github.com/streamingfast/firehose](https://github.com/streamingfast/firehose)
 
