@@ -12,7 +12,7 @@ Below, we'll show you how to use [Firehose](../../../../operate/concepts/) to sy
 
 ### Install firehose-cosmos
 
-`firehose-cosmos`, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the \[[Concepts & Architecture](../../concepts/)]\(\{{< ref "/operate/concepts" >\}}) is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a `Firehose` locally.
+`firehose-cosmos`, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the \[[Concepts & Architecture](../../../concepts/)]\(\{{< ref "/operate/concepts" >\}}) is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a `Firehose` locally.
 
 You can download the latest version of `firehose-cosmos` [here](https://github.com/figment-networks/firehose-cosmos/releases), however we recommend you use the Dockerfile provided in the `firehose-cosmos` repository located [here](https://github.com/figment-networks/firehose-cosmos).
 

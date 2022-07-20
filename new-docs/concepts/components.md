@@ -5,6 +5,8 @@ title: Components
 
 # Components
 
+TODO: List components one by one. Introduce readers to this content and set them up to understand what's coming.
+
 As a complement to the \[Data Flow]\(\{{< ref "./data-flow" >\}}) section, below we'll discuss in more detail each of the components which constitute the `Firehose` system.
 
 ***
@@ -17,7 +19,7 @@ You will need to run a full protocol node with the `Firehose` instrumentation en
 
 For a highly-available setup (which the system is designed to allow), you will need a few more components.
 
-<img src="../../.gitbook/assets/file.drawing.svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.drawing.svg" alt="" class="gitbook-drawing">
 
 \{{< mermaid >\}}
 
