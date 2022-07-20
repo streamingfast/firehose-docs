@@ -14,11 +14,11 @@ description: StreamingFast Firehose core concepts and architecture documentation
 
 In basic terms, Firehose is responsible for extracting data from blockchain nodes. Firehose makes paramount improvements in the speed and performance of blockchain data availability.
 
-From the consumer standpoint, Firehose is simply a gRPC service. Behind that elegant simplicity is an orchestrated family of components working in harmony to provide efficient blockchain data.
+From the consumer standpoint, Firehose is simply a gRPC service. Behind that elegant simplicity is an orchestrated family of components working in harmony to provide efficient blockchain data availability.
 
 Setting up a production-grade Firehose system requires some infrastructure and equipment.
 
-In order to utilize Firehose instrumentation must be integrated and enabled on a full protocol node to serve data with the Firehose system.
+To utilize Firehose, instrumentation must be integrated and enabled on a full protocol node to serve data with the Firehose system.
 
 Firehose was designed with high availability (HA) in mind and HA is available with a few extra steps and components.
 
