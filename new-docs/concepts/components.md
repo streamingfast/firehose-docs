@@ -1,14 +1,65 @@
 ---
 weight: 40
 title: Components
-description: StreamingFast Firehose component documentation
 ---
 
 # Components
 
-## Extractor (Mindreader)
+TODO: List components one by one. Introduce readers to this content and set them up to understand what's coming.
 
-The `Extractor` processes use the [node-manager](https://github.com/streamingfast/node-manager) library to run a blockchain node (`nodeos`) instance as a sub-process, and read data produced therein.
+As a complement to the \[Data Flow]\(\{{< ref "./data-flow" >\}}) section, below we'll discuss in more detail each of the components which constitute the `Firehose` system.
+
+***
+
+### Architecture
+
+To serve a production-grade `Firehose`, some infrastructure is required.
+
+You will need to run a full protocol node with the `Firehose` instrumentation enabled, as well as have an object store to conserve the merged blocks files.
+
+For a highly-available setup (which the system is designed to allow), you will need a few more components.
+
+<img src="../.gitbook/assets/file.drawing.svg" alt="" class="gitbook-drawing">
+
+\{{< mermaid >\}}
+
+flowchart BT
+
+dstore\[("Object Store")] click dstore "\{{< ref "/operate/concepts/data-storage" >\}}" "More on Data Storage"
+
+extractors\[\["firehose-enabled blockchain node(s)"]]
+
+relayers\[\["relayer(s)"]]
+
+merger
+
+click merger "\{{< ref "/operate/concepts/components" >\}}" "More on the merger"
+
+firehoses\[\["firehose servers"]]
+
+relayers --> |gRPC| extractors
+
+firehoses --> |gRPC| relayers
+
+user(\[User])-->|gRPC|firehoses
+
+extractors-.->|one-block files|merger
+
+merger -.-> |writes merged blocks| dstore dstore -.-> |consumes merged blocks| relayers dstore -.-> |consumes merged blocks| firehoses
+
+\{{< /mermaid >\}}
+
+***
+
+Stay tuned for a video series on the Firehose components.
+
+***
+
+### Extractor (mindreader)
+
+**Description**
+
+The `Extractor` processes uses the [node-manager](https://github.com/streamingfast/node-manager) library to run a blockchain node (`nodeos`) instance as a sub-process, and read data produced therein.
 
 This is the primal source of all data that will flow in all systems. The `Extractor` nodes can be considered as simple full nodes, with no archive enabled nor other oddities. You can bootstrap them just the way you would with full nodes, with the same backup strategy.
 
@@ -26,7 +77,11 @@ See the [merger](components.md#merger) for details.
 
 By adding more `Extractor`s, and dispersing them geographically, they end up racing to push blocks to the `Relayer`, increasing performance of the overall system.
 
+***
+
 ### Merger
+
+**Description**
 
 The `Merger` collects _one-block files_ written by one or more `Extractor`s, into a _one-block object store_, and merges them to produce _merged blocks files_ (a.k.a 100-blocks files).
 
@@ -58,6 +113,8 @@ Systems in need of blocks, when they start, will usually connect to `Relayer`s, 
 
 Once the other components are live, in general, they won't read from merged block files.
 
+***
+
 ### Relayer
 
 **Description**
@@ -71,6 +128,8 @@ The `Relayer` serves its block data through a streaming gRPC interface called `B
 **High Availability**
 
 `Relayer`s feed from all of the `Extractor` nodes, to get a complete view of all possible forks.
+
+***
 
 ### Firehose gRPC Server
 

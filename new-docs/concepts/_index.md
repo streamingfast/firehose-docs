@@ -22,11 +22,13 @@ Firehose was designed with high availability (HA) in mind and HA is available wi
 
 From the consumer standpoint, Firehose is simply a gRPC service.&#x20;
 
-Firehose provides an ordered, yet fork-aware, stream of blocks. The blocks provide built-in cursoring, enabling developers to stop and restart at the exact block needed; even for forked blocks.
+Firehose provides an ordered, yet fork-aware, stream of blocks.&#x20;
 
-Blocks contain details about consensus metadata, all transactions, traces of transaction executions, and even the transaction state changes.
+The blocks provide built-in cursoring, enabling developers to stop and restart at the exact block needed; even for forked blocks.
 
-Our vision is that these Firehose blocks are sufficient as the single source of data for any API that one would want to build on top of it. The goal is to circumvent the need for ad-hoc RPC calls to a protocol node while simultaneously populating a datastore.
+Blocks contain details about consensus metadata, transactions, traces of transaction executions, and even the transaction state changes.
+
+The StreamingFast vision is that Firehose blocks are sufficient as the single source of data for any API that one would want to build on top of it. The goal is to circumvent the need for ad-hoc RPC calls to a protocol node while simultaneously populating a datastore.
 
 For each protocol, a strict and complete definition of its data structure is defined in carefully designed Protocol Buffer schemas.&#x20;
 
