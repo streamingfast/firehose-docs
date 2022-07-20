@@ -10,4 +10,4 @@ In the most simple terms, Firehose is responsible for extracting data from block
 
 One important thing to understand is the Firehose system will run on StreamingFast infrastructure in most cases.&#x20;
 
-Developers will typically use Firehose through StreamingFast Substreams technology. StreamingFast has implemented the instrumentation on internal StreamingFast nodes for several popular blockchains including Ethereum, NEAR, Solana, and a few others.&#x20;
+Developers will typically use Firehose through StreamingFast Substreams technology. StreamingFast has implemented the instrumentation on internal StreamingFast nodes for several popular blockchains including Ethereum, NEAR, Solana, and a TODO: find full list of supported, intrumented and available blockchains.&#x20;
