@@ -12,36 +12,31 @@ description: StreamingFast Firehose core concepts and architecture documentation
 
 # Concepts & Architecture
 
-To reiterate, the basic functionality provided by Firehose is data extraction from instrumented blockchain nodes.
+In the most simple terms, Firehose is responsible for extracting data from blockchain nodes.
 
-TODO: List core concepts one by one. Introduce readers to this content and set them up to understand what's coming.
+Setting up a production-grade Firehose system requires some infrastructure and equipment.
 
-This section aims to be the best way to fully understand the power of the Firehose system, its architecture, the various components that it's made of, and how data flows through the Firehose stack up to the final consumer through the gRPC connection.
+Instrumentation must be set up and enabled on a full protocol node to serve data with the Firehose system.
 
-From the consumer standpoint, the `Firehose` is a gRPC service providing an ordered, yet fork-aware, stream of blocks with built-in cursoring, enabling you to stop and restart at the exact block you need, even on a forked block.
+Firehose was designed with high availability (HA) in mind and HA is available with a few extra steps and components.
 
-These blocks contain details about the consensus metadata, all transactions, and traces of their executions (including state changes).
+From the consumer standpoint, Firehose is simply a gRPC service.&#x20;
 
-Our vision is that these `Firehose` blocks are sufficient as the single source of data for any API that one would want to build on top of it, removing the need for ad-hoc RPC calls to a protocol node while populating a datastore.
+Firehose provides an ordered, yet fork-aware, stream of blocks. The blocks provide built-in cursoring, enabling developers to stop and restart at the exact block needed; even for forked blocks.
 
-For each protocol, a strict and complete definition of its data structure is defined in Protocol Buffer schemas. The blocks flowing through the `Firehose` are therefore messages that use those schemas (we call them blockchain `codecs`).
+Blocks contain details about consensus metadata, all transactions, traces of transaction executions, and even the transaction state changes.
 
-Ultimately, the `Firehose` provides a way to index and provide blockchain data which:
+Our vision is that these Firehose blocks are sufficient as the single source of data for any API that one would want to build on top of it. The goal is to circumvent the need for ad-hoc RPC calls to a protocol node while simultaneously populating a datastore.
 
-* is capable of handling high throughput chains (network bound)
-* increases linear reprocessing performance
-* increases back-filling performance & maximizes data agility by enabling parallel processing
-* reduces the risk of non-deterministic output
-* improves testability and developer experience when iterating on blockchain data
-* simplifies an operator's reprocessing needs by relying on flat data files instead of live processes
+For each protocol, a strict and complete definition of its data structure is defined in carefully designed Protocol Buffer schemas.&#x20;
 
-***
+The blocks flowing through Firehose are messages using Protocol Buffer schemas. StreamingFast refers to the schemas as blockchain codecs.
 
-In the following pages, we'll cover:
+The Firehose system indexes and provides blockchain data that:
 
-* [Principles and Approach](../../operate/concepts/principles/)
-* [Data Flow](../../operate/concepts/data-flow/)
-* [Components](../../operate/concepts/components/)
-* [Data Stores and Artifacts](../../operate/concepts/data-storage/)
-
-***
+* is capable of handling high throughput chains (network bound).
+* increases linear reprocessing performance.
+* increases back-filling performance & maximizes data agility by enabling parallel processing.
+* reduces the risk of non-deterministic output.
+* improves testability and developer experience when iterating on blockchain data.
+* simplifies an operator's reprocessing needs by relying on flat data files instead of live processes.
