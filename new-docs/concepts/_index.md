@@ -12,6 +12,8 @@ description: StreamingFast Firehose core concepts and architecture documentation
 
 # Concepts & Architecture
 
+To reiterate, the basic functionality provided by Firehose is data extraction from instrumented blockchain nodes.
+
 TODO: List core concepts one by one. Introduce readers to this content and set them up to understand what's coming.
 
 This section aims to be the best way to fully understand the power of the Firehose system, its architecture, the various components that it's made of, and how data flows through the Firehose stack up to the final consumer through the gRPC connection.
