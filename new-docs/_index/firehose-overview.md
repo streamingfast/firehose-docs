@@ -4,11 +4,13 @@ description: StreamingFast Firehose technology overview page.
 
 # Firehose Overview
 
+### What is StreamingFast Firehose?
+
 Firehose is a core component of StreamingFast’s suite of open-source blockchain data software development products.
 
 Firehose was created by StreamingFast to provide a files-based and streaming-first approach to processing blockchain data. Firehose is made available as part of the StreamingFast software suite.
 
-The StreamingFast software suite enables low-latency processing of blockchain data in real-time in the form of binary data streams. The StreamingFast suite also presents the ability to execute massive operations on historical blockchain data, in an extremely parallelized manner.
+The StreamingFast software suite enables low-latency processing of real-time blockchain data in the form of binary data streams. The StreamingFast suite also presents the ability to execute massive operations on historical blockchain data, in an extremely parallelized manner.
 
 Firehose was created to increase the speed and performance of blockchain data extraction from problems encountered in deployed, real-world applications.&#x20;
 
