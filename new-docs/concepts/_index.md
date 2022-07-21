@@ -41,4 +41,6 @@ The Firehose system indexes and provides blockchain data that:
 * increases back-filling performance & maximizes data agility by enabling parallel processing.
 * reduces the risk of non-deterministic output.
 * improves testability and developer experience when iterating on blockchain data.
-* simplifies an operator's reprocessing needs by relying on flat data files instead of live processes.
+* simplifies an operator's reprocessing needs by relying on flat data files instead of live data processes.
+
+The Firehose system is split up into separate components that work together to extract, process, and store blockchain data from instrumented nodes. The next step is to learn about the Firehose components.
