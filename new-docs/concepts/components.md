@@ -94,15 +94,27 @@ Multiple Extractor components will ensure blocks are flowing efficiently to the 
 
 ### Firehose gRPC Server
 
-TODO: The Firehose gRPC Server component is responsible for...
+The Firehose gRPC Server component is responsible for providing the extracted, formed, and collated blockchain data handled by the other Firehose components.
 
-The Firehose system uses merged blocks from data storage directly for historical requests. Live blocks are received from the Relayer component. The Relayer component gets its data from one, or more, Extractor components.
+The Firehose system will use merged blocks from data storage directly for historical requests.&#x20;
+
+Live blocks are received from the Relayer component.&#x20;
+
+The Relayer component gets its data from one, or more, Extractor components.
+
+The Firehose gRPC Server component provides the data to the end consumer of the Firehose system through remote method calls to the server.
 
 **High Availability**
 
-`Firehose`s can be horizontally scaled and will be limited by the throughput of the network between them and clients, as well as them as the `Relayer`s.
+Firehose can be scaled horizontally to provide a highly available system.&#x20;
 
-`Firehose`s can connect to a subset, or all of the `Relayer`s.
+The network speed and data throughput between consumers and Firehose deployments will dictate the speed of data availability.&#x20;
+
+In addition, the network speed and data throughput between Relayer components and Firehose gRPC Server components will impact the speed of data availability.
+
+Firehose gRPC Server components have the ability to connect to a subset of Relayer components or all Relayers available.
+
+\----------- CONTINUE FROM HERE --------------
 
 Having `Firehose`s connect to all `Relayer`s increases the likelihood of seeing all forks, and being able to navigate those forks for clients that request them while they are still in memory. All forks do end up in the merged blocks, so in the worst case, navigation of forks is delayed when forked blocks do not make it to all `Firehose`s.
 
