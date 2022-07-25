@@ -114,8 +114,8 @@ In addition, the network speed and data throughput between Relayer components an
 
 Firehose gRPC Server components have the ability to connect to a subset of Relayer components or all Relayers available.
 
-\----------- CONTINUE FROM HERE --------------
+When the Firehose gRPC Server component is connected to all available Relayer components the probability that all forks will be viewed increases. Inbound requests made by consumers will be fulfilled with in-memory fork data.
 
-Having `Firehose`s connect to all `Relayer`s increases the likelihood of seeing all forks, and being able to navigate those forks for clients that request them while they are still in memory. All forks do end up in the merged blocks, so in the worst case, navigation of forks is delayed when forked blocks do not make it to all `Firehose`s.
+Block navigation can be delayed when forked data isn't completely communicated to the Firehose gRPC Server component.&#x20;
 
 Understanding how data flows through the Firehose system is beneficial for harnessing its full power. Additional information is provided further explaining the data flow through Firehose.
