@@ -6,15 +6,17 @@ description: StreamingFast Firehose data flow documentation
 
 # Data Flow
 
-The path and process of data flow through the Firehose system are important facets to understand when using the software.
+The path and process of data flow through the Firehose system are important facets to understand when using the software.&#x20;
 
-The Firehose components are discussed in detail on the Components page in the documentation.&#x20;
+This page will provide information about the data flow through the Firehose components and system to the consumers. The Firehose components are discussed in greater detail on the Components page in the documentation.&#x20;
 
-Blockchain data flows from instrumented nodes to the gRPC server through the Firehose system.&#x20;
+In simple terms, blockchain data flows from instrumented nodes to the gRPC server through the Firehose system.&#x20;
 
 Each Firehose component plays an important role as the blockchain data flows through it.
 
 ![firehose](../../drawings/general\_architecture.png)
+
+The StreamingFast Deepmind instrumentation feeds to Extractor components. The Extractor components feed the Relayer component. The Index and IndexProvider components work with data provided by the instrumentation through the Extractor through the Relayer. Finally, the Firehose gRPC Server component hands data back to any consumers of the Firehose system.
 
 ***
 
@@ -140,17 +142,15 @@ The Transforms are handed off to chain-specific filter functions. The desired fi
 
 The IndexProvider component using Transforms is able to provide knowledge about specific data in large ranges of block data. This includes the presence or absence of specific data contained within the blocks the component is filtering.
 
-### Firehose Data Flow
+### Firehose gRPC Server Data Flow
 
-\-- QUESTION --
+The Firehose gRPC Server component is responsible for supplying the stream of block data to requesting consumers of the Firehose system. The Firehose gRPC Server can be thought of as the top most component in the Firehose architectural stack.
 
-IS THE FIREHOSE gRPC SERVER COMPONENT AND THE "FIREHOSE" COMPONENT THE SAME THING?!
+Firehose gRPC Server components connect to persisted and live block data sources to serve consumer data requests.
 
-\--- CONTINUE HERE ----
+The Firehose system was designed to switch between the persistent and live data store as it's joining data to intelligently fulfill inbound requests from consumers.
 
-Finally, the last component that serves the actual stream of blocks to the consumer is the `Firehose` service.
-
-The `Firehose` connects to both a file source and a live source, and starts serving blocks to the consumer. The sources are joined together using an intelligent "joining source" that knows when to switch over from the file source to the live source.
+\------- CONTINUE HERE -------
 
 As such, if a consumer’s request is for historical blocks, they are simply fetched from persistent storage, passed inside a `ForkDB` (more info about that below), and sent to the consumer with a cursor which uniquely identifies the block as well as its position in the chain. In so doing, we can resume even from forked blocks, as they are all preserved.
 
