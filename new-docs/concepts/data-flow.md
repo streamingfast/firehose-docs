@@ -98,47 +98,55 @@ The easily accessible block data enables StreamingFast's highly parallelized rep
 
 ### Relayer
 
-\------ CONTINUE HERE ---------
+The Relayer component is responsible for connecting to one or more Extractor components and receiving live block data from them.
 
-A multiplexer called the `Relayer` connects to multiple `Extractor` instances, and receives live blocks from them.
+The Relayer component uses multiple connections to provide data redundancy for scenarios where Extractor components have crashed or require maintenance. The Relayer also deduplicates incoming blocks resulting in speeds that match the fastest Extractor available to read data from.
 
-Multiple connections enable redundancy in case the `Extractor` crashes or needs maintenance. It deduplicates incoming blocks, so will serve its own clients at the speed of the fastest `Extractor`.
+The design of the Relayer component enables them to race to push data to consumers!
 
-We like to say that they race to push data to consumers!
+The Relayer component can function as a live data source for blocks in the Firehose system.&#x20;
 
-The relayer then becomes the "live source" of blocks in the system, as it serves the same interface as the extractor in a simple (non-HA) setup.
-
-***
+Relayer components serve the same interface as Extractor components in simple non-high availability setups.
 
 ### Merger Data Flow
 
-The `Merger` is responsible for creating bundles of blocks (100 per bundle) from persisted one-block files.
+Merger components create bundles containing one hundred blocks per bundle. The Merger component utilizes persisted one-block files to create the one hundred blocks bundle.
 
-This is done to improve performance, and helps reduce storage costs through better compression, as well as more efficient metered network access to a single 100 blocks bundle, as opposed to a single element.
+The Merger component assists with the reduction of storage costs, improved data compression, and more efficient metered network access to single 100 blocks bundles.
 
-The bundled blocks become the "file source" (a.k.a historical source) of blocks for all components.
-
-***
+The blocks bundled by the Relayer component become the file-based historical data source of blocks for all components in the Firehose system.
 
 ### Indexer Data Flow
 
-The `Indexer` is a background process which digests the contents of merged blocks, and creates targeted summaries of their contents. It writes these summaries to object storage as index files.
+The Indexer component runs as a background process digesting merged block files.&#x20;
 
-The targeted summaries are variable in nature, and are generated when an incoming `Firehose` query contains optional `Transforms`, which in turn contain the desired properties of a series of blocks. The `Transforms` can be likened to filter expressions, and are represented by protobuf definitions.
+The Indexer component consumes merged blocks files and provides a targeted summary of the blocks. The targeted summaries are written to object storage as index files.
 
-***
+Target summaries are created when incoming Firehose queries contain StreamingFast Transforms.
+
+Targeted summaries are variable in nature. &#x20;
+
+StreamingFast Transforms are used to locate a specific series of blocks according to search criteria provided by Firehose consumers. Transforms are created using Protocol Buffer definitions.
 
 ### Index Provider Data Flow
 
-The `Index Provider` is a chain-agnostic component, whose job it is to accept `Firehose` queries containing `Transforms`.
+The IndexProvider component accepts queries made to the Firehose system that contain StreamingFast Transforms.
 
-It will interpret these `Transforms` expressions according to their protobuf definitions, and pass them along to chain-specific filter functions that will apply the desired filtering to Blocks in the stream.
+The IndexProvider component is not specific to any particular blockchain's data format. The IndexProvider can be considered chain-agnostic for this reason.
 
-Indeed, the `Index Provider` delivers knowledge about the presence (or absence!) of specific data in large ranges of Block data. This helps us avoid unnecessary operations on merged block files.
+The IndexProvider component interprets Transforms in accordance with their Protocol Buffer definitions.&#x20;
 
-***
+The Transforms are handed off to chain-specific filter functions. The desired filtering is applied to the blocks in the data stream by the IndexProvider component to limit the results it supplies.
+
+The IndexProvider component using Transforms is able to provide knowledge about specific data in large ranges of block data. This includes the presence or absence of specific data contained within the blocks the component is filtering.
 
 ### Firehose Data Flow
+
+\-- QUESTION --
+
+IS THE FIREHOSE gRPC SERVER COMPONENT AND THE "FIREHOSE" COMPONENT THE SAME THING?!
+
+\--- CONTINUE HERE ----
 
 Finally, the last component that serves the actual stream of blocks to the consumer is the `Firehose` service.
 
