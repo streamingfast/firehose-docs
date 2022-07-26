@@ -33,7 +33,7 @@ Each Firehose component plays an important role as the blockchain data flows thr
 
 Tradeoffs and benefits are presented for how data is stored and how it flows from the instrumented blockchain nodes through the Firehose system.&#x20;
 
-### Extractor Dat Flow
+### Extractor Data Flow
 
 The first piece of the StreamingFast Firehose system is the instrumentation conducted on nodes for targeted blockchains.
 
@@ -110,7 +110,7 @@ The relayer then becomes the "live source" of blocks in the system, as it serves
 
 ***
 
-### Merger
+### Merger Data Flow
 
 The `Merger` is responsible for creating bundles of blocks (100 per bundle) from persisted one-block files.
 
@@ -120,7 +120,7 @@ The bundled blocks become the "file source" (a.k.a historical source) of blocks 
 
 ***
 
-### Indexer
+### Indexer Data Flow
 
 The `Indexer` is a background process which digests the contents of merged blocks, and creates targeted summaries of their contents. It writes these summaries to object storage as index files.
 
@@ -128,7 +128,7 @@ The targeted summaries are variable in nature, and are generated when an incomin
 
 ***
 
-### Index Provider
+### Index Provider Data Flow
 
 The `Index Provider` is a chain-agnostic component, whose job it is to accept `Firehose` queries containing `Transforms`.
 
@@ -138,7 +138,7 @@ Indeed, the `Index Provider` delivers knowledge about the presence (or absence!)
 
 ***
 
-### Firehose
+### Firehose Data Flow
 
 Finally, the last component that serves the actual stream of blocks to the consumer is the `Firehose` service.
 

@@ -12,9 +12,7 @@ description: StreamingFast Firehose core concepts and architecture documentation
 
 # Concepts & Architecture
 
-Firehose extracts data from instrumented blockchain nodes and provides on-demand, data in real-time.
-
-The key concepts for Firehose include components, the flow of data through the system, how data is stored, and the underlying design principles.
+In basic terms, Firehose is responsible for extracting data from blockchain nodes. Firehose makes paramount improvements in the speed and performance of blockchain data availability.
 
 From the consumer standpoint, Firehose is simply a gRPC service. Behind that elegant simplicity is an orchestrated family of components working in harmony to provide efficient blockchain data availability.
 
@@ -24,19 +22,17 @@ To utilize Firehose, instrumentation must be integrated and enabled on a full pr
 
 Firehose was designed with high availability (HA) in mind and HA is available with a few extra steps and components.
 
-Firehose provides an ordered, yet fork-aware, stream of blocks consisting of rich blockchain data with full and deep transaction history.&#x20;
+Firehose provides an ordered, yet fork-aware, stream of blocks.&#x20;
 
-The Firehose blocks provide built-in cursoring enabling developers to stop and restart at the exact block needed; even for forked blocks.
+The blocks provide built-in cursoring, enabling developers to stop and restart at the exact block needed; even for forked blocks.
 
-Firehose blocks contain details about consensus metadata, transactions, traces of transaction executions, and even transaction state changes.
+Blocks contain details about consensus metadata, transactions, traces of transaction executions, and even the transaction state changes.
 
-The StreamingFast vision is that Firehose blocks are sufficient as the single source of data for any possible blockchain API.&#x20;
+The StreamingFast vision is that Firehose blocks are sufficient as the single source of data for any API that one would want to build on top of it. The goal is to circumvent the need for ad-hoc RPC calls to a protocol node while simultaneously populating a datastore.
 
-An important design goal for the Firehose system was to circumvent the need for ad-hoc RPC calls to protocol nodes while simultaneously populating a datastore of blockchain data.
+For each protocol, a strict and complete definition of its data structure is defined in carefully designed Protocol Buffer schemas.&#x20;
 
-For each protocol, a strict and complete definition of its data structure is defined in carefully designed Protocol Buffer schemas. Protocol buffers are Google's language and platform-neutral, extensible mechanism for serializing structured data.
-
-The blocks flowing through Firehose are messages using Protocol Buffer schemas. StreamingFast refers to these schemas as "blockchain codecs."
+The blocks flowing through Firehose are messages using Protocol Buffer schemas. StreamingFast refers to the schemas as blockchain codecs.
 
 The Firehose system indexes and provides blockchain data that:
 
