@@ -150,23 +150,35 @@ Firehose gRPC Server components connect to persisted and live block data sources
 
 The Firehose system was designed to switch between the persistent and live data store as it's joining data to intelligently fulfill inbound requests from consumers.
 
-\------- CONTINUE HERE -------
+Consumer requests for historical blocks are fetched from persistent storage. The historical blocks are passed inside a `ForkDB` and sent with a cursor uniquely identifying the block and its position in the blockchain.
 
-As such, if a consumer’s request is for historical blocks, they are simply fetched from persistent storage, passed inside a `ForkDB` (more info about that below), and sent to the consumer with a cursor which uniquely identifies the block as well as its position in the chain. In so doing, we can resume even from forked blocks, as they are all preserved.
+The Firehose system has the ability to resume from forked blocks because all forks are preserved during node data processing.
 
-The `Firehose` component also has the responsibility of filtering a block’s content according to the request’s filter expression, represented by a `Transform`. This filtering is achieved by querying the `Index Provider`.
+The Firehose gRPC component will filter block content through Transforms passed to the IndexProvider component. The Transforms are used as filter expressions to isolate specific data points in the block data.
 
-Transactions that have no matching unit are removed from the block and execution units are flagged as matching/not matching the filter expression. Block metadata is always sent, even with no matches, to guarantee sequentiality on the receiving end.
+Transactions that do not match the filter criteria provided in Transforms are removed from the block and execution units are flagged as either matching or not matching.&#x20;
 
-***
+Block metadata is always sent to guarantee sequentiality on the receiving end; with or without matching Transforms criteria.
 
 ### `bstream`
 
-The underlying library that powers all of the components above is `bstream` (a portmanteau for Block Stream) available [on our Github organization](https://github.com/dfuse-io/bstream/blob/develop/README.md).
+The StreamingFast bstream Go package manages flows of blocks and forks in a blockchain through a handler-based interface, similar to Go's net/http package.
 
-It is the core code within our stack which abstracts away the files and the streaming of blocks from an instrumented protocol node, to present to the user an extremely simple interface that deals with all reorgs. The library was built, tweaked and enhanced over several years with high speed and fast throughput in mind. For example, the file source has features like downloading multiple files in parallel, decoding multiple blocks in parallel, inline filtering, etc.
+The StreamingFast bstream Go package is responsible for collaboration between all other components in the Fireshose system.
 
-Inside `bstream`, one of the most important elements for proper blockchain linearity is the `ForkDB`, a graph-based data structure that mimics the forking logic used by the native node. `ForkDB` receives all blocks and orders them based on the parent-child relationship defined by the chain, keeping around active forked branches and reorgs that happen on-chain.
+The `bstream` Go package is available [in the StreamingFast Github repository](https://github.com/dfuse-io/bstream/blob/develop/README.md).
+
+The bstream Go package abstracts details surrounding files and block streaming from instrumented blockchain nodes.&#x20;
+
+The bstream Go package presents an extremely powerful and simplified interface for dealing will all blockchain reorganizations.&#x20;
+
+StreamingFast built, refined, and enhanced the bstream Go package over the period of several years. Key design considerations for bstream included high speed for data transfers and fast data throughput. Capabilities include downloading multiple files in parallel, decoding multiple blocks in parallel, and inline filtering.
+
+The `bstream` Go package utilizes the StreamingFast ForkDB data structure for binary data storage.&#x20;
+
+\--- CONTINUE HERE ---
+
+one of the most important elements for proper blockchain linearity is the `ForkDB`, a graph-based data structure that mimics the forking logic used by the native node. `ForkDB` receives all blocks and orders them based on the parent-child relationship defined by the chain, keeping around active forked branches and reorgs that happen on-chain.
 
 When a branch of blocks becomes the longest chain of blocks, the `ForkDB` will switch to it, emitting a series of events for proper handling of forks (like `new 1b`, `new 2b`, `undo 2b`, `new 2a`, `new 3a`, etc.). Active forks are kept until a certain level of confirmation is achieved (exact rules can be configured for specific chain), and when block(s) become final (a.k.a irreversible). Specific irreversibility events are emitted by the `ForkDB` instance.
 
