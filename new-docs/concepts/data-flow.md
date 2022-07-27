@@ -162,19 +162,19 @@ Block metadata is always sent to guarantee sequentiality on the receiving end; w
 
 ### `bstream`
 
-The StreamingFast bstream Go package manages flows of blocks and forks in a blockchain through a handler-based interface, similar to Go's net/http package.
+The StreamingFast bstream package manages flows of blocks and forks in a blockchain through a handler-based interface, similar to Go's net/http package.
 
 The StreamingFast bstream Go package is responsible for collaboration between all other components in the Fireshose system.
 
-The `bstream` Go package is available [in the StreamingFast Github repository](https://github.com/dfuse-io/bstream/blob/develop/README.md).
+The `bstream` package is available [in the StreamingFast Github repository](https://github.com/dfuse-io/bstream/blob/develop/README.md).
 
-The bstream Go package abstracts details surrounding files and block streaming from instrumented blockchain nodes.&#x20;
+The bstream package abstracts details surrounding files and block streaming from instrumented blockchain nodes.&#x20;
 
-The bstream Go package presents an extremely powerful and simplified interface for dealing will all blockchain reorganizations.&#x20;
+The bstream package presents an extremely powerful and simplified interface for dealing will all blockchain reorganizations.&#x20;
 
-StreamingFast built, refined, and enhanced the bstream Go package over the period of several years. Key design considerations for bstream included high speed for data transfers and fast data throughput. Capabilities include downloading multiple files in parallel, decoding multiple blocks in parallel, and inline filtering.
+StreamingFast built, refined, and enhanced the bstream package over the period of several years. Key design considerations for bstream included high speed for data transfers and fast data throughput. Capabilities include downloading multiple files in parallel, decoding multiple blocks in parallel, and inline filtering.
 
-The `bstream` Go package utilizes the StreamingFast ForkDB data structure for binary data storage.&#x20;
+The `bstream` package utilizes the StreamingFast ForkDB data structure for binary data storage.&#x20;
 
 \--- CONTINUE HERE ---
 
