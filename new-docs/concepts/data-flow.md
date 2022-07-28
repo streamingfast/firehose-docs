@@ -174,18 +174,36 @@ The bstream package presents an extremely powerful and simplified interface for 
 
 StreamingFast built, refined, and enhanced the bstream package over the period of several years. Key design considerations for bstream included high speed for data transfers and fast data throughput. Capabilities include downloading multiple files in parallel, decoding multiple blocks in parallel, and inline filtering.
 
-The `bstream` package utilizes the StreamingFast ForkDB data structure for binary data storage.&#x20;
+An extremely important element of proper blockchain linearity is the StreamingFast `ForkDB.` The `bstream` package utilizes the `ForkDB` data structure for data storage.&#x20;
 
-\--- CONTINUE HERE ---
+The `ForkDB` is a graph-based data structure that mimics the forking logic used by the native blockchain node.&#x20;
 
-one of the most important elements for proper blockchain linearity is the `ForkDB`, a graph-based data structure that mimics the forking logic used by the native node. `ForkDB` receives all blocks and orders them based on the parent-child relationship defined by the chain, keeping around active forked branches and reorgs that happen on-chain.
+`The ForkDB` receives all blocks and orders them based on the parent-child relationship defined by the chain. The ForkDB will keep around active forked branches and reorganizations that are occurring on-chain.
 
-When a branch of blocks becomes the longest chain of blocks, the `ForkDB` will switch to it, emitting a series of events for proper handling of forks (like `new 1b`, `new 2b`, `undo 2b`, `new 2a`, `new 3a`, etc.). Active forks are kept until a certain level of confirmation is achieved (exact rules can be configured for specific chain), and when block(s) become final (a.k.a irreversible). Specific irreversibility events are emitted by the `ForkDB` instance.
+When a block branch becomes the longest block chain, the `ForkDB` will switch to it. The `ForkDB` will emit a series of events for proper handling of forks for example `new 1b`, `new 2b`, `undo 2b`, `new 2a`, `new 3a`, etc.&#x20;
 
-Each event emitted contains the step’s type (either `new`, `undo`, or `irreversible`), the block it relates to, and a cursor. The cursor contains information required to reconstruct an equivalent instance of the `ForkDB` in the correct branch, forked or canonical, enabling a perfect resume of the stream of events where the consumer left off. To visualize, the cursor points to a specific position in the stream of events emitted by `ForkDB` and as such, the blockchain itself.
+Active forks are kept until a certain level of confirmation is achieved or when blocks become final or irreversible. The exact rules for the confirmation can be configured for specific blockchains.
 
-The `bstream` library is chain-agnostic, and is only concerned about the concept of a `Block`, containing the minimal required metadata to maintain the consistency of the chain. `Block` carries a protocol buffer bytes payload which is decoded by the consumer to one of the supported chain-specific `Block` definitions, such as `sf.ethereum.codec.v1.Block`.
+Specific irreversibility events are emitted by the `ForkDB` instance.
 
-***
+Each event emitted by the ForkDB instance contains:
 
-We've now covered everything required to understand the `Firehose` data flow, from data acquisition to producing a consumable stream of blocks.
+* the step’s type of `new`, `undo`, or `irreversible,`
+* the block the step relates to,
+* and a cursor.
+
+The ForkDB cursor points to a specific position in the stream of events emitted by `ForkDB` and the blockchain itself.
+
+The ForkDB cursor contains information that is required to reconstruct an equivalent forked or canonical instance of the `ForkDB`.&#x20;
+
+The ForkDB is created in the correct branch, enabling the ability to perfectly resume the event streaming where the consumer last stopped.&#x20;
+
+The `bstream` library is chain-agnostic, and is only concerned about the concept of a `Block`.&#x20;
+
+The `bstream` library contains the minimally required metadata to maintain the consistency of the chain.&#x20;
+
+`Block` carries a payload of Protocol Buffer bytes.&#x20;
+
+The payload can be decoded by the consumer in accordance with one of the supported chain-specific `Block` definitions, for example, `sf.ethereum.codec.v1.Block`.
+
+Understanding the storage mechanisms and methodologies used for data in the Firehose system is another important topic. Additional details on Firehose data storage are provided in the documentation.  &#x20;
