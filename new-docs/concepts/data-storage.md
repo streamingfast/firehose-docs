@@ -1,59 +1,53 @@
 ---
 weight: 70
 title: Data Storage
+description: StreamingFast Firehose data storage documentation
 ---
 
-This section is about **what is stored where** in a Firehose deployment.
+# Data Storage
 
----
+Data and the locations where it is stored are important facets of Firehose system deployment and operation.&#x20;
 
-## Stores
+Key Firehose data storage topics include Stores, Merged blocks files, serialization, one block files, and 100-blocks files.
 
-_Stores_ used by the Firehose are abstractions on top of Object Storage.
+### Stores
 
-These use the `Firehose` [dstore abstraction library](https://github.com/streamingfast/dstore) to support
-Azure, GCP, S3 (and on-premise solution supporting the S3 API interface like [minio](https://min.io/)
-or [ceph](https://ceph.com/en/)) as well as local filesystems.
+Simply defined, StreamingFast Firehose Stores are abstractions sitting on top of Object Storage.
 
-{{< alert type="note" >}}
-For production deployments outside of cloud providers, we recommend [ceph](https://ceph.com/en/)
-over its compatible S3 API as the distributed storage system.
-{{< /alert >}}
+Object Storage is a data storage technique that manages data as objects in opposition to other data storage architectures like hierarchical file systems.
 
----
+Stores utilize the `Firehose` [dstore abstraction library](https://github.com/streamingfast/dstore) to provide support for local file systems, Azure, GCP, S3, and other S3 API compatible object storage solutions such as [minio](https://min.io/) or [ceph](https://ceph.com/en/).
 
-## Artifacts
+For production deployments outside of cloud providers, StreamingFast recommends [ceph](https://ceph.com/en/) as the distributed storage instead of its compatible S3 API system.
 
-The `Firehose` stack uses [Protocol Buffers version 3](https://developers.google.com/protocol-buffers) for serialization, pretty much throughout.
+### Serialization
 
+The `Firehose` system primarily utilizes [Protocol Buffers version 3](https://developers.google.com/protocol-buffers) for serialization.
 
 ### Merged Blocks Files
 
-Also called `100-blocks files`, or merged blocks files, or merged bundles, these are all used interchangeably.
+Merged blocks files are also referred to as `100-blocks files`, and merged bundles. These terms are all used interchangeably within the StreamingFast Firehose system.
 
-These files are binary files that use the [dbin](https://github.com/streamingfast/dbin) packing format,
-to store a series of `bstream.Block` objects ([defined here](https://github.com/streamingfast/proto/blob/develop/sf/bstream/v1/bstream.proto)),
-serialized as [Protocol Buffers](https://developers.google.com/protocol-buffers).
+Merged blocks are binary files that use the [dbin](https://github.com/streamingfast/dbin) packing format to store a series of [bstream Block objects](https://github.com/streamingfast/proto/blob/develop/sf/bstream/v1/bstream.proto), serialized as [Protocol Buffers](https://developers.google.com/protocol-buffers).
 
-They are produced by `Extractor`s, in catch-up mode (set as such with certain flags), or by the `Merger` in an HA setup.
-In the latter case, the `Extractor` contributes _one-block files_ to the `Merger` instead, and the `Merger` collates
-all of those in a single bundle.
+Typical Firehose systems use Extractor components that have been set by a special flag to work in catch-up mode to create merged blocks.
 
-These `100-blocks files` can contain **more than 100 blocks** (because they can include multiple versions
-(e.g. **fork block**) of a given block number), ensuring continuity through the previous block link.
+In high-availability Firehose system configurations, merged blocks will be created by the Merger component. The Extractor component will provide the Merger component with one-block files.
 
-They are consumed by the [bstream](https://github.com/streamingfast/bstream) library, used by almost all [components]({{< ref "./components" >}}).
+The Merger component will also collate all of the one-block files into a single bundle of blocks.
 
-The protocol specific decoded block objects (for [Ethereum](https://github.com/streamingfast/proto-ethereum/blob/develop/sf/ethereum/codec/v1/codec.proto) as an example)
-are what circulate amongst all processes that work with executed block data.
+Over one hundred blocks can be contained within a single 100-blocks file.&#x20;
 
+The 100-blocks files can include multiple versions such as a fork block or a given block number, ensuring continuity through the previous block link.
 
-### One Block Files
+Nearly all components in the Firehose system rely on or utilize 100-blocks files. The bstream library consumes 100-blocks files for example.
 
-These are transient files, destined to ensure that the `Merger` gathers all visible forks from
-the `Extractor` instances, in an HA setup.
+Protocol-specific decoded block objects. like [Ethereum](https://github.com/streamingfast/proto-ethereum/blob/develop/sf/ethereum/codec/v1/codec.proto), are what circulate amongst all processes that work with executed block data in the Firehose system.
 
-They contain one `bstream.Block`, as serialized Protobuf (see links above).
+#### One Block Files
 
-The `Merger` will consume them, bundle them in _executed blocks files_ (100-blocks files) and store
-them to `dstore` storage, for consumption by most other processes.
+For high availability configurations, one-block files are transient and ensure the `Merger` component gathers all visible forks from any `Extractor` components.
+
+One-block files contain only one `bstream.Block` as a serialized Protocol Buffer.
+
+One-block files are concumed by the `Merger` component, bundled in executed __ 100-blocks files. The one-block files are then stored to `dstore` storage and consumed by most of the other Firehose system processes.

@@ -8,21 +8,23 @@ description: StreamingFast Firehose design principles
 
 The Firehose system was heavily inspired by large-scale data science machinery and other processes previously developed by the StreamingFast team.
 
-#### "The StreamingFast Firehose System North Star"
+#### StreamingFast Firehose system "North Star"
 
-The Firehose system was designed with the following truths and assumptions taken into careful consideration.
+The Firehose system was designed with the following truths and assumptions taken into excruciatingly careful consideration.
 
 * Flat files provide more efficiency than live running CPU and RAM-consuming and intensive processes.
 * Fast iteration is preferred for data processes because data is inherently messy.
 * Data agility is only achievable when data processes can be parallelized.
 * Clear data contracts between tasks and processes including APIs, RPC query formats, and data model definitions, are critical
-* Excruciating precision is required for defining, referencing, and identifying concepts or data models. _Leave no stone unturned._
+* Maximum precision is required for defining, referencing, and identifying concepts or data models. _Leave no stone unturned._
 * The only guarantee in data science is that data processes change and evolve.
 * Migrating data is annoying, careful consideration must be taken for:
   * file formats,
   * forward and backward compatibility,
   * versioning,
   * and performance.
+
+\---- CONTINUE HERE ----
 
 ### Extraction
 
@@ -44,9 +46,7 @@ Some protocols offer JSON-RPC requests that allow querying either transaction st
 
 Without easy access to this kind of data, developers inevitably work around the issue by emitting more events, increasing gas costs, only to circumvent the fact that enriched data is not readily available. Availability of such data even has effects on contract design, as a contract designer needs to think about how the stored data will be queried and consumed, often by his own application.
 
-Richer external data processes allow devs to simplify contracts, and lower on-chain operation costs.
-
-***
+Richer external data processes allow devs to simplify contracts and lower on-chain operation costs.
 
 ### Modeling With Extreme Care
 
