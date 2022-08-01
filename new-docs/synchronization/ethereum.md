@@ -1,14 +1,12 @@
 ---
-weight: 20
-title: Syncing
-showH2InSideNav: true
+description: StreamingFast Firehose synchronization documentation for Ethereum
 ---
 
-Below, we'll show you how to use [Firehose](/operate/concepts/) to sync and stream Ethereum Mainnet.
+# Ethereum
 
-{{< alert type="important" >}}
-If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries
-could do nothing at all when ran from the terminal.
+Below, we'll show you how to use [Firehose](../../operate/concepts/) to sync and stream Ethereum Mainnet.
+
+\{{< alert type="important" >\}} If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when ran from the terminal.
 
 To fix the problem, remove the quarantine attribute on the file using the following command against the binary:
 
@@ -17,27 +15,23 @@ xattr -d com.apple.quarantine sfeth
 xattr -d com.apple.quarantine geth_macos
 ```
 
-You'll only need to do this once.
-{{< /alert >}}
+You'll only need to do this once. \{{< /alert >\}}
 
----
+***
 
-## Install Geth
+### Install Geth
 
 The first step is to install a StreamingFast-instrumented version of `Geth`.
 
-[`Geth`](https://github.com/ethereum/go-ethereum) is the official Golang
-implementation of the Ethereum Protocol. We have instrumented `Geth` to have the ability to extract the
-raw blockchain data from the node.
+[`Geth`](https://github.com/ethereum/go-ethereum) is the official Golang implementation of the Ethereum Protocol. We have instrumented `Geth` to have the ability to extract the raw blockchain data from the node.
 
 The instrumented version source code can be found [on our Github organization](https://github.com/streamingfast/go-ethereum).
 
-We automatically build and release version of Geth with upstream changes; you'll find a `linux` and `mac` version
-ready for download for the following protocols:
+We automatically build and release version of Geth with upstream changes; you'll find a `linux` and `mac` version ready for download for the following protocols:
 
-- [Ethereum](https://github.com/streamingfast/go-ethereum/releases?q=geth-&expanded=true)
-- [Polygon](https://github.com/streamingfast/go-ethereum/releases?q=polygon-&expanded=true)
-- [BSC](https://github.com/streamingfast/go-ethereum/releases?q=bsc-&expanded=true)
+* [Ethereum](https://github.com/streamingfast/go-ethereum/releases?q=geth-\&expanded=true)
+* [Polygon](https://github.com/streamingfast/go-ethereum/releases?q=polygon-\&expanded=true)
+* [BSC](https://github.com/streamingfast/go-ethereum/releases?q=bsc-\&expanded=true)
 
 Once your binary downloaded you must make them into an executable
 
@@ -59,16 +53,13 @@ Version: 1.10.16-dm-stable
 ...
 ```
 
-Note that you may have a different version than `1.10.16`; the important thing is the `dm` in the version name.
-`dm` stands for `DeepMind`, and denotes our instrumented version of Geth.
+Note that you may have a different version than `1.10.16`; the important thing is the `dm` in the version name. `dm` stands for `DeepMind`, and denotes our instrumented version of Geth.
 
----
+***
 
-## Install sfeth
+### Install sfeth
 
-`sfeth`, a.k.a. Ethereum on Streamingfast, is an application that runs a few small, isolated processes,
-that together form the `Firehose` stack. A thorough discussion of the [Concepts & Architecture]({{< ref "/operate/concepts" >}})
-is discussed elsewhere. Needless to say, you must run `sfeth` to run a `Firehose` locally.
+`sfeth`, a.k.a. Ethereum on Streamingfast, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the \[Concepts & Architecture]\(\{{< ref "/operate/concepts" >\}}) is discussed elsewhere. Needless to say, you must run `sfeth` to run a `Firehose` locally.
 
 You can download the latest version of `sfeth` [here](https://github.com/streamingfast/sf-ethereum/releases/latest)
 
@@ -88,9 +79,9 @@ Great! At this point we have installed our instrumented `Geth` application as we
 
 In the following steps we will setup configuration files so that you can start syncing & running an Ethereum Mainnet Firehose!
 
----
+***
 
-## Configure the binaries
+### Configure the binaries
 
 We will start off by creating a working directory where we will copy our 2 binaries that we have setup on the prior steps
 
@@ -104,10 +95,7 @@ We're assuming that all future commands will be run inside the working directory
 
 Now, we are going to create a configuration file that will help us run `sfeth`. Copy the following content to an `eth-mainnet.yaml` file in your working directory
 
-
-{{< alert type="important" >}}
-The configuration below will sync from mainnet, but is not production-ready.
-{{< /alert >}}
+\{{< alert type="important" >\}} The configuration below will sync from mainnet, but is not production-ready. \{{< /alert >\}}
 
 ```yaml
 ---
@@ -142,9 +130,9 @@ start:
     mindreader-node-merge-and-store-directly: true
 ```
 
----
+***
 
-## Sync eth-mainnet
+### Sync eth-mainnet
 
 Launch `sfeth` to start indexing the chain.
 
@@ -244,11 +232,9 @@ After a short delay, you should start to see the blocks syncing in.
 ...
 ```
 
-{{< alert type="important" >}}
-At any point in time you can stop the process with `Ctrl + C`.
+\{{< alert type="important" >\}} At any point in time you can stop the process with `Ctrl + C`.
 
-The process will shutdown gracefully and on restart it will continue where it left off.
-{{< /alert >}}
+The process will shutdown gracefully and on restart it will continue where it left off. \{{< /alert >\}}
 
 Once you have synced 10,000 blocks, you can run the following command in a separate terminal to introspect the block data
 
@@ -265,30 +251,21 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 ...
 ```
 
----
+***
 
-## Overview and Explanation
+### Overview and Explanation
 
-The `mindreader-node` is a process that runs and manages the blockchain node `Geth`. It consumes the blockchain data
-that is extracted from our instrumented `Geth` node. The instrumented `Geth` node outputs individual block data.
+The `mindreader-node` is a process that runs and manages the blockchain node `Geth`. It consumes the blockchain data that is extracted from our instrumented `Geth` node. The instrumented `Geth` node outputs individual block data.
 
-The `mindreader-node` process will either write individual block data into separate files called one-block files,
-or merge 100 blocks data together and write into a file called a `100-blocks file`.
+The `mindreader-node` process will either write individual block data into separate files called one-block files, or merge 100 blocks data together and write into a file called a `100-blocks file`.
 
-This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag. When running
-the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, we say the
-"mindreader is running in merged mode". When the flag is disabled, we will refer to the mindreader as running in
-its normal mode of operation.
+This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag. When running the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, we say the "mindreader is running in merged mode". When the flag is disabled, we will refer to the mindreader as running in its normal mode of operation.
 
-In the scenario where the `mindreader-node` process stores one-block files, we can run a `merger` process on the
-side which would merge the one-block files into 100-block files. When we are syncing the chain we will
-run the `mindreader-node` process in merged mode.
+In the scenario where the `mindreader-node` process stores one-block files, we can run a `merger` process on the side which would merge the one-block files into 100-block files. When we are syncing the chain we will run the `mindreader-node` process in merged mode.
 
 When we are synced we will run the `mindreader-node` in its regular mode of operation (storing one-block files)
 
-The one-block files and 100-block files will be stored in `data-dir/storage/merged-blocks` and
-`data-dir/storage/one-blocks` respectively. The naming convention of the file is the number
-of the first block in the file.
+The one-block files and 100-block files will be stored in `data-dir/storage/merged-blocks` and `data-dir/storage/one-blocks` respectively. The naming convention of the file is the number of the first block in the file.
 
 Finally, we have built tools that allow you to introspect the block files:
 
@@ -300,9 +277,9 @@ Finally, we have built tools that allow you to introspect the block files:
 ./sfeth tools print one-block --store ./eth-data/storage/one-blocks 10000
 ```
 
----
+***
 
-## Launch the Firehose
+### Launch the Firehose
 
 Let's pick up where we left off, assuming we're no longer syncing eth-mainnet:
 
@@ -310,18 +287,15 @@ Let's pick up where we left off, assuming we're no longer syncing eth-mainnet:
 ./sfeth -c eth-mainnet.yaml start mindreader-node
 ```
 
-The current state of affairs is that we have an `sfeth` running a `mindreader-node` process.
-The process is extracting and merging 100-bock data.
+The current state of affairs is that we have an `sfeth` running a `mindreader-node` process. The process is extracting and merging 100-bock data.
 
-While still running the `mindreader-node` process in a separate terminal (still in the working directory),
-launch the firehose:
+While still running the `mindreader-node` process in a separate terminal (still in the working directory), launch the firehose:
 
 ```bash
 ./sfeth -c eth-mainnet.yaml start relayer firehose
 ```
 
-The `sfeth` command launches 2 processes, the `Relayer` and `Firehose`. Both processes work together to provide
-the `Firehose` data stream. Once the `Firehose` process is running, it will be listening on port `13042`.
+The `sfeth` command launches 2 processes, the `Relayer` and `Firehose`. Both processes work together to provide the `Firehose` data stream. Once the `Firehose` process is running, it will be listening on port `13042`.
 
 At its core, the `Firehose` is a gRPC stream. We can list the available gRPC services with `grpcurl`
 
@@ -382,12 +356,44 @@ You should see block streaming. Like so
 }
 ```
 
----
+***
 
-## What's next
+### What's next
 
 Congratulations! You're now streaming ETH block data from mainnet.
 
 At this point, Ethereum and ERC20 networks are yours to discover. Slice and dice this data to your heart's content.
 
 You might also want to move on to other sections, to start streaming data from other protocols.
+
+#### System Requirements
+
+The **goal of this page** is to set expectations and get you to understand what is required to run Firehose for Ethereum, for different protocols.
+
+The Firehose stack is extremely elastic, and supports handling networks of varied sizes and shapes. It is also heavy on data, so **make sure you have a good understanding** of the \[different data stores, artifacts and databases]\(\{{< ref "/operate/concepts/data-storage" >\}}) required to run the Firehose stack.
+
+The deployment efforts will be proportional to the size of history, and the density of the chain at hand.
+
+### Network shapes
+
+This document outlines requirements for different shapes of networks
+
+#### Persistent chains
+
+In order to scale easily, you will want to decouple \[components]\(\{{< ref "/operate/concepts/components" >\}}) that run in a single process.
+
+The storage requirements will vary depending on these metrics:
+
+* **The length of history**: whether or not you are serving all the blocks through the firehose
+* **Throughput in transactions and calls**: Calls on Ethereum are the smallest units of execution to produce meaningful data, transaction overhead becomes negligible once you have 2-3 calls in a transaction. A single ERC20 transfer generally has 1 call, 2 calls when there is a proxy contract involved. A Uniswap swap is usually composes of a few dozens of calls.
+
+The CPU/RAM requirements will depend on these factors:
+
+* **High Availability**: highly available deployments will require **2 times the resources** (or more) listed in the following examples, as a general rule.
+* **Throughput of queries**: the Firehose stack is built for horizontal scalability, the more requests per second you want to fulfill, the larger the deployment, the more CPU/RAM you will need to allocate to your cluster.
+
+\{{< alert type="note" >\}} These stats are from March 2022, but chains of similar density and similar age will behave similarly. \{{< /alert >\}}
+
+**Ethereum Mainnet**
+
+`This section is incomplete.`

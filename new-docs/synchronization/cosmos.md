@@ -1,18 +1,14 @@
 ---
-weight: 20
-title: Syncing
-showH2InSideNav: true
+description: StreamingFast Firehose synchronization documentation for Cosmos
 ---
 
-# Syncing
+# Cosmos
 
-Below, we'll show you how to use [Firehose](../../../../operate/concepts/) to sync and stream Cosmos Chains.
+Below, we'll show you how to use [Firehose](../../operate/concepts/) to sync and stream Cosmos Chains.
 
-***
+#### Install firehose-cosmos
 
-### Install firehose-cosmos
-
-`firehose-cosmos`, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the \[[Concepts & Architecture](../../../concepts/)]\(\{{< ref "/operate/concepts" >\}}) is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a `Firehose` locally.
+`firehose-cosmos`, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the \[[Concepts & Architecture](../concepts/)]\(\{{< ref "/operate/concepts" >\}}) is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a `Firehose` locally.
 
 You can download the latest version of `firehose-cosmos` [here](https://github.com/figment-networks/firehose-cosmos/releases), however we recommend you use the Dockerfile provided in the `firehose-cosmos` repository located [here](https://github.com/figment-networks/firehose-cosmos).
 
@@ -32,9 +28,7 @@ firehose-cosmos --version
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose --version
 ```
 
-***
-
-### Install and run instrumented nodes
+#### Install and run instrumented nodes
 
 In order to index Cosmos nodes with `firehose-cosmos`, you will need to insure you are using the correctly modified binaries for the chain you are targetting. Figment provide these for CosmosHub and Osmosis, mainnet and testnet chains as prebuilt Docker Images which you can find listed on [their Dockerhub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). These Dockerfiles also start the `firehose-cosmos` process for you. Below is an example for v7.0.4 of the Osmosis testnet. You can modify this to use whichever version of the chain node you are indexing. You should also pass the path to your chain data volume storage. If you don't pass this, the chain will instead start from Genesis each time. For CosmosHub chains, it will be `/app/gaia_home/data`
 
@@ -53,7 +47,7 @@ enabled = true
 output_file = "stdout"
 ```
 
-### firehose-cosmos Configuration
+#### firehose-cosmos Configuration
 
 If you wish to use a configuration file instead of setting all CLI flags, you can pass it with a `-c ./configfile.yaml` argument.
 
@@ -76,9 +70,7 @@ start:
     ingestor-node-args: start
 ```
 
-***
-
-### Syncing your chain
+#### Syncing your chain
 
 One you begin running `firehose-cosmos`, you will begin to see your blocks streaming through if it is successfully instrumented. If this is the first time you have run the node, this will start the node from genesis, so give it some time until it start syncing. You may check on the node's status (if its running locally) by opening `http://localhost:26657/status` in your browser.
 
@@ -221,16 +213,47 @@ A graceful shutdown should look something similar to the below:
 2022-05-30T22:39:39.414+0100 (dfuse) All apps terminated gracefully (launcher/launcher.go:273)
 ```
 
-***
-
 ### Overview and Explanation
 
-For a full breakdown of the services used, you can refer to the [components page](../../../../operate/concepts/components/). For firehose-cosmos, the extractor component is labeled as `ingestor` but functions the same.
-
-***
+For a full breakdown of the services used, you can refer to the [components page](../../operate/concepts/components/). For firehose-cosmos, the extractor component is labeled as `ingestor` but functions the same.
 
 ### What's next
 
 Congratulations! You're now streaming blocks data from a Cosmos chain.
 
 At this point, Cosmos networks, such as CosmosHub and Osmosis are yours to discover. Slice and dice this data to your heart's content.
+
+
+
+System Requirements
+
+The **goal of this page** is to set expectations and get you to understand what is required to run `firehose-cosmos`.
+
+The Firehose stack is extremely elastic, and supports handling networks of varied sizes and shapes. It is also heavy on data, so **make sure you have a good understanding** of the \[different data stores, artifacts and databases]\(\{{< ref "/operate/concepts/data-storage" >\}}) required to run the Firehose stack.
+
+The deployment efforts will be proportional to the size of history, and the density of the chain at hand.
+
+### Network shapes
+
+This document outlines requirements for different shapes of networks
+
+#### Persistent chains
+
+In order to scale easily, you will want to decouple \[components]\(\{{< ref "/operate/concepts/components" >\}}) that run in a single process.
+
+The storage requirements will vary depending on these metrics:
+
+* **The length of history**: whether or not you are serving all the blocks through the firehose
+
+The CPU/RAM requirements will depend on these factors:
+
+* **High Availability**: highly available deployments will require **2 times the resources** (or more) listed in the following examples, as a general rule.
+* **Throughput of queries**: the Firehose stack is built for horizontal scalability, the more requests per second you want to fulfill, the larger the deployment, the more CPU/RAM you will need to allocate to your cluster.
+
+**Cosmoshub-4 Mainnet**
+
+`This section is incomplete.`
+
+**Osmosis-1 Mainnet**
+
+`This section is incomplete.`
