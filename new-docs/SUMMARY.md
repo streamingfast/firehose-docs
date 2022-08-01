@@ -8,7 +8,7 @@
   * [Data Flow](concepts/data-flow.md)
   * [Data Storage](concepts/data-storage.md)
   * [Design Principles](concepts/principles.md)
-* [Integration](integrate.md)
+* [Integration](integrate/README.md)
 * [Synchronization](synchronization/README.md)
   * [Ethereum](synchronization/ethereum.md)
   * [Cosmos](synchronization/cosmos.md)
