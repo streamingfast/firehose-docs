@@ -108,8 +108,8 @@ The process of querying nodes can cause substantial issues for developers wantin
 
 Consuming blockchain state is difficult and each blockchain presents its own issues.
 
-\---- CONTINUE HERE ----
+Solidity, for example, uses `bytes32` => `bytes32` mapping, making such a data retrieval endeavor rather opaque and difficult to reason about. This data is available with additional effort, but not easily. Developers having access to state data presents tremendous opportunities for indexing and application development.
 
-Solidity, for example, makes such an endeavor rather opaque. Solidity uses `bytes32` => `bytes32` mapping. There are ways to decode the data, however. Access to this state data presents tremendous opportunities for indexing.
+Google's Protocol Buffers version 3 met the requirements identified by StreamingFast for versioning, compatibility, and speed of file content.
 
-Regarding versioning, compatibility and speed of file content, we found Google’s Protocol Buffers version 3 to meet these last requirements, while striving for simplicity (e.g. as attested by their removal of optional/required fields in version 3).
+Optional and required fields were removed in Google's Protocol Buffers version 3 simplifying the data extraction process.
