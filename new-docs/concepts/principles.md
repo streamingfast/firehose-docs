@@ -64,42 +64,52 @@ Data processes triggered by Ethereum log events can benefit from having knowledg
 
 Accessing rich, complete data leads smart contract developers to emit additional events. Emitting additional events leads to increased gas fees.
 
-\--- CONTINUE HERE ---
-
 Enriched and complete transaction data is simply not easily or readily available.&#x20;
 
-The availability of this rich data even has effects on contract design. Contract designers are required to think about how the stored data will be queried and consumed by their application.
+The lack of availability of rich data also has effects on contract design.&#x20;
 
-Richer external data processes allow developers to simplify contracts and reduce on-chain operation costs.
+Contract designers are required to reason and plan out how stored data will be queried and consumed by their application.
+
+Having access to richer external data processes allows developers to simplify contracts reducing on-chain operation costs.
 
 ### Modeling With Extreme Care
 
-The data model we use to ingest protocol data was modeled with extreme care. We discovered peculiarities of several protocols the hard way.
+The data model used by StreamingFast to ingest protocol data was modeled with extreme dillegence and care.&#x20;
 
-Some subtle interpretations of bits of data produced by a blockchain (e.g.: the meaning of a reverted call within the call stack of an Ethereum transaction) are such that, if enough information is not surfaced from the source, it can be impossible to interpret the data downstream. It is only when the model definitions (protobuf schemas) are complete and leave no bit of data in a node that we know that we can serve all needs: that no other solution is needed.
+StreamingFast encountered several peculiarities within many protocols during the design and development process of the Firehose system.
 
-Conceptually, the data extracted from a node should be so complete that one could write a program that takes that data, and rebuilds a full archive node out of it, and is able to boot it.
+Interpreting subtleties in bits of data, for things like the meaning of a reverted call in an Ethereum call stack, becomes impossible farther downstream.&#x20;
 
-***
+The StreamingFast Firehose system provides complete node data through carefully considered and implemented model definitions created with Protocol Buffer schemas.&#x20;
 
-### Use Files and Streams of Pure Data
+The Firehose system provides enough comprehensive data to conceptually boot and run a full archive node.
 
-As opposed to requests/responses model, we've chosen to use flat-files and data streams, to alleviate the challenges of querying pools of (often load-balanced) nodes in a master-to-master replication configuration.
+### Using Pure Data with Files and Streams
 
-This avoids massive consistency issues, their retries, the incurred latency, and greatly simplifies the consuming code.
+StreamingFast chose to utilize flat files instead of the traditional request and response model of data acquisition. Using flat files alleviates the challenges presented by querying pools of, generally load-balanced, nodes in some type of replication configuration.
 
-Additionally, by adopting the flat-file and data stream abstractions we adhere to the Unix philosophy of writing programs that do one thing, do it well, and work together with other programs by handling streams of data as input and output.
+The decision to rely on flat files assists with the reduction of massive consistency issues, retries, and incurred latency. In addition, using flat files greatly simplifies the task developers face writing code to interface with blockchain node data.
 
-***
+Flat-file and data stream abstractions adhere to the Unix philosophy of _writing programs that do one thing, do it well, and work together with other programs by handling streams of data as input and output._
 
-### State Transition Hiearchy
+### State Transition Hierarchy
 
-We use state transitions scoped to a call, indexed within a transaction, indexed within a block.
+StreamingFast uses state transitions scoped to calls, indexed within transactions, indexed within a block.
 
-Most blockchains “round up” state changes for all transactions into a block to facilitate consensus. But the basic unit of execution remains a single smart contract execution (a single EVM call alone, where calling another contract means a second execution).
+Blockchains typically “round up” state changes for all transactions into a block to facilitate consensus.&#x20;
 
-Precision in state is therefore lost for what happens mid-block, i.e. when the state of a contract changes in the middle of a transaction, in the middle of a block. If you want to know the balance at the _exact_ point because it's required for some calculations (when you’re processing a log event for instance), you’re out of luck, because the node will provide the response that is true at the _end_ of that block. It's thus impossible to know if there are other transactions after the one you are indexing that mutated the same state again. Querying a node will potentially throw you off, sometimes egregiously so.
+The basic unit of execution always remains a single smart contract execution resulting in a single EVM call. However, calling another contract from within the first contract means a second execution will occur.
 
-Not all chains make consuming the actual state easy. For example, Solidity makes such an endeavor rather opaque, in the form of a `bytes32` => `bytes32` mapping, although there are ways to decode it. However, making that state usable creates tremendous opportunities for indexing.
+Contracts lose state precision when the state is changed in the middle of a transaction or block. &#x20;
+
+Attempting to locate the balance for calculations at the exact point needed, during the processing of a log event, for example, will result in receiving the balance value at the end of the block. The balance value may have changed state in a subsequent transaction after the transaction currently being indexed.
+
+The process of querying nodes can cause substantial issues for developers wanting finite node data access.
+
+Consuming blockchain state is difficult and each blockchain presents its own issues.
+
+\---- CONTINUE HERE ----
+
+Solidity, for example, makes such an endeavor rather opaque. Solidity uses `bytes32` => `bytes32` mapping. There are ways to decode the data, however. Access to this state data presents tremendous opportunities for indexing.
 
 Regarding versioning, compatibility and speed of file content, we found Google’s Protocol Buffers version 3 to meet these last requirements, while striving for simplicity (e.g. as attested by their removal of optional/required fields in version 3).
