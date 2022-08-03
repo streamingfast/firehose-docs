@@ -38,6 +38,8 @@ go install -v ./cmd/fireacme
 
 I can't see where this was updated on my system after installation. I'm not sure about the accuracy of this part. Need to check with team on these next couple of paragraphs.
 
+I'll have to double-check but I think the latest installation of Go changed this somehow.
+
 _--- /NOTE ---_
 
 The `fireacme` binary will be added to the computer's `GOPATH`. The typical GOPATH directory is `~/go/bin`.&#x20;
