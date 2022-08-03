@@ -10,6 +10,7 @@
   * [Design Principles](concepts/principles.md)
 * [Integration](integrate/README.md)
   * [Firehose Setup](integrate/firehose-setup.md)
+  * [Integration](integrate/integration.md)
   * [Node Instrumentation](integrate/node-instrumentation.md)
 * [Synchronization](synchronization/README.md)
   * [Ethereum](synchronization/ethereum.md)

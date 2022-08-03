@@ -25,7 +25,7 @@ From the consumer standpoint, Firehose is simply a gRPC service.&#x20;
 
 Behind that elegant simplicity is an orchestrated family of components working in harmony to provide efficient blockchain data availability; in real-time.
 
-Setting up a production-grade Firehose system does require some infrastructure and equipment.
+Setting up a production-grade Firehose system requires infrastructure and equipment.
 
 To utilize Firehose, instrumentation must be integrated and enabled on a full protocol node to serve data to consumers.
 
