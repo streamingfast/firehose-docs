@@ -60,9 +60,9 @@ Also, need to remember to hunt back through the existing Git repositories to rem
 
 Modify `devel/standard/standard.yaml` to point to the dummy chain implementation.&#x20;
 
-\--- NOTE ---
-
 The full path into the dchain directory must be used. The path needs to be in quotes.
+
+\--- NOTE ---
 
 Make sure to account for old, outdated, non-working references to "dummy-blockchain", it's now "dchain."
 
@@ -82,9 +82,7 @@ The following error will be displayed for an incorrectly formatted field in the 
 
 Error: unable to read config file "standard.yaml": reading json: yaml: line 10: did not find expected key
 
-Also, show the output from Firehose when the path is wrong; the error isn't representative of what the issue actually is.
-
-The following message will be displayed in the Terminal if the path to the example blockchain application is incorrect.
+The following message will be displayed in the shell if the path to the example blockchain application is incorrect.
 
 2022-08-02T14:50:42.153-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
 
@@ -105,6 +103,8 @@ instance "acme" stopped (exit code: -1), shutting down
 2022-08-02T14:50:43.181-0700 ERRO (extractor) {"status": {"Cmd":"/Users/seanmoore-mpb/Desktop/dfuse/integrate/dummy-blockchain","PID":0,"Exit":-1,"Error":{"Op":"fork/exec","Path":"/Users/seanmoore-mpb/Desktop/dfuse/integrate/dummy-blockchain","Err":13},"StartTs":1659477043178396000,"StopTs":1659477043181083000,"Runtime":0,"Stdout":null,"Stderr":null\}} command terminated with non-zero status, last log lines:
 
 \<None>
+
+\--- CONTINUE HERE ---
 
 \--- NOTE ---
 
