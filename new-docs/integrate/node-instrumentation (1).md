@@ -1,52 +1,30 @@
 ---
-description: StreamingFast Firehose node integration documentation
+description: StreamingFast Firehose node instrumentation documentation
 ---
 
-# Integration
+# Node Instrumentation
 
-Existing blockchains that can be integrated immediately with Firehose include Ethereum, NEAR, Solana, and Cosmos.
+Instrumenting a node is the process of applying specialized code to the core of the codebase for the given node.&#x20;
 
-#### Integrate your chain
+StreamingFast provides the instrumented code for Ethereum, NEAR, Solana, and Cosmos nodes.
 
-Modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to your blockchain node's binary. Learn more about those parameters in the \[Operator's manual]\(\{{#< ref "/operate/running-the-node" >#\}}).
+\--- NOTE ---
 
-Modify `devel/standard/start.sh` to
+Does it make sense to show the reader the integration piece first or the node instrumentation? Isn't an instrumented node required for integration? For instance, the path to the node binary is required.
 
-Run it with:
+A potential, very rough outline could be:
 
-#### Define types
+* Set up hardware/server/node&#x20;
+* Download SF chain-specific node code&#x20;
+* Update SF code and compile&#x20;
+* Start up, run, and test node hardware with SF code&#x20;
+* Protocol Buffer updates and compilation&#x20;
+* Update config files
+* Probably some other things I don't know about yet
 
-Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in [specs for chain's protobuf model definitions](protobuf-defs/)
+Input will be needed for the more detailed aspects of instrumenting new blockchains. Could we call that something like Instrumentation Design and make a separate page?
 
-#### Modify the Ingestor's `Read()`
+\--- /NOTE ---
 
-Inside `codec`, is a file called `reader.go`. This file is the boundary between your process and the firehose's ingestion process.
+Firehose was designed to work with multiple blockchains beyond the existing implementations.&#x20;
 
-Read the source of the `ConsoleReader` and make sure you understand how it works. This will be the bulk of your integration work.
-
-Do X, Y, Z
-
-#### Make sure data is produced
-
-As you iterate, check that files are produced under `xyz` directory.
-
-#### Rename everything
-
-Pick two names, the long form and short form for your chain, following the [naming conventions](names/).
-
-For example:
-
-* `arweave` and `arw`
-
-Then finalize the rename:
-
-* Rename `cmd/fireacme` -> `cmd/firearw` (short form)
-* Search and replace `fireacme` => `firearw` (short form)
-* Do massive search and replace from: `acme` => `arweave` (long form)
-
-Meanwhile, please follow the [this document from github.com/streamingfast/firehose-acme](https://github.com/streamingfast/firehose-acme/blob/master/INTEGRATION.md)
-
-Additional links:
-
-* https://github.com/streamingfast/firehose-acme
-* https://github.com/streamingfast/dummy-blockchain
