@@ -111,11 +111,3 @@ instance "acme" stopped (exit code: -1), shutting down
 Firehose-ACME and Dummy Blockchain run on the same http port so they can't be running at the same time. Be sure to mention this somewhere, it caused me a bit of trouble.
 
 \--- /NOTE ---
-
-### Integrate your chain
-
-Modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to your blockchain node's binary. Learn more about those parameters in the \[Operator's manual]\(\{{#< ref "/operate/running-the-node" >#\}}).
-
-Modify `devel/standard/start.sh` to
-
-Run it with:
