@@ -8,7 +8,7 @@ Setting up Firehose differs depending on the specific needs of your target appli
 
 #### Basic Firehose with Fake Data App
 
-The Firehose system can be set up with an application designed to replicate an actual instrumented blockchain node. Use this path if you don't have the computational power to run a full blockchain node.
+The Firehose system can be set up with an application designed to replicate an actual instrumented blockchain node. Use this path if you don't have the computational power or need to run a full blockchain node.
 
 #### Use Firehose with a supported blockchain
 
