@@ -1,8 +1,8 @@
-# Firehose & DChain
+# Firehose & Fake Data
 
 The template, called Firehose-ACME, is the path to setting up Firehose with the fake blockchain data provision application. Firehose-ACME is also the starting point for instrumenting new blockchain nodes.
 
-Setting up Firehose with the fake blockchain provision application doesn't require running an actual blockchain node. Using Firehose with the Dummy Blockchain, or DChain application is a great way to see what the process involves and become familiar with the setup process.
+Setting up Firehose with the fake blockchain provision application doesn't require running an actual blockchain node. Using Firehose with the Dummy Blockchain, or DChain application is a great way to see what the process involves and become familiar with the setup process and a running Firehose system.
 
 #### Step 1. Create Firehose directory
 

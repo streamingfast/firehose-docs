@@ -36,7 +36,7 @@ Run it with what?&#x20;
 
 #### Define types
 
-Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in [specs for chain's protobuf model definitions](../protobuf-defs/)
+Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in [specs for chain's protobuf model definitions](protobuf-defs/)
 
 #### Modify the Ingestor's `Read()`
 
@@ -52,7 +52,7 @@ As you iterate, check that files are produced under `xyz` directory.
 
 #### Rename everything
 
-Pick two names, the long form and short form for your chain, following the [naming conventions](../names/).
+Pick two names, the long form and short form for your chain, following the [naming conventions](names/).
 
 For example:
 
