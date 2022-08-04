@@ -1,24 +1,16 @@
----
-description: StreamingFast Firehose base setup documentation
----
+# Firehose & DChain
 
-# Firehose Setup
+The template, called Firehose-ACME, is the path to setting up Firehose with the fake blockchain data provision application. Firehose-ACME is also the starting point for instrumenting new blockchain nodes.
 
-The first step in creating a fully functional, custom Firehose system is setting up the core application using a template provided by StreamingFast.
-
-The template, called Firehose-ACME, is also the starting point for instrumenting a new blockchain node.
-
-The Firehose system can be connected to a simple example blockchain to ensure the setup is working properly.
-
-Custom instrumentation can begin after the Firehose template and base have been set up and tested with the example blockchain application.
+Setting up Firehose with the fake blockchain provision application doesn't require running an actual blockchain node. Using Firehose with the Dummy Blockchain, or DChain application is a great way to see what the process involves and become familiar with the setup process.
 
 #### Step 1. Create Firehose directory
 
-Find a suitable location on the computer Firehose is being installed on to store the application's source code and related files. A new directory can be created such as Firehose.
+Find a suitable location on the computer Firehose is being installed on to store the application's source code and related files. A new directory can be created such as "Firehose".
 
 #### Step 2. Clone the Firehose-ACME repo
 
-Navigate to the directory choosen or created in step one.
+Navigate to the directory chosen or created in step one.
 
 Using a Linux-based shell, such as Bash or Z shell, clone the Firehose-ACME project. GitDesktop can also be used to clone the project however using a shell is required for the following steps.
 

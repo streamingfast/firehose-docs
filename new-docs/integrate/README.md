@@ -4,12 +4,10 @@ description: StreamingFast Firehose integration documentation
 
 # Integration
 
-Integration refers to using the Firehose system with a target blockchain.&#x20;
+Setting up and integrating the Firehose system can be accomplished in a few different ways.
 
 Top-level tasks for integration include:
 
 * fully understanding the Firehose concepts and architecture,
 * determining the target blockchain for data extraction,
-* set up the Firehose-ACME template project,
-* set up the example Dummy Blockchain project,
-* and node instrumentation for the targeted blockchain.
+* and choosing the best setup path to get started.
