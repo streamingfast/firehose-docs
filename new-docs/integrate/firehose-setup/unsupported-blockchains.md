@@ -2,7 +2,7 @@
 description: StreamingFast Firehose node instrumentation documentation
 ---
 
-# Firehose & Unsupported Blockchains
+# Unsupported Blockchains
 
 #### Node Instrumentation
 
@@ -28,5 +28,17 @@ Input will be needed for the more detailed aspects of instrumenting new blockcha
 
 \--- /DEV NOTE ---
 
-Firehose was designed to work with multiple blockchains beyond the existing implementations.&#x20;
+Firehose was designed to work with multiple blockchains beyond the existing implementations.
+
+\--- DEV NOTE ---
+
+The content below was pulled from the github repo. It needs to be updated.
+
+\--- /DEV NOTE ---
+
+#### Data Modeling&#x20;
+
+Designing the Google Protobuf Structures for your given blockchain is one of the most important steps in an integrators journey. The data structures needs to represent as precisely as possible the on chain data and concepts. By carefully crafting the Protobuf structure, the next steps will be a lot simpler. The data model need.
+
+As a reference, here is Ethereum's Protobuf Structure: https://github.com/streamingfast/proto-ethereum/blob/develop/sf/ethereum/codec/v1/codec.proto&#x20;
 

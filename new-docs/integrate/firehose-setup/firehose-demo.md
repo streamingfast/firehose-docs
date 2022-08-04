@@ -1,14 +1,16 @@
 ---
-description: >-
-  StreamingFast Firehose used with the Dchain application for fake data
-  provision
+description: StreamingFast Firehose Demo setup documentation
 ---
 
-# Firehose & Fake Data
+# Firehose Demo
 
-The template, called Firehose-ACME, is the path to setting up Firehose with the fake blockchain data provision application. Note, that the _Firehose-ACME template is also the starting point for instrumenting new, unsupported blockchain nodes._
+The Firehose Demo can be run without a full blockchain node and is a great introduction to a real, live-running Firehose system.&#x20;
 
-Setting up Firehose with the fake blockchain provision application doesn't require running an actual blockchain node. Using Firehose with the Dummy Blockchain, or DChain application is a great way to see what the process involves and become familiar with the setup process and a running Firehose system.
+The demo consists of a basic templated Firehose system and a faux data provision application called the Dummy Blockchain, or DChain.
+
+Note, that the _Firehose-ACME demo template is also the starting point for instrumenting new, unsupported blockchain nodes._
+
+Follow the steps below to get started with the Firehose Demo.
 
 #### Step 1. Create Firehose directory
 
@@ -110,4 +112,12 @@ instance "acme" stopped (exit code: -1), shutting down
 
 Firehose-ACME and Dummy Blockchain run on the same http port so they can't be running at the same time. Be sure to mention this somewhere, it caused me a bit of trouble.
 
+The content below was pulled over from the GitHub repo. Some of it may be useful for the content on this page.
+
 \--- /DEV NOTE ---
+
+We have built an end-to-end template, to start the on-boarding process of new chains. This solution consist of:
+
+firehose-acme As mentioned above, the Extractor process consumes the data that is extracted and streamed from Deeepmind. In Actuality the Extractor is one process out of multiple ones that creates the Firehose. These processes are launched by one application. This application is chain specific and by convention, we name is "firehose-". Though this application is chain specific, the structure of the application is standardized and is quite similar from chain to chain. For convenience, we have create a boiler plate app to help you get started. We named our chain Acme this the app is firehose-acme
+
+DeepMind Deepmind consist of an instrumented syncing node. We have created a "dummy" chain to simulate a node process syncing that can be found https://github.com/streamingfast/dummy-blockchain.
