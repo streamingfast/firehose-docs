@@ -34,13 +34,13 @@ Run the installation process for the Firehose-ACME project.
 go install -v ./cmd/fireacme
 ```
 
-\--- NOTE ---
+\--- DEV NOTE ---
 
 I can't see where this was updated on my system after installation. I'm not sure about the accuracy of this part. Need to check with team on these next couple of paragraphs.
 
 I'll have to double-check but I think the latest installation of Go changed how it sets the PATH somehow.
 
-\--- /NOTE ---
+\--- /DEV NOTE ---
 
 The `fireacme` binary will be added to the computer's `GOPATH`. The typical GOPATH directory is `~/go/bin`.&#x20;
 
@@ -66,7 +66,7 @@ The full path into the dchain directory must be used. The path needs to be in qu
 
 \--- DEV NOTE ---
 
-Make sure to account for old, outdated, non-working references to "dummy-blockchain", it's now "dchain."
+Make sure to account for old, outdated, non-working references to "dummy-blockchain", it's now "dchain." This is applicable to code, so it impacts functionality.
 
 Include instructions for running the example blockchain to generate data for Firehose-ACME to use. I let mine create around three hundred blocks.
 
