@@ -1,18 +1,24 @@
+---
+description: >-
+  StreamingFast Firehose used with the Dchain application for fake data
+  provision
+---
+
 # Firehose & Fake Data
 
-The template, called Firehose-ACME, is the path to setting up Firehose with the fake blockchain data provision application. Firehose-ACME is also the starting point for instrumenting new blockchain nodes.
+The template, called Firehose-ACME, is the path to setting up Firehose with the fake blockchain data provision application. Note, that the _Firehose-ACME template is also the starting point for instrumenting new, unsupported blockchain nodes._
 
 Setting up Firehose with the fake blockchain provision application doesn't require running an actual blockchain node. Using Firehose with the Dummy Blockchain, or DChain application is a great way to see what the process involves and become familiar with the setup process and a running Firehose system.
 
 #### Step 1. Create Firehose directory
 
-Find a suitable location on the computer Firehose is being installed on to store the application's source code and related files. A new directory can be created such as "Firehose".
+Find a suitable location on the computer Firehose is being installed. Use that location to store the application's source code and related files. A new directory can be created on the target computer, such as "Firehose".
 
 #### Step 2. Clone the Firehose-ACME repo
 
 Navigate to the directory chosen or created in step one.
 
-Using a Linux-based shell, such as Bash or Z shell, clone the Firehose-ACME project. GitDesktop can also be used to clone the project however using a shell is required for the following steps.
+Using a Linux-based shell, such as Bash or Z shell, clone the Firehose-ACME project. GitDesktop can also be used to clone the project however using a shell is required for the subsequent steps.
 
 ```
 git clone git@github.com:streamingfast/firehose-acme
@@ -42,13 +48,13 @@ _Ensure the Firehose-ACME path is in the systems `PATH` before continuing._
 
 Follow the installation instructions located on the example blockchain's official Git repository.
 
-\--- NOTE ---
+\--- DEV NOTE ---
 
 Need to either add new, working instructions on this page or update the existing documentation in the dummy blockchain Git repo.
 
 Also, need to remember to hunt back through the existing Git repositories to remove outdated instructions and information. Those areas can link to this new documentation where appropriate.
 
-\--- /NOTE ---
+\--- /DEV NOTE ---
 
 #### Step 5. Test with the example blockchain application data
 
@@ -56,13 +62,13 @@ Modify `devel/standard/standard.yaml` to point to the dummy chain implementation
 
 The full path into the dchain directory must be used. The path needs to be in quotes.
 
-\--- NOTE ---
+\--- DEV NOTE ---
 
 Make sure to account for old, outdated, non-working references to "dummy-blockchain", it's now "dchain."
 
 Include instructions for running the example blockchain to generate data for Firehose-ACME to use. I let mine create around three hundred blocks.
 
-\--- /NOTE ---
+\--- /DEV NOTE ---
 
 **Example path:**
 
@@ -100,8 +106,8 @@ instance "acme" stopped (exit code: -1), shutting down
 
 \--- CONTINUE HERE ---
 
-\--- NOTE ---
+\--- DEV NOTE ---
 
 Firehose-ACME and Dummy Blockchain run on the same http port so they can't be running at the same time. Be sure to mention this somewhere, it caused me a bit of trouble.
 
-\--- /NOTE ---
+\--- /DEV NOTE ---

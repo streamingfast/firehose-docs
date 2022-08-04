@@ -10,7 +10,7 @@ Instrumenting a node is the process of applying specialized code to the core of 
 
 StreamingFast provides the instrumented code for Ethereum, NEAR, Solana, and Cosmos nodes.
 
-\--- NOTE ---
+\--- DEV NOTE ---
 
 Does it make sense to show the reader the integration piece first or the node instrumentation? Isn't an instrumented node required for integration? For instance, the path to the node binary is required.
 
@@ -26,7 +26,7 @@ A potential, very rough outline could be:
 
 Input will be needed for the more detailed aspects of instrumenting new blockchains. Could we call that something like Instrumentation Design and make a separate page?
 
-\--- /NOTE ---
+\--- /DEV NOTE ---
 
 Firehose was designed to work with multiple blockchains beyond the existing implementations.&#x20;
 

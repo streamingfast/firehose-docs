@@ -28,11 +28,11 @@ Modify `devel/standard/start.sh` to
 
 Run it with:&#x20;
 
-\--- NOTE ---
+\--- DEV NOTE ---
 
 Run it with what?&#x20;
 
-\--- /NOTE ---
+\--- /DEV NOTE ---
 
 #### Define types
 

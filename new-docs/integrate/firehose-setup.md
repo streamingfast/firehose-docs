@@ -1,10 +1,10 @@
 ---
-description: StreamingFast Firehose base setup documentation
+description: StreamingFast Firehose setup documentation
 ---
 
 # Firehose Setup
 
-Getting Firehose up and running can be accomplished in a few different ways.&#x20;
+Setting up Firehose differs depending on the specific needs of your target application or infrastructure. The three top-level paths to setup and integration are as follows.
 
 #### Basic Firehose with Fake Data App
 
