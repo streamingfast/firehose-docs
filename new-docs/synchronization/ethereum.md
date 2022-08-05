@@ -4,25 +4,9 @@ description: StreamingFast Firehose synchronization documentation for Ethereum
 
 # Ethereum
 
-_--- DEV NOTE ---_
-
-_**sfeth is essentially a Go package containing all of the other Firehose components. Correct? (In the Firehose-ACME Demo they are included in the YAML config file in the 'args' field. If this is correct it might be worth mentioning in the documentation for clarity.**_
-
-_Supported blockchains don't require an integration step. Only setup and 'sync.'_
-
-_The demo requires setup and a sort of faux sync with dchain. Correct?_
-
-_New, unsupported blockchains require instrumenting nodes and integration._&#x20;
-
-_Why are the Firehose components listed in the YAML files for the demo and not for the supported blockchains? Supported blockchains package them into sfeth or sf-xChain?_
-
-_This page should potentially just be moved into the Supported Blockchains in the Integration/Setup section. There is no 'integration' for existing blockchains, just Sync. Correct? If this is the case, it still might make sense to move this into the Firehose Setup section under Supported Blockchains. In that scenario Integration can be left within Setup > Unsupported Blockchains and be coupled with information about instrumentation._
-
-_--- /DEV NOTE ---_
-
 Below, we'll show you how to use [Firehose](../../operate/concepts/) to sync and stream Ethereum Mainnet.
 
-&#x20;If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when ran from the terminal.
+\{{< alert type="important" >\}} If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when ran from the terminal.
 
 To fix the problem, remove the quarantine attribute on the file using the following command against the binary:
 
@@ -31,9 +15,11 @@ xattr -d com.apple.quarantine sfeth
 xattr -d com.apple.quarantine geth_macos
 ```
 
-You'll only need to do this once.&#x20;
+You'll only need to do this once. \{{< /alert >\}}
 
-#### Install Geth
+***
+
+### Install Geth
 
 The first step is to install a StreamingFast-instrumented version of `Geth`.
 
@@ -53,12 +39,6 @@ Once your binary downloaded you must make them into an executable
 chmod +x geth_linux
 ```
 
-_--- DEV NOTE ---_
-
-_It looks like the installation command and step is not included here?_
-
-_--- /DEV NOTE ---_
-
 To verify the installation was successful, run
 
 ```bash
@@ -75,6 +55,8 @@ Version: 1.10.16-dm-stable
 
 Note that you may have a different version than `1.10.16`; the important thing is the `dm` in the version name. `dm` stands for `DeepMind`, and denotes our instrumented version of Geth.
 
+***
+
 ### Install sfeth
 
 `sfeth`, a.k.a. Ethereum on Streamingfast, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the \[Concepts & Architecture]\(\{{< ref "/operate/concepts" >\}}) is discussed elsewhere. Needless to say, you must run `sfeth` to run a `Firehose` locally.
@@ -87,12 +69,6 @@ Once downloaded you must untar the bundle
 tar -xvzf sf-ethereum_0.9.0_linux_x86_64.tar.gz
 ```
 
-_--- DEV NOTE ---_
-
-_Is the actual installation command missing here?_
-
-_--- /DEV NOTE ---_
-
 To verify the installation was successful, run
 
 ```bash
@@ -103,7 +79,9 @@ Great! At this point we have installed our instrumented `Geth` application as we
 
 In the following steps we will setup configuration files so that you can start syncing & running an Ethereum Mainnet Firehose!
 
-#### Configure the binaries
+***
+
+### Configure the binaries
 
 We will start off by creating a working directory where we will copy our 2 binaries that we have setup on the prior steps
 
@@ -115,9 +93,9 @@ cp <path-to-binary>/sfeth ./sf-firehose/sfeth
 
 We're assuming that all future commands will be run inside the working directory we just created.
 
-Now, we are going to create a configuration file that will help us run `sfeth`. Copy the following content to an `eth-mainnet.yaml` file in your working directory.
+Now, we are going to create a configuration file that will help us run `sfeth`. Copy the following content to an `eth-mainnet.yaml` file in your working directory
 
-The configuration below will sync from mainnet, but is not production-ready.&#x20;
+\{{< alert type="important" >\}} The configuration below will sync from mainnet, but is not production-ready. \{{< /alert >\}}
 
 ```yaml
 ---
@@ -299,7 +277,9 @@ Finally, we have built tools that allow you to introspect the block files:
 ./sfeth tools print one-block --store ./eth-data/storage/one-blocks 10000
 ```
 
-#### Launch the Firehose
+***
+
+### Launch the Firehose
 
 Let's pick up where we left off, assuming we're no longer syncing eth-mainnet:
 
@@ -376,7 +356,9 @@ You should see block streaming. Like so
 }
 ```
 
-#### What's next
+***
+
+### What's next
 
 Congratulations! You're now streaming ETH block data from mainnet.
 
@@ -392,7 +374,7 @@ The Firehose stack is extremely elastic, and supports handling networks of varie
 
 The deployment efforts will be proportional to the size of history, and the density of the chain at hand.
 
-#### Network shapes
+### Network shapes
 
 This document outlines requirements for different shapes of networks
 

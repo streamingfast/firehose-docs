@@ -16,11 +16,13 @@ If you already understand the core Firehose concepts and architecture please fee
 
 The official GitHub repository for Firehose can be found at [https://github.com/streamingfast/firehose](https://github.com/streamingfast/firehose)
 
-#### Intended Audience&#x20;
+### Intended Audience&#x20;
 
 This document is aimed at the following audiences:
 
 * Software Developers&#x20;
 * System Administrators
-* DevOps
-* Blockchain Node Operators
+
+### Prerequisites
+
+Software Developers and Systems Administrators should have an understanding of Linux operating systems, computer programming, web-based application development and blockchain technologies and terminology.

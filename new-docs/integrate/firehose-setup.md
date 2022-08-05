@@ -6,9 +6,9 @@ description: StreamingFast Firehose setup documentation
 
 Setting up Firehose differs depending on the specific needs of your target application or infrastructure. The three top-level paths to setup and integration are as follows.
 
-#### Basic Firehose with Fake Data App
+#### Basic Firehose demo application
 
-The Firehose system can be set up with an application designed to replicate an actual instrumented blockchain node. Use this path if you don't have the computational power or need to run a full blockchain node.
+The Firehose system can be set up with an application designed to replicate an actual instrumented blockchain node. Use this path if you don't have the computational power or need to run a full blockchain node. Note, this path doesn't provide a production-ready Firehose system; only a demo version.
 
 #### Use Firehose with a supported blockchain
 
