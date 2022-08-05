@@ -10,7 +10,7 @@ Data and the locations where it is stored are important facets of Firehose syste
 
 Key Firehose data storage topics include Stores, Merged blocks files, serialization, one block files, and 100-blocks files.
 
-### Stores
+#### Stores
 
 Simply defined, StreamingFast Firehose Stores are abstractions sitting on top of Object Storage.
 
@@ -20,11 +20,11 @@ Stores utilize the `Firehose` [dstore abstraction library](https://github.com/st
 
 For production deployments outside of cloud providers, StreamingFast recommends [ceph](https://ceph.com/en/) as the distributed storage instead of its compatible S3 API system.
 
-### Serialization
+#### Serialization
 
 The `Firehose` system primarily utilizes [Protocol Buffers version 3](https://developers.google.com/protocol-buffers) for serialization.
 
-### Merged Blocks Files
+#### Merged Blocks Files
 
 Merged blocks files are also referred to as `100-blocks files`, and merged bundles. These terms are all used interchangeably within the StreamingFast Firehose system.
 

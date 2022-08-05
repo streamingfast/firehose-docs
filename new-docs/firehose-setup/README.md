@@ -4,6 +4,12 @@ description: StreamingFast Firehose setup documentation
 
 # Firehose Setup
 
+Setting up and integrating the Firehose system can be accomplished in a few different ways.
+
+1. Set up and run the Firehose Demo
+2. Use Firehose with a supported blockchain
+3. Use Firehose with an unsupported blockchain
+
 Setting up Firehose differs depending on the specific needs of your target application or infrastructure. The three top-level paths to setup and integration are as follows.
 
 #### Basic Firehose demo application

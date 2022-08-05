@@ -36,9 +36,7 @@ go install -v ./cmd/fireacme
 
 _--- DEV NOTE ---_
 
-_I can't see where this was updated on my system after installation. I'm not sure about the accuracy of this part. Need to check with team on these next couple of paragraphs._
-
-_I'll have to double-check but I think the latest installation of Go changed how it sets the PATH somehow._
+export GOPATH=/Users/julien/go export PATH=/usr/local/go/bin:$PATH export PATH=$GOPATH/bin:$PATH
 
 _--- /DEV NOTE ---_
 
@@ -52,9 +50,9 @@ Follow the installation instructions located on the example blockchain's officia
 
 _--- DEV NOTE ---_
 
-_Need to either add new, working instructions on this page or update the existing documentation in the dummy blockchain Git repo._
+_Pull in existing doc from Git and clean it up._
 
-_Also, need to remember to hunt back through the existing Git repositories to remove outdated instructions and information. Those areas can link to this new documentation where appropriate._
+_Need to remember to hunt back through the existing Git repositories to remove outdated instructions and information. Those areas can link to this new documentation where appropriate._
 
 _--- /DEV NOTE ---_
 
@@ -109,8 +107,6 @@ instance "acme" stopped (exit code: -1), shutting down
 ## --- CONTINUE HERE ---
 
 _--- DEV NOTE ---_
-
-_Firehose-ACME and Dummy Blockchain run on the same http port so they can't be running at the same time. Be sure to mention this somewhere, it caused me a bit of trouble._
 
 _The content below was pulled over from the GitHub repo. Some of it may be useful for the content on this page._
 
