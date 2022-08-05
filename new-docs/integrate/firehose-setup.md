@@ -12,8 +12,8 @@ The Firehose system can be set up with an application designed to replicate an a
 
 #### Use Firehose with a supported blockchain
 
-Alternatively, Firehose can be set up and integrated for blockchains that have already been instrumented by StreamingFast. Use this path if the target blockchain has already been decided upon and an instrumented node codebase is available.
+Alternatively, Firehose can be set up for blockchains that have already been instrumented by StreamingFast. Use this path if the target blockchain has already been decided upon and an instrumented codebase is available. StreamingFast currently supports Ethereum, NEAR, Solana, and Cosmos.
 
 #### Use Firehose with an unsupported blockchain
 
-Unsupported blockchains can also be instrumented to feed the Firehose system with the necessary data.&#x20;
+Unsupported blockchains can also be instrumented to feed the Firehose system with the necessary data. The Firehose-ACME demo application, custom Google Protocol Buffs, and instrumenting a node are the steps required for an unsupported blockchain.

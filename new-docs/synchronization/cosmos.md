@@ -4,6 +4,12 @@ description: StreamingFast Firehose synchronization documentation for Cosmos
 
 # Cosmos
 
+_--- DEV NOTE ---_
+
+_This page should potentially just be moved into the Supported Blockchains in the Integration/Setup section._
+
+_--- /DEV NOTE ---_
+
 Below, we'll show you how to use [Firehose](../../operate/concepts/) to sync and stream Cosmos Chains.
 
 #### Install firehose-cosmos

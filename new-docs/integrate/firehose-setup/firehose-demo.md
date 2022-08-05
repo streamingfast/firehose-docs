@@ -34,13 +34,13 @@ Run the installation process for the Firehose-ACME project.
 go install -v ./cmd/fireacme
 ```
 
-\--- DEV NOTE ---
+_--- DEV NOTE ---_
 
-I can't see where this was updated on my system after installation. I'm not sure about the accuracy of this part. Need to check with team on these next couple of paragraphs.
+_I can't see where this was updated on my system after installation. I'm not sure about the accuracy of this part. Need to check with team on these next couple of paragraphs._
 
-I'll have to double-check but I think the latest installation of Go changed how it sets the PATH somehow.
+_I'll have to double-check but I think the latest installation of Go changed how it sets the PATH somehow._
 
-\--- /DEV NOTE ---
+_--- /DEV NOTE ---_
 
 The `fireacme` binary will be added to the computer's `GOPATH`. The typical GOPATH directory is `~/go/bin`.&#x20;
 
@@ -50,13 +50,13 @@ _Ensure the Firehose-ACME path is in the systems `PATH` before continuing._
 
 Follow the installation instructions located on the example blockchain's official Git repository.
 
-\--- DEV NOTE ---
+_--- DEV NOTE ---_
 
-Need to either add new, working instructions on this page or update the existing documentation in the dummy blockchain Git repo.
+_Need to either add new, working instructions on this page or update the existing documentation in the dummy blockchain Git repo._
 
-Also, need to remember to hunt back through the existing Git repositories to remove outdated instructions and information. Those areas can link to this new documentation where appropriate.
+_Also, need to remember to hunt back through the existing Git repositories to remove outdated instructions and information. Those areas can link to this new documentation where appropriate._
 
-\--- /DEV NOTE ---
+_--- /DEV NOTE ---_
 
 #### Step 5. Test with the example blockchain application data
 
@@ -64,13 +64,13 @@ Modify `devel/standard/standard.yaml` to point to the dummy chain implementation
 
 The full path into the dchain directory must be used. The path needs to be in quotes.
 
-\--- DEV NOTE ---
+_--- DEV NOTE ---_
 
-Make sure to account for old, outdated, non-working references to "dummy-blockchain", it's now "dchain." This is applicable to code, so it impacts functionality.
+_Make sure to account for old, outdated, non-working references to "dummy-blockchain", it's now "dchain." This is applicable to code, so it impacts functionality._
 
-Include instructions for running the example blockchain to generate data for Firehose-ACME to use. I let mine create around three hundred blocks.
+_Include instructions for running the example blockchain to generate data for Firehose-ACME to use. I let mine create around three hundred blocks._
 
-\--- /DEV NOTE ---
+_--- /DEV NOTE ---_
 
 **Example path:**
 
@@ -106,18 +106,23 @@ instance "acme" stopped (exit code: -1), shutting down
 
 \<None>
 
-\--- CONTINUE HERE ---
+## --- CONTINUE HERE ---
 
-\--- DEV NOTE ---
+_--- DEV NOTE ---_
 
-Firehose-ACME and Dummy Blockchain run on the same http port so they can't be running at the same time. Be sure to mention this somewhere, it caused me a bit of trouble.
+_Firehose-ACME and Dummy Blockchain run on the same http port so they can't be running at the same time. Be sure to mention this somewhere, it caused me a bit of trouble._
 
-The content below was pulled over from the GitHub repo. Some of it may be useful for the content on this page.
+_The content below was pulled over from the GitHub repo. Some of it may be useful for the content on this page._
 
-\--- /DEV NOTE ---
+_--- /DEV NOTE ---_
 
 We have built an end-to-end template, to start the on-boarding process of new chains. This solution consist of:
 
 firehose-acme As mentioned above, the Extractor process consumes the data that is extracted and streamed from Deeepmind. In Actuality the Extractor is one process out of multiple ones that creates the Firehose. These processes are launched by one application. This application is chain specific and by convention, we name is "firehose-". Though this application is chain specific, the structure of the application is standardized and is quite similar from chain to chain. For convenience, we have create a boiler plate app to help you get started. We named our chain Acme this the app is firehose-acme
 
 DeepMind Deepmind consist of an instrumented syncing node. We have created a "dummy" chain to simulate a node process syncing that can be found https://github.com/streamingfast/dummy-blockchain.
+
+Additional links:
+
+* https://github.com/streamingfast/firehose-acme
+* https://github.com/streamingfast/dummy-blockchain

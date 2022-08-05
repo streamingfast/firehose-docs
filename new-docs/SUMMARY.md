@@ -12,7 +12,7 @@
 * [Integration](integrate/README.md)
   * [Firehose Setup](integrate/firehose-setup.md)
     * [Firehose Demo](integrate/firehose-setup/firehose-demo.md)
-    * [Supported Blockchains](integrate/firehose-setup/supported-blockchains.md)
+    * [Supported Blockchains](integrate/node-instrumentation.md)
     * [Unsupported Blockchains](integrate/firehose-setup/unsupported-blockchains.md)
 * [Synchronization](synchronization/README.md)
   * [Ethereum](synchronization/ethereum.md)
