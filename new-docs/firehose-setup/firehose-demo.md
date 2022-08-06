@@ -4,23 +4,35 @@ description: StreamingFast Firehose Demo setup documentation
 
 # Firehose Demo
 
-The Firehose Demo can be run without a full blockchain node and is a great introduction to a real, live-running Firehose system.&#x20;
+The Firehose Demo can be run without a fully functioning blockchain node. The demo is a quick way to evaluate and better understand a real, live-running Firehose system.&#x20;
 
 The demo consists of a basic templated Firehose system and a faux data provision application called the Dummy Blockchain, or DChain.
 
-Note, that the _Firehose-ACME demo template is also the starting point for instrumenting new, unsupported blockchain nodes._
+Note, that the _Firehose-ACME demo template is also the starting point for instrumenting new, unsupported blockchain nodes. Additional information is available in the Unsupported Blockchains documentation._
 
-Follow the steps below to get started with the Firehose Demo.
+The following steps explain how to set up the Firehose-ACME demo.
 
 #### Step 1. Create Firehose directory
 
-Find a suitable location on the computer Firehose is being installed. Use that location to store the application's source code and related files. A new directory can be created on the target computer, such as "Firehose".
+Find a location on the target computer to download and store the Firehose application's source code and related files. Create a new directory in the chosen location and name it something like "Firehose."
+
+Open a new Terminal window. Navigate to the destination on the target computer where the Firehose files will be stored.
+
+```
+cd /Users/<User Account>/Desktop/ 
+// Just an example, choose a directory 
+// on the target computer
+```
+
+Create the new directory and navigate into it. The pwd command will print the full path to the new directory to the Terminal. This will be the working directory for the remaining steps in the installation process.
+
+```
+mkdir SFFirehose; cd SFFirehose; pwd
+```
 
 #### Step 2. Clone the Firehose-ACME repo
 
-Navigate to the directory chosen or created in step one.
-
-Using a Linux-based shell, such as Bash or Z shell, clone the Firehose-ACME project. GitDesktop can also be used to clone the project however using a shell is required for the subsequent steps.
+Next, clone the Firehose-ACME project into the directory created in step one.
 
 ```
 git clone git@github.com:streamingfast/firehose-acme
@@ -28,33 +40,43 @@ git clone git@github.com:streamingfast/firehose-acme
 
 #### Step 3. Install Firehose-ACME
 
-Run the installation process for the Firehose-ACME project.
+Run the installation process for the Firehose-ACME Demo.
 
 ```
 go install -v ./cmd/fireacme
 ```
 
-_--- DEV NOTE ---_
+The installation process copies the fireacme binary file into the computer's default Go binary directory.
 
-export GOPATH=/Users/julien/go export PATH=/usr/local/go/bin:$PATH export PATH=$GOPATH/bin:$PATH
+The standard default Go binary directory is `~/go/bin`.&#x20;
 
-_--- /DEV NOTE ---_
+The GOPATH can be checked by issuing the echo command followed by the system variable preceded by a dollar sign.
 
-The `fireacme` binary will be added to the computer's `GOPATH`. The typical GOPATH directory is `~/go/bin`.&#x20;
+```
+echo $GOPATH
+```
 
-_Ensure the Firehose-ACME path is in the systems `PATH` before continuing._
+To ensure the Firehose-ACME Demo binary is executable on the command line through the shell run the binary and pass the version flag.&#x20;
+
+```
+fireacme --version
+```
+
+If everything has been set up correctly the version will be printed to the Terminal window.
+
+```
+fireacme version dev (Built 2022-08-05T15:36:44-07:00) 
+```
+
+_Ensure the Firehose-ACME path is in the system's PATH before continuing._
 
 #### Step 4. Set up the example blockchain application
 
 Follow the installation instructions located on the example blockchain's official Git repository.
 
-_--- DEV NOTE ---_
+[https://github.com/streamingfast/dummy-blockchain](https://github.com/streamingfast/dummy-blockchain)
 
-_Pull in existing doc from Git and clean it up._
-
-_Need to remember to hunt back through the existing Git repositories to remove outdated instructions and information. Those areas can link to this new documentation where appropriate._
-
-_--- /DEV NOTE ---_
+_**--- CONTINUE EDITING HERE --->**_
 
 #### Step 5. Test with the example blockchain application data
 
@@ -62,17 +84,13 @@ Modify `devel/standard/standard.yaml` to point to the dummy chain implementation
 
 The full path into the dchain directory must be used. The path needs to be in quotes.
 
-_--- DEV NOTE ---_
+Example path:
 
-_Make sure to account for old, outdated, non-working references to "dummy-blockchain", it's now "dchain." This is applicable to code, so it impacts functionality._
+```
+extractor-node-path: "/Users/<User Account>/Desktop/dfuse/integrate/dummy-blockchain/dchain"
+```
 
-_Include instructions for running the example blockchain to generate data for Firehose-ACME to use. I let mine create around three hundred blocks._
-
-_--- /DEV NOTE ---_
-
-**Example path:**
-
-**extractor-node-path**: "/Users/janes-macbook/Desktop/dfuse/integrate/dummy-blockchain/dchain"
+#### Problems
 
 Ensure there is a space between the colon after the extractor-node-path field and the quote that starts the path to the dchain binary on the target computer. Notice the missing space in the example directly below. &#x20;
 
@@ -103,8 +121,6 @@ instance "acme" stopped (exit code: -1), shutting down
 2022-08-02T14:50:43.181-0700 ERRO (extractor) {"status": {"Cmd":"/Users/seanmoore-mpb/Desktop/dfuse/integrate/dummy-blockchain","PID":0,"Exit":-1,"Error":{"Op":"fork/exec","Path":"/Users/seanmoore-mpb/Desktop/dfuse/integrate/dummy-blockchain","Err":13},"StartTs":1659477043178396000,"StopTs":1659477043181083000,"Runtime":0,"Stdout":null,"Stderr":null\}} command terminated with non-zero status, last log lines:
 
 \<None>
-
-## --- CONTINUE HERE ---
 
 _--- DEV NOTE ---_
 

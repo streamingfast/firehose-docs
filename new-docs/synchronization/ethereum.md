@@ -4,13 +4,15 @@ description: StreamingFast Firehose synchronization documentation for Ethereum
 
 # Ethereum
 
-sfeth is essentially a Go package containing all of the other Firehose components including the Extractor, Merger, Relayer and gRPC Server. __&#x20;
+Setting up Firehose for Ethereum is a straight forward process that uses StreamingFast's pre-instrumented code solution.
 
-New, unsupported blockchains require instrumenting nodes and integration.&#x20;
+The two primary tasks for running a Firehose instrumented node are syncing and streaming data.
 
-Below, we'll show you how to use [Firehose](../../../operate/concepts/) to sync and stream Ethereum Mainnet.
+Follow the steps to use Firehose to sync and stream the Ethereum Mainnet.
 
-&#x20;If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when ran from the terminal.
+#### Problems
+
+If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when ran from the terminal.
 
 To fix the problem, remove the quarantine attribute on the file using the following command against the binary:
 
@@ -19,7 +21,7 @@ xattr -d com.apple.quarantine sfeth
 xattr -d com.apple.quarantine geth_macos
 ```
 
-You'll only need to do this once.&#x20;
+You'll only need to do this once.
 
 #### Install Geth
 
@@ -65,11 +67,13 @@ Note that you may have a different version than `1.10.16`; the important thing i
 
 ### Install sfeth
 
-`sfeth`, a.k.a. Ethereum on Streamingfast, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the \[Concepts & Architecture]\(\{{< ref "/operate/concepts" >\}}) is discussed elsewhere. Needless to say, you must run `sfeth` to run a `Firehose` locally.
+The sfeth Go package contains all of the other Firehose components including the Extractor, Merger, Relayer and gRPC Server. __&#x20;
 
-You can download the latest version of `sfeth` [here](https://github.com/streamingfast/sf-ethereum/releases/latest)
+You can download the latest version of `sfeth`at the official Git repository.
 
-Once downloaded you must untar the bundle
+[https://github.com/streamingfast/sf-ethereum/releases/latest](https://github.com/streamingfast/sf-ethereum/releases/latest)
+
+After sfeth has completed downloading untar the bundle.
 
 ```bash
 tar -xvzf sf-ethereum_0.9.0_linux_x86_64.tar.gz
