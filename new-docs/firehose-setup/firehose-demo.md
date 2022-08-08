@@ -76,19 +76,63 @@ Follow the installation instructions located on the example blockchain's officia
 
 [https://github.com/streamingfast/dummy-blockchain](https://github.com/streamingfast/dummy-blockchain)
 
-_**--- CONTINUE EDITING HERE --->**_
+The Dummy Blockchain can be set up anywhere on the target computer. Make a note of the full path where the Dummy Blockchain is located. The path is needed in the next step.
+
+The Dummy Blockchain should be started and allowed to run for at least a few minutes. This will enable the application enough time and processing facilities to generate faux blockchain data for Firehose to consume in the following steps.
 
 #### Step 5. Test with the example blockchain application data
 
-Modify `devel/standard/standard.yaml` to point to the dummy chain implementation.&#x20;
+Using a Terminal window navigate to the directory that Firehose was downloaded and set up within. The path will looking something similiar to the following.
+
+/Users//Desktop/\<User Account>/SFFirehose/
+
+Using the Terminal window navigate into the standard directory, inside of the devel directory, under the main firehose-acme directory.
+
+cd /Users//Desktop/\<User Account>/SFFirehose/standard/devel
+
+Open the standard.yaml configuration file to use the Dummy Blockchain application's data store.&#x20;
+
+For real-world Firehose setups the path used here that points at the Dummy Blockchain would be directed at a blockchain node that has been instrumented for Firehose.
 
 The full path into the dchain directory must be used. The path needs to be in quotes.
 
 Example path:
 
 ```
-extractor-node-path: "/Users/<User Account>/Desktop/dfuse/integrate/dummy-blockchain/dchain"
+extractor-node-path: "/Users/<User Account>/Desktop/SFFireshose/dummy-blockchain/dchain"
 ```
+
+#### Step 6. Start Firehose
+
+The shell script that starts the Firehose demo is located inside the devel/standard directory. The Terminal's shell session should still be using this directory. If it isn't navigate back to the firehose-acme/devel/standard directory.
+
+Issue the following command in the Terminal window to start the Firehose-ACME Demo.
+
+./start.sh
+
+To stop the Firehose-ACME Demo press down on the Control key and then press the C key. This will send an interrupt to the application to exit and discontinue processing data.
+
+If all of the configuration changes were made correctly, all system paths have been set correctly and the Dummy Blockchain was installed and set up correctly something similar to the following will be printed to the Terminal window.
+
+2022-08-03T11:22:30.744-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
+
+2022-08-03T11:22:30.750-0700 INFO (fireacme) launching applications: extractor-node,firehose,merger,relayer
+
+start --store-dir=/Users/seanmoore-mpb/Desktop/dfuse/integrate/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
+
+2022-08-03T11:22:31.924-0700 INFO (extractor.acme) level=info msg="initializing node"
+
+2022-08-03T11:22:31.927-0700 INFO (extractor.acme) level=info msg="initializing store"
+
+2022-08-03T11:22:31.928-0700 INFO (extractor.acme) level=info msg="loading last block" tip=165
+
+2022-08-03T11:22:31.929-0700 INFO (extractor.acme) level=info msg="initializing engine"
+
+2022-08-03T11:22:31.948-0700 INFO (extractor.acme) level=info msg="starting block producer" rate=10s
+
+2022-08-03T11:22:31.948-0700 INFO (extractor.acme) level=info msg="starting server" addr="0.0.0.0:8080"
+
+2022-08-03T11:22:41.931-0700 INFO (extractor.acme) level=info msg="processing block" hash=e0f05da93a0f5a86a3be5fc0e301606513c9f7e59dac2357348aa0f2f47db984 height=166
 
 #### Problems
 
