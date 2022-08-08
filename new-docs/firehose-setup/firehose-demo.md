@@ -82,7 +82,7 @@ The Dummy Blockchain should be started and allowed to run for at least a few min
 
 #### Step 5. Test with the example blockchain application data
 
-Using a Terminal window navigate to the directory that Firehose was downloaded and set up within. The path will looking something similiar to the following.
+Using a Terminal window navigate to the directory that Firehose was downloaded and set up within. The path will look something similar to the following.
 
 /Users//Desktop/\<User Account>/SFFirehose/
 
