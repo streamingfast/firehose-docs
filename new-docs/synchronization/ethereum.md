@@ -4,68 +4,69 @@ description: StreamingFast Firehose synchronization documentation for Ethereum
 
 # Ethereum
 
-Setting up Firehose for Ethereum is a straight forward process that uses StreamingFast's pre-instrumented code solution.
+Setting up Firehose for Ethereum is a straightforward process that uses StreamingFast's pre-instrumented code solution.
 
-The two primary tasks for running a Firehose instrumented node are syncing and streaming data.
+The primary tasks for running a Firehose instrumented node are&#x20;
 
-Follow the steps to use Firehose to sync and stream the Ethereum Mainnet.
+* setup,&#x20;
+* configuration,
+* data synchronization,&#x20;
+* and streaming data.
 
-#### Problems
+Full source code is available for the StreamingFast instrumented version of Geth in its official Git repository.
 
-If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when ran from the terminal.
+LINK\_HERE
 
-To fix the problem, remove the quarantine attribute on the file using the following command against the binary:
+Installation instructions for the standard, non-instrumented version of Geth are available on the Ethereum website. Installing the standard version isn't required to run Firehose. _The Ethereum documentation provides a deeper understanding of the blockchain and node operation in general._
 
-```bash
-xattr -d com.apple.quarantine sfeth
-xattr -d com.apple.quarantine geth_macos
-```
+[https://geth.ethereum.org/docs/install-and-build/installing-geth](https://geth.ethereum.org/docs/install-and-build/installing-geth)
 
-You'll only need to do this once.
+Follow the steps to get started with Ethereum and Firehose.
 
-#### Install Geth
+#### Install the StreamingFast version of Geth
 
-The first step is to install a StreamingFast-instrumented version of `Geth`.
+StreamingFast's instrumented `Geth` version extracts raw blockchain data from Ethereum nodes. [`Geth`](https://github.com/ethereum/go-ethereum) is the official [Golang](https://go.dev/) implementation of the Ethereum Protocol.
 
-[`Geth`](https://github.com/ethereum/go-ethereum) is the official Golang implementation of the Ethereum Protocol. We have instrumented `Geth` to have the ability to extract the raw blockchain data from the node.
+#### Step 1. download StreamingFast Geth&#x20;
 
-The instrumented version source code can be found [on our Github organization](https://github.com/streamingfast/go-ethereum).
+Using a web browser download the nightly pre-built StreamingFast Geth binary. StreamingFast currently provides binaries for Linux and macOS.
 
-We automatically build and release version of Geth with upstream changes; you'll find a `linux` and `mac` version ready for download for the following protocols:
+[https://github.com/streamingfast/go-ethereum/releases?q=geth](https://github.com/streamingfast/go-ethereum/releases?q=geth)
 
-* [Ethereum](https://github.com/streamingfast/go-ethereum/releases?q=geth-\&expanded=true)
-* [Polygon](https://github.com/streamingfast/go-ethereum/releases?q=polygon-\&expanded=true)
-* [BSC](https://github.com/streamingfast/go-ethereum/releases?q=bsc-\&expanded=true)
+After the download has been completed, open a Terminal window and navigate to the directory where it was saved.
 
-Once your binary downloaded you must make them into an executable
+The permissions on the binary must be set to be executable on the target computer.
 
 ```bash
 chmod +x geth_linux
 ```
 
-_--- DEV NOTE ---_
-
-_It looks like the installation command and step is not included here?_
-
-_--- /DEV NOTE ---_
-
-To verify the installation was successful, run
+Now, run the binary and check its version to ensure it was properly downloaded and the permissions were correctly set. _Note, if issues are encountered on macOS for this step see the Problems section of this document._
 
 ```bash
 geth_linux version
 ```
 
-You should see an output that contains
+A message similar to the following should be displayed in the Terminal window If everything is working correctly.
 
 ```bash
+INFO [08-08|14:36:21.188] Initializing deep mind 
+INFO [08-08|14:36:21.193] Deep mind initialized                    enabled=false sync_instrumentation_enabled=true mining_enabled=false block_progress_enabled=false compaction_disabled=false archive_blocks_to_keep=0 genesis_provenance="Geth Default"
 Geth
-Version: 1.10.16-dm-stable
-...
+Version: 1.10.21-fh2
+Git Commit: 86d99626c622c2e4e1a22502172c59911675faaf
+Architecture: amd64
+Go Version: go1.17.12
+Operating System: darwin
+GOPATH=/Users/<User Account>/go
+GOROOT=go
 ```
 
-Note that you may have a different version than `1.10.16`; the important thing is the `dm` in the version name. `dm` stands for `DeepMind`, and denotes our instrumented version of Geth.
+_Note, the version will contain the letters "fh" to indicate that this is the instrumented StreamingFast Firehose version of the Geth binary._
 
 ### Install sfeth
+
+_**--- CONTINUE EDITING HERE --->**_
 
 The sfeth Go package contains all of the other Firehose components including the Extractor, Merger, Relayer and gRPC Server. __&#x20;
 
@@ -370,17 +371,15 @@ You should see block streaming. Like so
 
 #### What's next
 
-Congratulations! You're now streaming ETH block data from mainnet.
+The target computer is now successfully streaming ETH block data from mainnet. Congratulations!
 
-At this point, Ethereum and ERC20 networks are yours to discover. Slice and dice this data to your heart's content.
+Full searchability and discoverability of Ethereum and ERC20 networks have now been attained. The underlying blockchain data can be sliced and diced in just about any way imaginable.
 
-You might also want to move on to other sections, to start streaming data from other protocols.
+Don't forget that StreamingFast also provides pre-instrumented and ready-to-go solutions for several other blockchains.
 
 #### System Requirements
 
-The **goal of this page** is to set expectations and get you to understand what is required to run Firehose for Ethereum, for different protocols.
-
-The Firehose stack is extremely elastic, and supports handling networks of varied sizes and shapes. It is also heavy on data, so **make sure you have a good understanding** of the \[different data stores, artifacts and databases]\(\{{< ref "/operate/concepts/data-storage" >\}}) required to run the Firehose stack.
+The Firehose stack is extremely elastic, and supports handling networks of varied sizes and shapes. It is also heavy on data, so **make sure you have a good understanding** of the different data stores, artifacts, and databases required to run the Firehose stack.
 
 The deployment efforts will be proportional to the size of history, and the density of the chain at hand.
 
@@ -402,8 +401,21 @@ The CPU/RAM requirements will depend on these factors:
 * **High Availability**: highly available deployments will require **2 times the resources** (or more) listed in the following examples, as a general rule.
 * **Throughput of queries**: the Firehose stack is built for horizontal scalability, the more requests per second you want to fulfill, the larger the deployment, the more CPU/RAM you will need to allocate to your cluster.
 
-\{{< alert type="note" >\}} These stats are from March 2022, but chains of similar density and similar age will behave similarly. \{{< /alert >\}}
+These stats are from March 2022, but chains of similar density and similar age will behave similarly.
 
 **Ethereum Mainnet**
 
 `This section is incomplete.`
+
+#### Problems
+
+If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when run from the terminal.
+
+To fix the problem, remove the quarantine attribute on the file using the following command against the binary:
+
+```bash
+xattr -d com.apple.quarantine sfeth
+xattr -d com.apple.quarantine geth_macos
+```
+
+You'll only need to do this once.
