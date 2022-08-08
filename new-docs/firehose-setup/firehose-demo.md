@@ -4,17 +4,21 @@ description: StreamingFast Firehose Demo setup documentation
 
 # Firehose Demo
 
-The Firehose Demo can be run without a fully functioning blockchain node. The demo is a quick way to evaluate and better understand a real, live-running Firehose system.&#x20;
+The Firehose-ACME Demo is a quick and low-resource way to evaluate and better understand a real, live-running Firehose system.
 
-The demo consists of a basic templated Firehose system and a faux data provision application called the Dummy Blockchain, or DChain.
+The Firehose-ACME Demo can even be run without a fully functioning blockchain node.
 
-Note, that the _Firehose-ACME demo template is also the starting point for instrumenting new, unsupported blockchain nodes. Additional information is available in the Unsupported Blockchains documentation._
+The demo consists of a basic templated Firehose system and a faux data provision application called the Dummy Blockchain, or dchain.
 
-The following steps explain how to set up the Firehose-ACME demo.
+Note, that the _Firehose-ACME demo template is also the starting point for instrumenting new, unsupported blockchain nodes. Additional information is available in the_ [_Unsupported Blockchains_ ](unsupported-blockchains.md)_documentation._
+
+The following steps explain how to set up the Firehose-ACME Demo with the Dummy Blockchain.
 
 #### Step 1. Create Firehose directory
 
-Find a location on the target computer to download and store the Firehose application's source code and related files. Create a new directory in the chosen location and name it something like "Firehose."
+Find a location on the target computer to download and store the Firehose-ACME Demo application's source code and related files.
+
+&#x20;Create a new directory in the chosen location and name it something like "SFFirehose."
 
 Open a new Terminal window. Navigate to the destination on the target computer where the Firehose files will be stored.
 
@@ -24,7 +28,9 @@ cd /Users/<User Account>/Desktop/
 // on the target computer
 ```
 
-Create the new directory and navigate into it. The pwd command will print the full path to the new directory to the Terminal. This will be the working directory for the remaining steps in the installation process.
+Create the new directory and navigate into it.&#x20;
+
+The pwd command will print the full path to the new directory to the Terminal. This will be the working directory for the remaining steps in the installation process.
 
 ```
 mkdir SFFirehose; cd SFFirehose; pwd
@@ -32,7 +38,7 @@ mkdir SFFirehose; cd SFFirehose; pwd
 
 #### Step 2. Clone the Firehose-ACME repo
 
-Next, clone the Firehose-ACME project into the directory created in step one.
+Next, clone the Firehose-ACME Demo project into the SFFirehose directory created in step one.
 
 ```
 git clone git@github.com:streamingfast/firehose-acme
@@ -70,29 +76,27 @@ fireacme version dev (Built 2022-08-05T15:36:44-07:00)
 
 _Ensure the Firehose-ACME path is in the system's PATH before continuing._
 
-#### Step 4. Set up the example blockchain application
+#### Step 4. Set up the Dummy Blockchain application
 
 Follow the installation instructions located on the example blockchain's official Git repository.
 
 [https://github.com/streamingfast/dummy-blockchain](https://github.com/streamingfast/dummy-blockchain)
 
-The Dummy Blockchain can be set up anywhere on the target computer. Make a note of the full path where the Dummy Blockchain is located. The path is needed in the next step.
+The Dummy Blockchain can be set up anywhere on the target computer. Make a note of the full path where the Dummy Blockchain is located. The path is needed in the following steps.
 
 The Dummy Blockchain should be started and allowed to run for at least a few minutes. This will enable the application enough time and processing facilities to generate faux blockchain data for Firehose to consume in the following steps.
 
-#### Step 5. Test with the example blockchain application data
+#### Step 5. Test the Firehose-ACME Demo
 
 Using a Terminal window navigate to the directory that Firehose was downloaded and set up within. The path will look something similar to the following.
 
 /Users//Desktop/\<User Account>/SFFirehose/
 
-Using the Terminal window navigate into the standard directory, inside of the devel directory, under the main firehose-acme directory.
+Next, navigate into the directory named "standard", inside of the directory named "devel", under the main firehose-acme directory.
 
 cd /Users//Desktop/\<User Account>/SFFirehose/standard/devel
 
-Open the standard.yaml configuration file to use the Dummy Blockchain application's data store.&#x20;
-
-For real-world Firehose setups the path used here that points at the Dummy Blockchain would be directed at a blockchain node that has been instrumented for Firehose.
+Open the Firehose-ACME Demo standard.yaml configuration file to update the path to the Dummy Blockchain.
 
 The full path into the dchain directory must be used. The path needs to be in quotes.
 
@@ -102,15 +106,19 @@ Example path:
 extractor-node-path: "/Users/<User Account>/Desktop/SFFireshose/dummy-blockchain/dchain"
 ```
 
+Ensure the file has been saved with the updated path information and then return to the Terminal window.
+
+Note, for real-world Firehose setups, the path that points at the Dummy Blockchain would typically be directed at an actual blockchain node that has been instrumented for Firehose.
+
 #### Step 6. Start Firehose
 
-The shell script that starts the Firehose demo is located inside the devel/standard directory. The Terminal's shell session should still be using this directory. If it isn't navigate back to the firehose-acme/devel/standard directory.
+The shell script that starts the Firehose-ACME Demo is located inside the devel/standard directory. The Terminal's shell session should still be using this directory. If it isn't, navigate back to the firehose-acme/devel/standard directory.
 
 Issue the following command in the Terminal window to start the Firehose-ACME Demo.
 
 ./start.sh
 
-To stop the Firehose-ACME Demo press down on the Control key and then press the C key. This will send an interrupt to the application to exit and discontinue processing data.
+To stop the Firehose-ACME Demo at any time press down on the Control key and then press the C key. This will send an interrupt to the application to exit and discontinue data processing.
 
 If all of the configuration changes were made correctly, all system paths have been set correctly and the Dummy Blockchain was installed and set up correctly something similar to the following will be printed to the Terminal window.
 
@@ -134,13 +142,23 @@ start --store-dir=/Users/seanmoore-mpb/Desktop/dfuse/integrate/firehose-acme/dev
 
 2022-08-03T11:22:41.931-0700 INFO (extractor.acme) level=info msg="processing block" hash=e0f05da93a0f5a86a3be5fc0e301606513c9f7e59dac2357348aa0f2f47db984 height=166
 
+If the output seen in the target computer's Terminal looks resembles the sample above the Firehose-ACME Demo has been successfully set up and is functional. Congratulations!&#x20;
+
+#### Conclusion
+
+This is the basic process for setting up a Firehose system. Real-world implementations don't use or rely on the Dummy Blockchain application or its data.
+
+The next steps will be determined by the end goals of any Firehose user. Existing, current, and knowledgable node operators can take advantage of the pre-instrumented blockchain solutions provided by StreamingFast for their specific blockchain.
+
+For those interested in using Firehose with new, unsupported blockchains custom instrumentation is required.
+
 #### Problems
 
 Ensure there is a space between the colon after the extractor-node-path field and the quote that starts the path to the dchain binary on the target computer. Notice the missing space in the example directly below. &#x20;
 
 **extractor-node-path**:"/&#x20;
 
-The following error will be displayed for an incorrectly formatted field in the YAML config file.&#x20;
+The following error will be displayed for an incorrectly formatted field in the YAML config file. Note, this is a YAML error, however, if it's a new topic this could potentially cause issues.
 
 Error: unable to read config file "standard.yaml": reading json: yaml: line 10: did not find expected key
 
@@ -150,7 +168,7 @@ The following message will be displayed in the shell if the path to the example 
 
 2022-08-02T14:50:42.171-0700 INFO (fireacme) launching applications: extractor-node,firehose,merger,relayer
 
-start --store-dir=/Users/seanmoore-mpb/Desktop/dfuse/integrate/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
+start --store-dir=/Users/\<User Account>/Desktop/SFFirehose/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
 
 2022-08-02T14:50:43.181-0700 ERRO (fireacme)&#x20;
 
@@ -162,23 +180,6 @@ instance "acme" stopped (exit code: -1), shutting down
 
 \################################################################
 
-2022-08-02T14:50:43.181-0700 ERRO (extractor) {"status": {"Cmd":"/Users/seanmoore-mpb/Desktop/dfuse/integrate/dummy-blockchain","PID":0,"Exit":-1,"Error":{"Op":"fork/exec","Path":"/Users/seanmoore-mpb/Desktop/dfuse/integrate/dummy-blockchain","Err":13},"StartTs":1659477043178396000,"StopTs":1659477043181083000,"Runtime":0,"Stdout":null,"Stderr":null\}} command terminated with non-zero status, last log lines:
+2022-08-02T14:50:43.181-0700 ERRO (extractor) {"status": {"Cmd":"/Users/\<User Account>/Desktop/SFFirehose/dummy-blockchain","PID":0,"Exit":-1,"Error":{"Op":"fork/exec","Path":"/Users/\<User Account>/Desktop/SFFirehose/dummy-blockchain","Err":13},"StartTs":1659477043178396000,"StopTs":1659477043181083000,"Runtime":0,"Stdout":null,"Stderr":null\}} command terminated with non-zero status, last log lines:
 
 \<None>
-
-_--- DEV NOTE ---_
-
-_The content below was pulled over from the GitHub repo. Some of it may be useful for the content on this page._
-
-_--- /DEV NOTE ---_
-
-We have built an end-to-end template, to start the on-boarding process of new chains. This solution consist of:
-
-firehose-acme As mentioned above, the Extractor process consumes the data that is extracted and streamed from Deeepmind. In Actuality the Extractor is one process out of multiple ones that creates the Firehose. These processes are launched by one application. This application is chain specific and by convention, we name is "firehose-". Though this application is chain specific, the structure of the application is standardized and is quite similar from chain to chain. For convenience, we have create a boiler plate app to help you get started. We named our chain Acme this the app is firehose-acme
-
-DeepMind Deepmind consist of an instrumented syncing node. We have created a "dummy" chain to simulate a node process syncing that can be found https://github.com/streamingfast/dummy-blockchain.
-
-Additional links:
-
-* https://github.com/streamingfast/firehose-acme
-* https://github.com/streamingfast/dummy-blockchain
