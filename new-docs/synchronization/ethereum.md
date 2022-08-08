@@ -80,12 +80,6 @@ After sfeth has completed downloading untar the bundle.
 tar -xvzf sf-ethereum_0.9.0_linux_x86_64.tar.gz
 ```
 
-_--- DEV NOTE ---_
-
-_Is the actual installation command missing here?_
-
-_--- /DEV NOTE ---_
-
 To verify the installation was successful, run
 
 ```bash
