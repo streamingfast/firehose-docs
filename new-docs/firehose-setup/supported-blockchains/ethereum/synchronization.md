@@ -1,147 +1,10 @@
 ---
-description: StreamingFast Firehose synchronization documentation for Ethereum
+description: StreamingFast Firehose for Ethereum Synchronization documentation
 ---
 
-# Ethereum
+# Synchronization
 
-Setting up Firehose for Ethereum is a straightforward process that uses StreamingFast's pre-instrumented code solution.
-
-The primary tasks for running a Firehose instrumented node are&#x20;
-
-* setup,&#x20;
-* configuration,
-* data synchronization,&#x20;
-* and streaming data.
-
-Full source code is available for the StreamingFast instrumented version of Geth in its official Git repository.
-
-LINK\_HERE
-
-Installation instructions for the standard, non-instrumented version of Geth are available on the Ethereum website. Installing the standard version isn't required to run Firehose. _The Ethereum documentation provides a deeper understanding of the blockchain and node operation in general._
-
-[https://geth.ethereum.org/docs/install-and-build/installing-geth](https://geth.ethereum.org/docs/install-and-build/installing-geth)
-
-Follow the steps to get started with Ethereum and Firehose.
-
-#### Install the StreamingFast version of Geth
-
-StreamingFast's instrumented `Geth` version extracts raw blockchain data from Ethereum nodes. [`Geth`](https://github.com/ethereum/go-ethereum) is the official [Golang](https://go.dev/) implementation of the Ethereum Protocol.
-
-#### Step 1. download StreamingFast Geth&#x20;
-
-Using a web browser download the nightly pre-built StreamingFast Geth binary. StreamingFast currently provides binaries for Linux and macOS.
-
-[https://github.com/streamingfast/go-ethereum/releases?q=geth](https://github.com/streamingfast/go-ethereum/releases?q=geth)
-
-After the download has been completed, open a Terminal window and navigate to the directory where it was saved.
-
-The permissions on the binary must be set to be executable on the target computer.
-
-```bash
-chmod +x geth_linux
-```
-
-Now, run the binary and check its version to ensure it was properly downloaded and the permissions were correctly set. _Note, if issues are encountered on macOS for this step see the Problems section of this document._
-
-```bash
-geth_linux version
-```
-
-A message similar to the following should be displayed in the Terminal window If everything is working correctly.
-
-```bash
-INFO [08-08|14:36:21.188] Initializing deep mind 
-INFO [08-08|14:36:21.193] Deep mind initialized                    enabled=false sync_instrumentation_enabled=true mining_enabled=false block_progress_enabled=false compaction_disabled=false archive_blocks_to_keep=0 genesis_provenance="Geth Default"
-Geth
-Version: 1.10.21-fh2
-Git Commit: 86d99626c622c2e4e1a22502172c59911675faaf
-Architecture: amd64
-Go Version: go1.17.12
-Operating System: darwin
-GOPATH=/Users/<User Account>/go
-GOROOT=go
-```
-
-_Note, the version will contain the letters "fh" to indicate that this is the instrumented StreamingFast Firehose version of the Geth binary._
-
-### Install sfeth
-
-_**--- CONTINUE EDITING HERE --->**_
-
-The sfeth Go package contains all of the other Firehose components including the Extractor, Merger, Relayer and gRPC Server. __&#x20;
-
-You can download the latest version of `sfeth`at the official Git repository.
-
-[https://github.com/streamingfast/sf-ethereum/releases/latest](https://github.com/streamingfast/sf-ethereum/releases/latest)
-
-After sfeth has completed downloading untar the bundle.
-
-```bash
-tar -xvzf sf-ethereum_0.9.0_linux_x86_64.tar.gz
-```
-
-To verify the installation was successful, run
-
-```bash
-sfeth --version
-```
-
-Great! At this point we have installed our instrumented `Geth` application as well as our `sfeth` application.
-
-In the following steps we will setup configuration files so that you can start syncing & running an Ethereum Mainnet Firehose!
-
-#### Configure the binaries
-
-We will start off by creating a working directory where we will copy our 2 binaries that we have setup on the prior steps
-
-```bash
-mkdir sf-firehose
-cp <path-to-binary>/geth_linux ./sf-firehose/geth_linux
-cp <path-to-binary>/sfeth ./sf-firehose/sfeth
-```
-
-We're assuming that all future commands will be run inside the working directory we just created.
-
-Now, we are going to create a configuration file that will help us run `sfeth`. Copy the following content to an `eth-mainnet.yaml` file in your working directory.
-
-The configuration below will sync from mainnet, but is not production-ready.&#x20;
-
-```yaml
----
-start:
-  args:
-  - mindreader-node
-  - firehose
-
-  flags:
-    # Sets the verbosity of the application
-    verbose: 2
-
-    # Specifies the path where `sfeth` will store all data for all sub processes
-    data-dir: eth-data
-
-    # Logs to STDOUT
-    log-to-file: false
-
-    # ETH chain ID (from EIP-155) as returned from JSON-RPC `eth_chainId` call
-    common-chain-id: "1"
-
-    # ETH network ID as returned from JSON-RPC `net_version` call
-    common-network-id: "1"
-
-    # Path to the Geth binary we downloaded in Step 1
-    mindreader-node-path: ./geth_linux
-
-    # Tells the Firehose to run without a live stream (i.e. Relayer)
-    common-blockstream-addr: ""
-
-    # Instructs the mindreader-node (aka. Extractor) to produce merged-blocks without a Merger
-    mindreader-node-merge-and-store-directly: true
-```
-
-***
-
-### Sync eth-mainnet
+#### Sync eth-mainnet
 
 Launch `sfeth` to start indexing the chain.
 
@@ -260,9 +123,7 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 ...
 ```
 
-***
-
-### Overview and Explanation
+#### Overview and Explanation
 
 The `mindreader-node` is a process that runs and manages the blockchain node `Geth`. It consumes the blockchain data that is extracted from our instrumented `Geth` node. The instrumented `Geth` node outputs individual block data.
 
