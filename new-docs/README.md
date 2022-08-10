@@ -1,5 +1,6 @@
 ---
 description: Documentation home for StreamingFast Firehose
+layout: landing
 ---
 
 # Home

@@ -14,13 +14,11 @@ A node that has been instrumented producing data is consumed by the Firehose sys
 
 Close attention to detail is crucial when instrumenting nodes with new blockchains and working with custom Protocol Buffer schemas.
 
-_--- DEV NOTE ---_
-
+{% hint style="success" %}
 _Input will be needed for the more detailed aspects of instrumenting new blockchains._&#x20;
 
 _The content below was pulled from the github repo. It could be useful here but needs to be updated._
-
-_--- /DEV NOTE ---_
+{% endhint %}
 
 #### Using `firehose-acme` as a template
 
