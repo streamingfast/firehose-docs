@@ -14,7 +14,9 @@ Using a web browser download the StreamingFast Geth binary. StreamingFast curren
 
 [https://github.com/streamingfast/go-ethereum/releases?q=geth](https://github.com/streamingfast/go-ethereum/releases?q=geth)
 
-#### [https://github.com/streamingfast/go-ethereum/releases?q=bsc+fh2](https://github.com/streamingfast/go-ethereum/releases?q=bsc+fh2) for BSC binaries
+_<mark style="color:yellow;">**\[\[slm:] add links to other binaries here, BSC was pulled in per Alex during the meeting.]**</mark>_
+
+[https://github.com/streamingfast/go-ethereum/releases?q=bsc+fh2](https://github.com/streamingfast/go-ethereum/releases?q=bsc+fh2) for BSC binaries
 
 #### Step 2. update permissions on the StreamingFast Geth binary
 

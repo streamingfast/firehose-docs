@@ -2,6 +2,8 @@
 
 ## Chain-specific schemas
 
+_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line.]**</mark>_
+
 Here is a quick reference to all the known Layer 1 Firehose Protocol Buffer schemas:
 
 * [Ethereum Protobuf Definitions](https://github.com/streamingfast/sf-ethereum/blob/develop/proto/sf/ethereum/type/v1/type.proto)

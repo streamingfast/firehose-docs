@@ -4,6 +4,8 @@ description: StreamingFast Firehose synchronization documentation for Cosmos
 
 # Cosmos
 
+_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line.]**</mark>_
+
 Below, we'll show you how to use [Firehose](../../operate/concepts/) to sync and stream Cosmos Chains.
 
 #### Install firehose-cosmos
