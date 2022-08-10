@@ -102,23 +102,44 @@ At this point, both the StreamingFast instrumented version of Geth and sfeth hav
 
 To complete the full Firehose setup and begin syncing the node with the Ethereum Mainnet specific configuration files still need to be edited.
 
-**--- CONTINUE EDITING HERE --->**
+#### StreamingFast sfeth binary configuration
 
-#### StreamingFast sfeth binary configuation
+Configuration is the next step following the successful completion of the installation steps for StreamingFast Geth and sfeth.
 
-We will start off by creating a working directory where we will copy our 2 binaries that we have setup on the prior steps
+**Step 1. choose Firehose location on target computer**
+
+Using a Terminal window navigate to the location where the full StreamingFast Firehose system will be stored on the target computer.
+
+**Step 2. Create directory for Firehose**&#x20;
+
+Create a new directory in the location chosen in the previous setup. In the example, the name sf-firehose will be used.
+
+```
+mkdir sf-firehose
+```
+
+**Step 3. copy binary files into the sf-firehose directory**
 
 ```bash
-mkdir sf-firehose
 cp <path-to-binary>/geth_linux ./sf-firehose/geth_linux
 cp <path-to-binary>/sfeth ./sf-firehose/sfeth
 ```
 
-We're assuming that all future commands will be run inside the working directory we just created.
+Note, commands for the remaining steps use the newly created sf-firehose directory as the main, base working directory.
 
-Now, we are going to create a configuration file that will help us run `sfeth`. Copy the following content to an `eth-mainnet.yaml` file in your working directory.
+**Step 4. create sfeth configuration file**
 
-The configuration below will sync from mainnet, but is not production-ready.&#x20;
+To create a new file quickly issue the following command to the Terminal window.
+
+```
+touch eth-mainnet.yaml
+```
+
+Next, open the YAML configuration file in an editor. Copy the configuration settings below into the new YAML file.
+
+Ensure that the changes have been saved.
+
+The configuration settings below will sync from Ethereum Mainnet, however, this setup is not production-ready.&#x20;
 
 ```yaml
 ---
