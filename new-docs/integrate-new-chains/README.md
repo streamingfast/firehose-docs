@@ -1,4 +1,4 @@
-# Integrate new chains
+# Integrate New Chains
 
 This section covers what is needed for you to integrate Firehose into a new blockchain protocol, or blockchain node implementation, as to benefit from Firehose, Substreams and The Graph integration.
 

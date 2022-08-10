@@ -87,26 +87,21 @@ You should start seeing logs similar to this:
 ...
 ```
 
-After a short delay, you should start to see the blocks syncing in.
+After a short delay, you should start to see the blocks syncing in:
 
 ```bash
 ...
-2022-03-19T10:28:57.491-0400 (merger) downloading one block file {"canonical_name": "0000000031-20150730T153042.0-000a59d5-ffaa9b8c-1"}
-2022-03-19T10:28:57.492-0400 (merger) downloading one block file {"canonical_name": "0000000032-20150730T153044.0-1260ae13-000a59d5-1"}
-2022-03-19T10:28:57.492-0400 (merger) downloading one block file {"canonical_name": "0000000033-20150730T153045.0-db35e310-1260ae13-1"}
-2022-03-19T10:28:57.493-0400 (merger) downloading one block file {"canonical_name": "0000000034-20150730T153052.0-746e213f-db35e310-1"}
-2022-03-19T10:28:57.494-0400 (merger) downloading one block file {"canonical_name": "0000000035-20150730T153055.0-5d96a474-746e213f-1"}
-2022-03-19T10:28:57.495-0400 (merger) downloading one block file {"canonical_name": "0000000036-20150730T153105.0-ff8cbf9a-5d96a474-1"}
-2022-03-19T10:28:57.496-0400 (merger) downloading one block file {"canonical_name": "0000000037-20150730T153107.0-d3f13e32-ff8cbf9a-1"}
 2022-03-19T10:28:57.497-0400 (merger) downloading one block file {"canonical_name": "0000000038-20150730T153109.0-b624ded0-d3f13e32-1"}
 2022-03-19T10:28:57.498-0400 (merger) downloading one block file {"canonical_name": "0000000039-20150730T153112.0-5c99c0f7-b624ded0-1"}
 2022-03-19T10:28:57.499-0400 (merger) downloading one block file {"canonical_name": "0000000040-20150730T153113.0-a852d084-5c99c0f7-1"}
 ...
 ```
 
-\{{< alert type="important" >\}} At any point in time you can stop the process with `Ctrl + C`.
+{% hint style="warning" %}
+At any point in time you can stop the process with `Ctrl + C`.
 
-The process will shutdown gracefully and on restart it will continue where it left off. \{{< /alert >\}}
+The process will shutdown gracefully and on restart it will continue where it left off.
+{% endhint %}
 
 Once you have synced 10,000 blocks, you can run the following command in a separate terminal to introspect the block data
 
@@ -173,9 +168,11 @@ grpcurl -plaintext localhost:13042 list
 
 We can start streaming blocks with the `sf.firehose.v1.Stream` Service:
 
+{% code overflow="wrap" %}
 ```bash
 grpcurl -plaintext -d '{"start_block_num": 10}' localhost:13042 sf.firehose.v1.Stream.Blocks
 ```
+{% endcode %}
 
 You should see block streaming. Like so
 
