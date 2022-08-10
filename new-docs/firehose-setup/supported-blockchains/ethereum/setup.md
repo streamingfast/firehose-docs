@@ -141,6 +141,12 @@ Ensure that the changes have been saved.
 
 The configuration settings below will sync from Ethereum Mainnet, however, this setup is not production-ready.&#x20;
 
+\<!--- DEV NOTE --->
+
+Is there a command that can be run here to ensure this is working?
+
+\<!--- /DEV NOTE --->
+
 ```yaml
 ---
 start:
