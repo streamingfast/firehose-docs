@@ -4,8 +4,6 @@ description: StreamingFast Firehose resources documentation
 
 # Reference
 
-_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line.]**</mark>_
-
 Collection of pointers to existing Firehose integrations codebases as well as design discussion about some alternatives way to have a Firehose integration.
 
 #### Common codebase

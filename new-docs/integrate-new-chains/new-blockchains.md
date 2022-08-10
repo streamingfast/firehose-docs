@@ -14,8 +14,6 @@ A node that has been instrumented producing data is consumed by Firehose is also
 
 Close attention to detail is crucial when instrumenting nodes with new blockchains and working with custom Protocol Buffer schemas.
 
-_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line.]**</mark>_
-
 {% hint style="success" %}
 _Input will be needed for the more detailed aspects of instrumenting new blockchains._&#x20;
 
