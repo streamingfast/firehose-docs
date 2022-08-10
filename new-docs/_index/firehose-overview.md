@@ -40,4 +40,4 @@ A Firehose Demo is available that doesn't require an actual, full running blockc
 
 Experienced node operators can get up and running by using one of the pre-instrumented blockchain node codebases provided by StreamingFast. Look in the [supported blockchains](../integrate/firehose-setup.md) section of the Firehose documentation for further information.
 
-Lastly, developers who want to work with blockchains that don't have instrumented node codebases can learn how to implement their own in the [Unsupported Blockchains](../integrate-new-chains/unsupported-blockchains.md) section of the Firehose documentation.
+Lastly, developers who want to work with blockchains that don't have instrumented node codebases can learn how to implement their own in the [Unsupported Blockchains](../firehose-setup/unsupported-blockchains.md) section of the Firehose documentation.
