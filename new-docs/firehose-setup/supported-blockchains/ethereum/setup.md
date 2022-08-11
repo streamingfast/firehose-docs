@@ -175,8 +175,6 @@ cp <path-to-binary>/geth_linux ./sf-firehose/geth_linux
 cp <path-to-binary>/sfeth ./sf-firehose/sfeth
 ```
 
-_<mark style="color:yellow;">**\[\[slm:] continue updates and edits here]**</mark>_
-
 ### **StreamingFast sfeth Configuration**
 
 #### Step 1. create Config File
@@ -189,16 +187,45 @@ touch eth-mainnet.yaml
 
 **Step 2. Edit YAML Configuration Settings**
 
-Next, open the YAML configuration file in an editor. Ensure that the changes have been saved.
+Next, open the YAML configuration file in an editor.
 
-_<mark style="color:yellow;">**\[\[slm:] the instructions got deleted somehow during yesterday's changes with Alex. track down the info and get it updated and formatted]**</mark>_
+```
+---
+start:
+  args:
+  - mindreader-node
+  - firehose
 
-#### Non-production File Sync
+  flags:
+    # Sets the verbosity of the application
+    verbose: 2
 
-The configuration settings below will sync from Ethereum Mainnet, however, is not production-ready.&#x20;
+    # Specifies the path where `sfeth` will store all data for all sub processes
+    data-dir: eth-data
 
-```yaml
+    # Logs to STDOUT
+    log-to-file: false
+
+    # ETH chain ID (from EIP-155) as returned from JSON-RPC `eth_chainId` call
+    common-chain-id: "1"
+
+    # ETH network ID as returned from JSON-RPC `net_version` call
+    common-network-id: "1"
+
+    # Path to the Geth binary we downloaded in Step 1
+    mindreader-node-path: ./geth_linux
+
+    # Tells the Firehose to run without a live stream (i.e. Relayer)
+    common-blockstream-addr: ""
+
+    # Instructs the mindreader-node (aka. Extractor) to produce merged-blocks without a Merger
     mindreader-node-merge-and-store-directly: true
 ```
 
-_<mark style="color:yellow;">**\[\[slm:] Is there a command that can be run here to ensure this is working?]**</mark>_
+Ensure that the changes have been saved after updating the configuration file.
+
+_Note, these settings are not production-ready._
+
+#### Synchronization in Detail
+
+Synchronization is the next step in the process for Ethereum Firehose setup. Additional details on [synchronization](synchronization.md) are provided in the following documentation.
