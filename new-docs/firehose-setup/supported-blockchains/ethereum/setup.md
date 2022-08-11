@@ -162,6 +162,8 @@ Create a new directory in the location chosen in the previous setup. In the exam
 mkdir sf-firehose
 ```
 
+_Note, commands for the remaining steps use the newly created sf-firehose directory as the main, base working directory._
+
 ### **Step 3. copy binary files into the sf-firehose directory**
 
 #### Copy Binaries to Working Directory
@@ -173,13 +175,11 @@ cp <path-to-binary>/geth_linux ./sf-firehose/geth_linux
 cp <path-to-binary>/sfeth ./sf-firehose/sfeth
 ```
 
-_Note, commands for the remaining steps use the newly created sf-firehose directory as the main, base working directory._
-
 _<mark style="color:yellow;">**\[\[slm:] continue updates and edits here]**</mark>_
 
 ### **StreamingFast sfeth Configuration**
 
-#### Step 1. Create Config File
+#### Step 1. create Config File
 
 To create a new file quickly issue the following command to the Terminal window.
 
@@ -187,7 +187,11 @@ To create a new file quickly issue the following command to the Terminal window.
 touch eth-mainnet.yaml
 ```
 
+**Step 2. Edit YAML Configuration Settings**
+
 Next, open the YAML configuration file in an editor. Ensure that the changes have been saved.
+
+_<mark style="color:yellow;">**\[\[slm:] the instructions got deleted somehow during yesterday's changes with Alex. track down the info and get it updated and formatted]**</mark>_
 
 #### Non-production File Sync
 
