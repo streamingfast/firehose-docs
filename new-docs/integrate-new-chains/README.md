@@ -1,5 +1,7 @@
 # Integrate New Chains
 
+_<mark style="color:yellow;">**\[\[slm:] convert page to section title header in menu through the summary file per Alex.]**</mark>_
+
 _<mark style="color:yellow;">**\[\[slm:] content has not been updated.]**</mark>_
 
 This section covers what is needed for you to integrate Firehose into a new blockchain protocol, or blockchain node implementation, as to benefit from Firehose, Substreams and The Graph integration.

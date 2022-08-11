@@ -4,8 +4,6 @@ description: StreamingFast Firehose node instrumentation documentation
 
 # New Blockchains
 
-_<mark style="color:yellow;">**\[\[slm:] update subtitles, links, and address edits.]**</mark>_
-
 Firehose was designed to work with multiple blockchains beyond the existing implementations.
 
 The process of instrumenting a node is mandatory for using an unsupported blockchain with Firehose.
@@ -15,8 +13,6 @@ The Firehose-ACME starter application's codebase is the starting point for worki
 A node that has been instrumented producing data is consumed by Firehose is also required.&#x20;
 
 Close attention to detail is crucial when instrumenting nodes with new blockchains and working with custom Protocol Buffer schemas.
-
-_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line.]**</mark>_
 
 {% hint style="success" %}
 _Input will be needed for the more detailed aspects of instrumenting new blockchains._&#x20;

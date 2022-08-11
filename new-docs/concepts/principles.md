@@ -6,8 +6,6 @@ description: StreamingFast Firehose design principles
 
 # Design Principles
 
-_<mark style="color:yellow;">**\[\[slm:] update subtitles, links, and address edits.]**</mark>_
-
 The Firehose system was heavily inspired by large-scale data science machinery and other processes previously developed by the StreamingFast team.
 
 #### StreamingFast Firehose system "North Star"
