@@ -4,8 +4,6 @@ description: StreamingFast Firehose Starter setup documentation
 
 # Firehose Starter
 
-_<mark style="color:yellow;">**\[\[slm:] edits, and add links, subtitles, etc.]**</mark>_
-
 ### Firehose Starter Project&#x20;
 
 #### Firehose Starter in Detail
