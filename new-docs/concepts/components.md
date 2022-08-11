@@ -6,8 +6,6 @@ description: StreamingFast Firehose component documentation
 
 # Components
 
-_<mark style="color:yellow;">**\[\[slm:] this section and the associated sections need to be updated to reflect name changes for Mindreader and Deepmind. I'm still not 100% clear. -- per Alex.]**</mark>_
-
 ### Firehose Component Family
 
 #### Components by Name

@@ -18,6 +18,8 @@ Blockchain data flows from instrumented nodes to the gRPC server through the Fir
 
 Each Firehose component plays an important role as the blockchain data flows through it.
 
+_<mark style="color:yellow;">**\[\[slm:] fix graphic. Need help with this. Not sure how the dynamic graphic is going to get pulled into GitBook like it was in Hugo. There's no build process here really.]**</mark>_
+
 ![firehose](../../drawings/general\_architecture.png)
 
 #### Data Flow Component Relationship
