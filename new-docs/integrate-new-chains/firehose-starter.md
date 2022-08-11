@@ -16,7 +16,7 @@ The Firehose-ACME starter can even be run without a fully functioning blockchain
 
 #### Firehose Starter & Faux Data
 
-The starter consists of a basic templated Firehose system and a faux data provision application called the Dummy Blockchain, or dchain.
+The starter consists of a basic templated Firehose and a faux data provision application called the Dummy Blockchain, or dchain.
 
 Note, that the _Firehose-ACME_ starter _template is the main starting point for instrumenting new, unsupported blockchain nodes. Additional information is available in the_ [_Unsupported Blockchains_ ](new-blockchains.md)_documentation._
 
