@@ -6,33 +6,37 @@ description: StreamingFast Firehose node instrumentation documentation
 
 _<mark style="color:yellow;">**\[\[slm:] update subtitles, links, and address edits.]**</mark>_
 
+### Working with New Blockchains
+
+#### Firehose & New Blockchains in Detail
+
 Firehose was designed to work with multiple blockchains beyond the existing implementations.
 
-The process of instrumenting a node is mandatory for using an unsupported blockchain with Firehose.
+The process of instrumenting a node is mandatory for using a new blockchain with Firehose.
 
-The Firehose-ACME starter application's codebase is the starting point for working with unsupported blockchains.
+The [Firehose-ACME starter](firehose-starter.md) application's codebase is the starting point for working with unsupported blockchains.
 
-A node that has been instrumented producing data is consumed by Firehose is also required.&#x20;
+An instrumented node that is capable of producing data to be consumed by Firehose is required.&#x20;
+
+#### Careful Consideration & Design
 
 Close attention to detail is crucial when instrumenting nodes with new blockchains and working with custom Protocol Buffer schemas.
 
-_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line. the steps need to be tested as well.]**</mark>_
+_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line. the steps need to be tested as well.**</mark>_&#x20;
 
-{% hint style="success" %}
-_Input will be needed for the more detailed aspects of instrumenting new blockchains._&#x20;
+_<mark style="color:yellow;">**Input will be needed for the more detailed aspects of instrumenting new blockchains.]**</mark>_
 
-_The content below was pulled from the github repo. It could be useful here but needs to be updated._
-{% endhint %}
+### Firehose-ACME Starter Template
 
-#### Using `firehose-acme` as a template
+treamingFast provides the Firehose-ACME starter repository to act as a template that integrators can use to create the required chain-specific code.
 
-One of the main reason we provide a `firehose-acme` repository is to act as a template element that integrators can use to bootstrap creating the required Firehose chain specific code.
+_<mark style="color:yellow;">**\[\[slm:]The content below was pulled from the github repo. It could be useful here but needs to be updated.]**</mark>_
 
 We purposely used `Acme` (and also `acme` and `ACME`) throughout this repository so that integrators can simply copy everything and perform a global search/replace of this word and use their chain name instead.
 
 As well as this, there is a few files that requires a renaming. Would will find below the instructions to properly make the search/replace as well as the list of files that should be renamed.
 
-#### Cloning
+### Cloning
 
 First step is to clone again `firehose-acme` this time to a dedicated repository that will be the one of your chain:
 
@@ -58,7 +62,7 @@ git add -A .
 git commit -m "Initial commit"
 ```
 
-#### Renaming
+### Renaming
 
 Perform a **case-sensitive** search/replace for the following terms:
 
@@ -68,7 +72,7 @@ Perform a **case-sensitive** search/replace for the following terms:
 
 > Don't forget to change `<chain>` (and their variants) by the name of your exact chain like `aptos` so it would became `aptos`, `Aptos` and `APTOS` respectively.
 
-#### Files
+### Files
 
 ```
 git mv ./devel/fireacme ./devel/fireaptos
@@ -83,7 +87,7 @@ git mv ./tools/fireacme ./tools/fireaptos
 git mv ./types/pb/sf/acme ./types/pb/sf/aptos
 ```
 
-#### Re-generate Protobuf
+### Re-generate Protobuf
 
 Once you have performed the renamed of all 3 terms above and file renames, you should re-generate the Protobuf code:
 
@@ -94,7 +98,7 @@ cd firehose-<chain>
 
 > You will require `protoc`, `protoc-gen-go` and `protoc-gen-go-grpc`. The former can be installed following [https://grpc.io/docs/protoc-installation/](https://grpc.io/docs/protoc-installation/), the last two can be installed respectively with `go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.25.0` and `go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1.0`.
 
-#### Testing
+### Testing
 
 Once everything is done, normally tests should be all good and everything should compile properly:
 
@@ -102,7 +106,7 @@ Once everything is done, normally tests should be all good and everything should
 go test ./...
 ```
 
-#### Commit
+### Commit
 
 If everything is fine at that point, you are ready to commit everything and push
 
@@ -113,17 +117,13 @@ git add remote origin <url>
 git push
 ```
 
-#### Data Modeling&#x20;
+### Data Modeling&#x20;
 
 Designing the Google Protobuf Structures for your given blockchain is one of the most important steps in an integrators journey. The data structures needs to represent as precisely as possible the on chain data and concepts. By carefully crafting the Protobuf structure, the next steps will be a lot simpler. The data model need.
 
 As a reference, here is Ethereum's Protobuf Structure: https://github.com/streamingfast/proto-ethereum/blob/develop/sf/ethereum/codec/v1/codec.proto&#x20;
 
-_--- DEV NOTE ---_
-
-_Double-check everything below to make sure it's correct and belongs here. There's more than likely overlap with the information above._
-
-_--- /DEV NOTE ---_
+_<mark style="color:yellow;">**\[\[slm: Double-check everything below this comment to make sure it's correct and belongs here. There's more than likely overlap with the information above.]**</mark>_
 
 #### Integrate the target blockchain&#x20;
 
@@ -133,17 +133,13 @@ Modify `devel/standard/start.sh` to
 
 Run it with:&#x20;
 
-_--- DEV NOTE ---_
+_<mark style="color:yellow;">**\[\[slm:  Run it with what?]**</mark> _&#x20;
 
-_Run it with what?_&#x20;
-
-_--- /DEV NOTE ---_
-
-#### Define types
+### Define types
 
 Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in [specs for chain's protobuf model definitions](../integrate/protobuf-defs/)
 
-#### Modify the Ingestor's `Read()`
+### Modify the Ingestor's `Read()`
 
 Inside `codec`, is a file called `reader.go`. This file is the boundary between your process and the firehose's ingestion process.
 
@@ -151,17 +147,13 @@ Read the source of the `ConsoleReader` and make sure you understand how it works
 
 Do X, Y, Z
 
-_--- DEV NOTE ---_
+_<mark style="color:yellow;">**\[\[slm:  What does this mean? "Do, X, Y, Z??"]**</mark>_
 
-_What does this mean? "Do X, Y, Z"_
-
-_--- /DEV NOTE ---_
-
-#### Make sure data is produced
+### Make sure data is produced
 
 As you iterate, check that files are produced under `xyz` directory.
 
-#### Rename everything
+### Rename everything
 
 Pick two names, the long form and short form for your chain, following the [naming conventions](../integrate/names/).
 

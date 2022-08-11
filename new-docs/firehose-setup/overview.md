@@ -1,23 +1,11 @@
----
-description: StreamingFast Firehose setup overview
----
-
 # Overview
 
-### Firehose Setup Overview
+Setting up and integrating the Firehose system can be accomplished in the following ways.
 
-#### Setup Overview in Detail
+#### Use Firehose with a supported blockchain
 
-Setting up and integrating Firehose can be accomplished in the following ways.
+Alternatively, Firehose can be set up for blockchains that have already been instrumented by StreamingFast. Use this path if the target blockchain has already been decided upon and an instrumented codebase is available. StreamingFast currently supports Ethereum, NEAR, Solana, and Cosmos.
 
-### Use Firehose with a supported blockchain
+#### Set up Firehose for a new blockchain
 
-#### Firehose Supported Blockchains in Detail
-
-Firehose can be set up for blockchains that have already been instrumented by StreamingFast. Use this path if the target blockchain has already been decided upon and an instrumented codebase is available. StreamingFast currently supports Ethereum, NEAR, Solana, and Cosmos.
-
-### Set up Firehose for a new blockchain
-
-#### New Blockchains & Firehose
-
-New blockchains can also be instrumented to feed Firehose with the necessary data. The Firehose-ACME demo application, custom Google Protocol Buffs, and instrumenting a node are the steps required for using Firehose with new blockchains.
+New blockchains can also be instrumented to feed the Firehose system with the necessary data. The Firehose-ACME demo application, custom Google Protocol Buffs, and instrumenting a node are the steps required for an unsupported blockchain.
