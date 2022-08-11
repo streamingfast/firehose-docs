@@ -8,19 +8,21 @@ description: StreamingFast Firehose for Ethereum Setup
 
 #### StreamingFast Geth Setup in Detail
 
-StreamingFast's instrumented `Geth` version extracts raw blockchain data from Ethereum nodes. [`Geth`](https://github.com/ethereum/go-ethereum) is the official [Golang](https://go.dev/) implementation of the Ethereum Protocol.
+StreamingFast's instrumented Geth version extracts raw blockchain data from Ethereum nodes.&#x20;
+
+Note, Geth is the official [Golang](https://go.dev/) implementation of the Ethereum Protocol.
 
 ### Step 1. download StreamingFast Geth&#x20;
 
 #### Download Binary
 
-Using a web browser download the StreamingFast Geth binary. StreamingFast currently provides binaries for Linux and macOS.
+Using a web browser download the StreamingFast Geth binary. Download the latest Geth binary or the one with the corresponding Ethereum versioning to match existing node deployments.&#x20;
+
+Specific binaries for Binance Smart Chain (BSC) and Polygon (MATIC) are also provided. Be sure to download the corresponding version for existing node deployments.
+
+Binaries are available for both Linux and macOS.
 
 [https://github.com/streamingfast/go-ethereum/releases?q=geth](https://github.com/streamingfast/go-ethereum/releases?q=geth)
-
-_<mark style="color:yellow;">**\[\[slm:] add links to other binaries here, BSC was pulled in per Alex during the meeting.]**</mark>_
-
-[https://github.com/streamingfast/go-ethereum/releases?q=bsc+fh2](https://github.com/streamingfast/go-ethereum/releases?q=bsc+fh2) for BSC binaries
 
 ### Step 2. update Geth binary permissions
 
@@ -71,9 +73,13 @@ Full source code is available for the StreamingFast instrumented version of Geth
 
 #### Standard Node Documentation
 
-Installation instructions for the standard, non-instrumented version of Geth are available on the Ethereum website. Installing the standard version of Geth is not required to run Firehose. _The Ethereum documentation provides a deeper understanding of the blockchain and node operation in general._
+Installation instructions for the standard, non-instrumented version of Geth are available on the Ethereum website. Installing the standard version of Geth is not required to run Firehose.&#x20;
 
-__[_https://geth.ethereum.org/docs/install-and-build/installing-geth_](https://geth.ethereum.org/docs/install-and-build/installing-geth)__
+#### More Information
+
+_Note, the_ [_Ethereum documentation_](https://geth.ethereum.org/docs/install-and-build/installing-geth) _provides a deeper understanding of the blockchain and node operation in general._
+
+#### Next Steps
 
 The next step for completing the setup is to download and install StreamingFast sfeth.
 
@@ -95,7 +101,9 @@ Using a web browser download the StreamingFast sfeth archive relevant to the tar
 
 #### Extract Archive
 
-After sfeth has completed downloading issue the following command in the Terminal window to untar, or extract, the archive. Note, the file name for the archive must match the version that was downloaded.
+After sfeth has completed downloading issue the following command in the Terminal window to untar, or extract, the archive.&#x20;
+
+_Note, the file name for the archive must match the version that was downloaded._
 
 ```bash
 tar -xvzf sf-ethereum_0.9.0_linux_x86_64.tar.gz
@@ -130,7 +138,7 @@ sfeth version 0.10.2 (Commit f0a8987, Built 2022-08-09T12:43:08-07:00)
 
 #### Next steps
 
-At this point, both the StreamingFast instrumented version of Geth and sfeth have been successfully set up on the target computer.&#x20;
+At this point, both the StreamingFast sfeth and an instrumented version of Geth have been successfully set up on the target computer.&#x20;
 
 To complete the full Firehose setup and begin syncing the node with the Ethereum Mainnet specific configuration files still need to be edited.
 
