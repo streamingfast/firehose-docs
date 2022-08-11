@@ -10,13 +10,13 @@ description: StreamingFast Firehose design principles
 
 #### Design Principles in Detail
 
-The Firehose system was heavily inspired by large-scale data science machinery and other processes previously developed by the StreamingFast team.
+Firehose was heavily inspired by large-scale data science machinery and other processes previously developed by the StreamingFast team.
 
 ### StreamingFast Firehose system "North Star"
 
 #### Truths & Assumptions
 
-The Firehose system was designed with the following truths and assumptions taken into excruciatingly careful consideration.
+Firehose was designed with the following truths and assumptions taken into excruciatingly careful consideration.
 
 * Flat files provide more efficiency than live running CPU and RAM-consuming and intensive processes.
 * Fast iteration is preferred for data processes because data is inherently messy.
@@ -45,9 +45,9 @@ StreamingFast strives to create the shortest path available from the determinist
 
 #### Full Data Extraction
 
-The Firehose system achieves data completeness through the extraction of all available data from instrumented nodes.&#x20;
+Firehose achieves data completeness through the extraction of all available data from instrumented nodes.&#x20;
 
-Revisiting instrumented nodes is avoided by the Firehose system due to the complete, rich, verifiable data collected during the extraction process.
+Revisiting instrumented nodes is avoided by Firehose due to the complete, rich, verifiable data collected during the extraction process.
 
 #### Finite Data Tracking
 
@@ -110,11 +110,11 @@ StreamingFast encountered several peculiarities within many protocols during the
 
 Interpreting subtleties in bits of data, for things like the meaning of a reverted call in an Ethereum call stack, becomes impossible farther downstream.&#x20;
 
-The StreamingFast Firehose system provides complete node data through carefully considered and implemented model definitions created with Protocol Buffer schemas.&#x20;
+Firehose provides complete node data through carefully considered and implemented model definitions created with Protocol Buffer schemas.&#x20;
 
 #### Running Full Archive Nodes
 
-The Firehose system provides enough comprehensive data to conceptually boot and run a full archive node.
+Firehose provides enough comprehensive data to conceptually boot and run a full archive node.
 
 ### Pure Data, Files & Streams
 
