@@ -140,7 +140,7 @@ To complete the full Firehose setup and begin syncing the node with the Ethereum
 
 Firehose needs a home. This will be the main working directory for the Firehose application and files.
 
-### **Step 1. choose Firehose location on target computer**
+### **Step 1. choose location on target computer**
 
 #### Select Destination for Files
 
