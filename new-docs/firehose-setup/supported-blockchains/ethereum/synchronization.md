@@ -4,6 +4,8 @@ description: StreamingFast Firehose for Ethereum Synchronization documentation
 
 # Synchronization
 
+_<mark style="color:yellow;">**\[\[slm:] update subtitles, links, and refine content. Also, need to test more, check error at bottom of page. Need to resolve this and also provide documentation in case others run into the problem.]**</mark>_
+
 #### Sync eth-mainnet
 
 Launch `sfeth` to start indexing the chain.
@@ -259,7 +261,7 @@ These stats are from March 2022, but chains of similar density and similar age w
 
 `This section is incomplete.`
 
-#### Problems
+### Problems
 
 If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when run from the terminal.
 
@@ -271,3 +273,132 @@ xattr -d com.apple.quarantine geth_macos
 ```
 
 You'll only need to do this once.
+
+Problems
+
+If the following error is encountered...
+
+```bash
+2022-08-11T12:06:48.033-0700 (<n/a>) registering development exporters from environment variables
+2022-08-11T12:06:48.033-0700 (sfeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
+2022-08-11T12:06:48.033-0700 (sfeth) ulimit max open files before adjustment {"current_value": 2560}
+2022-08-11T12:06:48.033-0700 (sfeth) ulimit max open files after adjustment {"current_value": 1000000}
+2022-08-11T12:06:48.033-0700 (sfeth) sfeth binary started {"data_dir": "eth-data"}
+2022-08-11T12:06:48.033-0700 (sfeth) starting with config file 'eth-mainnet.yaml'
+2022-08-11T12:06:48.033-0700 (sfeth) launcher created
+2022-08-11T12:06:48.033-0700 (sfeth) launching applications: firehose,mindreader-node
+2022-08-11T12:06:48.033-0700 (sfeth) initialize application {"app": "mindreader-node"}
+2022-08-11T12:06:48.033-0700 (sfeth) creating application {"app": "firehose"}
+2022-08-11T12:06:48.033-0700 (sfeth) creating application {"app": "mindreader-node"}
+2022-08-11T12:06:48.034-0700 (mindreader) adding superviser shutdown to plugins {"plugin_name": "log plug func"}
+2022-08-11T12:06:48.034-0700 (mindreader) registered log plugin {"plugin count": 1}
+2022-08-11T12:06:48.034-0700 (mindreader) adding superviser shutdown to plugins {"plugin_name": "ToZapLogPlugin"}
+2022-08-11T12:06:48.034-0700 (mindreader) registered log plugin {"plugin count": 2}
+2022-08-11T12:06:48.034-0700 (mindreader) created geth superviser {"superviser": {"binary": "./geth_linux", "arguments": ["--networkid=1", "--datadir=/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/data", "--ipcpath=/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/ipc", "--port=30305", "--http", "--http.api=eth,net,web3", "--http.port=8547", "--http.addr=0.0.0.0", "--http.vhosts=*", "--firehose-deep-mind"], "data_dir": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/data", "ipc_file_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/ipc", "last_block_seen": 0, "enode_str": ""}}
+2022-08-11T12:06:48.034-0700 (mindreader) creating operator {"options": {"Bootstrapper":null,"EnableSupervisorMonitoring":true,"ShutdownDelay":0}}
+2022-08-11T12:06:48.034-0700 (mindreader) parsing backup configs {"configs": [], "factory_count": 0}
+2022-08-11T12:06:48.034-0700 (mindreader) backup config {"config": [], "backup_module_count": 0, "backup_schedule_count": 0}
+2022-08-11T12:06:48.034-0700 (mindreader) creating mindreader plugin {"archive_store_url": "file:///Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/one-blocks", "merge_archive_store_url": "file:///Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks", "oneblock_suffix": "default", "batch_mode": true, "merge_threshold_age": "2562047h47m16.854775807s", "working_directory": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/work", "start_block_num": 0, "stop_block_num": 0, "channel_capacity": 100, "with_head_block_update_func": true, "with_shutdown_func": true, "fail_on_non_continuous_blocks": false, "wait_upload_complete_on_shutdown": "30s"}
+2022-08-11T12:06:48.034-0700 (dstore) sanitized base path {"original_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/one-blocks", "sanitized_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/one-blocks"}
+2022-08-11T12:06:48.034-0700 (dstore) sanitized base path {"original_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks", "sanitized_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks"}
+2022-08-11T12:06:48.034-0700 (dstore) sanitized base path {"original_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/work/mergeable", "sanitized_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/work/mergeable"}
+2022-08-11T12:06:48.034-0700 (dstore) sanitized base path {"original_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/work/uploadable-merged", "sanitized_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/work/uploadable-merged"}
+2022-08-11T12:06:48.034-0700 (dstore) sanitized base path {"original_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/work/uploadable-oneblock", "sanitized_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/work/uploadable-oneblock"}
+2022-08-11T12:06:48.035-0700 (mindreader) creating new mindreader plugin
+2022-08-11T12:06:48.035-0700 (mindreader) adding superviser shutdown to plugins {"plugin_name": "MindReaderPlugin"}
+2022-08-11T12:06:48.035-0700 (mindreader) registered log plugin {"plugin count": 3}
+2022-08-11T12:06:48.035-0700 (mindreader) adding superviser shutdown to plugins {"plugin_name": "TrxPoolLogPlugin"}
+2022-08-11T12:06:48.035-0700 (mindreader) registered log plugin {"plugin count": 4}
+2022-08-11T12:06:48.035-0700 (sfeth) launching app {"app": "firehose"}
+2022-08-11T12:06:48.035-0700 (sfeth) launching app {"app": "mindreader-node"}
+2022-08-11T12:06:48.035-0700 (mindreader) launching nodeos mindreader {"config": {"ManagerAPIAddress":":13009","ConnectionWatchdog":false,"GRPCAddr":":13010"}}
+2022-08-11T12:06:48.035-0700 (mindreader) retrieved hostname from os {"hostname": "NSA-Lab-x01.local"}
+2022-08-11T12:06:48.035-0700 (firehose) running firehose {"config": {"BlockStoreURLs":["file:///Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks"],"IrreversibleBlocksIndexStoreURL":"","IrreversibleBlocksBundleSizes":[100000,10000,1000,100],"BlockStreamAddr":"","GRPCListenAddr":":13042","GRPCShutdownGracePeriod":1000000000,"RealtimeTolerance":120000000000}}
+2022-08-11T12:06:48.035-0700 (dstore) sanitized base path {"original_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks", "sanitized_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks"}
+2022-08-11T12:06:48.035-0700 (mindreader) starting grpc listener {"listen_addr": ":13010"}
+2022-08-11T12:06:48.035-0700 (firehose) creating gRPC server {"live_support": false}
+2022-08-11T12:06:48.035-0700 (firehose) registering grpc services
+2022-08-11T12:06:48.035-0700 (firehose) firehose is now ready to accept request
+2022-08-11T12:06:48.035-0700 (firehose) launching gRPC server {"listen_addr": ":13042"}
+2022-08-11T12:06:48.035-0700 (firehose) serving gRPC (over HTTP router) (plain-text) {"listen_addr": ":13042"}
+2022-08-11T12:06:48.035-0700 (mindreader) unable to execute get health request {"error": "Get \"http://:13009/healthz\": dial tcp :13009: connect: connection refused"}
+2022-08-11T12:06:48.035-0700 (sfeth) app status switching to warning {"app_id": "mindreader-node"}
+2022-08-11T12:06:49.036-0700 (mindreader) grpc server listener ready
+2022-08-11T12:06:49.036-0700 (mindreader) launching metrics and readinessManager
+2022-08-11T12:06:49.036-0700 (mindreader) launching operator
+2022-08-11T12:06:49.036-0700 (mindreader) launching operator HTTP server {"http_listen_addr": ":13009"}
+2022-08-11T12:06:49.037-0700 (mindreader) unable to execute get health request {"error": "Get \"http://:13009/healthz\": dial tcp :13009: connect: connection refused"}
+2022-08-11T12:06:49.037-0700 (mindreader) starting webserver {"http_addr": ":13009"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "GET", "path_template": "/v1/ping"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "GET", "path_template": "/healthz"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "GET", "path_template": "/v1/healthz"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "GET", "path_template": "/v1/server_id"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "GET", "path_template": "/v1/is_running"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "GET", "path_template": "/v1/start_command"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "POST", "path_template": "/v1/maintenance"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "POST", "path_template": "/v1/resume"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "POST", "path_template": "/v1/backup"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "POST", "path_template": "/v1/restore"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "GET", "path_template": "/v1/list_backups"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "POST", "path_template": "/v1/reload"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "POST", "path_template": "/v1/safely_reload"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "POST", "path_template": "/v1/safely_pause_production"}
+2022-08-11T12:06:49.037-0700 (mindreader) walked route methods {"methods": "POST", "path_template": "/v1/safely_resume_production"}
+2022-08-11T12:06:49.037-0700 (mindreader) operator ready to receive commands
+2022-08-11T12:06:49.037-0700 (mindreader) received operator command {"command": "start", "params": null}
+2022-08-11T12:06:49.037-0700 (mindreader) preparing for start
+2022-08-11T12:06:49.037-0700 (mindreader) preparing to start chain
+2022-08-11T12:06:49.037-0700 (mindreader) starting mindreader
+2022-08-11T12:06:49.037-0700 (mindreader) starting archiver
+2022-08-11T12:06:49.037-0700 (mindreader) starting one block uploader
+2022-08-11T12:06:49.037-0700 (mindreader) starting file uploader
+2022-08-11T12:06:49.037-0700 (mindreader) launching consume read flow {"capacity": 100}
+2022-08-11T12:06:49.037-0700 (mindreader) creating new command instance and launch read loop {"binary": "./geth_linux", "arguments": ["--networkid=1", "--datadir=/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/data", "--ipcpath=/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/mindreader/ipc", "--port=30305", "--http", "--http.api=eth,net,web3", "--http.port=8547", "--http.addr=0.0.0.0", "--http.vhosts=*", "--firehose-deep-mind"]}
+2022-08-11T12:06:49.038-0700 (mindreader) successfully start service
+2022-08-11T12:06:49.038-0700 (mindreader) operator ready to receive commands
+2022-08-11T12:06:49.038-0700 (mindreader) starting consume flow
+2022-08-11T12:06:49.038-0700 (codec) next {"read_type": 1}
+2022-08-11T12:06:49.038-0700 (mindreader) waiting to consume next block
+2022-08-11T12:06:49.047-0700 (mindreader) operator is terminating {"error": "instance \"geth\" stopped (exit code: -1), shutting down"}
+2022-08-11T12:06:49.047-0700 (mindreader) superviser is terminating
+2022-08-11T12:06:49.047-0700 (mindreader) supervisor received a stop request, terminating node process
+2022-08-11T12:06:49.047-0700 (mindreader) underlying process is not running, nothing to do
+2022-08-11T12:06:49.047-0700 (mindreader) shutting down plugins {"last_exit_code": -1}
+2022-08-11T12:06:49.047-0700 (mindreader) stopping plugin {"plugin_name": "log plug func"}
+2022-08-11T12:06:49.047-0700 (mindreader) stopping plugin {"plugin_name": "ToZapLogPlugin"}
+2022-08-11T12:06:49.047-0700 (mindreader) stopping plugin {"plugin_name": "MindReaderPlugin"}
+2022-08-11T12:06:49.047-0700 (mindreader) mindreader is stopping
+2022-08-11T12:06:49.048-0700 (mindreader) waiting until consume read flow (i.e. blocks) is actually done processing blocks...
+2022-08-11T12:06:49.047-0700 (mindreader) {"status": {"Cmd":"./geth_linux","PID":0,"Exit":-1,"Error":{"Op":"fork/exec","Path":"./geth_linux","Err":2},"StartTs":1660244809044772000,"StopTs":1660244809047377000,"Runtime":0,"Stdout":null,"Stderr":null}} command terminated with non-zero status, last log lines:
+<None>
+2022-08-11T12:06:49.048-0700 (codec) lines channel has been closed
+2022-08-11T12:06:49.048-0700 (mindreader) node process terminated {"buffer_empty": true}
+2022-08-11T12:06:49.048-0700 (mindreader) reached end of console reader stream, nothing more to do
+2022-08-11T12:06:49.048-0700 (mindreader) all blocks in channel were drained, exiting read flow
+2022-08-11T12:06:49.048-0700 (mindreader) archiver selector is terminating
+2022-08-11T12:06:49.048-0700 (mindreader) archiver selector is terminated
+2022-08-11T12:06:49.048-0700 (mindreader) archiver Terminate done
+2022-08-11T12:06:49.048-0700 (mindreader) consume read flow terminate
+2022-08-11T12:06:49.048-0700 (mindreader) stopping plugin {"plugin_name": "TrxPoolLogPlugin"}
+2022-08-11T12:06:49.048-0700 (mindreader) all plugins closed
+2022-08-11T12:06:49.048-0700 (mindreader) operator is waiting for superviser to shutdown {"error": "instance \"geth\" stopped (exit code: -1), shutting down"}
+2022-08-11T12:06:49.048-0700 (mindreader) operator done waiting for superviser to shutdown {"error": "instance \"geth\" stopped (exit code: -1), shutting down"}
+2022-08-11T12:06:49.048-0700 (mindreader) chain operator terminated shutting down mindreader app
+2022-08-11T12:06:49.048-0700 (mindreader) operator ready to receive commands
+2022-08-11T12:06:49.048-0700 (sfeth) 
+################################################################
+Fatal error in app mindreader-node:
+
+
+instance "geth" stopped (exit code: -1), shutting down
+################################################################
+2022-08-11T12:06:49.048-0700 (sfeth) application mindreader-node shutdown unexpectedly, quitting
+2022-08-11T12:06:49.048-0700 (sfeth) waiting for all apps termination...
+2022-08-11T12:06:49.048-0700 (sfeth) app terminated {"app_id": "mindreader-node"}
+2022-08-11T12:06:49.048-0700 (firehose) gracefully stopping the gRPC server (over HTTP router) {"timeout": "1s"}
+2022-08-11T12:06:49.050-0700 (firehose) gRPC server (over HTTP router) terminated gracefully
+2022-08-11T12:06:49.050-0700 (sfeth) app terminated {"app_id": "firehose"}
+2022-08-11T12:06:49.050-0700 (sfeth) all apps terminated gracefully
+Error: unable to launch: instance "geth" stopped (exit code: -1), shutting down
+2022-08-11T12:06:49.050-0700 (derr) dfuse {"error": "unable to launch: instance \"geth\" stopped (exit code: -1), shutting down"}
+```
