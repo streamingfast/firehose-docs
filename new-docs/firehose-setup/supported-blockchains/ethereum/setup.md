@@ -158,7 +158,7 @@ mkdir sf-firehose
 
 ### **Step 3. copy binary files into the sf-firehose directory**
 
-#### Copt Binaries to Working Directory
+#### Copy Binaries to Working Directory
 
 Configuration is the next step following the successful completion of the installation steps for StreamingFast Geth and sfeth.
 
