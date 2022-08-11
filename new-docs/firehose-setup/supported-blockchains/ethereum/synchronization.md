@@ -274,7 +274,7 @@ xattr -d com.apple.quarantine geth_macos
 
 You'll only need to do this once.
 
-Problems
+sfeth Startup Problems
 
 If the following error is encountered...
 
