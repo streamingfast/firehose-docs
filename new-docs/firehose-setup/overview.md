@@ -4,7 +4,7 @@ Setting up and integrating the Firehose system can be accomplished in the follow
 
 #### Use Firehose with a supported blockchain
 
-Alternatively, Firehose can be set up for blockchains that have already been instrumented by StreamingFast. Use this path if the target blockchain has already been decided upon and an instrumented codebase is available. StreamingFast currently supports Ethereum, NEAR, Solana, and Cosmos.
+Firehose can be set up for blockchains that have already been instrumented by StreamingFast. Use this path if the target blockchain has already been decided upon and an instrumented codebase is available. StreamingFast currently supports Ethereum, NEAR, Solana, and Cosmos.
 
 #### Set up Firehose for a new blockchain
 
