@@ -4,6 +4,8 @@ description: StreamingFast Firehose synchronization documentation for Ethereum
 
 # Ethereum
 
+_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line.]**</mark>_
+
 Setting up Firehose for Ethereum is a straightforward process that uses StreamingFast's pre-instrumented code solution.
 
 {% hint style="success" %}

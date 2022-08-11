@@ -4,6 +4,8 @@ description: StreamingFast Firehose for Ethereum Synchronization documentation
 
 # Synchronization
 
+_<mark style="color:yellow;">**\[\[slm:] update subtitles, links, and address edits.]**</mark>_
+
 #### Sync eth-mainnet
 
 Launch `sfeth` to start indexing the chain.

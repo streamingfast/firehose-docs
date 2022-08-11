@@ -1,8 +1,9 @@
 # Integrate New Chains
 
+_<mark style="color:yellow;">**\[\[slm:] content has not been updated.]**</mark>_
+
 This section covers what is needed for you to integrate Firehose into a new blockchain protocol, or blockchain node implementation, as to benefit from Firehose, Substreams and The Graph integration.
 
-See our demo implementation, which highlights a few key components of integration. `[LINK TO firehose-acme, if we have a page that introduces it, link there. Make sure to link to the repository as quickly as possible. These guys are extreme coders, they'll want to know the low-levels fast.]`
+Refer to the Firehose-ACME starter implementation, which highlights a few key components of integration.&#x20;
 
-INSERT SOMEWHERE IN THIS COOKBOOK: **Versioning**, between the node being instrumented, and the data produced. When to bump versions (the moment deterministic data will change).
-
+`[LINK TO firehose-acme, if we have a page that introduces it, link there. Make sure to link to the repository as quickly as possible.`` `<mark style="color:yellow;">`These guys are extreme coders, they'll want to know the low-levels fast.]`</mark>
