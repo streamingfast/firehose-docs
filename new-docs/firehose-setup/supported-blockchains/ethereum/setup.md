@@ -10,7 +10,7 @@ description: StreamingFast Firehose for Ethereum Setup
 
 StreamingFast's instrumented Geth version extracts raw blockchain data from Ethereum nodes.&#x20;
 
-Note, Geth is the official [Golang](https://go.dev/) implementation of the Ethereum Protocol.
+_Note, Geth is the official_ [_Golang_](https://go.dev/) _implementation of the Ethereum Protocol._
 
 ### Step 1. download StreamingFast Geth&#x20;
 
