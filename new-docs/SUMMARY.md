@@ -16,7 +16,6 @@
     * [Local deployment](firehose-setup/ethereum/local-deployment.md)
     * [Production deployment](firehose-setup/ethereum/production-deployment.md)
     * [Reprocessing history](firehose-setup/ethereum/reprocessing-history.md)
-    * [Setup](firehose-setup/supported-blockchains/ethereum/setup.md)
     * [Synchronization](firehose-setup/supported-blockchains/ethereum/synchronization.md)
   * [Cosmos](synchronization/cosmos.md)
 * [Integrate New Chains](integrate-new-chains/README.md)
