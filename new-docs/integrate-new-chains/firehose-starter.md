@@ -4,6 +4,8 @@ description: StreamingFast Firehose Demo setup documentation
 
 # Firehose Starter
 
+_<mark style="color:yellow;">**\[\[slm:] edits, and add links, subtitles, etc.]**</mark>_
+
 The Firehose-ACME starter is a quick and low-resource way to evaluate and better understand a real, live-running Firehose system.
 
 The Firehose-ACME starter can even be run without a fully functioning blockchain node.
