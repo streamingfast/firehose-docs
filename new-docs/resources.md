@@ -4,7 +4,7 @@ description: StreamingFast Firehose resources documentation
 
 # Reference
 
-_<mark style="color:yellow;">**\[\[slm:] convert page to section title header in menu through the summary file per Alex. Will need to come up with some kind of strategy to migrate this page's content.]**</mark>_
+_<mark style="color:yellow;">**\[\[slm:] convert page to section title header in menu through the summary file per Alex.]**</mark>_
 
 _<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line.]**</mark>_
 
