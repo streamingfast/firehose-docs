@@ -28,7 +28,7 @@ _<mark style="color:yellow;">**\[\[slm:] add links to other binaries here, BSC w
 
 After the download has been completed, open a Terminal window and navigate to the directory where it was saved.
 
-The permissions on the binary must be set to be executable on the target computer.
+The permissions on the binary file must be set to be executable for the desired user account on the target computer.
 
 ```bash
 chmod +x geth_linux
@@ -77,7 +77,7 @@ __[_https://geth.ethereum.org/docs/install-and-build/installing-geth_](https://g
 
 The next step for completing the setup is to download and install StreamingFast sfeth.
 
-## Install StreamingFast sfeth
+### Install StreamingFast sfeth
 
 #### StreamingFast sfeth Setup in Detail
 
@@ -91,7 +91,7 @@ Using a web browser download the StreamingFast sfeth archive relevant to the tar
 
 [https://github.com/streamingfast/sf-ethereum/releases/latest](https://github.com/streamingfast/sf-ethereum/releases/latest)
 
-### **Step 2. extract the sfeth archive**
+### **Step 2. extract sfeth archive and update permissions**
 
 #### Extract Archive
 
@@ -134,17 +134,23 @@ At this point, both the StreamingFast instrumented version of Geth and sfeth hav
 
 To complete the full Firehose setup and begin syncing the node with the Ethereum Mainnet specific configuration files still need to be edited.
 
-### StreamingFast sfeth binary configuration
+### Firehose Working Directory
 
-#### Configuration in Detail
+#### Working Directory in Detail
 
-Configuration is the next step following the successful completion of the installation steps for StreamingFast Geth and sfeth.
+Firehose needs a home. This will be the main working directory for the Firehose application and files.
 
 ### **Step 1. choose Firehose location on target computer**
 
 #### Select Destination for Files
 
 Using a Terminal window navigate to the location where the full StreamingFast Firehose system will be stored on the target computer.
+
+```
+cd ~; pwd // navigate to home directory
+```
+
+_Note, use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected._
 
 ### **Step 2. Create directory for Firehose**&#x20;
 
@@ -160,20 +166,20 @@ mkdir sf-firehose
 
 #### Copy Binaries to Working Directory
 
-Configuration is the next step following the successful completion of the installation steps for StreamingFast Geth and sfeth.
+Using the Terminal window copy the files downloaded in the previous steps to the newly created sf-firehose directory.
 
 ```bash
 cp <path-to-binary>/geth_linux ./sf-firehose/geth_linux
 cp <path-to-binary>/sfeth ./sf-firehose/sfeth
 ```
 
-Note, commands for the remaining steps use the newly created sf-firehose directory as the main, base working directory.
+_Note, commands for the remaining steps use the newly created sf-firehose directory as the main, base working directory._
 
-### **Step 4. create sfeth configuration file**
+_<mark style="color:yellow;">**\[\[slm:] continue updates and edits here]**</mark>_
 
-_<mark style="color:yellow;">**\[slm: continue editing and updates here. something happened yesterday and this is all out of flow now.]**</mark>_
+### **StreamingFast sfeth Configuration**
 
-#### Create Config File
+#### Step 1. Create Config File
 
 To create a new file quickly issue the following command to the Terminal window.
 
@@ -181,53 +187,14 @@ To create a new file quickly issue the following command to the Terminal window.
 touch eth-mainnet.yaml
 ```
 
-Next, open the YAML configuration file in an editor.&#x20;
+Next, open the YAML configuration file in an editor. Ensure that the changes have been saved.
 
-Using a Terminal window navigate to the location where the full StreamingFast Firehose system will be stored on the target computer.
+#### Non-production File Sync
 
 The configuration settings below will sync from Ethereum Mainnet, however, is not production-ready.&#x20;
-
-Ensure that the changes have been saved
-
-to produce merged-blocks without a Merger
-
-**Step 2. Create directory for Firehose**&#x20;
-
-Create a new directory in the location chosen in the previous setup. In the example, the name sf-firehose will be used.
-
-```
-mkdir sf-firehose
-```
-
-**Step 3. copy binary files into the sf-firehose directory**
-
-```bash
-cp <path-to-binary>/geth_linux ./sf-firehose/geth_linux
-cp <path-to-binary>/sfeth ./sf-firehose/sfeth
-```
-
-Note, commands for the remaining steps use the newly created sf-firehose directory as the main, base working directory.
-
-**Step 4. create sfeth configuration file**
-
-To create a new file quickly issue the following command to the Terminal window.
-
-```
-touch eth-mainnet.yaml
-```
-
-Next, open the YAML configuration file in an editor. Copy the configuration settings below into the new YAML file.
-
-Ensure that the changes have been saved.
-
-The configuration settings below will sync from Ethereum Mainnet, however, this setup is not production-ready.&#x20;
-
-\<!--- DEV NOTE --->
-
-Is there a command that can be run here to ensure this is working?
-
-\<!--- /DEV NOTE --->
 
 ```yaml
     mindreader-node-merge-and-store-directly: true
 ```
+
+_<mark style="color:yellow;">**\[\[slm:] Is there a command that can be run here to ensure this is working?]**</mark>_
