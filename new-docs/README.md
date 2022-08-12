@@ -4,6 +4,8 @@ description: Documentation home for StreamingFast Firehose
 
 # Home
 
+_<mark style="color:yellow;">**\[\[slm:] convert page to section title header in menu through the summary file per Alex. Will need to come up with some kind of strategy to migrate this page's content.]**</mark>_
+
 ### Welcome to Firehose&#x20;
 
 Welcome to the product documentation for StreamingFast Firehose technology.&#x20;
