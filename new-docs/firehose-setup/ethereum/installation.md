@@ -239,6 +239,19 @@ _Note, these settings are not production-ready._
 #### Synchronization in Detail
 
 Synchronization is the next step in the process for Ethereum Firehose setup. Additional details on [synchronization](../supported-blockchains/ethereum/synchronization.md) are provided in the following documentation.
+
+### Problems
+
+If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when run from the terminal.
+
+To fix the problem, remove the quarantine attribute on the file using the following command against the binary:
+
+```bash
+xattr -d com.apple.quarantine sfeth
+xattr -d com.apple.quarantine geth_macos
+```
+
+You'll only need to do this once.
 {% endtab %}
 
 {% tab title="Polygon" %}

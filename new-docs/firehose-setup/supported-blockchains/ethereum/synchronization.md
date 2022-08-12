@@ -263,17 +263,6 @@ These stats are from March 2022, but chains of similar density and similar age w
 
 ### Problems
 
-If you are on macOS you could see a warning saying the downloaded binaries are not signed, or the binaries could do nothing at all when run from the terminal.
-
-To fix the problem, remove the quarantine attribute on the file using the following command against the binary:
-
-```bash
-xattr -d com.apple.quarantine sfeth
-xattr -d com.apple.quarantine geth_macos
-```
-
-You'll only need to do this once.
-
 #### sfeth Startup Problems
 
 Ensure the target computer's operating system's version of Geth is used for the mindreader-node-path. If the incorrect version is referenced, the follow error will be displayed in the Terminal window.
