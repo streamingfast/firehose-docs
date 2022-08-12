@@ -53,7 +53,7 @@ Now, run the binary and check its version to ensure it was properly downloaded a
 A message similar to the following should be displayed in the Terminal window If everything is working correctly.
 
 ```bash
-INFO [08-08|14:36:21.188] Initializing deep mind 
+INFO [08-08|14:36:21.188] Initializing deep mind
 INFO [08-08|14:36:21.193] Deep mind initialized                    enabled=false sync_instrumentation_enabled=true mining_enabled=false block_progress_enabled=false compaction_disabled=false archive_blocks_to_keep=0 genesis_provenance="Geth Default"
 Geth
 Version: 1.10.21-fh2
@@ -238,7 +238,7 @@ _Note, these settings are not production-ready._
 
 #### Synchronization in Detail
 
-Synchronization is the next step in the process for Ethereum Firehose setup. Additional details on [synchronization](../supported-blockchains/ethereum/synchronization.md) are provided in the following documentation.
+Synchronization is the next step in the process for Ethereum Firehose setup. Additional details on [synchronization](./synchronization.md) are provided in the following documentation.
 
 ### Problems
 
