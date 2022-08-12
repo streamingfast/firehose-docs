@@ -26,5 +26,8 @@
   * [Schemas](references/protobuf-schemas.md)
   * [Repositories](references/repositories.md)
   * [Versioning](references/versioning.md)
+
+## Release Notes
+
 * [Release Notes](release-notes/README.md)
   * [Change Log](release-notes/change-log.md)
