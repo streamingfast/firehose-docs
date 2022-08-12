@@ -1,14 +1,24 @@
 # Table of contents
 
 * [Firehose](README.md)
+
+## Introduction
+
 * [Introduction](intro/README.md)
   * [Firehose Overview](intro/firehose-overview.md)
   * [Prerequisites](intro/prerequisites.md)
+
+
+## Concepts & Architeceture
+
 * [Concepts & Architecture](concepts/README.md)
   * [Components](concepts/components.md)
   * [Data Flow](concepts/data-flow.md)
   * [Data Storage](concepts/data-storage.md)
   * [Design Principles](concepts/design-principles.md)
+
+## Firehose Setup
+
 * [Firehose Setup](setup/README.md)
   * [Cosmos](setup/cosmos/README.md)
     * [Synchronization](setup/cosmos/synchronization.md)
@@ -18,9 +28,15 @@
     * [Production deployment](setup/ethereum/production-deployment.md)
     * [Reprocessing history](setup/ethereum/reprocessing-history.md)
     * [Synchronization](setup/ethereum/synchronization.md)
+
+## Integrate New Chains
+
 * [Integrate New Chains](integrate-new-chains/README.md)
   * [Firehose Starter](integrate-new-chains/firehose-starter.md)
   * [New Blockchains](integrate-new-chains/new-blockchains.md)
+
+## References
+
 * [References](references/README.md)
   * [Naming Conventions](references/naming-conventions.md)
   * [Schemas](references/protobuf-schemas.md)
