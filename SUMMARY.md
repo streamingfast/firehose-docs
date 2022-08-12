@@ -17,6 +17,7 @@
 
 ## Firehose Setup
 
+  * [Overview](setup/README.md)
   * [Ethereum](setup/ethereum/README.md)
     * [Installation](setup/ethereum/installation.md)
     * [Local deployment](setup/ethereum/local-deployment.md)
