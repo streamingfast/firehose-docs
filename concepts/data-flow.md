@@ -10,17 +10,15 @@ description: StreamingFast Firehose data flow documentation
 
 #### Data Flow in Detail
 
-The path and process of how data flows through the Firehose component family are important facets to understand when using the application.&#x20;
+The path and process of how data flows through the Firehose component family are important facets to understand when using the application.
 
-Blockchain data flows from instrumented nodes to the gRPC server through the Firehose [component family](components.md).&#x20;
+Blockchain data flows from instrumented nodes to the gRPC server through the Firehose [component family](components.md).
 
 #### Data Flows Through Components
 
 Each Firehose component plays an important role as the blockchain data flows through it.
 
-_<mark style="color:yellow;">**\[\[slm:] fix graphic. Need help with this. Not sure how the dynamic graphic is going to get pulled into GitBook like it was in Hugo. There's no build process here really.]**</mark>_
-
-![firehose](../images/general_architecture.png)
+![firehose](../images/general\_architecture.png)
 
 #### Data Flow Component Relationship
 
@@ -32,17 +30,17 @@ The StreamingFast Deepmind instrumentation feeds to Extractor components. The Ex
 
 * An instrumented version of the native blockchain node process streams pieces of block data in a custom StreamingFast text-based protocol.
 * Firehose Extractor components read data streams from instrumented blockchain nodes.
-* Extractor components will then write the data to persistent storage. The data is then broadcast to the rest of the components in the Firehose system.&#x20;
+* Extractor components will then write the data to persistent storage. The data is then broadcast to the rest of the components in the Firehose system.
 * The Relayer component reads block data provided by one or more Extractor components and provides a live data source for the other Firehose components.
 * The Merger component combines blocks created by Extractor components into batches of one hundred individually merged blocks. The merged blocks are stored in an object store or written to disk.
 * The Indexer component provides a targeted summary of the contents of each 100-blocks file that was created by the Merger component. The indexed 100-blocks files are tracked and cataloged in an index file created by the Indexer component.
 * The IndexProvider component reads index files created by the Indexer component and provides fast responses about the contents of block data for filtering purposes.
-* The Firehose gRPC server component receives blocks from either:&#x20;
+* The Firehose gRPC server component receives blocks from either:
   * a merged blocks file source.
   * live block data received through the Relayer component.
-  * an indexed file source created through the collaboration between the Indexer and IndexProvider components.&#x20;
+  * an indexed file source created through the collaboration between the Indexer and IndexProvider components.
 * The Firehose gRPC Server component then joins and returns the block data to its consumers.
-* _Tradeoffs and benefits are presented for how data is stored and how it flows from the instrumented blockchain nodes through the Firehose system._&#x20;
+* _Tradeoffs and benefits are presented for how data is stored and how it flows from the instrumented blockchain nodes through the Firehose system._
 
 ### Extractor Data Flow
 
@@ -50,19 +48,19 @@ The StreamingFast Deepmind instrumentation feeds to Extractor components. The Ex
 
 Firehose begins at the instrumentation conducted on nodes for targeted blockchains.
 
-The instrumentation itself is called StreamingFast Deepmind. Deepmind is an augmentation to the target blockchain node's source code. The augmentation is placed at the points where the critical block and transaction processing occurs.&#x20;
+The instrumentation itself is called StreamingFast Deepmind. Deepmind is an augmentation to the target blockchain node's source code. The augmentation is placed at the points where the critical block and transaction processing occurs.
 
 StreamingFast Deepmind instrumentation is currently available for Geth, OpenEthereum, Solana, and a few other blockchains.
 
 #### Deepmind Data Output
 
-StreamingFast Deepmind Instrumentation outputs small chunks of data using a simple text-based protocol over the operating system's standard output pipe.&#x20;
+StreamingFast Deepmind Instrumentation outputs small chunks of data using a simple text-based protocol over the operating system's standard output pipe.
 
-The StreamingFast simple text-based protocol provides simplicity, performance boosts, and reliability.&#x20;
+The StreamingFast simple text-based protocol provides simplicity, performance boosts, and reliability.
 
 #### Deepmind Data Messages
 
-The Deepmind Instrumentation works with block data event messages. The six types of  block data event messages include:
+The Deepmind Instrumentation works with block data event messages. The six types of block data event messages include:
 
 * `START BLOCK`
 * `START TRANSACTION`
@@ -99,19 +97,19 @@ DMLOG END_BLOCK 33 717 {"header":{"parentHash":"0x538473df2d1a762473cf9f8f6c69e6
 
 The block data event messages provided by the Deepmind instrumentation are read by one or more Extractor components.
 
-The Extractor components:&#x20;
+The Extractor components:
 
 * launch instrumented Deepmind processes.
 * connect to the operating system's standard output pipe.
-* read the block data event messages or, `DMLOG`, messages.&#x20;
+* read the block data event messages or, `DMLOG`, messages.
 
 #### Data Collection & Formation
 
-Extractor components also collect and organize the various smaller chunks of data.&#x20;
+Extractor components also collect and organize the various smaller chunks of data.
 
 Extractor components assemble state changes, calls, and transactions into a complete Firehose data block for a specific blockchain protocol.
 
-The fully assembled Firehose data block is a Protocol Buffer-based object generated from a custom StreamingFast protobuf definition.&#x20;
+The fully assembled Firehose data block is a Protocol Buffer-based object generated from a custom StreamingFast protobuf definition.
 
 #### Data Broadcast
 
@@ -141,7 +139,7 @@ The design of the Relayer component enables them to race to push data to consume
 
 #### Live Data Through Relayer
 
-The Relayer component can function as a live data source for blocks in the Firehose system.&#x20;
+The Relayer component can function as a live data source for blocks in the Firehose system.
 
 #### Relayer & Extractor Overlap
 
@@ -165,7 +163,7 @@ The blocks bundled by the Merger component become the file-based historical data
 
 #### Indexer Data Flow in Detail
 
-The Indexer component runs as a background process digesting merged block files.&#x20;
+The Indexer component runs as a background process digesting merged block files.
 
 #### Block Summary
 
@@ -175,7 +173,7 @@ The Indexer component consumes merged blocks files and provides a targeted summa
 
 Target summaries are created when incoming Firehose queries contain StreamingFast Transforms.
 
-Targeted summaries are variable in nature. &#x20;
+Targeted summaries are variable in nature.
 
 #### Transforms & Protocol Buffers
 
@@ -193,7 +191,7 @@ The IndexProvider component is not specific to any particular blockchain's data 
 
 #### IndexProvider & Transforms
 
-The IndexProvider component interprets Transforms in accordance with their Protocol Buffer definitions.&#x20;
+The IndexProvider component interprets Transforms in accordance with their Protocol Buffer definitions.
 
 #### Data Filtering
 
@@ -227,7 +225,7 @@ Firehose has the ability to resume from forked blocks because all forks are pres
 
 The gRPC component will filter block content through Transforms passed to the IndexProvider component. The Transforms are used as filter expressions to isolate specific data points in the block data.
 
-Transactions that do not match the filter criteria provided in Transforms are removed from the block and execution units are flagged as either matching or not matching.&#x20;
+Transactions that do not match the filter criteria provided in Transforms are removed from the block and execution units are flagged as either matching or not matching.
 
 Block metadata is always sent to guarantee sequentiality on the receiving end; with or without matching Transforms criteria.
 
@@ -241,9 +239,9 @@ The StreamingFast bstream package manages flows of blocks and forks in a blockch
 
 The bstream package is responsible for collaboration between all other Firehose components.
 
-The bstream package abstracts details surrounding files and block streaming from instrumented blockchain nodes.&#x20;
+The bstream package abstracts details surrounding files and block streaming from instrumented blockchain nodes.
 
-The bstream package presents an extremely powerful and simplified interface for dealing will all blockchain reorganizations.&#x20;
+The bstream package presents an extremely powerful and simplified interface for dealing will all blockchain reorganizations.
 
 #### bstream Design & Motivation
 
@@ -251,17 +249,17 @@ StreamingFast built, refined, and enhanced the bstream package over the period o
 
 #### bstream & ForkDB
 
-An extremely important element of proper blockchain linearity is the StreamingFast `ForkDB.` The `bstream` package utilizes the `ForkDB` data structure for data storage.&#x20;
+An extremely important element of proper blockchain linearity is the StreamingFast `ForkDB.` The `bstream` package utilizes the `ForkDB` data structure for data storage.
 
 #### ForkDB in Detail
 
-The `ForkDB` is a graph-based data structure that mimics the forking logic used by the native blockchain node.&#x20;
+The `ForkDB` is a graph-based data structure that mimics the forking logic used by the native blockchain node.
 
 `The ForkDB` receives all blocks and orders them based on the parent-child relationship defined by the chain. The ForkDB will keep around active forked branches and reorganizations that are occurring on-chain.
 
 #### ForkDB Events
 
-When a block branch becomes the longest block chain, the `ForkDB` will switch to it. The `ForkDB` will emit a series of events for proper handling of forks for example `new 1b`, `new 2b`, `undo 2b`, `new 2a`, `new 3a`, etc.&#x20;
+When a block branch becomes the longest block chain, the `ForkDB` will switch to it. The `ForkDB` will emit a series of events for proper handling of forks for example `new 1b`, `new 2b`, `undo 2b`, `new 2a`, `new 3a`, etc.
 
 #### Active Forks
 
@@ -281,19 +279,19 @@ Each event emitted by the ForkDB instance contains:
 
 The ForkDB cursor points to a specific position in the stream of events emitted by `ForkDB` and the blockchain itself.
 
-The ForkDB cursor contains information that is required to reconstruct an equivalent forked or canonical instance of the `ForkDB`.&#x20;
+The ForkDB cursor contains information that is required to reconstruct an equivalent forked or canonical instance of the `ForkDB`.
 
 #### Start & Stop Event Streaming
 
-The ForkDB is created in the correct branch, enabling the ability to perfectly resume the event streaming where the consumer last stopped.&#x20;
+The ForkDB is created in the correct branch, enabling the ability to perfectly resume the event streaming where the consumer last stopped.
 
 #### Chain-agnostic ForkDB
 
-The `bstream` library is chain-agnostic, and is only concerned about the concept of a `Block`.&#x20;
+The `bstream` library is chain-agnostic, and is only concerned about the concept of a `Block`.
 
 #### bstream Metadata
 
-The `bstream` library contains the minimally required metadata to maintain the consistency of the chain.&#x20;
+The `bstream` library contains the minimally required metadata to maintain the consistency of the chain.
 
 #### Block & Protocol Buffers
 
@@ -301,4 +299,4 @@ The `bstream` library contains the minimally required metadata to maintain the c
 
 #### Data Storage in Detail
 
-Understanding the storage mechanisms and methodologies used for data in the Firehose system is another important topic. Additional details on Firehose [data storage](data-storage.md) are provided in the documentation.  &#x20;
+Understanding the storage mechanisms and methodologies used for data in the Firehose system is another important topic. Additional details on Firehose [data storage](data-storage.md) are provided in the documentation.
