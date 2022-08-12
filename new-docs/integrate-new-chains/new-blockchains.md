@@ -28,7 +28,7 @@ _<mark style="color:yellow;">**Input will be needed for the more detailed aspect
 
 ### Firehose-ACME Starter Template
 
-treamingFast provides the Firehose-ACME starter repository to act as a template that integrators can use to create the required chain-specific code.
+StreamingFast provides the Firehose-ACME starter repository to act as a template that integrators can use to create the required chain-specific code.
 
 _<mark style="color:yellow;">**\[\[slm:]The content below was pulled from the github repo. It could be useful here but needs to be updated.]**</mark>_
 
