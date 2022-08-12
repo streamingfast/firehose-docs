@@ -1,28 +1,36 @@
 # Table of contents
 
-* [Home](README.md)
-  * [Firehose Overview](\_index/firehose-overview.md)
-  * [Prerequisites](\_index/prerequisites.md)
-* [Concepts & Architecture](concepts/README.md)
-  * [Overview](concepts/\_index.md)
-  * [Components](concepts/components.md)
-  * [Data Flow](concepts/data-flow.md)
-  * [Data Storage](concepts/data-storage.md)
-  * [Design Principles](concepts/principles.md)
-* [Firehose Setup](integrate/firehose-setup.md)
-  * [Overview](firehose-setup/overview.md)
-  * [Ethereum](firehose-setup/supported-blockchains/ethereum/README.md)
-    * [Installation](firehose-setup/ethereum/installation.md)
-    * [Local deployment](firehose-setup/ethereum/local-deployment.md)
-    * [Production deployment](firehose-setup/ethereum/production-deployment.md)
-    * [Reprocessing history](firehose-setup/ethereum/reprocessing-history.md)
-    * [Synchronization](firehose-setup/supported-blockchains/ethereum/synchronization.md)
-  * [Cosmos](synchronization/cosmos.md)
-* [Integrate New Chains](integrate-new-chains/README.md)
-  * [Firehose Starter](integrate-new-chains/firehose-starter.md)
-  * [New Blockchains](integrate-new-chains/new-blockchains.md)
-* [Reference](resources.md)
-  * [Schemas](reference/schemas.md)
-  * [Repositories](reference/repositories.md)
-  * [Versioning](reference/versioning.md)
-  * [Naming Conventions](reference/naming-conventions.md)
+* [Firehose Overview](\_index/firehose-overview.md)
+* [Prerequisites](\_index/prerequisites.md)
+
+## Concepts & Architecture
+
+* [Overview](concepts/\_index.md)
+* [Components](concepts/components.md)
+* [Data Flow](concepts/data-flow.md)
+* [Data Storage](concepts/data-storage.md)
+* [Design Principles](concepts/principles.md)
+
+## Firehose Setup
+
+* [Overview](firehose-setup/overview.md)
+* [Ethereum](firehose-setup/supported-blockchains/ethereum/README.md)
+  * [Installation](firehose-setup/ethereum/installation.md)
+  * [Local deployment](firehose-setup/ethereum/local-deployment.md)
+  * [Production deployment](firehose-setup/ethereum/production-deployment.md)
+  * [Reprocessing history](firehose-setup/ethereum/reprocessing-history.md)
+  * [Synchronization](firehose-setup/supported-blockchains/ethereum/synchronization.md)
+* [Cosmos](synchronization/cosmos.md)
+
+## Integrater New Chains
+
+* [Firehose Starter](integrate-new-chains/firehose-starter.md)
+* [New Blockchains](integrate-new-chains/new-blockchains.md)
+
+## References
+
+* [Naming Conventions](reference/naming-conventions.md)
+* [Schemas](reference/schemas.md)
+* [Repositories](reference/repositories.md)
+* [Versioning](reference/versioning.md)
+
