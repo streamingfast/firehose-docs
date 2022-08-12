@@ -1,27 +1,28 @@
 # Table of contents
 
+## Home
 
-* [Firehose Overview](\_index/firehose-overview.md)
-* [Prerequisites](\_index/prerequisites.md)
+* [Firehose Overview](firehose-overview.md)
+* [Prerequisites](prerequisites.md)
 
 ## Concepts & Architecture
 
-* [Overview](concepts/\_index.md)
+* [Overview](concepts/README.md)
 * [Components](concepts/components.md)
 * [Data Flow](concepts/data-flow.md)
 * [Data Storage](concepts/data-storage.md)
-* [Design Principles](concepts/principles.md)
+* [Design Principles](concepts/design-principles.md)
 
 ## Firehose Setup
 
-* [Overview](firehose-setup/overview.md)
-* [Ethereum](firehose-setup/supported-blockchains/ethereum/README.md)
-  * [Installation](firehose-setup/ethereum/installation.md)
-  * [Local deployment](firehose-setup/ethereum/local-deployment.md)
-  * [Production deployment](firehose-setup/ethereum/production-deployment.md)
-  * [Reprocessing history](firehose-setup/ethereum/reprocessing-history.md)
-  * [Synchronization](firehose-setup/supported-blockchains/ethereum/synchronization.md)
-* [Cosmos](synchronization/cosmos.md)
+* [Overview](setup/README.md)
+* [Ethereum](setup/ethereum/README.md)
+  * [Installation](setup/ethereum/installation.md)
+  * [Local deployment](setup/ethereum/local-deployment.md)
+  * [Production deployment](setup/ethereum/production-deployment.md)
+  * [Reprocessing history](setup/ethereum/reprocessing-history.md)
+  * [Synchronization](setup/ethereum/synchronization.md)
+* [Cosmos](setup/cosmos/README.md)
 
 ## Integrate New Chains
 
@@ -30,7 +31,7 @@
 
 ## References
 
-* [Naming Conventions](reference/naming-conventions.md)
-* [Schemas](reference/schemas.md)
-* [Repositories](reference/repositories.md)
-* [Versioning](reference/versioning.md)
+* [Naming Conventions](references/naming-conventions.md)
+* [Schemas](references/protobuf-schemas.md)
+* [Repositories](references/repositories.md)
+* [Versioning](references/versioning.md)
