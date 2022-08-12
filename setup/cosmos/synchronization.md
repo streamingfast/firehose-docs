@@ -2,7 +2,7 @@
 description: StreamingFast Firehose synchronization documentation for Cosmos
 ---
 
-# Cosmos
+# Synchronization
 
 Below, we'll show you how to use [Firehose](../../operate/concepts/) to sync and stream Cosmos Chains.
 
