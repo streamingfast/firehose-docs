@@ -19,15 +19,14 @@
 
 ## Firehose Setup
 
-* [Firehose Setup](setup/README.md)
-  * [Cosmos](setup/cosmos/README.md)
-    * [Synchronization](setup/cosmos/synchronization.md)
   * [Ethereum](setup/ethereum/README.md)
     * [Installation](setup/ethereum/installation.md)
     * [Local deployment](setup/ethereum/local-deployment.md)
     * [Production deployment](setup/ethereum/production-deployment.md)
     * [Reprocessing history](setup/ethereum/reprocessing-history.md)
     * [Synchronization](setup/ethereum/synchronization.md)
+  * [Cosmos](setup/cosmos/README.md)
+    * [Synchronization](setup/cosmos/synchronization.md)
 
 ## Integrate New Chains
 
