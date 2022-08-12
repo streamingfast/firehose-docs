@@ -4,7 +4,7 @@ description: Documentation home for StreamingFast Firehose
 
 # Home
 
-### Welcome to Firehose&#x20;
+### Welcome to Firehose Documentation
 
 Welcome to the product documentation for StreamingFast Firehose technology.&#x20;
 
