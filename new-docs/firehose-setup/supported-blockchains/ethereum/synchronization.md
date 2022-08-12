@@ -274,9 +274,9 @@ xattr -d com.apple.quarantine geth_macos
 
 You'll only need to do this once.
 
-sfeth Startup Problems
+#### sfeth Startup Problems
 
-If the following error is encountered...
+Ensure the target computer's operating system's version of Geth is used for the mindreader-node-path. If the incorrect version is referenced, the follow error will be displayed in the Terminal window.
 
 ```bash
 2022-08-11T12:06:48.033-0700 (<n/a>) registering development exporters from environment variables
