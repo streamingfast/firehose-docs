@@ -1,78 +1,26 @@
-# Firehose Documentation
+---
+description: Documentation home for StreamingFast Firehose
+---
 
-We welcome contributions to improve the documentation. Simply open a pull request to start collaborating!
+# Home
 
-## Requirements
+### Welcome to Firehose&#x20;
 
-- Hugo **Extended** (with SCSS support), version 0.58.3 or higher
-- Install from source (with SCSS support) with:
+Welcome to the product documentation for StreamingFast Firehose technology.&#x20;
 
-```
-git clone https://github.com/gohugoio/hugo.git
-cd hugo
-go install -v --tags extended
-```
+This page serves as the primary entry point to the Firehose product documentation. Please submit a PR through GitHub with problems encountered in the documentation.
 
-## Development
+If you're new to Firehose, the[ Firehose Overview](\_index/firehose-overview.md) is the perfect place to start.&#x20;
 
-To start the hugo server, run this command:
+If you already understand the core Firehose [concepts and architecture](concepts/) please feel free to access the blockchain-specific documentation from the menu in [Firehose Setup](integrate/firehose-setup.md).&#x20;
 
-```sh
-hugo serve
-```
+The official GitHub repository for Firehose can be found in the official Github repository. [https://github.com/streamingfast/firehose](https://github.com/streamingfast/firehose)
 
-## Content Structure
+### Intended Audience&#x20;
 
-All content can be found in the `/content` directory. The structure of the website is generated automatically based on the structure of that directory.
+This documentation exists to help the following audiences learn about and use Firehose.
 
-## Style guide
-
-### Links
-
-- [1.1](#types--primitives) **external**: When you insert an external link use the `external-link` shortcode
-
-  ```markdown
-  {{< external-link href="https://app.dfuse.io" title="dfuseio" >}}
-  {{< external-link href="https://app.dfuse.io">}}
-  ```
-
-- [1.2](#types--primitives) **internal references**: Please put all _internal references_ as _full paths_, for greppability and refactoring.
-
-### Example code
-
-Use the following begin and end tags to indicate code sections that need to be referenced:
-
-```javascript
-// CODE:BEGIN:quickstarts_javascript_node_eos_section1
-function() {
-  var some = "code"
-}
-// CODE:END:quickstarts_javascript_node_eos_section1
-```
-
-Section names need to follow the path of the file from project root.
-For example the example snippet is from the file:
-
-```markdown
-├── quickstarts
-│   └── javascript
-│       └── node
-│           └── index.eos.js
-├── guides
-└── ...
-```
-
-When hugo builds the site, the code sections are extracted and stored in the `data` folder in project root.
-Example code can then be referenced with the following shortcode:
-```go
-{{< code-section "quickstarts_javascript_node_eos_section1" >}}
-```
-
-## Lexicon guide
-
-- web application
-- website
-- dfuse
-- real-time
-- GraphQL
-- API
+* Software Developers&#x20;
+* System Administrators
+* DevOps
+* Blockchain Node Operators

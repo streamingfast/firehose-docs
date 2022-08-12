@@ -1,5 +1,0 @@
-{{ $title :=  .Get "title" }}
-{{ $audience := .Get "protocol" }}
-{{ $release :=  .Get "release" }}
-
-{{ partial "section-title" (dict "Title" $title "Protocol" $audience "Release" $release) . }}
