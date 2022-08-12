@@ -25,3 +25,4 @@
   * [Schemas](reference/schemas.md)
   * [Repositories](reference/repositories.md)
   * [Versioning](reference/versioning.md)
+  * [Naming Conventions](reference/naming-conventions.md)

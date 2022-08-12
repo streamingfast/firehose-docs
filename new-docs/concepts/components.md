@@ -12,7 +12,7 @@ _<mark style="color:yellow;">**\[\[slm:] this section and the associated section
 
 #### Components by Name
 
-The Firehose system is comprised of several key components including the Deepmind-enabled Blockchain Node, the [Mindreader](components.md#mindreader), the [Merger](components.md#merger), the [Relayer](components.md#relayer), and the [Firehose gRPC Server](components.md#firehose-grpc-server).&#x20;
+The Firehose system is comprised of several key components including the Deepmind-enabled Blockchain Node, the [Extractor](components.md#mindreader), the [Merger](components.md#merger), the [Relayer](components.md#relayer), and the [Firehose gRPC Server](components.md#firehose-grpc-server).&#x20;
 
 #### Component Relationships
 
@@ -20,11 +20,11 @@ The Firehose components work together in symphony to provide blockchain data fro
 
 Understanding the Firehose components individually is helpful for fully comprehending the overall system and should aid with the setup and operation of the application.
 
-### Mindreader
+### Extractor
 
-#### Mindreader in Detail
+#### Extractor in Detail
 
-The Mindreader component is responsible for extracting data from instrumented blockchain nodes.
+The Extractor component is responsible for extracting data from instrumented blockchain nodes.
 
 Firehose's Mindreader component utilizes the StreamingFast [node-manager](https://github.com/streamingfast/node-manager) library to run a blockchain node instance as a sub-process.&#x20;
 
@@ -78,7 +78,7 @@ The Merger component produces what are referred to as "100-blocks files." The Me
 
 #### One-block Storage
 
-The Merger component creates a one-block object store to produce the 100-blocks files.
+The Merger component reads the one-block object store to produce the 100-blocks files.
 
 #### Forks
 
