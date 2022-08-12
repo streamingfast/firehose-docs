@@ -12,7 +12,7 @@ This page serves as the primary entry point to the Firehose product documentatio
 
 If you're new to Firehose, the[ Firehose Overview](firehose-overview.md) is the perfect place to start.&#x20;
 
-If you already understand the core Firehose [concepts and architecture](../concepts/) please feel free to access the blockchain-specific documentation from the menu in [Firehose Setup](../integrate/firehose-setup.md).&#x20;
+If you already understand the core Firehose [concepts and architecture](broken-reference) please feel free to access the blockchain-specific documentation from the menu in [Firehose Setup](../setup/).&#x20;
 
 The official GitHub repository for Firehose can be found in the official Github repository. [https://github.com/streamingfast/firehose](https://github.com/streamingfast/firehose)
 
@@ -76,11 +76,11 @@ _**\<!-- INSERT\_TOC /-->**_
 
 #### Getting Started
 
-To get started with Firehose the first step is to learn about its core [concepts and technical architecture](../concepts/).&#x20;
+To get started with Firehose the first step is to learn about its core [concepts and technical architecture](broken-reference).&#x20;
 
 #### Existing Firehose Users
 
-Experienced node operators can get up and running by using one of the pre-instrumented blockchain node codebases provided by StreamingFast. Look in the [Firehose Setup ](../integrate/firehose-setup.md)section of the Firehose documentation for further information.
+Experienced node operators can get up and running by using one of the pre-instrumented blockchain node codebases provided by StreamingFast. Look in the [Firehose Setup ](broken-reference)section of the Firehose documentation for further information.
 
 #### Custom Firehose Setups & New Chains
 
