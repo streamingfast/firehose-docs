@@ -29,5 +29,4 @@
 
 ## Release Notes
 
-* [Release Notes](release-notes/README.md)
-  * [Change Log](release-notes/change-log.md)
+* [Change Log](release-notes/change-log.md)
