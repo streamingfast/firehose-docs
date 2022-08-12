@@ -1,5 +1,6 @@
 # Table of contents
 
+## About Firehose
 
 * [Firehose Overview](\_index/firehose-overview.md)
 * [Prerequisites](\_index/prerequisites.md)
