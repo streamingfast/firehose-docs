@@ -21,11 +21,13 @@
 * [Integrate New Chains](integrate-new-chains/README.md)
   * [Firehose Starter](integrate-new-chains/firehose-starter.md)
   * [New Blockchains](integrate-new-chains/new-blockchains.md)
-* [References](references/README.md)
-  * [Naming Conventions](references/naming-conventions.md)
-  * [Schemas](references/protobuf-schemas.md)
-  * [Repositories](references/repositories.md)
-  * [Versioning](references/versioning.md)
+
+## References
+
+* [Naming Conventions](references/naming-conventions.md)
+* [Schemas](references/protobuf-schemas.md)
+* [Repositories](references/repositories.md)
+* [Versioning](references/versioning.md)
 
 ## Release Notes
 
