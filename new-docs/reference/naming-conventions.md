@@ -29,10 +29,13 @@ This section defines what is expected of a conventional Firehose implementation.
 
 
 
-\[Move this to the rest of the section]
+## Changes to prior conventions
 
+The `reader` component has historically been known as the `mindreader`, with its twist on the `deepmind` instrumentation the StreamingFast stack had.
 
+Going forward:Historically, the `mindreader` was the component
 
-* The Reader component (as known in the docs):
-  * component name for reading the `FIRE` output: `reader` (`extractor`, `ingestor`, `mindreader` ?)
-  * flags for that component: `--reader-node-config-1-2-3`, alongside ex: `--peering-node-config123` and `--miner-node-config123`
+* This component is to be known as the Reader in the documentation.
+* The name of the _app_ within the `fireacme` binary is `reader` (instead of `mindreader` or `extractor` or `ingestor` as it has been in some places).
+* Flags for that components would follow the convention of the different types of nodes handled by the `fireacme` binary: `--reader-node-config-1-2-3`, alongside ex: `--peering-node-config123` and `--miner-node-config123`
+* You can expect your pods to be named `reader` instead of `mindreader` here and there.
