@@ -4,15 +4,17 @@ description: StreamingFast Firehose for Ethereum Synchronization documentation
 
 # Synchronization
 
-_<mark style="color:yellow;">**\[\[slm:] update subtitles, links, and refine content. Also, need to test more, check error at bottom of page. Need to resolve this and also provide documentation in case others run into the problem.]**</mark>_
+_<mark style="color:yellow;">**\[\[slm:] add h3 subtitles and links. edit and refine content pulled from legacy docs. need to resolve the error running the first command first. see below for additional information.]**</mark>_
 
-#### Sync eth-mainnet
+### Sync eth-mainnet
 
 Launch `sfeth` to start indexing the chain.
 
 ```bash
 ./sfeth -c eth-mainnet.yaml start
 ```
+
+_<mark style="color:yellow;">**\[\[slm: the command above is causing the error posted at the bottom of this page. i can't get it working. not sure how to proceed for this content.]**</mark>_&#x20;
 
 You should start seeing logs similar to this:
 
@@ -120,7 +122,7 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 ...
 ```
 
-#### Overview and Explanation
+### Overview and Explanation
 
 The `mindreader-node` is a process that runs and manages the blockchain node `Geth`. It consumes the blockchain data that is extracted from our instrumented `Geth` node. The instrumented `Geth` node outputs individual block data.
 
@@ -144,7 +146,7 @@ Finally, we have built tools that allow you to introspect the block files:
 ./sfeth tools print one-block --store ./eth-data/storage/one-blocks 10000
 ```
 
-#### Launch the Firehose
+### Launch the Firehose
 
 Let's pick up where we left off, assuming we're no longer syncing eth-mainnet:
 
@@ -223,7 +225,7 @@ You should see block streaming. Like so
 }
 ```
 
-#### What's next
+### What's next
 
 The target computer is now successfully streaming ETH block data from mainnet. Congratulations!
 
@@ -231,13 +233,13 @@ Full searchability and discoverability of Ethereum and ERC20 networks have now b
 
 Don't forget that StreamingFast also provides pre-instrumented and ready-to-go solutions for several other blockchains.
 
-#### System Requirements
+### System Requirements
 
 The Firehose stack is extremely elastic, and supports handling networks of varied sizes and shapes. It is also heavy on data, so **make sure you have a good understanding** of the different data stores, artifacts, and databases required to run the Firehose stack.
 
 The deployment efforts will be proportional to the size of history, and the density of the chain at hand.
 
-#### Network shapes
+### Network shapes
 
 This document outlines requirements for different shapes of networks
 
