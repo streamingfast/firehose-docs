@@ -32,12 +32,12 @@
 * [Firehose Starter](integrate-new-chains/firehose-starter.md)
 * [New Blockchains](integrate-new-chains/new-blockchains.md)
 
-## References
+## Reference
 
-* [Naming Conventions](references/naming-conventions.md)
-* [Schemas](references/protobuf-schemas.md)
-* [Repositories](references/repositories.md)
-* [Versioning](references/versioning.md)
+* [Naming Conventions](reference/naming-conventions.md)
+* [Schemas](reference/protobuf-schemas.md)
+* [Repositories](reference/repositories.md)
+* [Versioning](reference/versioning.md)
 
 ## Release Notes
 
