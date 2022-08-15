@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose template setup documentation
+description: StreamingFast Firehose template documentation
 ---
 
 # Firehose Template
@@ -30,17 +30,15 @@ Create a new directory in the chosen location and name it something like "SFFire
 
 Open a new Terminal window. Navigate to the destination on the target computer where the Firehose files will be stored.
 
-```
-cd /Users/<User Account>/Desktop/ 
-// Just an example, choose a directory 
-// on the target computer
+```shell
+cd /Users/<User Account>/Desktop/ s
 ```
 
 Create the new directory and navigate into it.&#x20;
 
 The pwd command will print the full path to the new directory to the Terminal. This will be the working directory for the remaining steps in the installation process.
 
-```
+```shell
 mkdir SFFirehose; cd SFFirehose; pwd
 ```
 
@@ -48,7 +46,7 @@ mkdir SFFirehose; cd SFFirehose; pwd
 
 Next, clone the Firehose-ACME template into the SFFirehose directory created in step one.
 
-```
+```shell
 git clone git@github.com:streamingfast/firehose-acme
 ```
 
@@ -56,7 +54,7 @@ git clone git@github.com:streamingfast/firehose-acme
 
 Run the installation process for the Firehose-ACME starter.
 
-```
+```shell
 go install -v ./cmd/fireacme
 ```
 
@@ -66,19 +64,19 @@ The standard default Go binary directory is `~/go/bin`.&#x20;
 
 The GOPATH can be checked by issuing the echo command followed by the system variable preceded by a dollar sign.
 
-```
+```shell
 echo $GOPATH
 ```
 
 To ensure the Firehose-ACME binary is executable on the command line through the shell run the binary and pass the version flag.&#x20;
 
-```
+```shell
 fireacme --version
 ```
 
 If everything has been set up correctly the version will be printed to the Terminal window.
 
-```
+```shell
 fireacme version dev (Built 2022-08-05T15:36:44-07:00) 
 ```
 
@@ -98,13 +96,13 @@ The Dummy Blockchain should be started and allowed to run for at least a few min
 
 Using a Terminal window navigate to the directory that Firehose was downloaded and set up within. The path will look something similar to the following.
 
-```
+```shell
 /Users//Desktop/<User Account>/SFFirehose/
 ```
 
 Next, navigate into the directory named "standard", inside of the directory named "devel", under the main firehose-acme directory.
 
-```
+```shell
 cd /Users//Desktop/<User Account>/SFFirehose/standard/devel
 ```
 
@@ -114,7 +112,7 @@ The full path into the dchain directory must be used. The path needs to be in qu
 
 Example path:
 
-```
+```shell
 extractor-node-path: "/Users/<User Account>/Desktop/SFFireshose/dummy-blockchain/dchain"
 ```
 
@@ -128,7 +126,7 @@ The shell script that starts the Firehose-ACME template is located inside the de
 
 Issue the following command in the Terminal window to start the Firehose-ACME template.
 
-```
+```shell
 ./start.sh
 ```
 
@@ -136,7 +134,7 @@ To stop the Firehose-ACME template at any time press down on the Control key and
 
 If all of the configuration changes were made correctly, all system paths have been set correctly and the Dummy Blockchain was installed and set up correctly something similar to the following will be printed to the Terminal window.
 
-```
+```shell
 2022-08-03T11:22:30.744-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
 2022-08-03T11:22:30.750-0700 INFO (fireacme) launching applications: extractor-node,firehose,merger,relayer
 start --store-dir=/Users/seanmoore-mpb/Desktop/dfuse/integrate/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
@@ -163,13 +161,13 @@ The next steps will be determined by the end goals of any Firehose user. Existin
 
 Ensure there is a space between the colon after the extractor-node-path field and the quote that starts the path to the dchain binary on the target computer. Notice the missing space in the example directly below.
 
-```
+```shell
 extractor-node-path:"/   
 ```
 
 The following error will be displayed for an incorrectly formatted field in the YAML config file. Note, this is a YAML error, however, if it's a new topic this could potentially cause issues.
 
-```
+```shell
 Error: unable to read config file "standard.yaml": reading json: yaml: line 10: did not find expected key   
 ```
 
@@ -177,7 +175,7 @@ Error: unable to read config file "standard.yaml": reading json: yaml: line 10: 
 
 The following message will be displayed in the shell if the path to the example blockchain application is incorrect.
 
-```
+```shell
 2022-08-02T14:50:42.153-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
 2022-08-02T14:50:42.171-0700 INFO (fireacme) launching applications: extractor-node,firehose,merger,relayer
 start --store-dir=/Users/<User Account>/Desktop/SFFirehose/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
