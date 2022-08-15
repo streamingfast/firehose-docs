@@ -4,7 +4,7 @@ _<mark style="color:yellow;">**\[\[slm:] content has not been updated below this
 
 _<mark style="color:purple;">**NEED CONTENT**</mark>_
 
-_<mark style="color:purple;">**Here are the repositories for the different implementations:**</mark>_
+### Firehose implementation repositories
 
 * [Firehose for Ethereum](https://github.com/streamingfast/sf-ethereum)
 * [Firehose for NEAR](https://github.com/streamingfast/sf-near)
@@ -15,5 +15,7 @@ _<mark style="color:purple;">**Here are the repositories for the different imple
 
 ### Versioning
 
-\[\[Dump here versioning considerations for the binaries. How we track the upstream binaries, how we version the firehose instrumentation on top.]]
+\[\[Dump here versioning considerations for the binaries. How we track the upstream binaries, how we version the firehose instrumentation on top.
+
+\[slm:] there could be some types of automation to help with this but it's most likely the process of a human keeping track and making the updates.]]
 
