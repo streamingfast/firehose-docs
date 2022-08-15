@@ -10,8 +10,6 @@ Welcome to the product documentation for StreamingFast Firehose technology.&#x20
 
 This page serves as the primary entry point to the Firehose product documentation. Please submit a PR through GitHub with problems encountered in the documentation.
 
-If you already understand the core Firehose [concepts and architecture](broken-reference) please feel free to access the blockchain-specific documentation from the menu in [Firehose Setup](../setup/).&#x20;
-
 The official GitHub repository for Firehose can be found in the official Github repository. [https://github.com/streamingfast/firehose](https://github.com/streamingfast/firehose)
 
 ### Purpose (What is it?)
