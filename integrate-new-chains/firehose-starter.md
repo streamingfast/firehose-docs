@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose Starter setup documentation
+description: StreamingFast Firehose template setup documentation
 ---
 
 # Firehose Template
