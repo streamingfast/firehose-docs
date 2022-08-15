@@ -6,6 +6,14 @@ description: StreamingFast Firehose Ethereum installation documentation
 
 {% tabs %}
 {% tab title="Ethereum/Goerli/Ropsten" %}
+<mark style="color:yellow;">**\[\[slm:]**</mark>
+
+<mark style="color:yellow;">**"**</mark>_<mark style="color:yellow;">**With develop branch of sf-ethereum you need to use a version of geth tagged fh2.**</mark>_
+
+_<mark style="color:yellow;">**With release/v0.10.x you need to use version tagged fh1.**</mark>_<mark style="color:yellow;">**"]**</mark>
+
+
+
 #### Install StreamingFast Geth
 
 **StreamingFast Geth Setup in Detail**
@@ -34,7 +42,7 @@ After the download has been completed, open a Terminal window and navigate to th
 
 The permissions on the binary file must be set to be executable for the desired user account on the target computer.
 
-```bash
+```shell
 chmod +x geth_linux
 ```
 
@@ -44,7 +52,7 @@ chmod +x geth_linux
 
 Now, run the binary and check its version to ensure it was properly downloaded and the permissions were correctly set. _Note, if issues are encountered on macOS for this step see the Problems section of this document._
 
-```bash
+```shell
 ./geth_linux version
 ```
 
@@ -52,7 +60,7 @@ Now, run the binary and check its version to ensure it was properly downloaded a
 
 A message similar to the following should be displayed in the Terminal window If everything is working correctly.
 
-```bash
+```shell
 INFO [08-08|14:36:21.188] Initializing deep mind
 INFO [08-08|14:36:21.193] Deep mind initialized                    enabled=false sync_instrumentation_enabled=true mining_enabled=false block_progress_enabled=false compaction_disabled=false archive_blocks_to_keep=0 genesis_provenance="Geth Default"
 Geth
@@ -107,7 +115,7 @@ After sfeth has completed downloading issue the following command in the Termina
 
 _Note, the file name for the archive must match the version that was downloaded._
 
-```bash
+```shell
 tar -xvzf sf-ethereum_0.9.0_linux_x86_64.tar.gz
 ```
 
@@ -115,7 +123,7 @@ tar -xvzf sf-ethereum_0.9.0_linux_x86_64.tar.gz
 
 The following message will be displayed in the Terminal window after the archive has been extracted.
 
-```bash
+```shell
 r.gz
 x LICENSE
 x README.md
@@ -126,7 +134,7 @@ x sfeth
 
 To verify sfeth was completely downloaded and the application is functional, issue the following command to the Terminal window.
 
-```bash
+```shell
 ./sfeth --version
 ```
 
@@ -134,7 +142,7 @@ To verify sfeth was completely downloaded and the application is functional, iss
 
 The following message will be displayed in the Terminal window if sfeth is working correctly.
 
-```bash
+```shell
 sfeth version 0.10.2 (Commit f0a8987, Built 2022-08-09T12:43:08-07:00)
 ```
 
@@ -156,7 +164,7 @@ Firehose needs a home. This will be the main working directory for the Firehose 
 
 Using a Terminal window navigate to the location where the full StreamingFast Firehose system will be stored on the target computer.
 
-```
+```shell
 cd ~; pwd // navigate to home directory
 ```
 
@@ -168,7 +176,7 @@ _Note, use the target computer's home directory to begin If a dedicated director
 
 Create a new directory in the location chosen in the previous setup. In the example, the name sf-firehose will be used.
 
-```
+```shell
 mkdir sf-firehose
 ```
 
@@ -180,7 +188,7 @@ _Note, commands for the remaining steps use the newly created sf-firehose direct
 
 Using the Terminal window copy the files downloaded in the previous steps to the newly created sf-firehose directory.
 
-```bash
+```shell
 cp <path-to-binary>/geth_linux ./sf-firehose/geth_linux
 cp <path-to-binary>/sfeth ./sf-firehose/sfeth
 ```
@@ -199,7 +207,7 @@ touch eth-mainnet.yaml
 
 Next, open the YAML configuration file in an editor.
 
-```
+```yaml
 ---
 start:
   args:
@@ -248,7 +256,7 @@ To fix the problem, remove the quarantine attribute on the file using the follow
 
 ```bash
 xattr -d com.apple.quarantine sfeth
-xattr -d com.apple.quarantine geth_macos
+xattr -d com.apple.quarantine geth_mac
 ```
 
 This step will only need to be done one time.
