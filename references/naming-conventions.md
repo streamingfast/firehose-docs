@@ -1,5 +1,7 @@
 # Naming Conventions
 
+_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line.]**</mark>_
+
 This document lists naming conventions between the different Firehose implementations, in order to provide a unified experience between people running multiple versions of the Firehose, where the same concepts have the same name.
 
 A new Firehose implementation makes use of two forms of a blockchain protocol's name: a _long_ and a _short_ form. The should form should be the shortest contraction of the chain name possible.  For example: `ethereum` and `eth`. We will refer to those forms in this document.&#x20;
