@@ -6,21 +6,7 @@ description: StreamingFast Firehose Ethereum installation documentation
 
 {% tabs %}
 {% tab title="Ethereum/Goerli/Ropsten" %}
-<mark style="color:yellow;">**\[\[slm:]**</mark>
-
-<mark style="color:yellow;">**As it stands this documentation is non-functional. It's creating a setup that will not work because of versioning issues with Geth and sf-ethereum.**</mark>
-
-<mark style="color:yellow;">**Note from Matt regarding the issue:**</mark>
-
-<mark style="color:yellow;">**"**</mark>_<mark style="color:yellow;">**With develop branch of sf-ethereum you need to use a version of geth tagged fh2.**</mark>_
-
-_<mark style="color:yellow;">**With release/v0.10.x you need to use version tagged fh1.**</mark>_<mark style="color:yellow;">**"]**</mark>
-
-<mark style="color:yellow;">**Need to figure out the best approach to re-wording and correcting the instructions below that will lead the reader to an actual, working Firehose. it's probably a good idea to go through ALL of the steps in the documentation in a fresh VM or something and NOT a devs box that's already known to function correctly.**</mark>
-
-
-
-#### Install StreamingFast Geth
+### Install StreamingFast Geth
 
 **StreamingFast Geth Setup in Detail**
 
@@ -28,7 +14,7 @@ StreamingFast's instrumented Geth version extracts raw blockchain data from Ethe
 
 _Note, Geth is the official_ [_Golang_](https://go.dev/) _implementation of the Ethereum Protocol._
 
-#### Step 1. download StreamingFast Geth
+### Step 1. Download StreamingFast Geth
 
 **Download Binary**
 
@@ -40,7 +26,7 @@ Binaries are available for both Linux and macOS.
 
 [https://github.com/streamingfast/go-ethereum/releases?q=geth](https://github.com/streamingfast/go-ethereum/releases?q=geth)
 
-#### Step 2. update Geth binary permissions
+### Step 2. Update Geth binary permissions
 
 **Terminal & chmod to Update**
 
@@ -52,7 +38,7 @@ The permissions on the binary file must be set to be executable for the desired 
 chmod +x geth_linux
 ```
 
-#### Step 3. run the Geth binary
+### Step 3. run the Geth binary
 
 **Run Binary & Check Version**
 
@@ -99,13 +85,13 @@ _Note, the_ [_Ethereum documentation_](https://geth.ethereum.org/docs/install-an
 
 The next step for completing the setup is to download and install StreamingFast sfeth.
 
-#### Install StreamingFast sfeth
+### Install StreamingFast sfeth
 
 **StreamingFast sfeth Setup in Detail**
 
 StreamingFast sfeth contains all of the Firehose components including the Extractor, Merger, Relayer, and gRPC Server and is central to a functioning Firehose system. \_\_
 
-#### **Step 1. download StreamingFast sfeth**
+### **Step 1. Download StreamingFast sfeth**
 
 **Download Binary**
 
@@ -113,7 +99,7 @@ Using a web browser download the StreamingFast sfeth archive relevant to the tar
 
 [https://github.com/streamingfast/sf-ethereum/releases/latest](https://github.com/streamingfast/sf-ethereum/releases/latest)
 
-#### **Step 2. extract sfeth archive and update permissions**
+### **Step 2. Extract sfeth archive and update permissions**
 
 **Extract Archive**
 
@@ -158,13 +144,13 @@ At this point, both the StreamingFast sfeth and an instrumented version of Geth 
 
 To complete the full Firehose setup and begin syncing the node with the Ethereum Mainnet specific configuration files still need to be edited.
 
-#### Firehose Working Directory
+### Firehose Working Directory
 
 **Working Directory in Detail**
 
 Firehose needs a home. This will be the main working directory for the Firehose application and files.
 
-#### **Step 1. choose location on target computer**
+### **Step 1. Choose location on target computer**
 
 **Select Destination for Files**
 
@@ -176,7 +162,7 @@ cd ~; pwd // navigate to home directory
 
 _Note, use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected._
 
-#### **Step 2. Create directory for Firehose**
+### **Step 2. Create directory for Firehose**
 
 **Create New Directory**
 
@@ -188,7 +174,7 @@ mkdir sf-firehose
 
 _Note, commands for the remaining steps use the newly created sf-firehose directory as the main, base working directory._
 
-#### **Step 3. copy binary files into the sf-firehose directory**
+### **Step 3. copy binary files into the sf-firehose directory**
 
 **Copy Binaries to Working Directory**
 
@@ -199,9 +185,15 @@ cp <path-to-binary>/geth_linux ./sf-firehose/geth_linux
 cp <path-to-binary>/sfeth ./sf-firehose/sfeth
 ```
 
-#### **StreamingFast sfeth Configuration**
+### **StreamingFast sfeth Configuration**
 
-**Step 1. create Config File**
+#### **Configuration in Detail**
+
+Setting up sfeth requires specific configuration updates. Follow the steps to proceed.&#x20;
+
+### **Step 1. Create Config File**
+
+#### New Configuration File
 
 To create a new file quickly issue the following command to the Terminal window.
 
@@ -209,9 +201,13 @@ To create a new file quickly issue the following command to the Terminal window.
 touch eth-mainnet.yaml
 ```
 
-**Step 2. Edit YAML Configuration Settings**
+### **Step 2. Edit YAML Configuration Settings**
 
-Next, open the YAML configuration file in an editor.
+#### YAML Config
+
+Next, open the YAML configuration file in a text editor.&#x20;
+
+Copy the contents below into the newly created configuration file and save the changes.
 
 ```yaml
 ---
@@ -246,8 +242,6 @@ start:
     mindreader-node-merge-and-store-directly: true
 ```
 
-Ensure that the changes have been saved after updating the configuration file.
-
 _Note, these settings are not production-ready._
 
 **Synchronization in Detail**
@@ -265,7 +259,7 @@ xattr -d com.apple.quarantine sfeth
 xattr -d com.apple.quarantine geth_mac
 ```
 
-This step will only need to be done one time.
+_This step will only need to be done one time._
 {% endtab %}
 
 {% tab title="Polygon" %}
