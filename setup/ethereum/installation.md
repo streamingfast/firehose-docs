@@ -16,7 +16,7 @@ description: StreamingFast Firehose Ethereum installation documentation
 
 _<mark style="color:yellow;">**With release/v0.10.x you need to use version tagged fh1.**</mark>_<mark style="color:yellow;">**"]**</mark>
 
-<mark style="color:yellow;">**Need to figure out the best approach to re-wording and correctly the instructions below that will lead the reader to an actual, working Firehose. it's probably a good idea to go through ALL of the steps in the documentation in a fresh VM or something and NOT a devs box that's already known to function correctly.**</mark>
+<mark style="color:yellow;">**Need to figure out the best approach to re-wording and correcting the instructions below that will lead the reader to an actual, working Firehose. it's probably a good idea to go through ALL of the steps in the documentation in a fresh VM or something and NOT a devs box that's already known to function correctly.**</mark>
 
 
 
