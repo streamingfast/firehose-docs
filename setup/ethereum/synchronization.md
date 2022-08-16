@@ -110,12 +110,12 @@ After a short delay, the blocks begin syncing in.
 ```
 
 {% hint style="warning" %}
-To terminate the Firehose processing and connection to the Ethereum Mainnet press the Control + C key.
+To terminate the Firehose processing and connection to the Ethereum network press the Control + C keys.
 
-The Firehose sync process will shutdown gracefully and continue where it left off upon restart.
+The Firehose sync process will shutdown gracefully and continue where it left off upon the next restart.
 {% endhint %}
 
-Once 10,000 blocks have been synced, data introspection becomes possible through special sfeth tooling.
+Data introspection becomes possible through special sfeth tooling once 10,000 blocks have been synced
 
 Issue the following command to introspect the sync'd block data.
 
@@ -132,21 +132,31 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 ...
 ```
 
-_<mark style="color:yellow;">**\[slm: ] content below this line has not been edited or gone through yet.**</mark>_
+_<mark style="color:yellow;">**\[slm: ] content below this line still needs a lot of work. the new naming of components needs to be reflected in this content as well.**</mark>_
 
 ### Explanation
+
+#### Data Extraction in Detail
 
 The `mindreader-node` is a process that runs and manages the blockchain node `Geth`. It consumes the blockchain data that is extracted from our instrumented `Geth` node. The instrumented `Geth` node outputs individual block data.
 
 The `mindreader-node` process will either write individual block data into separate files called one-block files, or merge 100 blocks data together and write into a file called a `100-blocks file`.
 
+#### Merged Mode
+
 This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag. When running the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, we say the "mindreader is running in merged mode". When the flag is disabled, we will refer to the mindreader as running in its normal mode of operation.
+
+#### Block Mergers
 
 In the scenario where the `mindreader-node` process stores one-block files, we can run a `merger` process on the side which would merge the one-block files into 100-block files. When we are syncing the chain we will run the `mindreader-node` process in merged mode.
 
 When we are synced we will run the `mindreader-node` in its regular mode of operation (storing one-block files)
 
+#### Block File Data Storage
+
 The one-block files and 100-block files will be stored in `data-dir/storage/merged-blocks` and `data-dir/storage/one-blocks` respectively. The naming convention of the file is the number of the first block in the file.
+
+#### Data Introspection Tools
 
 Finally, we have built tools that allow you to introspect the block files:
 
@@ -160,21 +170,27 @@ Finally, we have built tools that allow you to introspect the block files:
 
 ### Launch the Firehose
 
-Let's pick up where we left off, assuming we're no longer syncing eth-mainnet:
+#### After Data Synchronization
+
+After the Ethereum network has finished synchronization the data collected can by analyzed and streamed.
+
+Issue the following command to begin a Mindreader process.
 
 ```bash
 ./sfeth -c eth-mainnet.yaml start mindreader-node
 ```
 
-The current state of affairs is that we have an `sfeth` running a `mindreader-node` process. The process is extracting and merging 100-bock data.
+`sfeth` is now running a `mindreader-node` process that is extracting and merging the 100-blocks of data at a time.
+
+#### Launch Firehose
+
+The `sfeth` command launches 2 processes, the `Relayer` and `Firehose`. Both processes work together to provide the `Firehose` data stream. Once the `Firehose` process is running, it will be listening on port `13042`.
 
 While still running the `mindreader-node` process in a separate terminal (still in the working directory), launch the firehose:
 
 ```bash
 ./sfeth -c eth-mainnet.yaml start relayer firehose
 ```
-
-The `sfeth` command launches 2 processes, the `Relayer` and `Firehose`. Both processes work together to provide the `Firehose` data stream. Once the `Firehose` process is running, it will be listening on port `13042`.
 
 At its core, the `Firehose` is a gRPC stream. We can list the available gRPC services with `grpcurl`
 
@@ -247,22 +263,26 @@ Don't forget that StreamingFast also provides pre-instrumented and ready-to-go s
 
 ### System Requirements
 
-The Firehose stack is extremely elastic, and supports handling networks of varied sizes and shapes. It is also heavy on data, so **make sure you have a good understanding** of the different data stores, artifacts, and databases required to run the Firehose stack.
+The Firehose stack is extremely elastic, and supports handling networks of varied sizes and shapes.&#x20;
 
-The deployment efforts will be proportional to the size of history, and the density of the chain at hand.
+Firehose is also very heavy on data, so _make sure you have a good understanding_ of the different [data stores](../../concepts/data-storage.md), artifacts, and databases required for operation.
+
+Deployment efforts will match the size of history, and the density of the blockchain being consumed.
 
 ### Network shapes
 
-This document outlines requirements for different shapes of networks
+Requirements for different shapes of networks are as follows.
 
 #### Persistent chains
 
-In order to scale easily, you will want to decouple \[components]\(\{{< ref "/operate/concepts/components" >\}}) that run in a single process.
+In order to scale easily, you will want to decouple [components](../../concepts/components.md) that run in a single process.
 
 The storage requirements will vary depending on these metrics:
 
 * **The length of history**: whether or not you are serving all the blocks through the firehose
 * **Throughput in transactions and calls**: Calls on Ethereum are the smallest units of execution to produce meaningful data, transaction overhead becomes negligible once you have 2-3 calls in a transaction. A single ERC20 transfer generally has 1 call, 2 calls when there is a proxy contract involved. A Uniswap swap is usually composes of a few dozens of calls.
+
+#### Limiting Factors
 
 The CPU/RAM requirements will depend on these factors:
 
