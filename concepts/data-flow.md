@@ -26,6 +26,8 @@ The StreamingFast Deepmind instrumentation feeds to Extractor components. The Ex
 
 #### Data Flow & Components Key Points
 
+***
+
 * An instrumented version of the native blockchain node process streams pieces of block data in a custom StreamingFast text-based protocol.
 * Firehose Extractor components read data streams from instrumented blockchain nodes.
 * Extractor components will then write the data to persistent storage. The data is then broadcast to the rest of the components in the Firehose system.
@@ -73,7 +75,7 @@ Each message contains the specific payload for the event. The start block for in
 
 Example block data event messages from a Deepmind instrumented Ethereum client:
 
-```shell
+```
 DMLOG BEGIN_BLOCK 33
 DMLOG BEGIN_APPLY_TRX 52e3ea8d63f66bfa65a5c9e5ba3f03fd80c5cf8f0b3fcbb2aa2ddb8328825141 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 0de0b6b3a7640000 0bfa f219f658459a2533c5a5c918d95ba1e761fc84e6d35991a45ed8c5204bb5a61a 43ff7909bb4049c77bd72750d74498cfa3032c859e2cc0864d744876aeba3221 21040 01 32 .
 DMLOG TRX_FROM ea143138dab9a14e11d1ae91e669851e6cc72131
@@ -99,7 +101,7 @@ The Extractor components:
 
 * launch instrumented Deepmind processes.
 * connect to the operating system's standard output pipe.
-* read the block data event messages or, `DMLOG`messages.
+* read the block data event messages or, `DMLOG`, messages.
 
 #### Data Collection & Formation
 

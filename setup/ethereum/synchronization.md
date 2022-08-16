@@ -259,9 +259,7 @@ You should see block streaming. Like so
 
 The target computer is now successfully streaming ETH block data from mainnet. Congratulations!
 
-Full searchability and discoverability of Ethereum and ERC20 networks have now been attained. The underlying blockchain data can be sliced and diced in just about any way imaginable.
-
-Don't forget that StreamingFast also provides pre-instrumented and ready-to-go solutions for several other blockchains.
+Full searchability and discoverability of Ethereum and ERC20 networks is now possible and the underlying blockchain data can be sliced and diced into a myriad of different solutions.
 
 ### System Requirements
 
