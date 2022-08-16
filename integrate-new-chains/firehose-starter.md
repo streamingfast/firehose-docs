@@ -4,6 +4,8 @@ description: StreamingFast Firehose template documentation
 
 # Firehose Template
 
+_<mark style="color:yellow;">**\[\[slm:] add/update subtitles, add/fix links, add/fix code snippets and set their correct syntax.]**</mark>_
+
 ### Firehose Template Project&#x20;
 
 #### Firehose Template in Detail
