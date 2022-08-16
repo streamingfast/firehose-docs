@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose for Ethereum Synchronization documentation
+description: StreamingFast Firehose Ethereum Synchronization documentation
 ---
 
 # Synchronization
@@ -265,13 +265,21 @@ Don't forget that StreamingFast also provides pre-instrumented and ready-to-go s
 
 ### System Requirements
 
-The Firehose stack is extremely elastic, and supports handling networks of varied sizes and shapes.&#x20;
+#### Network Flexibility
 
-Firehose is also very heavy on data, so _make sure you have a good understanding_ of the different [data stores](../../concepts/data-storage.md), artifacts, and databases required for operation.
+Firehose is extremely elastic and can support networks of varied sizes and shapes.&#x20;
+
+#### Firehose Fundamentals
+
+Firehose is _very heavy_ on data. Ensure to gain a solid __ understanding of the different [data stores](../../concepts/data-storage.md), artifacts, and databases required for operation.
+
+#### Relative to the Target Blockchain
 
 Deployment efforts will match the size of history, and the density of the blockchain being consumed.
 
 ### Network shapes
+
+#### Networking in Detail
 
 Requirements for different shapes of networks are as follows.
 
@@ -281,18 +289,18 @@ In order to scale easily, you will want to decouple [components](../../concepts/
 
 The storage requirements will vary depending on these metrics:
 
-* **The length of history**: whether or not you are serving all the blocks through the firehose
-* **Throughput in transactions and calls**: Calls on Ethereum are the smallest units of execution to produce meaningful data, transaction overhead becomes negligible once you have 2-3 calls in a transaction. A single ERC20 transfer generally has 1 call, 2 calls when there is a proxy contract involved. A Uniswap swap is usually composes of a few dozens of calls.
+* _The length of history:_ whether or not you are serving all the blocks through the firehose
+* _Throughput in transactions and calls_: Calls on Ethereum are the smallest units of execution to produce meaningful data, transaction overhead becomes negligible once you have 2-3 calls in a transaction. A single ERC20 transfer generally has 1 call, 2 calls when there is a proxy contract involved. A Uniswap swap is usually composes of a few dozens of calls.
 
 #### Limiting Factors
 
 The CPU/RAM requirements will depend on these factors:
 
-* **High Availability**: highly available deployments will require **2 times the resources** (or more) listed in the following examples, as a general rule.
-* **Throughput of queries**: the Firehose stack is built for horizontal scalability, the more requests per second you want to fulfill, the larger the deployment, the more CPU/RAM you will need to allocate to your cluster.
+* _High Availability_: highly available deployments will require **2 times the resources** (or more) listed in the following examples, as a general rule.
+* _Throughput of queries_: the Firehose stack is built for horizontal scalability, the more requests per second you want to fulfill, the larger the deployment, the more CPU/RAM you will need to allocate to your cluster.
 
 These stats are from March 2022, but chains of similar density and similar age will behave similarly.
 
-**Ethereum Mainnet**
+#### Ethereum Mainnet
 
-`This section is incomplete.`
+This section is incomplete.
