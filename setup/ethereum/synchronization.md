@@ -119,6 +119,8 @@ Data introspection becomes possible through special sfeth tooling once 10,000 bl
 
 Issue the following command to introspect the sync'd block data.
 
+_<mark style="color:yellow;">**\[slm: ] how long do i need to run the step above to test this? how much HD space do i need?**</mark>_
+
 ```shell
 ./sfeth tools print blocks --store ./eth-data/storage/merged-blocks 100000
 
@@ -132,7 +134,7 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 ...
 ```
 
-_<mark style="color:yellow;">**\[slm: ] content below this line still needs a lot of work. the new naming of components needs to be reflected in this content as well.**</mark>_
+_<mark style="color:yellow;">**\[slm: ] content below this line still needs a lot of work. the new naming of components needs to be reflected in this content as well. all steps need to be tested on a machine other than a devs with a working setup as well.**</mark>_
 
 ### Explanation
 
