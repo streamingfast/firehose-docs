@@ -8,9 +8,15 @@ description: StreamingFast Firehose Ethereum installation documentation
 {% tab title="Ethereum/Goerli/Ropsten" %}
 <mark style="color:yellow;">**\[\[slm:]**</mark>
 
+<mark style="color:yellow;">**As it stands this documentation is non-functional. It's creating a setup that will not work because of versioning issues with Geth and sf-ethereum.**</mark>
+
+<mark style="color:yellow;">**Note from Matt regarding the issue:**</mark>
+
 <mark style="color:yellow;">**"**</mark>_<mark style="color:yellow;">**With develop branch of sf-ethereum you need to use a version of geth tagged fh2.**</mark>_
 
 _<mark style="color:yellow;">**With release/v0.10.x you need to use version tagged fh1.**</mark>_<mark style="color:yellow;">**"]**</mark>
+
+<mark style="color:yellow;">**Need to figure out the best approach to re-wording and correctly the instructions below that will lead the reader to an actual, working Firehose. it's probably a good idea to go through ALL of the steps in the documentation in a fresh VM or something and NOT a devs box that's already known to function correctly.**</mark>
 
 
 
