@@ -22,7 +22,9 @@ To begin Firehose synchronization with Ethereum Mainnet issue the following comm
 
 #### Data Logging
 
-After the node connects to the network and begins processing data logging to the Terminal window will display. Messages similar to the following should be presented.
+The data being processed by the connected node will be displayed in the Terminal window.&#x20;
+
+Data logging will be presented in the following format.
 
 ```bash
 2022-03-19T10:28:26.666-0400 (sfeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
