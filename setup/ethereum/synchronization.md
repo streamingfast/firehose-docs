@@ -14,7 +14,7 @@ Synchronization is the process of:
 * verifying node integrity through cryptography,&#x20;
 * and building the working node's blockchain data store.&#x20;
 
-### Sync eth-mainnet
+### Ethereum Mainnet Synchronization
 
 #### Start sfeth
 
