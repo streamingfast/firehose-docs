@@ -14,8 +14,6 @@ The [Firehose-ACME template's](firehose-starter.md) codebase is the starting poi
 
 The process of instrumenting a node is mandatory for blockchains without existing StreamingFast instrumentation support.
 
-An instrumented node that is capable of producing data to be consumed by Firehose is required.&#x20;
-
 #### Careful Consideration & Design
 
 Close attention to detail is crucial when instrumenting nodes with new blockchains and working with custom Protocol Buffer schemas.
