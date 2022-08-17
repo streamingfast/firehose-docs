@@ -18,13 +18,21 @@ _Note, Geth is the official_ [_Golang_](https://go.dev/) _implementation of the 
 
 **Download Binary**
 
+Use the following link to download the instrumented version of Geth compatible with Firehose version 1.0.
+
+[https://github.com/streamingfast/go-ethereum/releases/tag/geth-v1.10.21-fh1](https://github.com/streamingfast/go-ethereum/releases/tag/geth-v1.10.21-fh1)
+
+#### Binance & Polygon Support
+
 Specific binaries for [Binance Smart Chain](https://github.com/streamingfast/go-ethereum/releases/tag/bsc-v1.1.12-fh2) (BSC) and [Polygon](https://github.com/streamingfast/go-ethereum/releases/tag/polygon-v0.2.16-fh2.1) (MATIC) are also provided.&#x20;
 
-Binaries are available for both Linux and macOS.
+#### Existing Node Deployments
 
 Download the corresponding versions for existing node deployments.
 
 [https://github.com/streamingfast/go-ethereum/releases?q=geth](https://github.com/streamingfast/go-ethereum/releases?q=geth)
+
+Geth binaries are available for both Linux and macOS.
 
 ### Step 2. Update Geth binary permissions
 
