@@ -18,17 +18,21 @@ The Firehose components work together in symphony to provide blockchain data fro
 
 Understanding the Firehose components individually is helpful for fully comprehending the overall system and should aid with the setup and operation of the application.
 
+### Firehose-enabled Blockchain Node
 
+#### Firehose-enabled Node in Detail
 
-## Firehose-enabled Blockchain Node
+The Firehose-enabled Blockchain Node is a third-party blockchain node client, such as Ethereum, instrumented under StreamingFast practices to output data that will be read by Firehose.&#x20;
 
-This component is a third-party blockchain client, instrumented to output Firehose data, to be consumed by the Reader.
+The Reader component will consume the data produced by the Firehose-enabled Blockchain Node.
 
-This component runs in tandem with the Reader, connected either via a UNIX pipe through stdout, or by having the Reader process execute and fork the blockchain client (using the node-manager software included in Firehose).
+The Firehose-enabled Blockchain Node runs in tandem with the Reader component. The two components are connected either through a UNIX pipe through STDOUT, or by having the Reader component's process execute and fork the blockchain client (using the node-manager software included in Firehose).
 
 Blockchain nodes used in this way need very little features, no archive mode capability, no JSON-RPC service, no indexed data will be queried on it. It needs to be the node executing all transactions in an order respecting the consensus protocol of the blockchain.
 
-## Reader
+### Reader
+
+#### Reader Component in Detail
 
 The Reader component is responsible for extracting data from instrumented blockchain nodes.
 
@@ -46,7 +50,7 @@ The Blockchain node underlying the Reader managed by the Reader can be considere
 
 #### Data Flows from the Reader
 
-After Firehose has been instrumented on a node it will begin returning _substantial amounts of data_. The data will flow from the Reader component into the rest of the components and Firehose system.
+After Firehose has been instrumented on a node it will begin returning _substantial amounts of data_. The data will flow from the Reader component into the rest of the components and Firehose.
 
 #### High Availability
 
@@ -60,13 +64,15 @@ Firehose also aggregates any forked blocks that would be seen by a single Reader
 
 #### Component Cooperation
 
-Adding Reader components and dispersing each one geographically will result in the Reader components actually racing to transfer blocks to the Relayer component. This cooperation between the Reader and Relayer components significantly increases the performance of the overall Firehose system.&#x20;
+Adding Reader components and dispersing each one geographically will result in the Reader components actually racing to transfer blocks to the Relayer component. This cooperation between the Reader and Relayer components significantly increases the performance of Firehose.&#x20;
 
 #### Reader Nomenclature
 
 The Reader component is sometimes referred to as the Mindreader. This nickname stems from history where the codebase `deepmind` was used to describe the instrumentation of nodes.
 
-## Merger
+### Merger
+
+#### Merger Component in Detail
 
 The Merger component is responsible for managing and shaping data flowing out of the Reader component.&#x20;
 
@@ -104,7 +110,7 @@ The Merger component will:&#x20;
 
 #### High Availability Merger&#x20;
 
-A single Merger component is required for Reader nodes in a highly available system.&#x20;
+A single Merger component is required for Reader nodes in a highly available Firehose.&#x20;
 
 Highly available systems usually connect to the Relayer component to receive real-time blocks. Merged blocked files are used when Relayer components can't provide the requested data or satisfy a range.
 
@@ -112,13 +118,15 @@ Restarts from other components can be sustained and time provided for Merger com
 
 Merged blocks generally aren't read by other Firehose components in a running, live highly available system.
 
-## Relayer
+### Relayer
 
-The Relayer component is responsible for providing executed block data to other components in the Firehose system.
+Relayer Component in Detail
+
+The Relayer component is responsible for providing executed block data to other Firehose components.
 
 The Relayer component feeds from all available Reader nodes to get a comprehensive view of all possible forks.&#x20;
 
-The Relayer "fans out", or relays, block information to the other components in the Firehose system.
+The Relayer "fans out", or relays, block information to the other Firehose components.
 
 #### Relayer & gRPC
 
@@ -126,11 +134,11 @@ The Relayer component serves its block data through the streaming gRPC interface
 
 #### High Availability Relayer
 
-A Relayer component in highly available systems will feed from all of the Reader nodes to gain a complete view of all possible forks.
+A Relayer component in a highly available Firehose will feed from all of the Reader nodes to gain a complete view of all possible forks.
 
-Multiple Reader components will ensure blocks are flowing efficiently to the Relayer component and throughout the rest of the Firehose system.
+Multiple Reader components will ensure blocks are flowing efficiently to the Relayer component and throughout Firehose.
 
-## Firehose gRPC Server
+### Firehose gRPC Server
 
 #### gRPC Server in Detail
 
@@ -150,7 +158,7 @@ The Relayer component gets its data from one, or more, Reader components.
 
 #### Serving Data
 
-The Firehose gRPC Server component provides the data to the end consumer of the Firehose system through remote method calls to the server.
+The Firehose gRPC Server component provides the data to the end consumer of Firehose through remote method calls to the server.
 
 #### High Availability gRPC
 
@@ -166,4 +174,4 @@ When the Firehose gRPC Server component is connected to all available Relayer co
 
 Block navigation can be delayed when forked data isn't completely communicated to the Firehose gRPC Server component.&#x20;
 
-Understanding how data flows through the Firehose system is beneficial for harnessing its full power. Additional information is provided further explaining the data flow through Firehose.
+Understanding how data flows through Firehose is beneficial for harnessing its full power. Additional information is provided further explaining the data flow through Firehose.

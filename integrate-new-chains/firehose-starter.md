@@ -4,8 +4,6 @@ description: StreamingFast Firehose template documentation
 
 # Firehose Template
 
-_<mark style="color:yellow;">**\[\[slm:] add/update subtitles, add/fix links, add/fix code snippets and set their correct syntax.]**</mark>_
-
 ### Firehose Template Project&#x20;
 
 #### Firehose Template in Detail
@@ -18,7 +16,7 @@ The Firehose-ACME template can even be run without a fully functioning blockchai
 
 The template consists of basic code and a faux data provision application called the Dummy Blockchain, or dchain.
 
-Note, that the _Firehose-ACME template is the main starting point for instrumenting new, unsupported blockchain nodes. Additional information is available in the_ [_Unsupported Blockchains_ ](new-blockchains.md)_documentation._
+Note, that the _Firehose-ACME template is the main starting point for instrumenting new, unsupported blockchain nodes._&#x20;
 
 ### Firehose Template Setup
 
@@ -26,25 +24,33 @@ The following steps explain how to set up the Firehose-ACME template with the Du
 
 ### Step 1. Create Firehose directory
 
+#### Select Location
+
 Find a location on the target computer to download and store the Firehose-ACME template application's source code and related files.
+
+#### Navigate to Location
+
+Open a new terminal window. Navigate to the destination on the target computer where Firehose files will be stored.
+
+```shell
+cd /Users/<User Account>/Desktop/
+```
+
+#### Create Directory
 
 Create a new directory in the chosen location and name it something like "SFFirehose."
 
-Open a new Terminal window. Navigate to the destination on the target computer where the Firehose files will be stored.
-
-```shell
-cd /Users/<User Account>/Desktop/ s
-```
-
 Create the new directory and navigate into it.&#x20;
-
-The pwd command will print the full path to the new directory to the Terminal. This will be the working directory for the remaining steps in the installation process.
 
 ```shell
 mkdir SFFirehose; cd SFFirehose; pwd
 ```
 
+The pwd command will print the full path to the new directory to the Terminal. This will be the working directory for the remaining steps in the installation process.
+
 ### Step 2. Clone the Firehose-ACME repo
+
+#### Clone Repo
 
 Next, clone the Firehose-ACME template into the SFFirehose directory created in step one.
 
@@ -54,6 +60,8 @@ git clone git@github.com:streamingfast/firehose-acme
 
 ### Step 3. Install Firehose-ACME
 
+#### Firehose-ACME Installation
+
 Run the installation process for the Firehose-ACME starter.
 
 ```shell
@@ -62,7 +70,11 @@ go install -v ./cmd/fireacme
 
 The installation process copies the fireacme binary file into the computer's default Go binary directory.
 
+#### Standard Go Binary Location
+
 The standard default Go binary directory is `~/go/bin`.&#x20;
+
+#### Go PATH Settings
 
 The GOPATH can be checked by issuing the echo command followed by the system variable preceded by a dollar sign.
 
@@ -70,11 +82,15 @@ The GOPATH can be checked by issuing the echo command followed by the system var
 echo $GOPATH
 ```
 
+#### Check Firehose-ACME Version
+
 To ensure the Firehose-ACME binary is executable on the command line through the shell run the binary and pass the version flag.&#x20;
 
 ```shell
 fireacme --version
 ```
+
+#### Success Message
 
 If everything has been set up correctly the version will be printed to the Terminal window.
 
@@ -86,21 +102,29 @@ _Ensure the Firehose-ACME path is in the system's PATH before continuing._
 
 ### Step 4. Set up the Dummy Blockchain application
 
+#### Dummy Blockchain Setup in Detail
+
 Follow the installation instructions located on the example blockchain's official Git repository.
 
 [https://github.com/streamingfast/dummy-blockchain](https://github.com/streamingfast/dummy-blockchain)
 
 The Dummy Blockchain can be set up anywhere on the target computer. Make a note of the full path where the Dummy Blockchain is located. The path is needed in the following steps.
 
+#### Run Dummy Blockchain
+
 The Dummy Blockchain should be started and allowed to run for at least a few minutes. This will enable the application enough time and processing facilities to generate faux blockchain data for Firehose to consume in the following steps.
 
 ### Step 5. Test the Firehose-ACME template
 
-Using a Terminal window navigate to the directory that Firehose was downloaded and set up within. The path will look something similar to the following.
+#### Navigate to Firehose-ACME Location
+
+Using a terminal window navigate to the directory that Firehose was downloaded and set up within. The path will look something similar to the following.
 
 ```shell
 /Users//Desktop/<User Account>/SFFirehose/
 ```
+
+#### Standard Directory
 
 Next, navigate into the directory named "standard", inside of the directory named "devel", under the main firehose-acme directory.
 
@@ -108,7 +132,11 @@ Next, navigate into the directory named "standard", inside of the directory name
 cd /Users//Desktop/<User Account>/SFFirehose/standard/devel
 ```
 
+#### YAML Configuration
+
 Open the Firehose-ACME template standard.yaml configuration file to update the path to the Dummy Blockchain.
+
+#### Update Path
 
 The full path into the dchain directory must be used. The path needs to be in quotes.
 
@@ -118,23 +146,31 @@ Example path:
 extractor-node-path: "/Users/<User Account>/Desktop/SFFireshose/dummy-blockchain/dchain"
 ```
 
+#### Save Changes
+
 Ensure the file has been saved with the updated path information and then return to the Terminal window.
 
-Note, for real-world Firehose setups, the path that points at the Dummy Blockchain would typically be directed at an actual blockchain node that has been instrumented for Firehose.
+_Note, for real-world Firehose setups, the path that points at the Dummy Blockchain would typically be directed at an actual blockchain node that has been instrumented for Firehose._
 
 ### Step 6. Start Firehose
 
-The shell script that starts the Firehose-ACME template is located inside the devel/standard directory. The Terminal's shell session should still be using this directory.
+#### Start Firehose-ACME
 
-Issue the following command in the Terminal window to start the Firehose-ACME template.
+The shell script that starts the Firehose-ACME template is located inside the devel/standard directory. The terminal's shell session should still be using this directory.
+
+Issue the following command in the terminal window to start the Firehose-ACME template.
 
 ```shell
 ./start.sh
 ```
 
-To stop the Firehose-ACME template at any time press down on the Control key and then press the C key. This will send an interrupt to the application to exit and discontinue data processing.
+To stop the Firehose-ACME template at any time press down on the Control key and then press the C key.&#x20;
 
-If all of the configuration changes were made correctly, all system paths have been set correctly and the Dummy Blockchain was installed and set up correctly something similar to the following will be printed to the Terminal window.
+The following messages will be printed to the terminal window if&#x20;
+
+* all of the configuration changes were made correctly,&#x20;
+* all system paths have been set correctly,
+* &#x20;and the Dummy Blockchain was installed and set up correctly.
 
 ```shell
 2022-08-03T11:22:30.744-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
@@ -149,9 +185,11 @@ start --store-dir=/Users/seanmoore-mpb/Desktop/dfuse/integrate/firehose-acme/dev
 2022-08-03T11:22:41.931-0700 INFO (extractor.acme) level=info msg="processing block" hash=e0f05da93a0f5a86a3be5fc0e301606513c9f7e59dac2357348aa0f2f47db984 height=166
 ```
 
-If the output seen in the target computer's Terminal looks resembles the sample above the Firehose-ACME template has been successfully set up and is functional. Congratulations!&#x20;
+If the output seen in the target computer's Terminal looks resembles the sample above the Firehose-ACME template has been successfully set up and is functional. _Congratulations!_&#x20;
 
 ### Conclusion
+
+#### Firehose Template in Review
 
 This is the basic process for setting up a Firehose. Real-world implementations don't use or rely on the Dummy Blockchain application or its data.
 

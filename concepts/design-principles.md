@@ -104,7 +104,7 @@ Having access to richer external data processes allows developers to simplify co
 
 The data model used by StreamingFast to ingest protocol data was modeled with extreme diligence and care.&#x20;
 
-StreamingFast encountered several peculiarities within many protocols during the design and development process of the Firehose system.
+StreamingFast encountered several peculiarities within many protocols during the design and development process of Firehose.
 
 #### Subtleties in Reverted Calls
 

@@ -1,26 +1,30 @@
 ---
-description: Documentation home for StreamingFast Firehose
+description: StreamingFast Firehose
 ---
 
-# Home
+# Firehose
 
-### Welcome to Firehose Documentation
+### Firehose Documentation
 
-Welcome to the product documentation for StreamingFast Firehose technology.&#x20;
+Welcome to the product documentation for StreamingFast Firehose.
 
-This page serves as the primary entry point to the Firehose product documentation. Please submit a PR through GitHub with problems encountered in the documentation.
+This page serves as the primary entry point to the Firehose product documentation.&#x20;
 
-If you're new to Firehose, the[ Firehose Overview](\_index/firehose-overview.md) is the perfect place to start.&#x20;
+#### Where to Start
 
-If you already understand the core Firehose [concepts and architecture](concepts/) please feel free to access the blockchain-specific documentation from the menu in [Firehose Setup](integrate/firehose-setup.md).&#x20;
+Firehose Overview is a great place to begin learning about the overall scope, vision, and capabilities of the software.
+
+The Firehose [concepts and architecture](broken-reference) documentation provides an in-depth look at the decisions that drove the development team's development efforts while designing the application.
+
+#### Find the Source Code
 
 The official GitHub repository for Firehose can be found in the official Github repository. [https://github.com/streamingfast/firehose](https://github.com/streamingfast/firehose)
 
-### Intended Audience&#x20;
+### Intended Audience
 
 This documentation exists to help the following audiences learn about and use Firehose.
 
-* Software Developers&#x20;
+* Blockchain Developers
 * System Administrators
 * DevOps
 * Blockchain Node Operators

@@ -8,7 +8,7 @@ Below, we'll show you how to use [Firehose](../../operate/concepts/) to sync and
 
 #### Install firehose-cosmos
 
-`firehose-cosmos`, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the \[[Concepts & Architecture](../concepts/)]\(\{{< ref "/operate/concepts" >\}}) is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a `Firehose` locally.
+`firehose-cosmos`, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the [Concepts & Architecture](../concepts/) is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a `Firehose` locally.
 
 You can download the latest version of `firehose-cosmos` [here](https://github.com/figment-networks/firehose-cosmos/releases), however we recommend you use the Dockerfile provided in the `firehose-cosmos` repository located [here](https://github.com/figment-networks/firehose-cosmos).
 
@@ -18,7 +18,7 @@ As of the time of writing this, the latest release is v0.4.0, you can get a copy
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
 ```
 
-Alternatively you can clone the repository and run `make install` to install it locally.
+Alternatively, you can clone the repository and run `make install` to install it locally.
 
 To verify the installation was successful, run:
 
@@ -30,7 +30,7 @@ docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose --versio
 
 #### Install and run instrumented nodes
 
-In order to index Cosmos nodes with `firehose-cosmos`, you will need to insure you are using the correctly modified binaries for the chain you are targetting. Figment provide these for CosmosHub and Osmosis, mainnet and testnet chains as prebuilt Docker Images which you can find listed on [their Dockerhub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). These Dockerfiles also start the `firehose-cosmos` process for you. Below is an example for v7.0.4 of the Osmosis testnet. You can modify this to use whichever version of the chain node you are indexing. You should also pass the path to your chain data volume storage. If you don't pass this, the chain will instead start from Genesis each time. For CosmosHub chains, it will be `/app/gaia_home/data`
+In order to index Cosmos nodes with `firehose-cosmos`, you will need to insure you are using the correctly modified binaries for the chain you are targetting. Figment provides these for CosmosHub and Osmosis, mainnet and testnet chains as prebuilt Docker Images which you can find listed on [their Dockerhub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). These Dockerfiles also start the `firehose-cosmos` process for you. Below is an example for v7.0.4 of the Osmosis testnet. You can modify this to use whichever version of the chain node you are indexing. You should also pass the path to your chain data volume storage. If you don't pass this, the chain will instead start from Genesis each time. For CosmosHub chains, it will be `/app/gaia_home/data`
 
 ```bash
 docker run --rm -it -v data:/app/osmosis_home/data figmentnetworks/firehose-cosmos:fh-v0.4.0-osmosis1-testnet-v7.0.4 /app/firehose start
@@ -222,8 +222,6 @@ For a full breakdown of the services used, you can refer to the [components page
 Congratulations! You're now streaming blocks data from a Cosmos chain.
 
 At this point, Cosmos networks, such as CosmosHub and Osmosis are yours to discover. Slice and dice this data to your heart's content.
-
-
 
 System Requirements
 

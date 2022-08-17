@@ -22,15 +22,13 @@ Each Firehose component plays an important role as the blockchain data flows thr
 
 #### Data Flow Component Relationship
 
-The StreamingFast Deepmind instrumentation feeds to Extractor components. The Extractor components feed the Relayer component. The Index and IndexProvider components work with data provided by the instrumentation through the Extractor through the Relayer. Finally, the Firehose gRPC Server component hands data back to any consumers of the Firehose system.
+The StreamingFast Deepmind instrumentation feeds to Extractor components. The Extractor components feed the Relayer component. The Index and IndexProvider components work with data provided by the instrumentation through the Extractor through the Relayer. Finally, the Firehose gRPC Server component hands data back to any consumers of Firehose.
 
 #### Data Flow & Components Key Points
 
-***
-
 * An instrumented version of the native blockchain node process streams pieces of block data in a custom StreamingFast text-based protocol.
 * Firehose Extractor components read data streams from instrumented blockchain nodes.
-* Extractor components will then write the data to persistent storage. The data is then broadcast to the rest of the components in the Firehose system.
+* Extractor components will then write the data to persistent storage. The data is then broadcast to the rest of the components in Firehose.
 * The Relayer component reads block data provided by one or more Extractor components and provides a live data source for the other Firehose components.
 * The Merger component combines blocks created by Extractor components into batches of one hundred individually merged blocks. The merged blocks are stored in an object store or written to disk.
 * The Indexer component provides a targeted summary of the contents of each 100-blocks file that was created by the Merger component. The indexed 100-blocks files are tracked and cataloged in an index file created by the Indexer component.
@@ -40,7 +38,7 @@ The StreamingFast Deepmind instrumentation feeds to Extractor components. The Ex
   * live block data received through the Relayer component.
   * an indexed file source created through the collaboration between the Indexer and IndexProvider components.
 * The Firehose gRPC Server component then joins and returns the block data to its consumers.
-* _Tradeoffs and benefits are presented for how data is stored and how it flows from the instrumented blockchain nodes through the Firehose system._
+* _Tradeoffs and benefits are presented for how data is stored and how it flows from the instrumented blockchain nodes through Firehose._
 
 ### Extractor Data Flow
 
@@ -75,7 +73,7 @@ Each message contains the specific payload for the event. The start block for in
 
 Example block data event messages from a Deepmind instrumented Ethereum client:
 
-```
+```shell
 DMLOG BEGIN_BLOCK 33
 DMLOG BEGIN_APPLY_TRX 52e3ea8d63f66bfa65a5c9e5ba3f03fd80c5cf8f0b3fcbb2aa2ddb8328825141 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 0de0b6b3a7640000 0bfa f219f658459a2533c5a5c918d95ba1e761fc84e6d35991a45ed8c5204bb5a61a 43ff7909bb4049c77bd72750d74498cfa3032c859e2cc0864d744876aeba3221 21040 01 32 .
 DMLOG TRX_FROM ea143138dab9a14e11d1ae91e669851e6cc72131
@@ -101,7 +99,7 @@ The Extractor components:
 
 * launch instrumented Deepmind processes.
 * connect to the operating system's standard output pipe.
-* read the block data event messages or, `DMLOG`, messages.
+* read the block data event messages or, `DMLOG`messages.
 
 #### Data Collection & Formation
 
@@ -139,7 +137,7 @@ The design of the Relayer component enables them to race to push data to consume
 
 #### Live Data Through Relayer
 
-The Relayer component can function as a live data source for blocks in the Firehose system.
+The Relayer component can function as a live data source for blocks in Firehose.
 
 #### Relayer & Extractor Overlap
 
@@ -157,7 +155,7 @@ The Merger component assists with the reduction of storage costs, improved data 
 
 #### Historical Data Access
 
-The blocks bundled by the Merger component become the file-based historical data source of blocks for all components in the Firehose system.
+The blocks bundled by the Merger component become the file-based historical data source of blocks for all Firehose components.
 
 ### Indexer Data Flow
 
@@ -183,7 +181,7 @@ StreamingFast Transforms are used to locate a specific series of blocks accordin
 
 #### IndexProvider Data Flow in Detail
 
-The IndexProvider component accepts queries made to the Firehose system that contain StreamingFast Transforms.
+The IndexProvider component accepts queries made to Firehose that contain StreamingFast Transforms.
 
 #### Chain Agnostic
 
@@ -299,4 +297,4 @@ The `bstream` library contains the minimally required metadata to maintain the c
 
 #### Data Storage in Detail
 
-Understanding the storage mechanisms and methodologies used for data in the Firehose system is another important topic. Additional details on Firehose [data storage](data-storage.md) are provided in the documentation.
+Understanding the storage mechanisms and methodologies used for data in Firehose is another important topic. Additional details on Firehose [data storage](data-storage.md) are provided in the documentation.

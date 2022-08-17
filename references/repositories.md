@@ -1,9 +1,5 @@
 # Repositories
 
-_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line.]**</mark>_
-
-_<mark style="color:purple;">**NEED CONTENT**</mark>_
-
 ### Firehose implementation repositories
 
 * [Firehose for Ethereum](https://github.com/streamingfast/sf-ethereum)

@@ -4,8 +4,6 @@ description: StreamingFast Firehose node instrumentation documentation
 
 # New Blockchains
 
-_<mark style="color:yellow;">**\[\[slm:] update subtitles, links, and address edits.]**</mark>_
-
 ### Working with New Blockchains
 
 #### Firehose & New Blockchains in Detail
@@ -22,15 +20,9 @@ An instrumented node that is capable of producing data to be consumed by Firehos
 
 Close attention to detail is crucial when instrumenting nodes with new blockchains and working with custom Protocol Buffer schemas.
 
-_<mark style="color:yellow;">**\[\[slm:] content has not been updated below this line. the steps need to be tested as well.**</mark>_&#x20;
-
-_<mark style="color:yellow;">**Input will be needed for the more detailed aspects of instrumenting new blockchains.]**</mark>_
-
 ### Firehose-ACME Starter Template
 
 StreamingFast provides the Firehose-ACME starter repository to act as a template that integrators can use to create the required chain-specific code.
-
-_<mark style="color:yellow;">**\[\[slm:]The content below was pulled from the github repo. It could be useful here but needs to be updated.]**</mark>_
 
 We purposely used `Acme` (and also `acme` and `ACME`) throughout this repository so that integrators can simply copy everything and perform a global search/replace of this word and use their chain name instead.
 
@@ -123,8 +115,6 @@ Designing the Google Protobuf Structures for your given blockchain is one of the
 
 As a reference, here is Ethereum's Protobuf Structure: https://github.com/streamingfast/proto-ethereum/blob/develop/sf/ethereum/codec/v1/codec.proto&#x20;
 
-_<mark style="color:yellow;">**\[\[slm: Double-check everything below this comment to make sure it's correct and belongs here. There's more than likely overlap with the information above.]**</mark>_
-
 #### Integrate the target blockchain&#x20;
 
 Modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to your blockchain node's binary. Learn more about those parameters in the \[Operator's manual]\(\{{#< ref "/operate/running-the-node" >#\}}).
@@ -133,11 +123,9 @@ Modify `devel/standard/start.sh` to
 
 Run it with:&#x20;
 
-_<mark style="color:yellow;">**\[\[slm:  Run it with what?]**</mark> _&#x20;
-
 ### Define types
 
-Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in [specs for chain's protobuf model definitions](../integrate/protobuf-defs/)
+Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in [specs for chain's protobuf model definitions](../new-docs/integrate/protobuf-defs/)
 
 ### Modify the Ingestor's `Read()`
 
@@ -147,15 +135,13 @@ Read the source of the `ConsoleReader` and make sure you understand how it works
 
 Do X, Y, Z
 
-_<mark style="color:yellow;">**\[\[slm:  What does this mean? "Do, X, Y, Z??"]**</mark>_
-
 ### Make sure data is produced
 
 As you iterate, check that files are produced under `xyz` directory.
 
 ### Rename everything
 
-Pick two names, the long form and short form for your chain, following the [naming conventions](../integrate/names/).
+Pick two names, the long form and short form for your chain, following the [naming conventions](../new-docs/integrate/names/).
 
 For example:
 
