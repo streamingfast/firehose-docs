@@ -8,7 +8,7 @@ description: StreamingFast Firehose overview
 
 #### What is it?
 
-Firehose is a core component of StreamingFast’s [suite](https://github.com/streamingfast) of open-source blockchain technologies.
+Firehose is a core component of StreamingFast’s suite of open-source blockchain technologies.
 
 #### Firehose Core Functionality
 
@@ -16,7 +16,7 @@ Firehose provides a files-based and streaming-first approach to processing block
 
 #### Firehose Basics
 
-In basic terms, Firehose is responsible for extracting data from blockchain nodes in a highly efficient manner. Firehose also consumes, processes, and streams blockchain data to consumers of Firehose-enabled nodes.
+In basic terms, Firehose is responsible for extracting data from blockchain nodes in a highly efficient manner. Firehose also consumes, processes, and streams blockchain data to consumers of nodes running Firehose-enabled, instrumented blockchain client software.
 
 #### Firehose Advantages
 
