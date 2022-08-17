@@ -28,7 +28,7 @@ The data being processed by the connected node will be displayed in the terminal
 
 Data logging will be presented to the terminal window in the following format.
 
-```bash
+```shell-session
 2022-03-19T10:28:26.666-0400 (sfeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
 2022-03-19T10:28:26.666-0400 (<n/a>) registering development exporters from environment variables
 2022-03-19T10:28:26.666-0400 (sfeth) starting with config file 'eth-mainnet.yaml'
@@ -103,7 +103,7 @@ Data logging will be presented to the terminal window in the following format.
 
 After a short delay, the blocks begin syncing in. A series of messages as seen below will be printed to the terminal window.
 
-```bash
+```shell-session
 ...
 2022-03-19T10:28:57.497-0400 (merger) downloading one block file {"canonical_name": "0000000038-20150730T153109.0-b624ded0-d3f13e32-1"}
 2022-03-19T10:28:57.498-0400 (merger) downloading one block file {"canonical_name": "0000000039-20150730T153112.0-5c99c0f7-b624ded0-1"}
@@ -159,7 +159,7 @@ _Note, data inspection can be run after 10,000 blocks have been synced._
 
 Messages containing information about block data will be printed to the terminal window.
 
-```shell
+```shell-session
 ...
 Block #10000 (dc2d938) (prev: b9ecd2d): 0 transactions, 1 balance changes
 Block #10001 (7e86236) (prev: dc2d938): 0 transactions, 1 balance changes
@@ -185,7 +185,7 @@ After the Ethereum network has finished synchronization the data collected can b
 
 Issue the following command to begin a Mindreader process.
 
-```shell
+```shell-session
 ./sfeth -c eth-mainnet.yaml start mindreader-node
 ```
 
@@ -193,7 +193,7 @@ Issue the following command to begin a Mindreader process.
 
 #### Launch Firehose
 
-The `sfeth` command launches the `Relayer` and `Firehose`.&#x20;
+The `sfeth` command launches both the Relayer and Firehose.
 
 The two processes work together to provide the `Firehose` data stream. The `Firehose` process is running and listening on port 13042.
 
@@ -258,7 +258,7 @@ sf.firehose.v1.Stream
 Block streaming can be accomplished through the `sf.firehose.v1.Stream` service. Issue the following command in the terminal to begin streaming blocks.
 
 {% code overflow="wrap" %}
-```bash
+```shell-session
 grpcurl -plaintext -d '{"start_block_num": 10}' localhost:13042 sf.firehose.v1.Stream.Blocks
 ```
 {% endcode %}
@@ -338,7 +338,7 @@ Requirements for different shapes of networks are as follows.
 
 #### Persistent chains
 
-In order to scale easily, [components](../../concepts/components.md) that run in a single process need to be decoupleed.
+In order to scale easily, components that run in a single process need to be decoupleed.
 
 The storage requirements will vary depending on the following metrics.
 
