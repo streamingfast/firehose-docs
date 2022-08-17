@@ -8,7 +8,7 @@ description: StreamingFast Firehose
 
 #### Where to Start
 
-[Firehose Overview](intro/firehose-overview.md) is a great place to begin learning about the overall scope, vision, and capabilities.
+[Firehose Overview](intro/firehose-overview.md) is a great place to begin learning about the overall scope, vision, and capabilities of Firehose.
 
 The Firehose [Concepts & Architecture](broken-reference) provides an in-depth look at the decisions that drove the development team's efforts while designing the application.
 
