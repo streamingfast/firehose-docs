@@ -117,7 +117,7 @@ To terminate the Firehose processing and connection to the Ethereum network pres
 The Firehose sync process will shutdown gracefully and continue where it left off upon the next restart.
 {% endhint %}
 
-### Explanation
+### Synchronization Processes
 
 #### Data Extraction in Detail
 
@@ -310,7 +310,9 @@ Block data formed into a JSON representation will be printed to the terminal win
 }
 ```
 
-### What's next
+### Synchronization Completion
+
+#### Successful Sync
 
 The target computer is now successfully streaming ETH block data from mainnet. _Congratulations!_
 
@@ -338,7 +340,7 @@ Requirements for different shapes of networks are as follows.
 
 #### Persistent chains
 
-In order to scale easily, components that run in a single process need to be decoupleed.
+In order to scale easily, components that run in a single process need to be decoupled.
 
 The storage requirements will vary depending on the following metrics.
 
