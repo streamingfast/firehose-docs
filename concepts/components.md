@@ -120,7 +120,7 @@ Merged blocks generally aren't read by other Firehose components in a running, l
 
 ### Relayer
 
-Relayer Component in Detail
+#### Relayer Component in Detail
 
 The Relayer component is responsible for providing executed block data to other Firehose components.
 
