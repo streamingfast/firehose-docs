@@ -16,7 +16,7 @@ The Firehose system is comprised of several key components including the [Fireho
 
 The Firehose components work together in symphony to provide blockchain data from configured and instrumented nodes to consumers through the [gRPC Server](components.md#firehose-grpc-server).
 
-Understanding the Firehose components individually is helpful for fully comprehending the overall system and should aid with setup and operation.
+Understanding the Firehose components individually is helpful for fully comprehending the overall system and will aid with setup and operation.
 
 ### Firehose-enabled Blockchain Node
 
