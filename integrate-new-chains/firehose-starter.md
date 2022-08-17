@@ -8,15 +8,11 @@ description: StreamingFast Firehose template documentation
 
 #### Firehose Template in Detail
 
-The Firehose-ACME template is a quick and low-resource way to evaluate and better understand a real, live-running Firehose.
-
-The Firehose-ACME template can even be run without a fully functioning blockchain node.
+The Firehose-ACME template is the main starting point for instrumenting new, unsupported blockchain nodes.
 
 #### Firehose Template & Faux Data
 
 The template consists of basic code and a faux data provision application called the Dummy Blockchain, or dchain.
-
-Note, that the _Firehose-ACME template is the main starting point for instrumenting new, unsupported blockchain nodes._&#x20;
 
 ### Firehose Template Setup
 
@@ -32,7 +28,7 @@ Find a location on the target computer to download and store the Firehose-ACME t
 
 Open a new terminal window. Navigate to the destination on the target computer where Firehose files will be stored.
 
-```shell
+```shell-session
 cd /Users/<User Account>/Desktop/
 ```
 
@@ -42,7 +38,7 @@ Create a new directory in the chosen location and name it something like "SFFire
 
 Create the new directory and navigate into it.&#x20;
 
-```shell
+```shell-session
 mkdir SFFirehose; cd SFFirehose; pwd
 ```
 
@@ -54,7 +50,7 @@ The pwd command will print the full path to the new directory to the Terminal. T
 
 Next, clone the Firehose-ACME template into the SFFirehose directory created in step one.
 
-```shell
+```shell-session
 git clone git@github.com:streamingfast/firehose-acme
 ```
 
@@ -64,7 +60,7 @@ git clone git@github.com:streamingfast/firehose-acme
 
 Run the installation process for the Firehose-ACME starter.
 
-```shell
+```shell-session
 go install -v ./cmd/fireacme
 ```
 
@@ -78,7 +74,7 @@ The standard default Go binary directory is `~/go/bin`.&#x20;
 
 The GOPATH can be checked by issuing the echo command followed by the system variable preceded by a dollar sign.
 
-```shell
+```shell-session
 echo $GOPATH
 ```
 
@@ -86,7 +82,7 @@ echo $GOPATH
 
 To ensure the Firehose-ACME binary is executable on the command line through the shell run the binary and pass the version flag.&#x20;
 
-```shell
+```shell-session
 fireacme --version
 ```
 
@@ -94,7 +90,7 @@ fireacme --version
 
 If everything has been set up correctly the version will be printed to the Terminal window.
 
-```shell
+```shell-session
 fireacme version dev (Built 2022-08-05T15:36:44-07:00) 
 ```
 
@@ -120,7 +116,7 @@ The Dummy Blockchain should be started and allowed to run for at least a few min
 
 Using a terminal window navigate to the directory that Firehose was downloaded and set up within. The path will look something similar to the following.
 
-```shell
+```shell-session
 /Users//Desktop/<User Account>/SFFirehose/
 ```
 
@@ -128,7 +124,7 @@ Using a terminal window navigate to the directory that Firehose was downloaded a
 
 Next, navigate into the directory named "standard", inside of the directory named "devel", under the main firehose-acme directory.
 
-```shell
+```shell-session
 cd /Users//Desktop/<User Account>/SFFirehose/standard/devel
 ```
 
@@ -142,7 +138,7 @@ The full path into the dchain directory must be used. The path needs to be in qu
 
 Example path:
 
-```shell
+```shell-session
 extractor-node-path: "/Users/<User Account>/Desktop/SFFireshose/dummy-blockchain/dchain"
 ```
 
@@ -160,7 +156,7 @@ The shell script that starts the Firehose-ACME template is located inside the de
 
 Issue the following command in the terminal window to start the Firehose-ACME template.
 
-```shell
+```shell-session
 ./start.sh
 ```
 
@@ -172,7 +168,7 @@ The following messages will be printed to the terminal window if&#x20;
 * all system paths have been set correctly,
 * &#x20;and the Dummy Blockchain was installed and set up correctly.
 
-```shell
+```shell-session
 2022-08-03T11:22:30.744-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
 2022-08-03T11:22:30.750-0700 INFO (fireacme) launching applications: extractor-node,firehose,merger,relayer
 start --store-dir=/Users/seanmoore-mpb/Desktop/dfuse/integrate/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
@@ -193,7 +189,9 @@ If the output seen in the target computer's Terminal looks resembles the sample 
 
 This is the basic process for setting up a Firehose. Real-world implementations don't use or rely on the Dummy Blockchain application or its data.
 
-The next steps will be determined by the end goals of any Firehose user. Existing, current, and knowledgable node operators can take advantage of the pre-instrumented blockchain solutions provided by StreamingFast for their specific blockchain.
+Existing, current, and knowledgable node operators can take advantage of the pre-instrumented blockchain solutions provided by StreamingFast for their specific blockchain.
+
+Blockchains that do not currently have a StreamingFast instrumented node client solution can create their own.
 
 ### Problems
 
@@ -207,7 +205,7 @@ extractor-node-path:"/
 
 The following error will be displayed for an incorrectly formatted field in the YAML config file. Note, this is a YAML error, however, if it's a new topic this could potentially cause issues.
 
-```shell
+```shell-session
 Error: unable to read config file "standard.yaml": reading json: yaml: line 10: did not find expected key   
 ```
 
