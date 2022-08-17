@@ -62,16 +62,16 @@ _Note, if issues are encountered on macOS for this step see the_ [_Problems_](in
 
 A message similar to the following should be displayed in the Terminal window If everything is working correctly.
 
-```shell
-INFO [08-08|14:36:21.188] Initializing deep mind
-INFO [08-08|14:36:21.193] Deep mind initialized                    enabled=false sync_instrumentation_enabled=true mining_enabled=false block_progress_enabled=false compaction_disabled=false archive_blocks_to_keep=0 genesis_provenance="Geth Default"
+```shell-session
+INFO [08-17|13:09:27.848] Initializing deep mind 
+INFO [08-17|13:09:27.848] Deep mind initialized                    enabled=false sync_instrumentation_enabled=true mining_enabled=false block_progress_enabled=false compaction_disabled=false archive_blocks_to_keep=0
 Geth
-Version: 1.10.21-fh2
-Git Commit: 86d99626c622c2e4e1a22502172c59911675faaf
+Version: 1.10.21-dm-stable
+Git Commit: 5557196d722fa8388df151ddf90a32b9e7c9ae65
 Architecture: amd64
 Go Version: go1.17.12
 Operating System: darwin
-GOPATH=/Users/<User Account>/go
+GOPATH=/Users/<User Account>sh/go
 GOROOT=go
 ```
 
@@ -103,7 +103,7 @@ After sfeth has completed downloading issue the following command in the termina
 
 _Note, the file name for the archive must match the version that was downloaded._
 
-```shell
+```shell-session
 tar -xvzf sf-ethereum_0.9.0_linux_x86_64.tar.gz
 ```
 
@@ -111,7 +111,7 @@ tar -xvzf sf-ethereum_0.9.0_linux_x86_64.tar.gz
 
 The following message will be displayed in the terminal window after the archive has been extracted.
 
-```shell
+```shell-session
 r.gz
 x LICENSE
 x README.md
@@ -122,7 +122,7 @@ x sfeth
 
 Issue the following command to the terminal window to verify sfeth was completely downloaded and the application fully operational.
 
-```shell
+```shell-session
 ./sfeth --version
 ```
 
@@ -130,7 +130,7 @@ Issue the following command to the terminal window to verify sfeth was completel
 
 The following message will be displayed in the terminal window if sfeth is working correctly.
 
-```shell
+```shell-session
 sfeth version 0.10.2 (Commit f0a8987, Built 2022-08-09T12:43:08-07:00)
 ```
 
@@ -152,7 +152,7 @@ Firehose needs a home. This will be the main working directory for the Firehose 
 
 Using a terminal window navigate to the location where Firehose will be stored on the target computer.
 
-```shell
+```shell-session
 cd ~; pwd // navigate to home directory
 ```
 
@@ -164,7 +164,7 @@ _Note, use the target computer's home directory to begin If a dedicated director
 
 Create a new directory in the location chosen in the previous setup. In the example, the name sf-firehose will be used.
 
-```shell
+```shell-session
 mkdir sf-firehose
 ```
 
@@ -176,7 +176,7 @@ _Note, commands for the remaining steps use the newly created sf-firehose direct
 
 Using the Terminal window copy the files downloaded in the previous steps to the newly created sf-firehose directory.
 
-```shell
+```shell-session
 cp <path-to-binary>/geth_linux ./sf-firehose/geth_linux
 cp <path-to-binary>/sfeth ./sf-firehose/sfeth
 ```
@@ -193,7 +193,7 @@ To run sfeth a YAML configuration file is required. This file drives core inform
 
 To create a new file quickly issue the following command to the terminal window.
 
-```
+```shell-session
 touch eth-mainnet.yaml
 ```
 
