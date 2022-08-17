@@ -14,7 +14,7 @@ Synchronization is the process of collecting data from other peer nodes on the n
 
 #### Start sfeth
 
-To begin Firehose synchronization with Ethereum Mainnet issue the following command to the Terminal.
+To begin Firehose synchronization with Ethereum Mainnet issue the following command to the terminal.
 
 ```bash
 ./sfeth -c eth-mainnet.yaml start
@@ -22,7 +22,7 @@ To begin Firehose synchronization with Ethereum Mainnet issue the following comm
 
 #### Data Logging
 
-The data being processed by the connected node will be displayed in the Terminal window.&#x20;
+The data being processed by the connected node will be displayed in the terminal window.&#x20;
 
 Data logging will be presented in the following format.
 
