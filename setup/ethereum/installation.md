@@ -52,7 +52,7 @@ chmod +x geth_linux
 
 Now, run the binary and check its version to ensure it was properly downloaded and the permissions were correctly set.&#x20;
 
-_Note, if issues are encountered on macOS for this step see the Problems section of this document._
+_Note, if issues are encountered on macOS for this step see the_ [_Problems_](installation.md#problems) _section of this document._
 
 ```shell
 ./geth_linux version
