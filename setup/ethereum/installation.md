@@ -253,10 +253,10 @@ _This step will only need to be done one time._
 {% endtab %}
 
 {% tab title="Polygon" %}
-_<mark style="color:purple;">**NEED CONTENT**</mark>_
+_<mark style="color:purple;">****</mark>_
 {% endtab %}
 
 {% tab title="BSC" %}
-_<mark style="color:purple;">**NEED CONTENT**</mark>_
+_<mark style="color:purple;">****</mark>_
 {% endtab %}
 {% endtabs %}
