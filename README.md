@@ -6,8 +6,6 @@ description: StreamingFast Firehose
 
 ### Firehose Documentation
 
-Welcome to the primary entry point for the Firehose documentation.&#x20;
-
 #### Where to Start
 
 [Firehose Overview](intro/firehose-overview.md) is a great place to begin learning about the overall scope, vision, and capabilities.
