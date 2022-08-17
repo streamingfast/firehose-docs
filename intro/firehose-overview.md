@@ -16,7 +16,7 @@ Firehose provides a files-based and streaming-first approach to processing block
 
 #### Firehose Basics
 
-In basic terms, Firehose is responsible for extracting data from blockchain nodes in a highly efficient manner. Firehose also consumes, processes, and streams blockchain data to consumers of nodes running Firehose-enabled, instrumented blockchain client software.
+Firehose is responsible for extracting data from blockchain nodes in a highly efficient manner. Firehose also consumes, processes, and streams blockchain data to consumers of nodes running Firehose-enabled, instrumented blockchain client software.
 
 #### Firehose Advantages
 
