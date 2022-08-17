@@ -14,17 +14,17 @@ The Firehose system is comprised of several key components including the [Fireho
 
 #### Component Relationships
 
-The Firehose components work together in symphony to provide blockchain data from configured and instrumented nodes to consumers through the gRPC Server.
+The Firehose components work together in symphony to provide blockchain data from configured and instrumented nodes to consumers through the [gRPC Server](components.md#firehose-grpc-server).
 
-Understanding the Firehose components individually is helpful for fully comprehending the overall system and should aid with the setup and operation of the application.
+Understanding the Firehose components individually is helpful for fully comprehending the overall system and should aid with setup and operation.
 
 ### Firehose-enabled Blockchain Node
 
 #### Firehose-enabled Node in Detail
 
-The Firehose-enabled Blockchain Node is a third-party blockchain node client, such as Ethereum, instrumented under StreamingFast practices to output data that will be read by Firehose.&#x20;
+The Firehose-enabled Blockchain Node is a third-party blockchain node client, such as Ethereum, instrumented under StreamingFast practices to output data that will be read by the Firehose Reader component.&#x20;
 
-The Reader component will consume the data produced by the Firehose-enabled Blockchain Node.
+_The Reader component will consume the data produced by the Firehose-enabled Blockchain Node._
 
 The Firehose-enabled Blockchain Node runs in tandem with the Reader component. The two components are connected either through a UNIX pipe through STDOUT, or by having the Reader component's process execute and fork the blockchain client (using the node-manager software included in Firehose).
 
