@@ -10,9 +10,9 @@ description: StreamingFast Firehose node instrumentation documentation
 
 Firehose was designed to work with multiple blockchains beyond the existing implementations.
 
-The process of instrumenting a node is mandatory for using a new blockchain with Firehose.
+The [Firehose-ACME template's](firehose-starter.md) codebase is the starting point for working with blockchains that do not have a pre-existing StreamingFast instrumented node client solution.
 
-The [Firehose-ACME starter](firehose-starter.md) application's codebase is the starting point for working with unsupported blockchains.
+The process of instrumenting a node is mandatory for blockchains without existing StreamingFast instrumentation support.
 
 An instrumented node that is capable of producing data to be consumed by Firehose is required.&#x20;
 
