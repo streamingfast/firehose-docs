@@ -60,7 +60,7 @@ _Note, if issues are encountered on macOS for this step see the_ [_Problems_](in
 
 **Success Message**
 
-A message similar to the following should be displayed in the Terminal window If everything is working correctly.
+A message similar to the following should be displayed in the terminal window If everything is working correctly.
 
 ```shell-session
 INFO [08-17|13:09:27.848] Initializing deep mind 
