@@ -22,9 +22,9 @@ To begin Firehose synchronization with Ethereum Mainnet issue the following comm
 
 #### Data Logging
 
-The data being processed by the connected node will be displayed in the terminal window.&#x20;
+The data being processed by the connected node will be displayed in the terminal window as the processing occurs.&#x20;
 
-Data logging will be presented in the following format.
+Data logging will be presented to the terminal window in the following format.
 
 ```bash
 2022-03-19T10:28:26.666-0400 (sfeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
@@ -99,7 +99,7 @@ Data logging will be presented in the following format.
 ...
 ```
 
-After a short delay, the blocks begin syncing in.
+After a short delay, the blocks begin syncing in. A series of messages as seen below will be printed to the terminal window.
 
 ```bash
 ...
@@ -115,13 +115,22 @@ To terminate the Firehose processing and connection to the Ethereum network pres
 The Firehose sync process will shutdown gracefully and continue where it left off upon the next restart.
 {% endhint %}
 
-Data introspection becomes possible through special sfeth tooling once 10,000 blocks have been synced
+#### Data Inspection Tool
+
+Data inspection becomes possible through special sfeth tooling.&#x20;
 
 Issue the following command to introspect the sync'd block data.
 
-```shell
-./sfeth tools print blocks --store ./eth-data/storage/merged-blocks 100000
+_Note, data inspection can be run after 10,000 blocks have been synced._
 
+```shell-session
+./sfeth tools print blocks --store ./eth-data/storage/merged-blocks 100000
+```
+
+Messages containing information about block data will be printed to the terminal window.
+
+```shell
+...
 Block #10000 (dc2d938) (prev: b9ecd2d): 0 transactions, 1 balance changes
 Block #10001 (7e86236) (prev: dc2d938): 0 transactions, 1 balance changes
 Block #10002 (d2be089) (prev: 7e86236): 0 transactions, 1 balance changes
@@ -156,25 +165,25 @@ The one-block files and 100-block files will be stored in `data-dir/storage/merg
 
 #### Data Introspection Tools
 
-Finally, we have built tools that allow you to introspect the block files:
+The Firehose data introspection tools allow you to introspect one-blocks and merged blocks files.
 
-```bash
-./sfeth tools print blocks --store ./eth-data/storage/merged-blocks 10000
+```shell-session
+./sfeth tools print blocks --store ./eth-data/storage/merged-blocks 0000000000
 ```
 
-```bash
-./sfeth tools print one-block --store ./eth-data/storage/one-blocks 10000
+```shell-session
+./sfeth tools print one-block --store ./eth-data/storage/one-blocks 0000000000
 ```
 
 ### Launch the Firehose
 
 #### After Data Synchronization
 
-After the Ethereum network has finished synchronization the data collected can by analyzed and streamed.
+After the Ethereum network has finished synchronization the data collected can be analyzed and streamed.
 
 Issue the following command to begin a Mindreader process.
 
-```bash
+```shell
 ./sfeth -c eth-mainnet.yaml start mindreader-node
 ```
 
