@@ -16,7 +16,7 @@ The Firehose [Concepts & Architecture](broken-reference) provides an in-depth lo
 
 Full source code is available in the [official Firehose Github repository](https://github.com/streamingfast/firehose).&#x20;
 
-### Intended Audience
+#### Intended Audience
 
 This documentation exists to help the following audiences learn about and operate Firehose.
 
