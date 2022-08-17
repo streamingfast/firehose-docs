@@ -33,7 +33,9 @@ Blockchain nodes used in this capacity require:&#x20;
 * very few features,&#x20;
 * no archive mode capability,&#x20;
 * no JSON-RPC service,&#x20;
-* and no indexed data will be queried. The Firehose-enabled Blockchain Node is responsible for executing all transactions in an order, respecting the consensus protocol of the blockchain.
+* and no indexed data will be queried.&#x20;
+
+The Firehose-enabled Blockchain Node is responsible for executing all transactions in an order, respecting the consensus protocol of the blockchain.
 
 ### Reader
 
