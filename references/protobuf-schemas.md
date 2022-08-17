@@ -1,3 +1,7 @@
+---
+description: StreamingFast Firehose schemas
+---
+
 # Schemas
 
 ## Chain-specific schemas

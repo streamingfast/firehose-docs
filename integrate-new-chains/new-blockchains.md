@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose node instrumentation documentation
+description: StreamingFast Firehose new blockchains
 ---
 
 # New Blockchains

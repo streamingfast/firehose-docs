@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose Ethereum installation documentation
+description: StreamingFast Firehose Ethereum installation
 ---
 
 # Installation

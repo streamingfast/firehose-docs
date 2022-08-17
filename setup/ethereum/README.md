@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose Ethereum documentation
+description: StreamingFast Firehose for Ethereum
 ---
 
 # Ethereum

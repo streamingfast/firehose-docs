@@ -1,7 +1,7 @@
 ---
 weight: 70
 title: Data Storage
-description: StreamingFast Firehose data storage documentation
+description: StreamingFast Firehose data storage
 ---
 
 # Data Storage

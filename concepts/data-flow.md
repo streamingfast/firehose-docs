@@ -1,7 +1,7 @@
 ---
 weight: 30
 title: Data Flow
-description: StreamingFast Firehose data flow documentation
+description: StreamingFast Firehose data flow
 ---
 
 # Data Flow

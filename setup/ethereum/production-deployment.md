@@ -1,3 +1,7 @@
+---
+description: StreamingFast Firehose production deployment
+---
+
 # Production deployment
 
 {% hint style="info" %}

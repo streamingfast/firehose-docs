@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose template documentation
+description: StreamingFast Firehose template
 ---
 
 # Firehose Template

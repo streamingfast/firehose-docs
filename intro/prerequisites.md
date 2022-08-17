@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose prerequisites documentation
+description: StreamingFast Firehose prerequisites
 ---
 
 # Prerequisites
@@ -12,6 +12,6 @@ Software Developers and Systems Administrators should have an understanding of [
 
 #### Requirements
 
-Full Firehose systems require a functional and operating [blockchain node](https://ethereum.org/en/run-a-node/).&#x20;
+Full Firehose implementations require a functional and operating [blockchain node](https://ethereum.org/en/run-a-node/).&#x20;
 
 Each blockchain has specific hardware and internet connection requirements. Refer to the specific vendor's documentation for the target blockchain.&#x20;

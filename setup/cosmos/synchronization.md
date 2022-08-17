@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose synchronization documentation for Cosmos
+description: StreamingFast Firehose Cosmos synchronization
 ---
 
 # Synchronization

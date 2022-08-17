@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose Ethereum Synchronization documentation
+description: StreamingFast Firehose Ethereum synchronization
 ---
 
 # Synchronization

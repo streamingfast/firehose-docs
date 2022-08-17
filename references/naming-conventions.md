@@ -1,3 +1,7 @@
+---
+description: StreamingFast Firehose naming conventions
+---
+
 # Naming Conventions
 
 This document lists naming conventions between the different Firehose implementations, in order to provide a unified experience between people running multiple versions of the Firehose, where the same concepts have the same name.

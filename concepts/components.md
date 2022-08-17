@@ -1,7 +1,7 @@
 ---
 weight: 40
 title: Components
-description: StreamingFast Firehose component documentation
+description: StreamingFast Firehose components
 ---
 
 # Components
