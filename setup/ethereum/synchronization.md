@@ -354,6 +354,3 @@ The CPU/RAM requirements will depend on these factors:
 * _High Availability -_ Highly available deployments will require _two, or more times the resources_ listed in the following examples, as a general rule.
 * _Throughput of queries -_ Firehose is built for horizontal scalability. As the need for requests per second increase the deployment increases in size and more CPU/RAM is required in the deployment cluster.
 
-#### Ethereum Mainnet
-
-Coming soon.
