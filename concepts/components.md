@@ -28,7 +28,12 @@ _The Reader component will consume the data produced by the Firehose-enabled Blo
 
 The Firehose-enabled Blockchain Node runs in tandem with the Reader component. The two components are connected either through a UNIX pipe through STDOUT, or by having the Reader component's process execute and fork the blockchain client. This is accomplished using the node-manager software included in Firehose.
 
-Blockchain nodes used in this way need very little features, no archive mode capability, no JSON-RPC service, no indexed data will be queried on it. It needs to be the node executing all transactions in an order respecting the consensus protocol of the blockchain.
+Blockchain nodes used in this capacity require:&#x20;
+
+* very few features,&#x20;
+* no archive mode capability,&#x20;
+* no JSON-RPC service,&#x20;
+* and no indexed data will be queried. The Firehose-enabled Blockchain Node is responsible for executing all transactions in an order, respecting the consensus protocol of the blockchain.
 
 ### Reader
 
