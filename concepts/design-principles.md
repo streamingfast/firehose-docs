@@ -12,7 +12,7 @@ description: StreamingFast Firehose design principles
 
 Firehose was heavily inspired by large-scale data science machinery and other processes previously developed by the StreamingFast team.
 
-### Firehose system "North Star"
+### The Firehose "North Star"
 
 #### Truths & Assumptions
 
