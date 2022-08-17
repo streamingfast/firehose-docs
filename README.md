@@ -12,7 +12,7 @@ Welcome to the primary entry point for the Firehose documentation.&#x20;
 
 [Firehose Overview](intro/firehose-overview.md) is a great place to begin learning about the overall scope, vision, and capabilities.
 
-The Firehose [Concepts & Architecture](broken-reference) provides an in-depth look at the decisions that drove the development team's development efforts while designing the application.
+The Firehose [Concepts & Architecture](broken-reference) provides an in-depth look at the decisions that drove the development team's efforts while designing the application.
 
 #### Find the Source Code
 
