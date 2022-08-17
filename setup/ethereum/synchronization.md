@@ -121,19 +121,21 @@ The Firehose sync process will shutdown gracefully and continue where it left of
 
 #### Data Extraction in Detail
 
-The `mindreader-node` is a process that runs and manages the blockchain node `Geth`. It consumes the blockchain data that is extracted from our instrumented `Geth` node. The instrumented `Geth` node outputs individual block data.
+The `mindreader-node` is a process that runs and manages the Geth blockchain node. It consumes the blockchain data that is extracted from the StreamingFast instrumented Geth node. The StreamingFast instrumented Geth node outputs individual block data.
 
-The `mindreader-node` process will either write individual block data into separate files called one-block files, or merge 100 blocks data together and write into a file called a `100-blocks file`.
+The `mindreader-node` process will either write individual block data into separate files called one-block files, or merge 100 blocks data together and write into a `100-blocks file`.
 
 #### Merged Mode
 
-This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag. When running the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, we say the "mindreader is running in merged mode". When the flag is disabled, we will refer to the mindreader as running in its normal mode of operation.
+This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag.&#x20;
+
+When running the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, the "_mindreader is running in merged mode_". When the flag is disabled it's running in "_normal mode_".
 
 #### Block Mergers
 
-In the scenario where the `mindreader-node` process stores one-block files, the merger process can be run on the side. In that scenario one-block files are merged into 100-block files. When we are syncing the chain we will run the `mindreader-node` process in merged mode.
+In the scenario where the `mindreader-node` process stores one-block files, the merger process can be run on the side. When the merger process is running in this fashion one-block files are merged into 100-block files.&#x20;
 
-When we are synced we will run the `mindreader-node` in its regular mode of operation (storing one-block files)
+The `mindreader-node` process is run in merged mode during chain synchronization. After the synchronization process has completed the run the `mindreader-node` will run in its regular mode of operation, storing one-block files.
 
 #### Block File Data Storage
 
