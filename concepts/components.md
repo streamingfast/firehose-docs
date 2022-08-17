@@ -51,7 +51,7 @@ Once the process has been started, the Reader component reads the data being gen
 
 It's important to note that the data consumed by any Firehose system takes its source in the Reader. It is the initial and deterministic data producer of the whole Firehose system.
 
-#### Bootable Nodes
+#### Reader Nodes
 
 The Blockchain node underlying the Reader managed by the Reader can be considered simple. They do not need archive capabilities or other wonky features. Reader nodes can be considered simple, fully bootable nodes. The Reader nodes do not have archiving capabilities or any additional features.
 
