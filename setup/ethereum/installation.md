@@ -4,6 +4,8 @@ description: StreamingFast Firehose Ethereum installation
 
 # Installation
 
+
+
 {% tabs %}
 {% tab title="Ethereum/Goerli/Ropsten" %}
 ### Install StreamingFast Geth
@@ -12,7 +14,7 @@ description: StreamingFast Firehose Ethereum installation
 
 StreamingFast's instrumented Geth version extracts raw blockchain data from Ethereum nodes.
 
-_Note, Geth is the official_ [_Golang_](https://go.dev/) _implementation of the Ethereum Protocol. The Firehose-enabled Blockchain Node_ _is an instrumented version of the official Geth implementation._
+_Note, Geth is the official_ [_Golang_](https://go.dev/) _implementation of the Ethereum Protocol. The Firehose-enabled Blockchain Node_ _is an instrumented version of the official Geth implementation. Learn more about the_ [_Firehose component family_](../../concepts/components.md)_._
 
 ### Step 1. Download StreamingFast Geth
 
