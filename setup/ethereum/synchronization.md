@@ -26,7 +26,7 @@ To begin Firehose synchronization with Ethereum Mainnet issue the following comm
 
 The data being processed by the connected node will be displayed in the terminal window as the processing occurs.&#x20;
 
-Data logging will be presented to the terminal window in the following format.
+Data logging will be presented in the following format.
 
 ```shell-session
 2022-03-19T10:28:26.666-0400 (sfeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
@@ -121,31 +121,31 @@ The Firehose sync process will shutdown gracefully and continue where it left of
 
 #### Data Extraction in Detail
 
-The `mindreader-node` is a process that runs and manages the Geth blockchain node. It consumes the blockchain data that is extracted from the StreamingFast instrumented Geth node. The StreamingFast instrumented Geth node outputs individual block data.
+The `mindreader-node` is a process that runs and manages the Geth blockchain node. The `mindreader-node` also consumes the blockchain data that is extracted from the instrumented Geth node and outputs individual block data.
 
-The `mindreader-node` process will either write individual block data into separate files called one-block files, or merge 100 blocks data together and write into a `100-blocks file`.
+The `mindreader-node` process will either write individual block data into separate files called one-block files, or merge one hundred blocks of data together creating a `100-blocks file`.
 
 #### Merged Mode
 
 This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag.&#x20;
 
-When running the `mindreader-node` process with `mindreader-node-merge-and-store-directly` flag enabled, the "_mindreader is running in merged mode_". When the flag is disabled it's running in "_normal mode_".
+When running the `mindreader-node` process with the `mindreader-node-merge-and-store-directly` flag enabled, the mindreader is running in merged mode. When the flag is disabled it's running in normal mode.
 
 #### Block Mergers
 
 In the scenario where the `mindreader-node` process stores one-block files, the merger process can be run on the side. When the merger process is running in this fashion one-block files are merged into 100-block files.&#x20;
 
-The `mindreader-node` process is run in merged mode during chain synchronization. After the synchronization process has completed the run the `mindreader-node` will run in its regular mode of operation, storing one-block files.
+The `mindreader-node` process is run in merged mode during chain synchronization. After the synchronization process has completed the `mindreader-node` will store one-block files running in its regular mode of operation.
 
 #### Block File Data Storage
 
-The one-block files and 100-block files will be stored in `data-dir/storage/merged-blocks` and `data-dir/storage/one-blocks` respectively. The naming convention of the file is the number of the first block in the file.
+The one-block files and 100-block files will be stored in the `data-dir/storage/merged-blocks` and `data-dir/storage/one-blocks` directories, respectively. The naming convention of the block files uses the number of the first block in the file.
 
 ### Data Introspection Tools
 
-The Firehose data introspection tools allow you to introspect one-blocks and merged blocks files.
+#### Data Introspection in Detail
 
-#### Data Inspection Tool
+The Firehose data introspection tools allow you to introspect one-blocks and merged blocks files.
 
 Data inspection becomes possible through special sfeth tooling.&#x20;
 
@@ -171,7 +171,7 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 ...
 ```
 
-Similarly one-blocks files can also be inspected. Issue the following command to the terminal window to inspect one-blocks files.
+In addition, one-block files can be inspected. Issue the following command to the terminal window to inspect one-block files.
 
 ```shell-session
 ./sfeth tools print one-block --store ./eth-data/storage/one-blocks 0000000000
@@ -179,7 +179,7 @@ Similarly one-blocks files can also be inspected. Issue the following command to
 
 ### Launch the Firehose
 
-#### After Data Synchronization
+#### Data Analyzation & Streaming
 
 After the Ethereum network has finished synchronization the data collected can be analyzed and streamed.
 
@@ -191,7 +191,7 @@ Issue the following command to begin a Mindreader process.
 
 `sfeth` is now running a `mindreader-node` process that is extracting and merging the 100-blocks of data at a time.
 
-#### Launch Firehose
+#### Launch Firehose & Relayer
 
 The `sfeth` command launches both the Relayer and Firehose.
 
@@ -240,13 +240,15 @@ The following message will be printed to the terminal window after launching Fir
 ...
 ```
 
-At its core, the `Firehose` is a gRPC stream. We can list the available gRPC services with grpcurl. Installation instruction for grpcurl can be found in its [official GitHub repository](https://github.com/fullstorydev/grpcurl).
+At its core, Firehose is a gRPC stream. The available gRPC services can be displayed using grpcurl.&#x20;
+
+_Installation instruction for grpcurl can be found in its_ [_official GitHub repository_](https://github.com/fullstorydev/grpcurl)_._
 
 ```bash
 grpcurl -plaintext localhost:13042 list
 ```
 
-The available gRPC services will be printed to the terminal window. The message will resemble the following.
+The available gRPC services will print the following message to the terminal window.&#x20;
 
 ```shell-session
 dfuse.bstream.v1.BlockStreamV2 
@@ -255,7 +257,9 @@ grpc.reflection.v1alpha.ServerReflection
 sf.firehose.v1.Stream
 ```
 
-Block streaming can be accomplished through the `sf.firehose.v1.Stream` service. Issue the following command in the terminal to begin streaming blocks.
+Block streaming can be accomplished through the `sf.firehose.v1.Stream` service.&#x20;
+
+Issue the following command in the terminal to begin streaming blocks.
 
 {% code overflow="wrap" %}
 ```shell-session
@@ -263,7 +267,9 @@ grpcurl -plaintext -d '{"start_block_num": 10}' localhost:13042 sf.firehose.v1.S
 ```
 {% endcode %}
 
-Block data formed into a JSON representation will be printed to the terminal window. The messages will resemble the following.
+Block data formed into a JSON representation will be printed to the terminal window.&#x20;
+
+The messages will resemble the following.
 
 ```json
 {
