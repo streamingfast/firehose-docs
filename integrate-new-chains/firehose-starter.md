@@ -213,7 +213,7 @@ Error: unable to read config file "standard.yaml": reading json: yaml: line 10: 
 
 The following message will be displayed in the shell if the path to the example blockchain application is incorrect.
 
-```shell
+```shell-session
 2022-08-02T14:50:42.153-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
 2022-08-02T14:50:42.171-0700 INFO (fireacme) launching applications: extractor-node,firehose,merger,relayer
 start --store-dir=/Users/<User Account>/Desktop/SFFirehose/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
