@@ -18,7 +18,7 @@ The process of instrumenting a node is mandatory for blockchains without existin
 
 Close attention to detail is crucial when instrumenting nodes and working with custom Protocol Buffer schemas when integrating new blockchains.
 
-### Firehose-ACME Starter Template
+### Firehose-ACME Template
 
 #### Template for Creating New Chain Integrations
 
