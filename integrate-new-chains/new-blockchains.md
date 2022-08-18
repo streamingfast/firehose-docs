@@ -30,7 +30,7 @@ The first step in the process is to conduct a global search and replace of the t
 
 #### Rename Files
 
-Instructions for renaming a few other required files and the search and replace are outlined below.
+Follow the steps below to conduct the search and replace tasks and rename the necessary files.
 
 ### Step 1. Create Main Integration Directory
 
