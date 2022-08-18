@@ -26,7 +26,7 @@ StreamingFast provides the Firehose-ACME template repository to act as a startin
 
 #### Search & Replace
 
-Integrators can simply perform a global search and replace of the template's references to "_ACME_" to reflect the new blockchain's name. _Note, three exact reference types need to be updated, acme, Acme and ACME._
+The first step in the process is to conduct a global search and replace of the template's references to "_ACME_" to reflect the new blockchain's name. _Note, three exact reference types need to be updated, acme, Acme and ACME._
 
 #### Rename Files
 
