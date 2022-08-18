@@ -42,7 +42,7 @@ After the download has been completed, open a terminal window and navigate to th
 
 The permissions on the binary file must be set to be executable for the desired user account on the target computer.
 
-```shell
+```shell-session
 chmod +x geth_linux
 ```
 
