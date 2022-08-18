@@ -22,7 +22,7 @@ Integrating new blockchains is an intricate process. Attention to detail is para
 
 #### Template for Creating New Chain Integrations
 
-StreamingFast provides the Firehose-ACME template repository to stand as a starting point that integrators can use to create the required chain-specific code.
+StreamingFast provides the Firehose-ACME template repository to stand as a starting point to create the required chain-specific code.
 
 #### Search & Replace
 
