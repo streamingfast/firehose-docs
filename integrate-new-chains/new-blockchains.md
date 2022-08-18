@@ -16,7 +16,7 @@ The process of instrumenting a node is mandatory for blockchains without existin
 
 #### Detailed Design
 
-Close attention to detail is crucial when instrumenting nodes and working with custom Protocol Buffer schemas when integrating new blockchains.
+Integrating new blockchains is an intricate process. Attention to detail is paramount during node instrumentation and while creating Protocol Buffer schemas.
 
 ### Firehose-ACME Template
 
