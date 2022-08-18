@@ -14,55 +14,79 @@ The [Firehose-ACME template's](firehose-starter.md) codebase is the starting poi
 
 The process of instrumenting a node is mandatory for blockchains without existing StreamingFast instrumentation support.
 
-#### Careful Consideration & Design
+#### Detailed Design
 
-Close attention to detail is crucial when instrumenting nodes with new blockchains and working with custom Protocol Buffer schemas.
+Close attention to detail is crucial when instrumenting nodes and working with custom Protocol Buffer schemas when integrating new blockchains.
 
 ### Firehose-ACME Starter Template
 
-StreamingFast provides the Firehose-ACME starter repository to act as a template that integrators can use to create the required chain-specific code.
+StreamingFast provides the Firehose-ACME template repository to act as a starting point that integrators can use to create the required chain-specific code.
 
-We purposely used `Acme` (and also `acme` and `ACME`) throughout this repository so that integrators can simply copy everything and perform a global search/replace of this word and use their chain name instead.
+Integrators can simply perform a global search and replace of the template's references to "_ACME_" to reflect the new blockchain's name. _Note, three exact reference types need to be updated, acme, Acme and ACME._
 
-As well as this, there is a few files that requires a renaming. Would will find below the instructions to properly make the search/replace as well as the list of files that should be renamed.
+Instructions for renaming a few other required files and the search and replace are outlined below.
 
-### Cloning
+### Create Main Integration Directory
 
-First step is to clone again `firehose-acme` this time to a dedicated repository that will be the one of your chain:
+Select a location on the target computer for all Firehose files including the data that will be extracted and stored, and all other integration artifacts. The name is flexible however this directory is an important location and will be frequented often during integration and operation of Firehose. _This directory is the home directory of the custom integration being created._
+
+```shell-session
+mkdir /Users/<User Account>/Desktop/custom-firehose-integration
+```
+
+### Clone Firehose-ACME
+
+#### Establishing the New Integration Codebase
+
+Using a terminal, navigate into the directory created in the previous step. Issue the following command to complete the cloning process.
+
+It's imperitive to use a sensible name for the new project that the Firehose-ACME template is being cloned into. Replace the reference to "_\<newchainname>_" with the name of the new chain being integrated.
+
+```shell-session
+git clone git@github.com:streamingfast/firehose-acme.git firehose-<newchainname>
+```
+
+#### Naviate Into Cloned Directory
+
+Using a terminal, navigate into the directory by cloning the Firehose-ACME template repository.
+
+```shell-session
+cd firehose-<newchainname>
+```
+
+#### Remove Git History
+
+Next, remove the `.git` directory to erradicate the previous history associated with the Firehose-ACME repository. Note, the reference to "_\<newchainname>_", seen in the example, needs to reflect the name of the new blockchain being integrated.
 
 ```
-git clone git@github.com:streamingfast/firehose-acme.git firehose-<chain>
-```
-
-> Don't forget to change `<chain>` by the name of your exact chain like `aptos` so it would became `firehose-aptos`
-
-Then we are going to remove the `.git` folder to start fresh:
-
-```
-cd firehose-<chain>
+cd firehose-<newchainname>
 rm -rf .git
 git init
 ```
 
-While not required, I suggest to create an initial commit so it's easier to revert back if you make a mistake or delete a wrong file:
+#### Initial Repo Commit
+
+Following best practice for development, this is a good point to make an initial commit to Git. The initial commit stands as a clean point in time the repository can be reverted to if need be. Again, update the reference to "_\<chain>_" to reflect the name of the new blockchain being integrated.
 
 ```
-cd firehose-<chain>
+cd firehose-<newchainname>
 git add -A .
 git commit -m "Initial commit"
 ```
 
-### Renaming
+### Update ACME References
 
-Perform a **case-sensitive** search/replace for the following terms:
+Perform a _case-sensitive_ search and replace for the following references to ACME.
 
-* `acme` -> `<chain>`
-* `Acme` -> `<Chain>`
-* `ACME` -> `<CHAIN>`
+* acme -> \<newchainname>
+* Acme -> \<Newchainname>
+* ACME -> \<NEWCHAINNAME>
 
-> Don't forget to change `<chain>` (and their variants) by the name of your exact chain like `aptos` so it would became `aptos`, `Aptos` and `APTOS` respectively.
+> Don't forget to update all variants of "_\<chain>_" to the name of the new chain being integrated. For example, if the chain's name was "aptos" the updates will be "aptos", "Aptos" and "APTOS", respectively.
 
 ### Files
+
+In addition to the previous global search and replace tasks, a handful of files also need to be updated to reflect the name of the new chain. The following example shows the name being update to "_aptos_" for reference purposes.
 
 ```
 git mv ./devel/fireacme ./devel/fireaptos
@@ -77,45 +101,68 @@ git mv ./tools/fireacme ./tools/fireaptos
 git mv ./types/pb/sf/acme ./types/pb/sf/aptos
 ```
 
-### Re-generate Protobuf
+### Regenerate Protocol Buffers
 
-Once you have performed the renamed of all 3 terms above and file renames, you should re-generate the Protobuf code:
+After updating the references to "ACME" the Protocol Buffers need to be regenerated. Issue the following command to the terminal window. _Note, the terminal session should be in the firehose-newchainname directory._
 
 ```
-cd firehose-<chain>
 ./types/pb/generate.sh
 ```
 
-> You will require `protoc`, `protoc-gen-go` and `protoc-gen-go-grpc`. The former can be installed following [https://grpc.io/docs/protoc-installation/](https://grpc.io/docs/protoc-installation/), the last two can be installed respectively with `go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.25.0` and `go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1.0`.
+#### Protocol Buffer Requirements
+
+Requirements for Protocol Buffer regeneration include `protoc`, `protoc-gen-go` and `protoc-gen-go-grpc`.
+
+Installation instruction for `protoc` are available at the project official website.&#x20;
+
+[https://grpc.io/docs/protoc-installation/](https://grpc.io/docs/protoc-installation/)
+
+Install `protoc-gen-go` by issuing the following command to the terminal.
+
+```
+go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.25.0
+```
+
+Install `protoc-gen-go-grpc` by issuing the following command to the terminal.
+
+```
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1.0.
+```
 
 ### Testing
 
-Once everything is done, normally tests should be all good and everything should compile properly:
+After completing all of the previous steps the base integration is ready for initial testing. Issue the following command to the terminal to test the changes made so far.
 
 ```
 go test ./...
 ```
 
+If all changes were made correctly the updated project should compile successfully.
+
 ### Commit
 
-If everything is fine at that point, you are ready to commit everything and push
+Upon sucessful project compliation the updated code should be commited to the repository.&#x20;
 
 ```
 git add -A .
-git commit -m "Renamed Acme to <Chain>"
+git commit -m "Renamed Acme to <Newchainname>"
 git add remote origin <url>
 git push
 ```
 
 ### Data Modeling&#x20;
 
-Designing the Google Protobuf Structures for your given blockchain is one of the most important steps in an integrators journey. The data structures needs to represent as precisely as possible the on chain data and concepts. By carefully crafting the Protobuf structure, the next steps will be a lot simpler. The data model need.
+Designing the Google Protobuf Structures for your given blockchain is one of the most important steps in an integrators journey.&#x20;
 
-As a reference, here is Ethereum's Protobuf Structure: https://github.com/streamingfast/proto-ethereum/blob/develop/sf/ethereum/codec/v1/codec.proto&#x20;
+Data structures need to represented as precisely as possible.&#x20;
 
-#### Integrate the target blockchain&#x20;
+Careful design and consideration taken while creating the Protocol Buffer will aid with the following integration tasks.
 
-Modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to your blockchain node's binary. Learn more about those parameters in the \[Operator's manual]\(\{{#< ref "/operate/running-the-node" >#\}}).
+Additional information ia available in the [StreamingFast Ethereum ProtoBuff structure implementation](https://github.com/streamingfast/proto-ethereum/blob/develop/sf/ethereum/codec/v1/codec.proto).
+
+#### &#x20;Integrate the target blockchain&#x20;
+
+Modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to your blockchain node's binary.&#x20;
 
 Modify `devel/standard/start.sh` to
 
