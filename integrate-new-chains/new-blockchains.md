@@ -20,13 +20,21 @@ Close attention to detail is crucial when instrumenting nodes and working with c
 
 ### Firehose-ACME Starter Template
 
+#### Template for Creating New Chain Integrations
+
 StreamingFast provides the Firehose-ACME template repository to act as a starting point that integrators can use to create the required chain-specific code.
+
+#### Search & Replace
 
 Integrators can simply perform a global search and replace of the template's references to "_ACME_" to reflect the new blockchain's name. _Note, three exact reference types need to be updated, acme, Acme and ACME._
 
+#### Rename Files
+
 Instructions for renaming a few other required files and the search and replace are outlined below.
 
-### Create Main Integration Directory
+### Step 1. Create Main Integration Directory
+
+#### Custom Integration Main Directory
 
 Select a location on the target computer for all Firehose files including the data that will be extracted and stored, and all other integration artifacts. The name is flexible however this directory is an important location and will be frequented often during integration and operation of Firehose. _This directory is the home directory of the custom integration being created._
 
@@ -34,13 +42,15 @@ Select a location on the target computer for all Firehose files including the da
 mkdir /Users/<User Account>/Desktop/custom-firehose-integration
 ```
 
-### Clone Firehose-ACME
+### Step 2. Clone Firehose-ACME
 
 #### Establishing the New Integration Codebase
 
 Using a terminal, navigate into the directory created in the previous step. Issue the following command to complete the cloning process.
 
-It's imperitive to use a sensible name for the new project that the Firehose-ACME template is being cloned into. Replace the reference to "_\<newchainname>_" with the name of the new chain being integrated.
+_Note, Using a sensible name for the new project that the Firehose-ACME template is being cloned into is imperative._&#x20;
+
+Replace the reference to "_\<newchainname>_" with the name of the new chain being integrated.
 
 ```shell-session
 git clone git@github.com:streamingfast/firehose-acme.git firehose-<newchainname>
@@ -74,7 +84,7 @@ git add -A .
 git commit -m "Initial commit"
 ```
 
-### Update ACME References
+### Step 3. Update ACME References
 
 Perform a _case-sensitive_ search and replace for the following references to ACME.
 
@@ -84,7 +94,7 @@ Perform a _case-sensitive_ search and replace for the following references to AC
 
 > Don't forget to update all variants of "_\<chain>_" to the name of the new chain being integrated. For example, if the chain's name was "aptos" the updates will be "aptos", "Aptos" and "APTOS", respectively.
 
-### Files
+### Step 4. Rename Project Files
 
 In addition to the previous global search and replace tasks, a handful of files also need to be updated to reflect the name of the new chain. The following example shows the name being update to "_aptos_" for reference purposes.
 
@@ -101,7 +111,7 @@ git mv ./tools/fireacme ./tools/fireaptos
 git mv ./types/pb/sf/acme ./types/pb/sf/aptos
 ```
 
-### Regenerate Protocol Buffers
+### Step 5. Regenerate Protocol Buffers
 
 After updating the references to "ACME" the Protocol Buffers need to be regenerated. Issue the following command to the terminal window. _Note, the terminal session should be in the firehose-newchainname directory._
 
@@ -129,7 +139,9 @@ Install `protoc-gen-go-grpc` by issuing the following command to the terminal.
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1.0.
 ```
 
-### Testing
+### Step 6. Test Changes&#x20;
+
+#### Ensure Changes Complie Correctly
 
 After completing all of the previous steps the base integration is ready for initial testing. Issue the following command to the terminal to test the changes made so far.
 
@@ -139,7 +151,7 @@ go test ./...
 
 If all changes were made correctly the updated project should compile successfully.
 
-### Commit
+### Step 7. Commit Working Code
 
 Upon sucessful project compliation the updated code should be commited to the repository.&#x20;
 
@@ -150,7 +162,7 @@ git add remote origin <url>
 git push
 ```
 
-### Data Modeling&#x20;
+### Step 8. Protobuf Data Modeling&#x20;
 
 Designing the Google Protobuf Structures for your given blockchain is one of the most important steps in an integrators journey.&#x20;
 
@@ -168,11 +180,11 @@ Modify `devel/standard/start.sh` to
 
 Run it with:&#x20;
 
-### Define types
+### Step 9. Define types
 
 Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in [specs for chain's protobuf model definitions](../new-docs/integrate/protobuf-defs/)
 
-### Modify the Ingestor's `Read()`
+### Step 10. Modify the Ingestor's `Read()`
 
 Inside `codec`, is a file called `reader.go`. This file is the boundary between your process and the firehose's ingestion process.
 
@@ -180,11 +192,11 @@ Read the source of the `ConsoleReader` and make sure you understand how it works
 
 Do X, Y, Z
 
-### Make sure data is produced
+### Step 11. Make sure data is produced
 
 As you iterate, check that files are produced under `xyz` directory.
 
-### Rename everything
+### Step 12. Rename everything
 
 Pick two names, the long form and short form for your chain, following the [naming conventions](../new-docs/integrate/names/).
 
