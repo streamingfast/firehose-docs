@@ -123,7 +123,7 @@ After updating the references to "ACME" the Protocol Buffers need to be regenera
 
 Requirements for Protocol Buffer regeneration include `protoc`, `protoc-gen-go` and `protoc-gen-go-grpc`.
 
-Installation instruction for `protoc` are available at the project official website.&#x20;
+Installation instructions for `protoc` are available at the project official website.&#x20;
 
 [https://grpc.io/docs/protoc-installation/](https://grpc.io/docs/protoc-installation/)
 
