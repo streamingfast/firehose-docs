@@ -188,7 +188,7 @@ Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match yo
 
 Inside `codec`, is a file called `reader.go`. This file is the boundary between your process and the firehose's ingestion process.
 
-Read the source of the `ConsoleReader` and make sure you understand how it works. This will be the bulk of your integration work.
+[Read the source](https://github.com/streamingfast/firehose-acme/blob/master/nodemanager/codec/consolereader.go) of the `ConsoleReader` and make sure you understand how it works. This will be the bulk of your integration work.
 
 Do X, Y, Z
 
