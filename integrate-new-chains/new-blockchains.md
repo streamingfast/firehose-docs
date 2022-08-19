@@ -170,7 +170,7 @@ Data structures need to represented as precisely as possible.&#x20;
 
 Careful design and consideration taken while creating the Protocol Buffer will aid with the following integration tasks.
 
-Additional information ia available in the [StreamingFast Ethereum ProtoBuff structure implementation](https://github.com/streamingfast/proto-ethereum/blob/develop/sf/ethereum/codec/v1/codec.proto).
+Additional information ia available in the [StreamingFast Ethereum ProtoBuff structure implementation](https://github.com/streamingfast/sf-ethereum/blob/develop/proto/sf/ethereum/type/v1/type.proto).
 
 #### &#x20;Integrate the target blockchain&#x20;
 
@@ -182,7 +182,7 @@ Run it with:&#x20;
 
 ### Step 9. Define types
 
-Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in [specs for chain's protobuf model definitions](../new-docs/integrate/protobuf-defs/)
+Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in specs for chain's protobuf model definitions
 
 ### Step 10. Modify the Ingestor's `Read()`
 
@@ -198,7 +198,7 @@ As you iterate, check that files are produced under `xyz` directory.
 
 ### Step 12. Rename everything
 
-Pick two names, the long form and short form for your chain, following the [naming conventions](../new-docs/integrate/names/).
+Pick two names, the long form and short form for your chain, following the naming conventions.
 
 For example:
 
