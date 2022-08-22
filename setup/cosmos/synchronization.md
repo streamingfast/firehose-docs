@@ -4,21 +4,23 @@ description: StreamingFast Firehose Cosmos synchronization
 
 # Synchronization
 
-Below, we'll show you how to use [Firehose](../../operate/concepts/) to sync and stream Cosmos Chains.
+## Cosmos Synchronization
 
-#### Install firehose-cosmos
+#### Cosmos Sync in Detail
 
-`firehose-cosmos`, is an application that runs a few small, isolated processes, that together form the `Firehose` stack. A thorough discussion of the [Concepts & Architecture](../concepts/) is discussed elsewhere. Needless to say, you must run `firehose-cosmos` to run a `Firehose` locally.
+Firehose for Cosmos, `firehose-cosmos,` is an application that funs a few small, isolated processes as a Firehose implementation.&#x20;
 
-You can download the latest version of `firehose-cosmos` [here](https://github.com/figment-networks/firehose-cosmos/releases), however we recommend you use the Dockerfile provided in the `firehose-cosmos` repository located [here](https://github.com/figment-networks/firehose-cosmos).
+The latest version of `firehose-cosmos` is available in the project's [official Github repository](https://github.com/figment-networks/firehose-cosmos/releases). _Note, StreamingFast recommends using the `firehose-cosmos` Dockerfile._
 
-As of the time of writing this, the latest release is v0.4.0, you can get a copy of this from [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags). The latest release will always be listed on the [Github Releases Page](https://github.com/figment-networks/firehose-cosmos/releases). Ensure you always use the most up to date version of `firehose-cosmos` to ensure you have the latest functionality.
+Firehose for Cosmos is also available at [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) and the latest release will always be listed on the [Github releases page](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
+
+Always download the most up-to-date version of `firehose-cosmos` to ensure the latest functionality, updates, and patches are available.
 
 ```bash
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
 ```
 
-Alternatively, you can clone the repository and run `make install` to install it locally.
+Another option is to clone the `firehose-cosmos` repository and then run `make install` to install the application locally.
 
 To verify the installation was successful, run:
 
