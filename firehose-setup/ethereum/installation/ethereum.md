@@ -255,4 +255,4 @@ xattr -d com.apple.quarantine sfeth
 xattr -d com.apple.quarantine geth_mac
 ```
 
-_This step will only need to be done one time._
+_Note, this step will only need to be completed once._
