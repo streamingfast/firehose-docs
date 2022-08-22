@@ -1,20 +1,16 @@
 ---
-description: StreamingFast Firehose Ethereum installation
+description: StreamingFast Firehose Ethereum, Goerli, Ropsten Installation
 ---
 
-# Installation
+# Ethereum
 
-
-
-{% tabs %}
-{% tab title="Ethereum/Goerli/Ropsten" %}
 ### Install StreamingFast Geth
 
 **StreamingFast Geth Setup in Detail**
 
 StreamingFast's instrumented Geth version extracts raw blockchain data from Ethereum nodes.
 
-_Note, Geth is the official_ [_Golang_](https://go.dev/) _implementation of the Ethereum Protocol. The Firehose-enabled Blockchain Node_ _is an instrumented version of the official Geth implementation. Learn more about the_ [_Firehose component family_](../../concepts/components.md)_._
+_Note, Geth is the official_ [_Golang_](https://go.dev/) _implementation of the Ethereum Protocol. The Firehose-enabled Blockchain Node_ _is an instrumented version of the official Geth implementation. Learn more about the_ [_Firehose component family_](../../../concepts/components.md)_._
 
 ### Step 1. Download StreamingFast Geth
 
@@ -54,7 +50,7 @@ chmod +x geth_linux
 
 Now, run the binary and check its version to ensure it was properly downloaded and the permissions were correctly set.&#x20;
 
-_Note, if issues are encountered on macOS for this step see the_ [_Problems_](installation.md#problems) _section of this document._
+_Note, if issues are encountered on macOS for this step see the_ [_Problems_](ethereum.md#problems) _section of this document._
 
 ```shell
 ./geth_linux version
@@ -244,7 +240,7 @@ _Note, these settings are not production-ready._
 
 #### Next Steps
 
-The next step will be dependent on [local](local-deployment.md) or [production](production-deployment.md)-based Firehose deployments. Follow the documentation provided for each to contine.
+The next step will be dependent on [local](../../../setup/ethereum/local-deployment.md) or [production](../../../setup/ethereum/production-deployment.md)-based Firehose deployments. Follow the documentation provided for each to contine.
 
 ### Problems
 
@@ -260,13 +256,3 @@ xattr -d com.apple.quarantine geth_mac
 ```
 
 _This step will only need to be done one time._
-{% endtab %}
-
-{% tab title="Polygon" %}
-_<mark style="color:purple;">****</mark>_
-{% endtab %}
-
-{% tab title="BSC" %}
-_<mark style="color:purple;">****</mark>_
-{% endtab %}
-{% endtabs %}
