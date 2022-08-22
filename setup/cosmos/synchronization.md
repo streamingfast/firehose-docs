@@ -10,13 +10,13 @@ description: StreamingFast Firehose Cosmos synchronization
 
 Firehose for Cosmos, `firehose-cosmos,` is an application that funs a few small, isolated processes as a Firehose implementation.&#x20;
 
-The latest version of `firehose-cosmos` is available in the project's [official Github repository](https://github.com/figment-networks/firehose-cosmos/releases). _Note, StreamingFast recommends using the `firehose-cosmos` Dockerfile._
+The latest version of `firehose-cosmos` is available in the project's [official Github repository](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
 
-Firehose for Cosmos is also available at [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) and the latest release will always be listed on the [Github releases page](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
+Firehose for Cosmos is also available at [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) and the latest release is listed project's on the [Github releases page](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
 
-Always download the most up-to-date version of `firehose-cosmos` to ensure the latest functionality, updates, and patches are available.
+_Note, make sure to download the most up-to-date version of `firehose-cosmos` to ensure the latest functionality, updates, and patches are available. StreamingFast recommends using the `firehose-cosmos` Dockerfile._
 
-```bash
+```shell-session
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
 ```
 
@@ -40,9 +40,11 @@ Figment provides [binaries and pre-built Docker images](https://hub.docker.com/r
 
 Below is an example for v7.0.4 of the Osmosis testnet. Modify this to use whichever version of the chain node you are indexing. Pass the path to the chain data volume storage.&#x20;
 
-```bash
+```shell-session
 docker run --rm -it -v data:/app/osmosis_home/data figmentnetworks/firehose-cosmos:fh-v0.4.0-osmosis1-testnet-v7.0.4 /app/firehose start
 ```
+
+#### Chain Data Volume Storage Path&#x20;
 
 If the chain data volume storage path isn't supplied the chain will start from the Genesis block each time it starts. For CosmosHub chains, the chain data volume storage path will be:
 
@@ -50,7 +52,9 @@ If the chain data volume storage path isn't supplied the chain will start from t
 /app/gaia_home/data
 ```
 
-In the situation that you wish the run the nodes outside of Docker, you would need to ensure you are running the Figment modified node and then change the node configuration file to include the following:
+#### Running Nodes Outside Docker
+
+Update the node configuration file and start the Figment modified node to run it outside of Docker. Use the example below as the content for the configuration file.
 
 ```ini
 #######################################################
