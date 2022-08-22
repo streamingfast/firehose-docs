@@ -22,11 +22,11 @@ Integrating new blockchains is an intricate process. Attention to detail is para
 
 #### Template for Creating New Chain Integrations
 
-StreamingFast provides the Firehose-ACME template repository to stand as a starting point to create the required chain-specific code.
+StreamingFast provides the Firehose-ACME template repository to stand as a starting point to create the required chain-specific code and files.
 
 #### Search & Replace
 
-The first step in the process is to conduct a global search and replace of the template's references to "_ACME_" to reflect the new blockchain's name. _Note, three exact reference types need to be updated, acme, Acme and ACME._
+The first step in the process is to conduct a global search and replace for the template's references of "_ACME_" to reflect the new blockchain's name. _Note, that three exact reference types need to be updated, acme, Acme, and ACME._
 
 #### Rename Files
 
@@ -36,7 +36,7 @@ Follow the steps below to conduct the search and replace tasks and rename the ne
 
 #### Custom Integration Main Directory
 
-Select a location on the target computer for all Firehose files including the data that will be extracted and stored, and all other integration artifacts. The name is flexible however this directory is an important location and will be frequented often during integration and operation of Firehose. _This directory is the home directory of the custom integration being created._
+Select a location on the target computer for all Firehose files including the data that will be extracted and stored, and all other integration artifacts. The name is flexible however this directory is an important location and will be frequented often during the integration and operation of Firehose. _This directory is the home directory of the custom integration being created._
 
 ```shell-session
 mkdir /Users/<User Account>/Desktop/custom-firehose-integration
@@ -66,7 +66,7 @@ cd firehose-<newchainname>
 
 #### Remove Git History
 
-Next, remove the `.git` directory to erradicate the previous history associated with the Firehose-ACME repository. Note, the reference to "_\<newchainname>_", seen in the example, needs to reflect the name of the new blockchain being integrated.
+Next, remove the `.git` directory to eradicate the previous history associated with the Firehose-ACME repository. Note, the reference to "_\<newchainname>_", seen in the example, needs to reflect the name of the new blockchain being integrated.
 
 ```
 cd firehose-<newchainname>
@@ -76,7 +76,9 @@ git init
 
 #### Initial Repo Commit
 
-Following best practice for development, this is a good point to make an initial commit to Git. The initial commit stands as a clean point in time the repository can be reverted to if need be. Again, update the reference to "_\<chain>_" to reflect the name of the new blockchain being integrated.
+Following development best practices, this is a great time to make an initial commit to the Git repository.&#x20;
+
+The initial commit stands as a clean point in time the repository can be reverted to if need be. Again, update the reference to "_\<chain>_" to reflect the name of the new blockchain being integrated.
 
 ```
 cd firehose-<newchainname>
@@ -96,7 +98,7 @@ Perform a _case-sensitive_ search and replace for the following references to AC
 
 ### Step 4. Rename Project Files
 
-In addition to the previous global search and replace tasks, a handful of files also need to be updated to reflect the name of the new chain. The following example shows the name being update to "_aptos_" for reference purposes.
+In addition to the previous global search and replace tasks, a handful of files also need to be updated to reflect the name of the new chain. The following example shows the name being updated to "_aptos_".
 
 ```
 git mv ./devel/fireacme ./devel/fireaptos
@@ -123,7 +125,7 @@ After updating the references to "ACME" the Protocol Buffers need to be regenera
 
 Requirements for Protocol Buffer regeneration include `protoc`, `protoc-gen-go` and `protoc-gen-go-grpc`.
 
-Installation instructions for `protoc` are available at the project official website.&#x20;
+Installation instructions for `protoc` are available at the project's official website.&#x20;
 
 [https://grpc.io/docs/protoc-installation/](https://grpc.io/docs/protoc-installation/)
 
@@ -153,7 +155,7 @@ If all changes were made correctly the updated project should compile successful
 
 ### Step 7. Commit Working Code
 
-Upon sucessful project compliation the updated code should be commited to the repository.&#x20;
+Once the project is compiling successfully it's time to commit the code to the repository.
 
 ```
 git add -A .
@@ -164,41 +166,37 @@ git push
 
 ### Step 8. Protobuf Data Modeling&#x20;
 
-Designing the Google Protobuf Structures for your given blockchain is one of the most important steps in an integrators journey.&#x20;
+Designing the protobuf structures for your given blockchain is one of the most important steps in an integrator's journey. It's imperative that the data structures in the protobuf's of the custom integration are represented as precisely as possible.&#x20;
 
-Data structures need to represented as precisely as possible.&#x20;
+The success of the integration will be proportionate to the amount of time spent on the design and implementation phase of the protobuf definitions.
 
-Careful design and consideration taken while creating the Protocol Buffer will aid with the following integration tasks.
-
-Additional information ia available in the [StreamingFast Ethereum ProtoBuff structure implementation](https://github.com/streamingfast/sf-ethereum/blob/develop/proto/sf/ethereum/type/v1/type.proto).
+Additional information is available in the [StreamingFast Ethereum protobuf implementation](https://github.com/streamingfast/sf-ethereum/blob/develop/proto/sf/ethereum/type/v1/type.proto).
 
 #### &#x20;Integrate the target blockchain&#x20;
 
-Modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to your blockchain node's binary.&#x20;
-
-Modify `devel/standard/start.sh` to
-
-Run it with:&#x20;
+Modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to the custom integration's blockchain node binary.&#x20;
 
 ### Step 9. Define types
 
 Go to the `proto` directory, and modify `sf/acme/type/v1/type.proto` to match your chain's types. More details in specs for chain's protobuf model definitions
 
-### Step 10. Modify the Ingestor's `Read()`
+### Step 10.  Modify the Ingestor's `Read()`
 
-Inside `codec`, is a file called `reader.go`. This file is the boundary between your process and the firehose's ingestion process.
+Inside `codec`, is a file called `reader.go`. This file is the boundary between the custom integration process and the firehose's ingestion process.
 
-[Read the source](https://github.com/streamingfast/firehose-acme/blob/master/nodemanager/codec/consolereader.go) of the `ConsoleReader` and make sure you understand how it works. This will be the bulk of your integration work.
+[Read the source](https://github.com/streamingfast/firehose-acme/blob/master/nodemanager/codec/consolereader.go) of the `ConsoleReader` to gain a better understanding of how it works. The majority of the customization work will be conducted in this file.
 
-Do X, Y, Z
+Each blockchain has a specific design and implementation details. There isn't a single standard or language that blockchains are written in or follow. For these reasons it's virtually impossible to provide instructions for the instrumentation steps involved with each blockchain in the world.
+
+Studying the StreamingFast Ethereum and other implementations and instrumentations should serve as a foundation for other custom integrations. _Ensure the custom integration has set aside a good amount of time to plan and execute the steps and tasks involved for researching and instrumenting the blockchain being targeted._&#x20;
 
 ### Step 11. Make sure data is produced
 
-As you iterate, check that files are produced under `xyz` directory.
+As the integration progresses ensure that files are being produced under `xyz` directory.
 
 ### Step 12. Rename everything
 
-Pick two names, the long form and short form for your chain, following the naming conventions.
+Pick two names, the long form and short form for the custom integration following the naming conventions outlined below.
 
 For example:
 
@@ -208,5 +206,5 @@ Then finalize the rename:
 
 * Rename `cmd/fireacme` -> `cmd/firearw` (short form)
 * Search and replace `fireacme` => `firearw` (short form)
-* Do massive search and replace from: `acme` => `arweave` (long form)
+* Conduct a global search and replace from: `acme` => `arweave` (long form)
 
