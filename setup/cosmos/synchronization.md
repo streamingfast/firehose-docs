@@ -265,8 +265,8 @@ Full searchability and discoverability of Cosmos is now possible and the underly
 
 **Cosmoshub-4 Mainnet**
 
-`This section is incomplete.`
+Coming soon.
 
 **Osmosis-1 Mainnet**
 
-`This section is incomplete.`
+Coming soon.
