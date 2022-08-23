@@ -14,17 +14,19 @@ The latest version of `firehose-cosmos` is available in the project's [official 
 
 Firehose for Cosmos is also available at [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) and the latest release is listed project's on the [Github releases page](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
 
-_Note, make sure to download the most up-to-date version of `firehose-cosmos` to ensure the latest functionality, updates, and patches are available. StreamingFast recommends using the `firehose-cosmos` Dockerfile._
+StreamingFast recommends using the `firehose-cosmos` Dockerfile.
+
+_Note, make sure to download the most recent version of `firehose-cosmos` for the latest functionality, updates, and patches._&#x20;
 
 ```shell-session
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
 ```
 
-Another option is to clone the `firehose-cosmos` repository and install the application locally. Issue the `make install` command from within the `firehose-cosmos` directory that was cloned from Github.
+Firehose Cosmos can also be installed from source. Navigate to the `firehose-cosmos` directory and issue the `make install` command to the terminal window.
 
 #### Verify Installation of Cosmos
 
-To verify the installation was successful, issue the following command to a terminal window.
+Issue the following command to the terminal window to verify that the Cosmos installation was successful.
 
 ```shell-session
 firehose-cosmos --version
@@ -32,29 +34,37 @@ firehose-cosmos --version
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose --version
 ```
 
-#### Install and run instrumented nodes
+#### Indexing Cosmos
 
-Correctly modified binaries for the chain being targeted are required to index Cosmos.
+To index Cosmos, the binaries must be correctly modified for the selected target blockchain.
 
-Figment provides [binaries and pre-built Docker images](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) for CosmosHub and Osmosis. Versions are available for both Cosmos Mainnet and Cosmos Testnet. _Note, the Dockerfiles start the `firehose-cosmos` process for you._&#x20;
+Figment provides [binaries and pre-built Docker images](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) for CosmosHub and Osmosis. _Note, Mainnet and Testnet versions are available._&#x20;
 
-Below is an example for v7.0.4 of the Osmosis testnet. Modify this to use whichever version of the chain node you are indexing. Pass the path to the chain data volume storage.&#x20;
+#### Docker Starts Firehose
+
+The Dockerfiles will start the `firehose-cosmos` process for you.&#x20;
+
+#### Chain Data Volume Storage Path&#x20;
+
+Be sure to pass the path to the chain data volume storage. If the path isn't supplied the chain will begin synchronizing at the Genesis block each time the application runs.&#x20;
+
+Modify the command below to reference the version of the chain node being indexed.&#x20;
+
+Example command for Osmosis Testnet v7.0.4.
 
 ```shell-session
 docker run --rm -it -v data:/app/osmosis_home/data figmentnetworks/firehose-cosmos:fh-v0.4.0-osmosis1-testnet-v7.0.4 /app/firehose start
 ```
 
-#### Chain Data Volume Storage Path&#x20;
+Chain data volume storage path for CosmosHub chains.
 
-If the chain data volume storage path isn't supplied the chain will start from the Genesis block each time it starts. For CosmosHub chains, the chain data volume storage path will be:
-
-```bash
+```
 /app/gaia_home/data
 ```
 
 #### Running Nodes Outside Docker
 
-Update the node configuration file and start the Figment modified node to run it outside of Docker. Use the example below as the content for the configuration file.
+To run a node outside of Docker update the configuration file for the binary. Check the Extractor Configuration Options to match them with the example below.
 
 ```ini
 #######################################################
@@ -65,11 +75,17 @@ enabled = true
 output_file = "stdout"
 ```
 
-#### firehose-cosmos Configuration
+#### Configuration Files
 
-If you wish to use a configuration file instead of setting all CLI flags, you can pass it with a `-c ./configfile.yaml` argument.
+Configuration files can be passed into the binary at startup. This alleviates passing in numerous command line flags, saves time and reduces errors.
 
-Example:
+Pass the configuration file to the binary at startup using the following argument.
+
+```
+-c ./configfile.yaml
+```
+
+The content below can be used for the configuration file.
 
 ```
 start:
