@@ -85,7 +85,7 @@ Pass the configuration file to the binary at startup using the following argumen
 -c ./configfile.yaml
 ```
 
-The content below can be used for the configuration file.
+The content below can be used for the configuration file. _Note, the path to the node binary should be updated to reflect the location on the target computer._
 
 ```
 start:
@@ -106,17 +106,23 @@ start:
 
 #### Syncing your chain
 
-One you begin running `firehose-cosmos`, you will begin to see your blocks streaming through if it is successfully instrumented. If this is the first time you have run the node, this will start the node from genesis, so give it some time until it start syncing. You may check on the node's status (if its running locally) by opening `http://localhost:26657/status` in your browser.
+The first time the node runs it will begin synchronization from the genesis block. This initial sync can generally take some time, so, give the process a minute or two to get started.
 
-To test if firehose is ready to stream blocks, you can use the grpcurl command:
+If the setup has been configured properly blocks of data will begin streaming and printing to the terminal window.
 
-```bash
+For Cosmos deployments running locally the node's status is viewable by pointing a web browser to the following address.&#x20;
+
+[http://localhost:26657/status](http://localhost:26657/status)
+
+Use `grpcurl` to test the installation's ability to stream block data. Issue the following command to the terminal window.
+
+```
 grpcurl -plaintext localhost:9030 sf.firehose.v1.Stream.Blocks | jq
 ```
 
-Make sure you have both [grpcurl](https://github.com/fullstorydev/grpcurl) and [jq](https://github.com/stedolan/jq) installed. If you don't, you should be able to find them on your preferred package manager.
+Both [grpcurl](https://github.com/fullstorydev/grpcurl) and [jq](https://github.com/stedolan/jq) should be installed. If they aren't available check the target computer's preferred package manager.
 
-You should start seeing logs similar to this:
+Issuing the `grpcurl` command will result in the following logging information being printed to the terminal.
 
 ```bash
 2022-05-30T22:30:11.142+0100 (ingestor) creating mindreader plugin (mindreader/mindreader.go:99) {"archive_store_url": "file:///../fh-data/storage/one-blocks", "merge_archive_store_url": "file:///../fh-data/storage/merged-blocks", "oneblock_suffix": "", "batch_mode": false, "merge_threshold_age": "2562047h47m16.854775807s", "working_directory": "/../fh-data/workdir", "start_block_num": 0, "stop_block_num": 0, "channel_capacity": 0, "with_head_block_update_func": true, "with_shutdown_func": true, "fail_on_non_continuous_blocks": true, "wait_upload_complete_on_shutdown": "10s"}
