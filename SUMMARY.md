@@ -28,6 +28,7 @@
   * [Synchronization](setup/ethereum/synchronization.md)
 * [Cosmos](setup/cosmos/README.md)
   * [Synchronization](setup/cosmos/synchronization.md)
+* [System Requirements](firehose-setup/system-requirements.md)
 
 ## Integrate New Chains
 

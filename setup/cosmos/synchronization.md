@@ -40,8 +40,6 @@ To index Cosmos, the binaries must be correctly modified for the selected target
 
 Figment provides [binaries and pre-built Docker images](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) for CosmosHub and Osmosis. _Note, Mainnet and Testnet versions are available._&#x20;
 
-#### Docker Starts Firehose
-
 The Dockerfiles will start the `firehose-cosmos` process for you.&#x20;
 
 #### Chain Data Volume Storage Path&#x20;
@@ -114,17 +112,17 @@ For Cosmos deployments running locally the node's status is viewable by pointing
 
 [http://localhost:26657/status](http://localhost:26657/status)
 
-Use `grpcurl` to test the installation's ability to stream block data. Issue the following command to the terminal window.
+Issue the following command to the terminal window to test the installation's ability to stream block data using `grpcurl.`
 
 ```
 grpcurl -plaintext localhost:9030 sf.firehose.v1.Stream.Blocks | jq
 ```
 
-Both [grpcurl](https://github.com/fullstorydev/grpcurl) and [jq](https://github.com/stedolan/jq) should be installed. If they aren't available check the target computer's preferred package manager.
+_Note, both_ [_grpcurl_](https://github.com/fullstorydev/grpcurl) _and_ [_jq_](https://github.com/stedolan/jq) _should be installed. If they aren't available check the target computer's preferred package manager._
 
 Issuing the `grpcurl` command will result in the following logging information being printed to the terminal.
 
-```bash
+```shell-session
 2022-05-30T22:30:11.142+0100 (ingestor) creating mindreader plugin (mindreader/mindreader.go:99) {"archive_store_url": "file:///../fh-data/storage/one-blocks", "merge_archive_store_url": "file:///../fh-data/storage/merged-blocks", "oneblock_suffix": "", "batch_mode": false, "merge_threshold_age": "2562047h47m16.854775807s", "working_directory": "/../fh-data/workdir", "start_block_num": 0, "stop_block_num": 0, "channel_capacity": 0, "with_head_block_update_func": true, "with_shutdown_func": true, "fail_on_non_continuous_blocks": true, "wait_upload_complete_on_shutdown": "10s"}
 2022-05-30T22:30:11.142+0100 (ingestor) creating new mindreader plugin (mindreader/mindreader.go:185)
 2022-05-30T22:30:11.143+0100 (merger) running merger (merger/app.go:60) {"config": {"StorageOneBlockFilesPath":"file:///../fh-data/storage/one-blocks","StorageMergedBlocksFilesPath":"file:///../fh-data/storage/merged-blocks","GRPCListenAddr":"0.0.0.0:9020","WritersLeewayDuration":10000000000,"TimeBetweenStoreLookups":5000000000,"StateFile":"/../fh-data/merger/merger.seen.gob","OneBlockDeletionThreads":10,"MaxOneBlockOperationsBatchSize":2000,"NextExclusiveHighestBlockLimit":0}}
@@ -164,9 +162,9 @@ Issuing the `grpcurl` command will result in the following logging information b
 ...
 ```
 
-After a short delay, you should start to see the blocks syncing in.
+After a short delay, blocks will begin syncing and printing to the terminal window.
 
-```bash
+```shell-session
 ...
 2022-05-30T22:39:36.919+0100 (firehose.hub.js) incoming live block (bstream/joiningsource.go:333) {"block": "#5200802 (F7FBEE7A1C978EADD63FE86DE131E72BE7E0DBC78B099FF4BFAD60FF61099A6F)", "live_pass_through": false}
 2022-05-30T22:39:36.919+0100 (firehose.hub.js) added live block to buffer (bstream/joiningsource.go:374) {"block": "#5200802 (F7FBEE7A1C978EADD63FE86DE131E72BE7E0DBC78B099FF4BFAD60FF61099A6F)", "buffer_size": 11}
@@ -206,13 +204,15 @@ After a short delay, you should start to see the blocks syncing in.
 ...
 ```
 
-\{{< alert type="important" >\}} At any point in time you can stop the process with `Ctrl + C`.
+{% hint style="warning" %}
+To terminate the Firehose processing and connection to the Ethereum network press the Control + C keys.
 
-The process will shutdown gracefully and on restart it will continue where it left off. \{{< /alert >\}}
+The Firehose sync process will shutdown gracefully and continue where it left off upon the next restart.
+{% endhint %}
 
-A graceful shutdown should look something similar to the below:
+A graceful shutdown will result in a message similar to the one seen below.
 
-```bash
+```shell-session
 ...
 2022-05-30T22:39:38.322+0100 (dfuse) Received termination signal, quitting (firehose-cosmos/cmd_start.go:55)
 2022-05-30T22:39:38.322+0100 (dfuse) Waiting for all apps termination... (launcher/launcher.go:259)
@@ -253,40 +253,15 @@ A graceful shutdown should look something similar to the below:
 2022-05-30T22:39:39.414+0100 (dfuse) All apps terminated gracefully (launcher/launcher.go:273)
 ```
 
-### Overview and Explanation
+Note, the `firehose-cosmos` extractor component is labeled `ingestor` however is functionally identical. Learn more about the Firehose [components](../../concepts/components.md) and the overall [concepts and architecture](broken-reference).
 
-For a full breakdown of the services used, you can refer to the [components page](../../operate/concepts/components/). For firehose-cosmos, the extractor component is labeled as `ingestor` but functions the same.
+### Synchronization Completion
 
-### What's next
+#### Successful Sync
 
-Congratulations! You're now streaming blocks data from a Cosmos chain.
+The target computer is now successfully streaming Cosmos block data. _Congratulations!_
 
-At this point, Cosmos networks, such as CosmosHub and Osmosis are yours to discover. Slice and dice this data to your heart's content.
-
-System Requirements
-
-The **goal of this page** is to set expectations and get you to understand what is required to run `firehose-cosmos`.
-
-The Firehose stack is extremely elastic, and supports handling networks of varied sizes and shapes. It is also heavy on data, so **make sure you have a good understanding** of the \[different data stores, artifacts and databases]\(\{{< ref "/operate/concepts/data-storage" >\}}) required to run the Firehose stack.
-
-The deployment efforts will be proportional to the size of history, and the density of the chain at hand.
-
-### Network shapes
-
-This document outlines requirements for different shapes of networks
-
-#### Persistent chains
-
-In order to scale easily, you will want to decouple \[components]\(\{{< ref "/operate/concepts/components" >\}}) that run in a single process.
-
-The storage requirements will vary depending on these metrics:
-
-* **The length of history**: whether or not you are serving all the blocks through the firehose
-
-The CPU/RAM requirements will depend on these factors:
-
-* **High Availability**: highly available deployments will require **2 times the resources** (or more) listed in the following examples, as a general rule.
-* **Throughput of queries**: the Firehose stack is built for horizontal scalability, the more requests per second you want to fulfill, the larger the deployment, the more CPU/RAM you will need to allocate to your cluster.
+Full searchability and discoverability of Cosmos is now possible and the underlying blockchain data can be sliced and diced into a myriad of different solutions.
 
 **Cosmoshub-4 Mainnet**
 
