@@ -16,7 +16,7 @@ The Firehose system is comprised of several key components including the:
 * [Reader](components.md#reader),&#x20;
 * [Merger](components.md#merger),&#x20;
 * [Relayer](components.md#relayer),&#x20;
-* [Firehose gRPC Server](components.md#firehose-grpc-server).&#x20;
+* and [Firehose gRPC Server](components.md#firehose-grpc-server).&#x20;
 
 #### Component Relationships
 
