@@ -49,7 +49,7 @@ The Firehose-enabled Blockchain Node is responsible for executing all transactio
 
 The Reader component is responsible for extracting data from instrumented blockchain nodes.
 
-The Reader component utilizes the StreamingFast [node-manager](https://github.com/streamingfast/node-manager) library to run a blockchain node instance as a sub-process. Alternatively, the Reader component can consume the `stdout` of the process (where `reader-stdin` is implemented).
+The Reader component utilizes the StreamingFast [node-manager](https://github.com/streamingfast/node-manager) library to run a blockchain node instance as a sub-process. Alternatively, the Reader component can consume the `stdout` of the process where `reader-stdin` is implemented.
 
 Once the process has been started, the Reader component:&#x20;
 
