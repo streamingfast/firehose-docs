@@ -12,8 +12,6 @@ description: StreamingFast Firehose data storage
 
 Data and the locations where it is stored are important facets of Firehose deployment and operation.&#x20;
 
-#### Key Points
-
 Key Firehose data storage topics include [Data Stores](data-storage.md#data-stores), [Merged blocks files](data-storage.md#merged-blocks-files), [serialization](data-storage.md#serialization), [one block files](data-storage.md#one-block-files), and [100-blocks files](data-storage.md#one-hundred-blocks-files).
 
 ### Data Stores
@@ -34,7 +32,7 @@ For production deployments outside of cloud providers, StreamingFast recommends 
 
 ### Serialization
 
-Fireshose primarily utilizes [Protocol Buffers version 3](https://developers.google.com/protocol-buffers) for serialization.
+Firehose primarily utilizes [Protocol Buffers version 3](https://developers.google.com/protocol-buffers) for serialization.
 
 ### Merged Blocks Files
 
@@ -58,7 +56,7 @@ The Merger component will also collate all of the one-block files into a single 
 
 #### One Hundred Blocks Files
 
-Over one hundred blocks can be contained within a single 100-blocks file.&#x20;
+Up to one hundred blocks can be contained within a single 100-blocks file.&#x20;
 
 The 100-blocks files can include multiple versions such as a fork block or a given block number, ensuring continuity through the previous block link.
 
@@ -66,7 +64,7 @@ The 100-blocks files can include multiple versions such as a fork block or a giv
 
 Nearly all components in Firehose rely on or utilize 100-blocks files. The bstream library consumes 100-blocks files for example.
 
-Protocol-specific decoded block objects. like Ethereum, are what circulate amongst all processes that work with executed block data in Firehose.
+Protocol-specific decoded block objects, like Ethereum, are what circulate amongst all processes that work with executed block data in Firehose.
 
 ### One Block Files
 

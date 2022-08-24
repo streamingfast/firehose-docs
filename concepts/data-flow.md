@@ -133,7 +133,7 @@ The Relayer component uses multiple connections to provide data redundancy for s
 
 #### Racing Relayer Data
 
-The design of the Relayer component enables them to race to push data to consumers.
+The design of the Relayer component enables them to race to push data to consumers!
 
 #### Live Data Through Relayer
 
@@ -162,6 +162,8 @@ The blocks bundled by the Merger component become the file-based historical data
 #### Indexer Data Flow in Detail
 
 The Indexer component runs as a background process digesting merged block files.
+
+#### Block Summary
 
 The Indexer component consumes merged blocks files and provides a targeted summary of the blocks. The targeted summaries are written to object storage as index files.
 
@@ -291,7 +293,7 @@ The `bstream` library contains the minimally required metadata to maintain the c
 
 #### Block & Protocol Buffers
 
-`Block` carries a payload of Protocol Buffer bytes. The payload can be decoded by the consumer in accordance with one of the supported chain-specific `Block` definitions, for example, `sf.ethereum.type.v1.Block`.
+`Block` carries a payload of Protocol Buffer bytes. The payload can be decoded by the consumer in accordance with one of the supported chain-specific `Block` definitions, for example, `sf.ethereum.codec.v1.Block`.
 
 #### Data Storage in Detail
 

@@ -72,7 +72,7 @@ Complete data means accounting for:&#x20;
 
 #### Transaction Relationships & Data
 
-Determining detailed transaction relationship information is difficult; especially after the fact.
+Detailed transaction relationship information is difficult to obtain from typical blockchain data.
 
 Firehose provides thorough and complete transaction data to avoid missed opportunities for potential data application development efforts.
 
@@ -100,9 +100,9 @@ Having access to richer external data processes allows developers to simplify co
 
 ### Modeling With Extreme Care
 
-#### Data Modeled for Ingestion
+#### Data Model for Ingestion
 
-The data model used by StreamingFast to ingest protocol data was modeled with extreme diligence and care.&#x20;
+The data model used by StreamingFast to ingest protocol data was created with extreme diligence and care.&#x20;
 
 StreamingFast encountered several peculiarities within many protocols during the design and development process of Firehose.
 
@@ -152,7 +152,7 @@ The process of querying nodes can cause substantial issues for developers wantin
 
 Consuming blockchain state is difficult and each blockchain presents its own issues.
 
-[Solidity](https://docs.soliditylang.org/en/v0.8.16/), for example, uses `bytes32` => `bytes32` mapping, making such a data retrieval endeavor rather opaque and difficult to reason about. This data is available with additional effort, but not easily.&#x20;
+[Solidity](https://docs.soliditylang.org/en/v0.8.16/), for example, uses `bytes32` => `bytes32` mapping, making such a data retrieval endeavour rather opaque and difficult to reason about. This data is available with additional effort, but not easily.&#x20;
 
 Developers having access to state data presents tremendous opportunities for indexing and application development.
 
