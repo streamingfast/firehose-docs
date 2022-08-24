@@ -32,7 +32,7 @@ The Firehose-enabled Blockchain Node is a third-party blockchain node client, su
 
 _The Reader component will consume the data produced by the Firehose-enabled Blockchain Node._
 
-The Firehose-enabled Blockchain Node runs in tandem with the Reader component. The two components are connected either through a UNIX pipe through `stdout`, or by having the Reader component's process execute and fork the blockchain client. This is accomplished using the node-manager software included in Firehose.
+The Firehose-enabled Blockchain Node runs in tandem with the Reader component. The two components are connected either through a UNIX pipe using `stdout`, or by having the Reader component's process execute and fork the blockchain client. This is accomplished using the node-manager software included in Firehose.
 
 Blockchain nodes used in this capacity require:&#x20;
 
