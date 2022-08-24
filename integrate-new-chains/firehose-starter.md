@@ -171,7 +171,7 @@ The following messages will be printed to the terminal window if&#x20;
 ```shell-session
 2022-08-03T11:22:30.744-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
 2022-08-03T11:22:30.750-0700 INFO (fireacme) launching applications: extractor-node,firehose,merger,relayer
-start --store-dir=/Users/seanmoore-mpb/Desktop/dfuse/integrate/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
+start --store-dir=/Users/<User Account>/Desktop/dfuse/integrate/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
 2022-08-03T11:22:31.924-0700 INFO (extractor.acme) level=info msg="initializing node"
 2022-08-03T11:22:31.927-0700 INFO (extractor.acme) level=info msg="initializing store"
 2022-08-03T11:22:31.928-0700 INFO (extractor.acme) level=info msg="loading last block" tip=165
