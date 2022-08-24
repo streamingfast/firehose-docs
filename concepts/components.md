@@ -73,7 +73,9 @@ _Note, after Firehose has been instrumented on a node it will begin returning su
 
 Placing multiple Reader components side by side, and fronted by one or more Relayers, allows for highly available setups. This is a core part of the design of Firehose.
 
-A Relayer connected to multiple Readers will deduplicate the incoming stream, and push the first Block downstream. Two Readers are therefore racing to push the data first, and the system is designed to leverage that to the benefit of the end-user (lowest latency possible).
+A Relayer connected to multiple Readers will deduplicate the incoming stream and push the first block downstream.&#x20;
+
+Two Reader components will even _race_ to push the data first. The system is designed to leverage this racing Reader feature to the benefit of the end-user by producing the lowest latency possible.
 
 #### Data Aggregation
 
