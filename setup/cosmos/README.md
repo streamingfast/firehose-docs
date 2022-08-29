@@ -6,10 +6,10 @@ description: StreamingFast Firehose for Cosmos
 
 
 
-Setting up Firehose for Ethereum is a straightforward process that uses StreamingFast's pre-instrumented code solution.\
+Setting up Firehose for Cosmos is a straightforward process that uses StreamingFast's pre-instrumented code solution.\
 
 
-The primary tasks for running a Firehose instrumented node are&#x20;
+The primary tasks for running a Cosmos Firehose instrumented node are&#x20;
 
 * install all dependencies,&#x20;
 * deploy the instances,
