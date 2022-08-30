@@ -16,13 +16,13 @@ Firehose for Cosmos is also available at [Figment's Docker Hub](https://hub.dock
 
 StreamingFast recommends using the `firehose-cosmos` Dockerfile.
 
-_Note, make sure to download the most recent version of `firehose-cosmos` for the latest functionality, updates, and patches._&#x20;
-
 Issue the following command to the terminal from inside the firehose-cosmos directory.
 
 ```shell-session
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
 ```
+
+_Note, make sure to download the most recent version of `firehose-cosmos` for the latest functionality, updates, and patches._&#x20;
 
 Firehose Cosmos can also be installed from source. Navigate to the `firehose-cosmos` directory and issue the `make install` command to the terminal window.
 
