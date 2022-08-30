@@ -12,11 +12,13 @@ Firehose for Cosmos, `firehose-cosmos,` is an application that funs a few small,
 
 The latest version of `firehose-cosmos` is available in the project's [official Github repository](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
 
-Firehose for Cosmos is also available at [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) and the latest release is listed project's on the [Github releases page](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
+Firehose for Cosmos is also available at [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) and the latest release is listed on the [Github releases page](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
 
 StreamingFast recommends using the `firehose-cosmos` Dockerfile.
 
 _Note, make sure to download the most recent version of `firehose-cosmos` for the latest functionality, updates, and patches._&#x20;
+
+Issue the following command to the terminal from inside the firehose-cosmos directory.
 
 ```shell-session
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
