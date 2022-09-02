@@ -18,10 +18,7 @@
 
 * [Overview](setup/README.md)
 * [Ethereum](setup/ethereum/README.md)
-  * [Installation](firehose-setup/ethereum/installation/README.md)
-    * [Ethereum](firehose-setup/ethereum/installation/ethereum.md)
-    * [Polygon](firehose-setup/ethereum/installation/polygon.md)
-    * [Binance Smart Chain](firehose-setup/ethereum/installation/binance-smart-chain.md)
+  * [Installation](firehose-setup/ethereum/installation.md)
   * [Local deployment](setup/ethereum/local-deployment.md)
   * [Production deployment](setup/ethereum/production-deployment.md)
   * [Reprocessing history](setup/ethereum/reprocessing-history.md)
