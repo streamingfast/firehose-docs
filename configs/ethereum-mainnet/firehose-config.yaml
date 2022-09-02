@@ -1,0 +1,23 @@
+start:
+  args:
+  - merger
+  - firehose
+  - reader-node
+  - relayer
+  - combined-index-builder
+  flags:
+    # This avoids creating a file for logging purposes (you won't be able to see past logs with this setup)
+    log-to-file: false
+
+    common-chain-id: "1"
+    common-network-id: "1"
+
+    #reader-node-path: ./geth_linux
+    reader-node-arguments: "+--cache 8192 --maxpeers 100 --metrics --metrics.port 6061 --port=30303 --http.port=8545 --snapshot=true --txlookuplimit=1000"
+    reader-node-log-to-zap: false
+
+    # Once fully live with chain, those should be removed, they are used so that Firehose serves
+    # blocks even if the chain is not live yet.
+    # FIXME: It seems firehose-realtime-tolerance is not available anymore so what's the replacement here?
+    #firehose-realtime-tolerance: 999999999s
+    #relayer-max-source-latency: 999999999s
