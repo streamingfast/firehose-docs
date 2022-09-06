@@ -4,7 +4,7 @@ description: StreamingFast Firehose schemas
 
 # Schemas
 
-## Chain-specific schemas
+### Chain-specific schemas
 
 Here is a quick reference to all the known Layer 1 Firehose Protocol Buffer schemas:
 
@@ -17,12 +17,12 @@ Here is a quick reference to all the known Layer 1 Firehose Protocol Buffer sche
 * [Arweave Protobuf Definitions](https://github.com/streamingfast/firehose-arweave/blob/develop/proto/sf/arweave/type/v1/type.proto)
 * [Aptos Protobuf Definitions](https://github.com/streamingfast/firehose-aptos/blob/main/proto/sf/aptos/type/v1/type.proto)
 
-## The `bstream` Block
+### The `bstream` Block
 
 As the main object, blockchain-agnostic, flowing throughout the Firehose. It's the _envelope_ used to pass blockchain-specific _Block_ objects (like Ethereum's, etc..)
 
 What are the important fields, their constraints and meaning. `parent_id`, `lib_num`, considerations for their determinism.
 
-## Versioning
+### Versioning
 
 \[discuss the general (any blockchain) considerations of versioning in the Firehose suite, when do we change the namespace, when do we bump the `version` field in the `block`.
