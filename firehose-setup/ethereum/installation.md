@@ -54,7 +54,7 @@ _**Firehose Versions**_
 
 Firehose v1.0.0 is the most recent release of Firehose. Release versions are also provided for legacy versions of Firehose. It is recommended that new setups use the latest version and existing setups are upgraded as soon as possible.
 
-It’s important that the Geth binary file’s version matches the Firehose binary file version. Firehose binaries tagged with “fh1” will only work with instrumented Geth versions also tagged with “fh1” and the same holds true for “fh2”.&#x20;
+It’s important that the Geth binary file’s version matches the Firehose for Ethereum binary file version. Firehose for Ethereum binaries v1.0.0 and above will only work with Firehose-instrumented Geth versions tagged with “fh2". The older Firehose-instrumented Geth versions tagged “fh1” are legacy versions and should not be used anymore.
 
 Ensure that the Geth Firehose and fireeth versions match. When errors are encountered during Firehose setup it’s often because of this versioning of Geth and fireeth. Double-check both binaries using the appropriate versioning commands provided in this documentation.
 
