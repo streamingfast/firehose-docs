@@ -220,10 +220,6 @@ start:
     reader-node-arguments: "+--cache 8192 --maxpeers 100 --metrics --metrics.port 6061 --port=30303 --http.port=8545 --snapshot=true --txlookuplimit=1000"
     reader-node-log-to-zap: false
 
-    # Once fully live with chain, this should be removed, it is used to check if Firehose serves
-    # blocks even if the chain is not live yet.
-    #relayer-max-source-latency: 999999999s
-
 ```
 
 #### Update Path to Geth
