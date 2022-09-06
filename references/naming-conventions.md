@@ -4,11 +4,11 @@ description: StreamingFast Firehose naming conventions
 
 # Naming Conventions
 
-This document lists naming conventions between the different Firehose implementations, in order to provide a unified experience between people running multiple versions of the Firehose, where the same concepts have the same name.
+In order to provide a unified experience between people running multiple versions of the Firehose, where the same concepts have the same name.
 
 A new Firehose implementation makes use of two forms of a blockchain protocol's name: a _long_ and a _short_ form. The short form should be the shortest contraction of the chain name possible.  For example: `ethereum` and `eth`. We will refer to those forms in this document.&#x20;
 
-## Firehose-enabled Blockchain Nodes
+### Firehose-enabled Blockchain Nodes
 
 These are conventions that apply to the blockchain node codebases themselves, when they are integrating the Firehose. Think of `geth` for Go Ethereum, `solana-validator` for Solana,  `gaia` for Cosmos, etc.
 
@@ -16,7 +16,7 @@ These are conventions that apply to the blockchain node codebases themselves, wh
 * Preferably, each line of output should start with the word `FIRE` followed by a simple word defining what data to expect on each line (for line-based Firehose instrumentation). NOTE: previous implementations used `DMLOG`, for deepmind, which was the codename of StreamingFast instrumentation.
 * If using a library proves useful when doing node instrumentation, using `firehose` as the name of the library for all firehose helpers is preferable. NOTE: `deepmind` was used in several prior implementations.
 
-## Within the chain-specific Firehose binary
+### Within the chain-specific Firehose binary
 
 This section defines what is expected of a conventional Firehose implementation. We use the word `acme` here, that should be replaced by the chain you are instrumenting.
 
@@ -33,7 +33,7 @@ This section defines what is expected of a conventional Firehose implementation.
 
 
 
-## Changes to prior conventions
+### Changes to prior conventions
 
 The `reader` component has historically been known as the `mindreader`, with its twist on the `deepmind` instrumentation the StreamingFast stack had.
 
