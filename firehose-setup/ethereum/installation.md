@@ -28,7 +28,7 @@ Create a new directory in the location chosen in the previous setup. The name â€
 
 _Note, the binary files for Firehose and Geth need to be downloaded to the main Firehose directory._
 
-#### 2. Select Blockchain
+### 2. Select Blockchain
 
 Geth is the official Golang implementation of the Ethereum Protocol. The Geth binary used with Firehose is an instrumented, customized version provided by StreamingFast.
 
