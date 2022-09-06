@@ -170,7 +170,7 @@ _**Success Message**_
 The following message will be displayed in the terminal window if Firehose is working correctly.
 
 ```shell-session
-fireeth version 0.10.2 (Commit f0a8987, Built 2022-08-09T12:43:08-07:00)
+fireeth version 1.0.0 (Commit 42f870c, Built 2022-09-02T17:07:45Z)
 ```
 
 #### Next Steps
