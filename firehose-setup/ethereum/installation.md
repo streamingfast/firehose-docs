@@ -24,7 +24,7 @@ Open a terminal window and navigate to the location where Firehose will be store
 
 Create a new directory in the location chosen in the previous setup. The name “sf-firehose” will be used. Issue the following command to the terminal to create the new directory.
 
-**mkdir sf-firehose**
+`mkdir sf-firehose`
 
 _Note, the binary files for Firehose and Geth need to be downloaded to the main Firehose directory._
 
