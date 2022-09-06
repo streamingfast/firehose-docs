@@ -4,7 +4,7 @@ description: StreamingFast Firehose Ethereum multichain installation
 
 # Installation
 
-### **Firehose Setup & Installation (Multichain)**
+### **Multichain Installation**
 
 #### Firehose Setup Prerequisites
 
