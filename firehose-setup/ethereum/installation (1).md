@@ -34,7 +34,7 @@ It’s important that the Geth binary file’s version matches the Firehose for 
 
 Ensure that the Geth Firehose and fireeth versions match. When errors are encountered during Firehose setup it’s often because of this versioning of Geth and fireeth. Double-check both binaries using the appropriate versioning commands provided in this documentation.
 
-Current legacy **** Firehose operators can find additional information in the [Update Firehose](https://docs.google.com/document/d/1PMf\_od2VuGirl8VS3rH-WO9OrPKkZ5rAQb28BcmeN18/edit) section of the documentation.
+Current legacy **** Firehose operators can find additional information in the Update Firehose section of the documentation.
 
 ### Install Geth
 
