@@ -64,7 +64,7 @@ Once the target blockchain has been identified the next step is to download the 
 
 Choose the Geth binary associated with the blockchain being targeted for the Firehose implementation being created. Firehose is currently available for Linux and macOS and binaries are provided for each operating system.
 
-Right-click the appropriate link, provided below, and save the Geth binary to the main directory created in the first step of the Firehose setup process.
+Save the Geth binary to the main directory created in the first step of the Firehose setup process.
 
 _**Ethereum Geth**_
 
@@ -139,7 +139,7 @@ GOROOT=go
 
 #### Download Firehose Binary
 
-Right-click the link provided below and save the Firehose binary to the main Firehose directory created in the first step of the setup process. After the file has completed downloading extract the archive to obtain the binary file contained within.
+Save the Firehose binary to the main Firehose directory created in the first step of the setup process. After the file has completed downloading extract the archive to obtain the binary file contained within.
 
 _**Firehose for Linux**_&#x20;
 
