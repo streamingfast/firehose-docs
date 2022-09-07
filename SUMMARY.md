@@ -18,8 +18,8 @@
 
 * [Overview](setup/README.md)
 * [Ethereum](setup/ethereum/README.md)
-  * [Installation](firehose-setup/ethereum/installation.md)
-  * [Local Deployment](<firehose-setup/ethereum/installation (1).md>)
+  * [Installation](<firehose-setup/ethereum/installation (1).md>)
+  * [Local Deployment](firehose-setup/ethereum/installation.md)
   * [Reprocessing history](setup/ethereum/reprocessing-history.md)
   * [Synchronization](setup/ethereum/synchronization.md)
 * [Cosmos](setup/cosmos/README.md)
