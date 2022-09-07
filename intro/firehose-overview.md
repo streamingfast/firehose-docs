@@ -62,12 +62,12 @@ Firehose is intended to stand as a replacement for The Graph’s original blockc
 
 #### Technical Overview
 
-To get started with Firehose, the first step is to learn about its core [concepts and technical architecture](broken-reference).&#x20;
+To get started with Firehose, the first step is to learn about its core concepts and technical architecture, beginning with the [component family](https://firehose.streamingfast.io/concepts-and-architeceture/components).&#x20;
 
 #### Existing Firehose Users
 
-Experienced node operators can get up and running by using one of the pre-instrumented blockchain node codebases provided by StreamingFast. Look in the [Firehose Setup ](broken-reference)section of the Firehose documentation for further information.
+Experienced node operators can get up and running by using one of the pre-instrumented blockchain node codebases provided by StreamingFast. Look in the [Firehose Setup](https://firehose.streamingfast.io/firehose-setup/setup) section of the Firehose documentation for further information.
 
 #### Custom Firehose Setups & New Chains
 
-Lastly, developers can learn how to implement custom Firehose nodes in the [Integrate new chains](../integrate-new-chains/new-blockchains.md) section of the Firehose documentation.
+Lastly, developers can learn how to implement custom Firehose nodes in the [New Blockchains](https://firehose.streamingfast.io/integrate-new-chains/new-blockchains) section of the Firehose documentation.
