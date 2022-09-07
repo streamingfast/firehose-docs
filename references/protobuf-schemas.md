@@ -6,7 +6,7 @@ description: StreamingFast Firehose schemas
 
 ### Chain-specific schemas
 
-Here is a quick reference to all the known Layer 1 Firehose Protocol Buffer schemas:
+Firehose currently has Layer 1 Protocol Buffer schemas for several different blockchains. Follow the links below to find the schemas relevant to the blockchain being targeted.
 
 * [Ethereum Protobuf Definitions](https://github.com/streamingfast/sf-ethereum/blob/develop/proto/sf/ethereum/type/v1/type.proto)
 * [NEAR Protobuf Definitions](https://github.com/streamingfast/sf-near/blob/develop/proto/sf/near/codec/v1/codec.proto)
@@ -19,7 +19,9 @@ Here is a quick reference to all the known Layer 1 Firehose Protocol Buffer sche
 
 ### The `bstream` Block
 
-As the main object, blockchain-agnostic, flowing throughout the Firehose. It's the _envelope_ used to pass blockchain-specific _Block_ objects (like Ethereum's, etc..)
+The `bstream` Block is the main blockchain-agnostic object flowing throughout Firehose.&#x20;
+
+The `bstream` Block is the _envelope_ used to pass blockchain-specific _Block_ objects, for Ethereum, as an example.
 
 What are the important fields, their constraints and meaning. `parent_id`, `lib_num`, considerations for their determinism.
 
