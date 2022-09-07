@@ -4,29 +4,29 @@ description: StreamingFast Firehose naming conventions
 
 # Naming Conventions
 
-Firehose currently has multiple versions with separate naming conventions. This page serves as an effort to provide a unified experience between Firehose versions.
+Firehose has multiple versions. The different versions have unique naming conventions. This page serves as an effort to provide a unified experience for developers working between Firehose versions.
 
-A new Firehose implementation makes use of two forms of a blockchain protocol's name: a _long_ and a _short_ form.&#x20;
+Each Firehose setup uses two forms taken from the target blockchain's protocol name. The two forms represent a _long_ and a _short_ form of the protocol name.&#x20;
 
-The short form should be the shortest contraction of the chain name possible.  For example:&#x20;
+The short form will be the shortest contraction of the chain name possible.  For Ethereum, the long form would be`ethereum` and the short form would be `eth`.&#x20;
 
-`ethereum` and `eth`.&#x20;
-
-_Note, these forms will be referenced throughout the naming conventions documentation._
+_Note, these forms will be referenced throughout the Firehose naming conventions documentation._
 
 ### Firehose-enabled Blockchain Nodes
 
-These are conventions that apply to the blockchain node codebases themselves, when they are integrating the Firehose.&#x20;
+These are conventions that apply to the codebases of blockchain nodes when they are integrating Firehose.&#x20;
 
-Think of `geth` for Go Ethereum, `solana-validator` for Solana,  `gaia` for Cosmos, etc.
+Think of `geth` for Go Ethereum, `solana-validator` for Solana,  `gaia` for Cosmos.
 
 * Whenever possible, the top-level flag  `--firehose-enabled` should be used to enable the firehose mode of spewing out data to standard output.
-* Preferably, each line of output should start with the word `FIRE` followed by a simple word defining what data to expect on each line (for line-based Firehose instrumentation). NOTE: previous implementations used `DMLOG`, for deepmind, which was the codename of StreamingFast instrumentation.
-* If using a library proves useful when doing node instrumentation, using `firehose` as the name of the library for all firehose helpers is preferable. NOTE: `deepmind` was used in several prior implementations.
+* Preferably, each line of output should start with the word `FIRE` followed by a simple word defining what data to expect on each line (for line-based Firehose instrumentation). _Note, previous implementations used `DMLOG`, for deepmind, which was the codename of StreamingFast instrumentation._
+* If using a library proves useful when doing node instrumentation, using `firehose` as the name of the library for all firehose helpers is preferable. _Note, `deepmind` was used in several prior implementations._
 
 ### Within the chain-specific Firehose binary
 
-This section defines what is expected of a conventional Firehose implementation. We use the word `acme` here, that should be replaced by the chain you are instrumenting.
+This section defines what is expected of a conventional Firehose implementation.&#x20;
+
+We use the word `acme` here, that should be replaced by the chain you are instrumenting.
 
 * Repository name: `firehose-acme` (_long form_, ex: `firehose-ethereum`)
 * Binary name: `fireacme`, using the _short form_ name (like `eth` for Ethereum, giving `fireeth`), living under `/cmd/fireacme`.
