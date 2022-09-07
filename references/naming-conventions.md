@@ -4,91 +4,47 @@ description: StreamingFast Firehose naming conventions
 
 # Naming Conventions
 
-### Firehose Naming Conventions
+Firehose has multiple versions. The different versions have unique naming conventions. This page serves as an effort to provide a unified experience for developers working between Firehose versions.
 
-#### Naming Conventions Intro
+Each Firehose setup uses two forms taken from the target blockchain's protocol name. The two forms represent a _long_ and a _short_ form of the protocol name.&#x20;
 
-Each Firehose setup has unique naming conventions depending on versioning and the blockchain being targeted.
-
-&#x20;This page serves as a resource to provide a unified experience for developers working between the Firehose versions.
-
-#### Short & Long Form Naming
-
-Each Firehose setup uses two forms of naming. The naming is taken from the target blockchain's protocol name. The two forms establish a _long_ and a _short_ form of the protocol name.&#x20;
-
-The short form will be the shortest abbreviation of the chain name possible.  For Ethereum, the long form would be`ethereum` and the short form would be `eth`.&#x20;
+The short form will be the shortest contraction of the chain name possible.  For Ethereum, the long form would be`ethereum` and the short form would be `eth`.&#x20;
 
 _Note, these forms will be referenced throughout the Firehose naming conventions documentation._
 
-### Firehose Instrumentation Naming
+### Firehose-enabled Blockchain Nodes
 
-#### Instrumentation Naming in Detail
+These are conventions that apply to the codebases of blockchain nodes when they are integrating Firehose.&#x20;
 
-Codebases of blockchain nodes that integrate Firehose use the following naming conventions.
+Think of `geth` for Go Ethereum, `solana-validator` for Solana,  `gaia` for Cosmos.
 
-Go Ethereum uses `geth,` Solana uses`solana-validator`, and Cosmos uses `gaia`.
+* Whenever possible, the top-level flag  `--firehose-enabled` should be used to enable the firehose mode of spewing out data to standard output.
+* Preferably, each line of output should start with the word `FIRE` followed by a simple word defining what data to expect on each line (for line-based Firehose instrumentation). _Note, previous implementations used `DMLOG`, for deepmind, which was the codename of StreamingFast instrumentation._
+* If using a library proves useful when doing node instrumentation, using `firehose` as the name of the library for all firehose helpers is preferable. _Note, `deepmind` was used in several prior implementations._
 
-For line-based Firehose instrumentations, each line of output should start with the word `FIRE` followed by a simple word defining what data to expect on each line.&#x20;
+### Within the chain-specific Firehose binary
 
-_Note, previous implementations used `DMLOG`, for deepmind, which was the codename of StreamingFast instrumentation._
+This section defines what is expected of a conventional Firehose implementation.&#x20;
 
-#### Libraries
+We use the word `acme` here, that should be replaced by the chain you are instrumenting.
 
-When using libraries for node instrumentation using `firehose` as the name of the library for all firehose helpers is preferable. _Note, `deepmind` was used in several prior Firehose implementations._
+* Repository name: `firehose-acme` (_long form_, ex: `firehose-ethereum`)
+* Binary name: `fireacme`, using the _short form_ name (like `eth` for Ethereum, giving `fireeth`), living under `/cmd/fireacme`.
+* Protocol Buffers schema:
+  * The protobuf definition convention for a top-level Block for a new chain is: `sf.[chain].type.v1.Block`
+* Directory layouts:
+  * `/proto`: any protobuf definitions for the chain, properly namespaced. Ex:  `proto/sf/acme/type/v1/type.proto` as the first (and often only) file
+  * `/types`: containing rendered protobuf types (and some helpers). Ex: `/types/pb/sf/acme/type/v1;pbacme`, using the _short form_ package name prefixed with `pb`.
+  * `/types/go.mod`: to be able to import `github.com/streamingfast/firehose-acme/types` and pull only a limited number of dependencies.
+  * `/codec`: containing all coding and decoding methods to manipulate the stream of data coming from the Firehose-enabled Blockchain Node. This library is concerned only with the data wrangling, and not the management of nodes.
 
-Also, note that the top-level flag  `--firehose-enabled` can be used for quickly dumping massive quantities of data to standard output from Firehose.                                         &#x20;
+### Changes to prior conventions
 
-### Chain-specific Binary Changes
+The `reader` component has historically been known as the `mindreader`, with its twist on the `deepmind` instrumentation the StreamingFast stack originally had.
 
-Replace `acme` with the chain you are instrumenting for the following items.&#x20;
+Going forward:Historically, the `mindreader` was the component
 
-In a sample scenario instrumenting the Tezos blockchain acme would be replaced by the two forms of Tezos; something similar to `tezos` and `tez`.
-
-#### Repository Name - `firehose-acme`
-
-If the target blockchain were Tezos the name would be `firehose-tezos`.
-
-#### Binary Name -`fireeth`
-
-The binary name will be the first half of the Firehose product name "fire" combined with the short form of the target blockchain. If the target blockchain were Tezos, the name of the binary would be something similar to `firetez`.
-
-#### Protocol Buffers Schema
-
-The top-level Block protobuf definition convention for a new chain is `sf.[chain].type.v1.Block.`\
-``\
-``For Tezos it would be `sf.tezos.type.v1.Block`
-
-#### Directory Layouts
-
-_**Proto Directory -**_ `/proto`
-
-Properly namespaced protobuf definitions for the target chain. \
-\
-For example  `proto/sf/acme/type/v1/type.proto` as the first, and often only, file.\
-\
-For Tezos it would be `proto/sf/tezos/type/v1/type.proto`\
-
-
-_**Types Directory -**_ `/types`
-
-Contains rendered protobuf types and some helpers. \
-\
-For example `/types/pb/sf/acme/type/v1;pbacme`, using the _short form_ package name prefixed with `pb`.\
-\
-For Tezos it would be something similar to:\
-`/types/pb/sf/acme/type/v1;pbtezos`\
-
-
-* `/types/go.mod`: to be able to import `github.com/streamingfast/firehose-acme/types` and pull only a limited number of dependencies.
-* `/codec`: containing all coding and decoding methods to manipulate the stream of data coming from the Firehose-enabled Blockchain Node. This library is concerned only with the data wrangling, and not the management of nodes.
-
-### Prior Convention Changes
-
-The `reader` component has historically been known as the `mindreader.` The `reader` component has its own twist on the `deepmind` instrumentation StreamingFast had originally created.
-
-#### Going Forward
-
-* The `mindreader` component is now called the `reader` component in the Firehose documentation.
-* The _app within_ the `fireacme` binary is now called`reader.`Previous names for the component included `mindreader,` `extractor` and `ingestor.`
-* Flags for other components would follow the naming convention of the different types of nodes handled by the `fireacme` binary. For example `--reader-node-config-1-2-3`, alongside: `--peering-node-config123` and `--miner-node-config123.`
-* Pods will also be named `reader` instead of `mindreader` throughout Firehose setups.
+* This component is to be known as the Reader in the documentation.
+* The name of the _app_ within the `fireacme` binary is `reader` (instead of `mindreader` or `extractor` or `ingestor` as it has been in some places).
+* Flags for that components would follow the convention of the different types of nodes handled by the `fireacme` binary: `--reader-node-config-1-2-3`, alongside ex: `--peering-node-config123` and `--miner-node-config123`
+* You can expect your pods to be named `reader` instead of `mindreader` here and there.

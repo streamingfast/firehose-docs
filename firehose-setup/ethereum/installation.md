@@ -8,7 +8,7 @@ description: StreamingFast Firehose Ethereum multichain installation
 
 #### Firehose Setup Prerequisites
 
-Many of the setup steps require knowledge of working on the command line in a terminal shell session. Each blockchain also has specific requirements for processing power, RAM and available disk space, and write speed.
+Many of the setup steps require knowledge of working on the command line in a terminal shell session. Each blockchain also has specific requirements for processing power, RAM, available disk space, and write speed.
 
 ### **1. Create Main Firehose Directory**
 
@@ -22,9 +22,9 @@ Open a terminal window and navigate to the location where Firehose will be store
 
 #### Create Main Working Directory
 
-Create a new directory in the location chosen in the previous setup. The name “sf-firehose” will be used. Issue the following command to the terminal to create the new directory.
+Create a new directory in the location chosen in the previous setup. The name “firehome” will be used. Issue the following command to the terminal to create the new directory.
 
-`mkdir sf-firehose`
+`mkdir firehome`
 
 _Note, the binary files for Firehose and Geth need to be downloaded to the main Firehose directory._
 
@@ -32,7 +32,7 @@ _Note, the binary files for Firehose and Geth need to be downloaded to the main 
 
 Geth is the official Golang implementation of the Ethereum Protocol. The Geth binary used with Firehose is an instrumented, customized version provided by StreamingFast.
 
-Geth extracts raw blockchain data from Ethereum nodes. The Firehose-enabled Blockchain Node is an instrumented, or customized, version of the official Geth implementation. Additional documentation is available to better understand how Geth works with the [Firehose component family.](../../concepts/components.md)
+Geth extracts raw blockchain data from Ethereum nodes. The Firehose-enabled Blockchain Node is an instrumented, or customized, version of the official Geth implementation. Additional documentation is available to better understand how Geth works with the Firehose component family.
 
 #### Blockchain Specific Considerations
 
@@ -183,7 +183,7 @@ The following steps will differ slightly for each blockchain. Specific configura
 
 The configuration file for Firehose needs to be created in the Firehose directory from the beginning of the setup process. Navigate out of the firehose-ethereum directory from the previous step by issuing the following command to the terminal.
 
-`cd ..`
+`cd ~/firehome`
 
 Next, create a new configuration file. The name of the file can be anything, however, using the name of the specific chain and version of Firehose is recommended for clarity.
 
