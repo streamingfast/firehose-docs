@@ -170,7 +170,7 @@ Designing the protobuf structures for your given blockchain is one of the most i
 
 The success of the integration will be proportionate to the amount of time spent on the design and implementation phase of the protobuf definitions.
 
-Additional information is available in the [StreamingFast Ethereum protobuf implementation](https://github.com/streamingfast/firehose-ethereum/blob/develop/proto/sf/ethereum/type/v2/type.proto).
+Additional information is available in the [StreamingFast Ethereum protobuf implementation](https://github.com/streamingfast/sf-ethereum/blob/develop/proto/sf/ethereum/type/v1/type.proto).
 
 #### &#x20;Integrate the target blockchain&#x20;
 

@@ -6,7 +6,7 @@ description: StreamingFast Firehose Installation
 
 ### StreamingFast Geth
 
-Geth is the official Golang implementation of the Ethereum Protocol. The Geth binary used with Firehose is an instrumented, customized version provided by StreamingFast.
+Geth is the official Golang implementation of the Ethereum Protocol. The Geth binary used with Firehose is a special, customized, instrumented version created and provided by StreamingFast.
 
 Geth extracts raw blockchain data from Ethereum nodes. The Firehose-enabled Blockchain Node is an instrumented, or customized, version of the official Geth implementation.&#x20;
 
