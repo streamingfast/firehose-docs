@@ -40,6 +40,8 @@ Also, note that the top-level flag  `--firehose-enabled` can be used for quickly
 
 ### Chain-specific Binary Changes
 
+#### Chain-specific Binary Changes Intro
+
 Replace `acme` with the chain you are instrumenting for the following items.&#x20;
 
 In a sample scenario instrumenting the Tezos blockchain acme would be replaced by the two forms of Tezos; something similar to `tezos` and `tez`.
@@ -62,7 +64,7 @@ The top-level Block protobuf definition convention for a new chain is `sf.[chain
 
 _**Proto Directory -**_ `/proto`
 
-Properly namespaced protobuf definitions for the target chain. \
+The proto directory contains properly namespaced protobuf definitions for the target chain. \
 \
 For example  `proto/sf/acme/type/v1/type.proto` as the first, and often only, file.\
 \
@@ -71,7 +73,7 @@ For Tezos it would be `proto/sf/tezos/type/v1/type.proto`\
 
 _**Types Directory -**_ `/types`
 
-Contains rendered protobuf types and some helpers. \
+The types directory contains rendered protobuf types and some helpers. \
 \
 For example `/types/pb/sf/acme/type/v1;pbacme`, using the _short form_ package name prefixed with `pb`.\
 \
@@ -79,12 +81,15 @@ For Tezos it would be something similar to:\
 `/types/pb/sf/acme/type/v1;pbtezos`\
 
 
-* `/types/go.mod`: to be able to import `github.com/streamingfast/firehose-acme/types` and pull only a limited number of dependencies.
-* `/codec`: containing all coding and decoding methods to manipulate the stream of data coming from the Firehose-enabled Blockchain Node. This library is concerned only with the data wrangling, and not the management of nodes.
+`/types/go.mod`: to be able to import `github.com/streamingfast/firehose-acme/types` and pull only a limited number of dependencies.
 
-### Prior Convention Changes
+_**Codec Directory -**_ `/codec`
 
-The `reader` component has historically been known as the `mindreader.` The `reader` component has its own twist on the `deepmind` instrumentation StreamingFast had originally created.
+The `codec` directory contains all of the coding and decoding methods used to manipulate the stream of data coming from the Firehose-enabled Blockchain Node. _Note,_ t_his library is concerned only with the data wrangling, and not the management of nodes._
+
+### Prior Naming Convention Changes
+
+The `reader` component has historically been known as the `mindreader.` The `reader` component has its own twist on the `deepmind` instrumentation originally created by StreamingFast.
 
 #### Going Forward
 
