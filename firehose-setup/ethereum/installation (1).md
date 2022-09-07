@@ -20,7 +20,7 @@ Every Ethereum-compatible blockchain has specific requirements and other differe
 
 All Firehose instrumented Geth binaries are provided on the Firehose go-ethereum [releases page](https://github.com/streamingfast/go-ethereum). Direct links to the latest Geth binaries for the supported Ethereum-compatible blockchains are also provided below.
 
-Obtaining the Firehose instrumented version of Geth for the target blockchain is the next step in the Firehose setup process. The setup process differs slightly for the different blockchains.
+Obtaining the instrumented version of Geth for the target blockchain is the first step in the Firehose setup process. The setup process differs slightly for the different blockchains.
 
 **Default Blockchain for Geth**
 
