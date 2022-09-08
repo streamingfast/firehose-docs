@@ -6,11 +6,11 @@ description: StreamingFast Firehose new blockchains
 
 ### Working with New Blockchains
 
-#### Firehose & New Blockchains in Detail
+#### Firehose & New Blockchains Intro
 
 Firehose was specifically designed to work with multiple blockchains beyond the existing implementations.
 
-The [Firehose-ACME template's](firehose-starter.md) codebase is the starting point for working with blockchains that do not have a pre-existing StreamingFast instrumented node client solution.
+[Firehose-ACME](firehose-starter.md) is the starting point for working with blockchains that do not have a pre-existing StreamingFast instrumented node client solution.
 
 The process of instrumenting a node is mandatory for blockchains without existing StreamingFast instrumentation support.
 
