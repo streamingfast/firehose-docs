@@ -16,9 +16,9 @@ Use the target computer's home directory to begin If a dedicated directory hasn'
 
 #### Config File in Detail
 
-The configuration file for Firehose needs to be created in the main Firehose directory. The name of the file can be anything, however, using the name of the specific chain and version of Firehose is recommended for clarity.
+The configuration file for Firehose is stored in the main Firehose directory. The name of the file can be anything, however, using the name of the specific chain and version of Firehose is recommended for clarity.
 
-The example below assumes a default Ethereum-based Firehose configuration is being created. For Binance use something like “bnb-firehose-config.yaml.”
+The example below assumes a default Ethereum-based Firehose configuration is being created. For Binance use a filename similar to “bnb-firehose-config.yaml.”
 
 Use the content provided below for the configuration file. The settings provided are ready-to-go for default Ethereum setups. Additional information is provided for the other Ethereum-compatible chains.
 
