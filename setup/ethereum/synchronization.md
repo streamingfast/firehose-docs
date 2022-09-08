@@ -16,21 +16,23 @@ Synchronization is the process of:
 
 ### Ethereum Mainnet Synchronization
 
-#### Start fireeth
+#### Start sfeth
 
-The `fireeth` command is used to start Firehose and begin synchronization with the desired network. In this case, it's the Ethereum Mainnet.
+To begin Firehose synchronization with Ethereum Mainnet issue the following command to the terminal.
 
 ```bash
-./fireeth -c eth-mainnet.yaml start
+./sfeth -c eth-mainnet.yaml start
 ```
 
-The data being processed by the connected node will be displayed as processing occurs. The data los will be presented in the following format.
+The data being processed by the connected node will be displayed in the terminal window as the processing occurs.&#x20;
+
+Data logging will be presented in the following format.
 
 ```shell-session
-2022-03-19T10:28:26.666-0400 (fireeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
+2022-03-19T10:28:26.666-0400 (sfeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
 2022-03-19T10:28:26.666-0400 (<n/a>) registering development exporters from environment variables
-2022-03-19T10:28:26.666-0400 (fireeth) starting with config file 'eth-mainnet.yaml'
-2022-03-19T10:28:26.666-0400 (fireeth) launching applications: mindreader-node
+2022-03-19T10:28:26.666-0400 (sfeth) starting with config file 'eth-mainnet.yaml'
+2022-03-19T10:28:26.666-0400 (sfeth) launching applications: mindreader-node
 2022-03-19T10:28:26.666-0400 (mindreader) adding superviser shutdown to plugins {"plugin_name": "log plug func"}
 2022-03-19T10:28:26.666-0400 (mindreader) registered log plugin {"plugin count": 1}
 2022-03-19T10:28:26.666-0400 (mindreader) adding superviser shutdown to plugins {"plugin_name": "ToZapLogPlugin"}
@@ -99,7 +101,7 @@ The data being processed by the connected node will be displayed as processing o
 ...
 ```
 
-After a short delay, the blocks begin syncing.
+After a short delay, the blocks begin syncing in. A series of messages as seen below will be printed to the terminal window.
 
 ```shell-session
 ...
@@ -121,17 +123,17 @@ The Firehose sync process will shutdown gracefully and continue where it left of
 
 The `mindreader-node` is a process that runs and manages the Geth blockchain node. The `mindreader-node` also consumes the blockchain data that is extracted from the instrumented Geth node and outputs individual block data.
 
-The `mindreader-node` process will either write individual block data into separate files called one-block files, or merge one hundred blocks of data together creating a 100-blocks file.
+The `mindreader-node` process will either write individual block data into separate files called one-block files, or merge one hundred blocks of data together creating a `100-blocks file`.
 
 #### Merged Mode
 
-This behavior is configurable with the `mindreader-node-merge-and-store-directly` flag.&#x20;
+This behaviour is configurable with the `mindreader-node-merge-and-store-directly` flag.&#x20;
 
 When running the `mindreader-node` process with the `mindreader-node-merge-and-store-directly` flag enabled, the mindreader is running in merged mode. When the flag is disabled it's running in normal mode.
 
 #### Block Mergers
 
-In the scenario where the `mindreader-node` process stores one-block files the merger process can be run on the side. When the merger process is running in this fashion one-block files are merged into 100-block files.&#x20;
+In the scenario where the `mindreader-node` process stores one-block files, the merger process can be run on the side. When the merger process is running in this fashion one-block files are merged into 100-block files.&#x20;
 
 The `mindreader-node` process is run in merged mode during chain synchronization. After the synchronization process has completed the `mindreader-node` will store one-block files running in its regular mode of operation.
 
@@ -147,15 +149,15 @@ The Firehose data introspection tools allow you to introspect one-blocks and mer
 
 Data inspection becomes possible through special sfeth tooling.&#x20;
 
-The `tools print block` can be used to introspect the sync'd block data.
+Issue the following command to introspect the sync'd block data.
 
 _Note, data inspection can be run after 10,000 blocks have been synced._
 
 ```shell-session
-./fireeth tools print blocks --store ./eth-data/storage/merged-blocks 100000
+./sfeth tools print blocks --store ./eth-data/storage/merged-blocks 100000
 ```
 
-Block data will be displayed in the following format.
+Messages containing information about block data will be printed to the terminal window.
 
 ```shell-session
 ...
@@ -169,55 +171,59 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 ...
 ```
 
-In addition, one-block files can be inspected using the `tools print one-block` command.
+In addition, one-block files can be inspected. Issue the following command to the terminal window to inspect one-block files.
 
 ```shell-session
-./fireeth tools print one-block --store ./eth-data/storage/one-blocks 0000000000
+./sfeth tools print one-block --store ./eth-data/storage/one-blocks 0000000000
 ```
 
-### Running Firehose
+### Launch the Firehose
 
 #### Data Analyzation & Streaming
 
-After the Ethereum network has finished synchronization the data collected can be analyzed and streamed through the `mindreader` process.
+After the Ethereum network has finished synchronization the data collected can be analyzed and streamed.
+
+Issue the following command to begin a Mindreader process.
 
 ```shell-session
-./fireeth -c eth-mainnet.yaml start mindreader-node
+./sfeth -c eth-mainnet.yaml start mindreader-node
 ```
 
-Firehose, `fireeth`, is now running a `mindreader-node` process that is extracting and merging the 100-blocks of data at a time.
+`sfeth` is now running a `mindreader-node` process that is extracting and merging the 100-blocks of data at a time.
 
-#### Firehose & Relayer
+#### Launch Firehose & Relayer
 
-The `fireeth` command launches both the Relayer and Firehose.
+The `sfeth` command launches both the Relayer and Firehose.
 
-The two processes work together to provide the Firehose data stream. The Firehose process is running and listening on port 13042.
+The two processes work together to provide the `Firehose` data stream. The `Firehose` process is running and listening on port 13042.
+
+While the `mindreader-node` process is still running, use a separate terminal to launch Firehose.
 
 ```shell-session
-./fireeth -c eth-mainnet.yaml start relayer firehose
+./sfeth -c eth-mainnet.yaml start relayer firehose
 ```
 
 The following message will be printed to the terminal window after launching Firehose.
 
 ```shell-session
 2022-08-17T09:51:26.807-0700 (<n/a>) registering development exporters from environment variables
-2022-08-17T09:51:26.807-0700 (fireeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
-2022-08-17T09:51:26.807-0700 (fireeth) ulimit max open files before adjustment {"current_value": 256}
-2022-08-17T09:51:26.807-0700 (fireeth) ulimit max open files after adjustment {"current_value": 1000000}
-2022-08-17T09:51:26.807-0700 (fireeth) sfeth binary started {"data_dir": "eth-data"}
-2022-08-17T09:51:26.807-0700 (fireeth) starting with config file 'eth-mainnet.yaml'
-2022-08-17T09:51:26.807-0700 (fireeth) launcher created
-2022-08-17T09:51:26.807-0700 (fireeth) launching applications: firehose,relayer
-2022-08-17T09:51:26.807-0700 (fireeth) creating application {"app": "firehose"}
+2022-08-17T09:51:26.807-0700 (sfeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
+2022-08-17T09:51:26.807-0700 (sfeth) ulimit max open files before adjustment {"current_value": 256}
+2022-08-17T09:51:26.807-0700 (sfeth) ulimit max open files after adjustment {"current_value": 1000000}
+2022-08-17T09:51:26.807-0700 (sfeth) sfeth binary started {"data_dir": "eth-data"}
+2022-08-17T09:51:26.807-0700 (sfeth) starting with config file 'eth-mainnet.yaml'
+2022-08-17T09:51:26.807-0700 (sfeth) launcher created
+2022-08-17T09:51:26.807-0700 (sfeth) launching applications: firehose,relayer
+2022-08-17T09:51:26.807-0700 (sfeth) creating application {"app": "firehose"}
 2022-08-17T09:51:26.807-0700 (dmetrics) can't listen on the metrics endpoint
-2022-08-17T09:51:26.807-0700 (fireeth) creating application {"app": "relayer"}
-2022-08-17T09:51:26.808-0700 (fireeth) launching app {"app": "firehose"}
-2022-08-17T09:51:26.808-0700 (fireeth) launching app {"app": "relayer"}
-2022-08-17T09:51:26.808-0700 (fireeth) unable to start profiling server {"error": "listen tcp 127.0.0.1:6060: bind: address already in use", "listen_addr": "localhost:6060"}
+2022-08-17T09:51:26.807-0700 (sfeth) creating application {"app": "relayer"}
+2022-08-17T09:51:26.808-0700 (sfeth) launching app {"app": "firehose"}
+2022-08-17T09:51:26.808-0700 (sfeth) launching app {"app": "relayer"}
+2022-08-17T09:51:26.808-0700 (sfeth) unable to start profiling server {"error": "listen tcp 127.0.0.1:6060: bind: address already in use", "listen_addr": "localhost:6060"}
 2022-08-17T09:51:26.808-0700 (relayer) starting relayer {"sources_addr": [":13010"], "grpc_listen_addr": ":13011", "merger_addr": ":13012", "buffer_size": 300, "source_request_burst": 0, "max_source_latency": "10m0s", "min_start_offset": 120, "source_store_url": "file:///Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks"}
-2022-08-17T09:51:26.808-0700 (fireeth) app status switching to warning {"app_id": "relayer"}
+2022-08-17T09:51:26.808-0700 (sfeth) app status switching to warning {"app_id": "relayer"}
 2022-08-17T09:51:26.808-0700 (firehose) running firehose {"config": {"BlockStoreURLs":["file:///Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks"],"IrreversibleBlocksIndexStoreURL":"","IrreversibleBlocksBundleSizes":[100000,10000,1000,100],"BlockStreamAddr":"","GRPCListenAddr":":13042","GRPCShutdownGracePeriod":1000000000,"RealtimeTolerance":120000000000}}
-2022-08-17T09:51:26.808-0700 (fireeth) failed starting atomic level switcher {"error": "listen tcp 127.0.0.1:1065: bind: address already in use", "listen_addr": "localhost:1065"}
+2022-08-17T09:51:26.808-0700 (sfeth) failed starting atomic level switcher {"error": "listen tcp 127.0.0.1:1065: bind: address already in use", "listen_addr": "localhost:1065"}
 2022-08-17T09:51:26.808-0700 (dstore) sanitized base path {"original_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks", "sanitized_base_path": "/Users/seanmoore-mpb/Desktop/dfuse/Firehose-Setup/sf-firehose/eth-data/storage/merged-blocks"}
 2022-08-17T09:51:26.808-0700 (relayer) tcp listener created
 2022-08-17T09:51:26.808-0700 (firehose) creating gRPC server {"live_support": false}
@@ -229,14 +235,14 @@ The following message will be printed to the terminal window after launching Fir
 2022-08-17T09:51:26.808-0700 (firehose) serving gRPC (over HTTP router) (plain-text) {"listen_addr": ":13042"}
 2022-08-17T09:51:26.810-0700 (relayer) source head latency too high {"sources_addr": [":13010"], "max_source_latency": "10m0s", "observed_latency": "61798h38m5.810142s"}
 2022-08-17T09:51:27.312-0700 (relayer) source head latency too high {"sources_addr": [":13010"], "max_source_latency": "10m0s", "observed_latency": "61798h32m45.312764s"}
-2022-08-17T09:51:27.808-0700 (fireeth) app status switching to running {"app_id": "relayer"}
+2022-08-17T09:51:27.808-0700 (sfeth) app status switching to running {"app_id": "relayer"}
 2022-08-17T09:51:27.814-0700 (relayer) source head latency too high {"sources_addr": [":13010"], "max_source_latency": "10m0s", "observed_latency": "61798h29m12.814542s"}
 ...
 ```
 
-At its core, Firehose is a gRPC stream. The available gRPC services can be displayed using `grpcurl`.&#x20;
+At its core, Firehose is a gRPC stream. The available gRPC services can be displayed using grpcurl.&#x20;
 
-_Installation instructions for grpcurl can be found in its_ [_official GitHub repository_](https://github.com/fullstorydev/grpcurl)_._
+_Installation instruction for grpcurl can be found in its_ [_official GitHub repository_](https://github.com/fullstorydev/grpcurl)_._
 
 ```bash
 grpcurl -plaintext localhost:13042 list
@@ -253,7 +259,7 @@ sf.firehose.v1.Stream
 
 Block streaming can be accomplished through the `sf.firehose.v1.Stream` service.&#x20;
 
-The following command will begin the Firehose block streaming capability.
+Issue the following command in the terminal to begin streaming blocks.
 
 {% code overflow="wrap" %}
 ```shell-session
@@ -261,7 +267,9 @@ grpcurl -plaintext -d '{"start_block_num": 10}' localhost:13042 sf.firehose.v1.S
 ```
 {% endcode %}
 
-Block data formed into a JSON representation resembling the following.
+Block data formed into a JSON representation will be printed to the terminal window.&#x20;
+
+The messages will resemble the following.
 
 ```json
 {
@@ -283,7 +291,7 @@ Block data formed into a JSON representation resembling the following.
     "header": {
       "parentHash": "2UDI+9iNUQ6fR13LTotFhgw9tYW3AP7gIjSNAIo/MWg=",
       "uncleHash": "HcxN6N7HXXqrhbVntszUGtMSRRuUinQT8KFC/UDUk0c=",
-      "coinbase": "KJIeTiydhPTA8MDOuZH0V1Gg/pM=",
+      "coi^Cnbase": "KJIeTiydhPTA8MDOuZH0V1Gg/pM=",
       "stateRoot": "RSVmg4SxOM9mawD5Z4isp+mRTPmb+gxfAmNu00UBEog=",
       "transactionsRoot": "VugfFxvMVab/g0XmksD4bltI4BuZbK3AAWIvteNjtCE=",
       "receiptRoot": "VugfFxvMVab/g0XmksD4bltI4BuZbK3AAWIvteNjtCE=",
@@ -308,4 +316,11 @@ Block data formed into a JSON representation resembling the following.
 }
 ```
 
-Full searchability and discoverability of Ethereum and ERC20 networks are now possible and the underlying blockchain data can be sliced and diced into a myriad of different solutions.
+### Synchronization Completion
+
+#### Successful Sync
+
+The target computer is now successfully streaming ETH block data from mainnet. _Congratulations!_
+
+Full searchability and discoverability of Ethereum and ERC20 networks is now possible and the underlying blockchain data can be sliced and diced into a myriad of different solutions.
+
