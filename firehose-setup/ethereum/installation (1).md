@@ -4,6 +4,16 @@ description: StreamingFast Firehose Installation
 
 # Installation
 
+### Ethereum Compatible Installation
+
+#### Installation Intro
+
+Firehose installation is accomplished through a few fairly simple tasks including obtaining specific binaries and some configuration steps.
+
+It's important to note that Firehose comes in many different flavors for different blockchains. Firehose also has a legacy version and a new version. The setup process isn't difficult however having a clear idea and path in mind before you begin is recommended.&#x20;
+
+After Firehose has been installed, configured, and synchronized with the target blockchain operating the software becomes the primary goal. Documentation is provided for the various blockchains and versions of Firehose to get operators up and running as quick as possible.
+
 ### StreamingFast Geth
 
 Geth extracts raw blockchain data from Ethereum nodes. The StreamingFast Firehose-enabled Blockchain Node is an instrumented, version of the official Geth implementation.&#x20;
