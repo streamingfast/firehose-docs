@@ -6,13 +6,11 @@ description: StreamingFast Firehose template
 
 ### Firehose Template Project&#x20;
 
-#### Firehose Template in Detail
+#### Firehose Template Intro
 
 The Firehose-ACME template is the main starting point for instrumenting new, unsupported blockchain nodes.
 
-#### Firehose Template & Faux Data
-
-The template consists of basic code and a faux data provision application called the Dummy Blockchain, or dchain.
+The template consists of basic code and a faux data provision application called the Dummy Blockchain, or `dchain`.
 
 ### Firehose Template Setup
 

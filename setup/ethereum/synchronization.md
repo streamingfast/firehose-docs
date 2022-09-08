@@ -18,15 +18,13 @@ Synchronization is the process of:
 
 #### Start fireeth
 
-To begin Firehose synchronization with Ethereum Mainnet issue the following command to the terminal.
+The `fireeth` command is used to start Firehose and begin synchronization with the desired network. In this case, it's the Ethereum Mainnet.
 
 ```bash
 ./fireeth -c eth-mainnet.yaml start
 ```
 
-The data being processed by the connected node will be displayed in the terminal window as the processing occurs.&#x20;
-
-Data logging will be presented in the following format.
+The data being processed by the connected node will be displayed as processing occurs. The data los will be presented in the following format.
 
 ```shell-session
 2022-03-19T10:28:26.666-0400 (fireeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
@@ -187,7 +185,7 @@ After the Ethereum network has finished synchronization the data collected can b
 ./fireeth -c eth-mainnet.yaml start mindreader-node
 ```
 
-`sfeth` is now running a `mindreader-node` process that is extracting and merging the 100-blocks of data at a time.
+Firehose, `fireeth`, is now running a `mindreader-node` process that is extracting and merging the 100-blocks of data at a time.
 
 #### Firehose & Relayer
 
@@ -311,4 +309,3 @@ Block data formed into a JSON representation resembling the following.
 ```
 
 Full searchability and discoverability of Ethereum and ERC20 networks are now possible and the underlying blockchain data can be sliced and diced into a myriad of different solutions.
-
