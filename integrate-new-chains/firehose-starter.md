@@ -2,17 +2,17 @@
 description: StreamingFast Firehose template
 ---
 
-# Firehose Template
+# Firehose ACME
 
-### Firehose Template Project&#x20;
+### Firehose ACME
 
-#### Firehose Template Intro
+#### Firehose AMCE Intro
 
-The Firehose-ACME template is the main starting point for instrumenting new, unsupported blockchain nodes.
+Firehose-ACME is the main starting point for instrumenting new, unsupported blockchain nodes.
 
-The template consists of basic code and a faux data provision application called the Dummy Blockchain, or `dchain.`
+It consists of basic code and a faux data provision application called the Dummy Blockchain, or `dchain.`
 
-The Firehose ACME template is available on GitHub. Clone the repo to obtain the source code.
+Firehose ACME is available on GitHub. Clone the repo to obtain the source code.
 
 ```shell-session
 git clone git@github.com:streamingfast/firehose-acme
@@ -20,7 +20,7 @@ git clone git@github.com:streamingfast/firehose-acme
 
 ### Firehose-ACME Installation
 
-#### Firehose-ACME Installation
+#### Installation
 
 The following command is used to install Firehose-ACME.
 
@@ -42,9 +42,9 @@ Firehose versioning information will display as follows.
 fireacme version dev (Built 2022-08-05T15:36:44-07:00) 
 ```
 
-### &#x20;Dummy Blockchain Application
+### Dummy Blockchain
 
-#### Dummy Blockchain Setup in Intro
+#### Dummy Blockchain Setup
 
 The Dummy Blockchain can be set up anywhere on the target computer.
 

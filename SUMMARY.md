@@ -28,7 +28,7 @@
 
 ## Integrate New Chains
 
-* [Firehose Template](integrate-new-chains/firehose-starter.md)
+* [Firehose ACME](integrate-new-chains/firehose-starter.md)
 * [New Blockchains](integrate-new-chains/new-blockchains.md)
 
 ## References
