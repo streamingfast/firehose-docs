@@ -10,7 +10,7 @@ description: StreamingFast Firehose local deployment
 
 Firehose setups that are created on a computer directly, as opposed to cloud-based setups are considered "local deployments." Local deployments remain on the computer the operators have direct access to and management over.
 
-Use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected for the Firehose implementation. Create a directory named “firehome”, or something similar that's reflective of the target setup being created.&#x20;
+Use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected for the Firehose setup. Create a directory named “firehome”, or something similar that's reflective of the target setup being created.&#x20;
 
 ### Firehose Configuration
 
