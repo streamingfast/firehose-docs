@@ -12,9 +12,9 @@ Geth is the official Golang implementation of the Ethereum Protocol.
 
 StreamingFast provides support for various Ethereum-compatible blockchains ready to use with Firehose. The overall setup and installation process is very similar across the different Ethereum-compatible blockchains.
 
-Each blockchain also has specific requirements for processing power, RAM, available disk space, and write speed that need to be considered.
+Every Ethereum-compatible blockchain has specific requirements and other differences that should be taken into consideration before rolling out a production Firehose solution.&#x20;
 
-Every Ethereum-compatible blockchain has specific requirements and other differences that should be taken into consideration before rolling out a production Firehose solution. Some **** blockchains, such as Binance, have specific requirements for disk size or write speed for example.
+Each blockchain has specific requirements for processing power, RAM, available disk space, and write speed that need to be considered.
 
 #### Available StreamingFast Geth Releases
 
@@ -32,7 +32,7 @@ Firehose v1.0.0 is the most recent release of Firehose. Release versions are als
 
 It’s important that the Geth binary file’s version matches the Firehose for Ethereum binary file version. Firehose for Ethereum binaries v1.0.0 and above will only work with Firehose-instrumented Geth versions tagged with “fh2". The older Firehose-instrumented Geth versions tagged “fh1” are legacy versions and should not be used anymore.
 
-Ensure that the Geth Firehose and fireeth versions match. When errors are encountered during Firehose setup it’s often because of this versioning of Geth and fireeth. Double-check both binaries using the appropriate versioning commands provided in this documentation.
+Ensure that the Geth Firehose and fireeth versions match. When errors are encountered during Firehose setup it’s often because of this versioning between Geth and fireeth. Double-check both binaries using the appropriate versioning commands provided in this documentation.
 
 Current legacy **** Firehose operators can find additional information in the Update Firehose section of the documentation.
 
