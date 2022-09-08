@@ -6,23 +6,21 @@ description: StreamingFast Firehose local deployment
 
 ### Ethereum Local Deployment
 
-Firehose needs a home. This will be the main location for the Firehose application and its associated files.
+#### Local Deployments Intro
 
-Use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected for the Firehose implementation. Create a directory named “firehome”, or something similar reflective of the target setup being created.&#x20;
+Firehose setups that are created on a computer directly, as opposed to cloud-based setups are considered "local deployments." Local deployments remain on the computer the operators have direct access to and management over.
 
-### Configure Firehose
+Use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected for the Firehose implementation. Create a directory named “firehome”, or something similar that's reflective of the target setup being created.&#x20;
 
-#### Create Config File
+### Firehose Configuration
 
-The configuration file for Firehose needs to be created in the Firehose directory from the beginning of the setup process.&#x20;
+#### Config File in Detail
 
-The name of the file can be anything, however, using the name of the specific chain and version of Firehose is recommended for clarity.
+The configuration file for Firehose needs to be created in the main Firehose directory. The name of the file can be anything, however, using the name of the specific chain and version of Firehose is recommended for clarity.
 
 The example below assumes a default Ethereum-based Firehose configuration is being created. For Binance use something like “bnb-firehose-config.yaml.”
 
-After creating the file open it in a text editor such as Notepad, TextEdit, [Visual Studio Code](https://code.visualstudio.com/), or [Vim](https://www.vim.org/).
-
-Copy and paste the following configuration file starting point into the newly created file.
+Use the content provided below for the configuration file. The settings provided are ready-to-go for default Ethereum setups. Additional information is provided for the other Ethereum-compatible chains.
 
 ```shell-session
 start:
@@ -49,21 +47,21 @@ start:
 
 ```
 
-#### Update Path to Geth
+#### Geth Binary Path
 
 Firehose needs to know the location of the Geth binary. The configuration file contains a reader-node-path flag specifically designed to point Firehose to the Geth binary. The binary name will be the same for the different blockchains.
 
-_Note, the names of the Geth binaries differ depending on the target operating system. The differences are indicated by “\_linux” or “\_mac” in the binaries file name. Geth can be used directly on the command line without specifying a path if it has been installed globally on the system._
+_Note, the names of the Geth binaries differ depending on the target operating system. The differences are indicated by “\_linux” or “\_mac” in the binaries file name. Geth can be used directly on the command line without specifying a path if it has been installed globally on the system in the `user/local/bin` directory._
 
 The updated flag in the configuration file for a macOS-based Firehose setup should reflect the following.
 
 `reader-node-path: ./geth_mac`
 
-#### Update chain and network ID
+#### Unique chain and network ID
 
 Each blockchain has a unique, numeric ID for the chain and network. Ethereum is the default blockchain implementation; the chain and network ID for it are the numeric value of 1. The numeric value is different for the other Ethereum-compatible chains.
 
-Use the table below to locate the chain and network ID for the blockchain used in the Firehose setup. Update both of the following flags in the configuration file.
+Use the table below to locate the chain and network ID for the blockchain used in the Firehose setup. Both of the following flags need to be updated in the configuration file.
 
 `common-chain-id`&#x20;
 
@@ -82,15 +80,15 @@ The numbers for the network and chain need to be enclosed in quotes. The update 
 
 `common-network-id: “1”`
 
-Be sure to save the configuration file after the network and chain IDs have been updated.
+The chain and network ID will be different for each of the different Ethereum-compatible chains.
 
-_**Next Steps**_
+**Default Ethereum Firehose Setups**
 
 Ethereum Mainnet is the default Geth version provided by StreamingFast. For Firehose setups targeting Ethereum Mainnet the genesis file and reader-node-arguments steps below are not applicable. Proceed to the step for running Firehose.
 
-For Firehose setups targeting other Ethereum-compatible blockchains, such as Polygon, further action is required. Follow the proceeding steps to continue with the genesis file creation process and reader-node-arguments modifications.
+For Firehose setups targeting other Ethereum-compatible blockchains, such as Polygon, further action is required. Additional information is provided to explain the genesis file creation process and reader-node-arguments modifications.
 
-Firehose setups targeting Goerli do not require genesis files however further modifications to the reader-node-arguments value are necessary. Additional information specific to Goerli setup is provided below.
+Firehose setups targeting Goerli do not require genesis files however further modifications to the reader-node-arguments value are necessary. Additional information specific to Goerli setups is provided below.
 
 #### Download genesis JSON File
 
@@ -158,9 +156,7 @@ Another important thing to note is the cache argument passed to fireeth should b
 
 ### 6. Test Installation
 
-The next step is to run Firehose to ensure it has been properly set up and configured.
-
-Ensure the shell session is within the main Firehose directory and then issue the following command to the terminal. Firehose will begin its startup process.
+The following command is used to start Firehose. Run the command from the directory that Firehose was installed to if other than `usr/local/bin`.
 
 ```shell-session
 ./fireeth -c eth-mainnet.yaml start
@@ -168,7 +164,11 @@ Ensure the shell session is within the main Firehose directory and then issue th
 
 _**Successful Installation Logging**_
 
-After issuing the start command to the terminal wait at least thirty seconds for Firehose to get started. Firehose will begin connecting to peers and processing block data. Logging will be rapidly printed to the terminal window resembling the following. Press _****_ and hold the Control key and then press the C key three times to terminate Firehose and end all processes.
+After issuing the start command to the terminal it can take up to thirty seconds for Firehose to begin connecting to peers and processing block data.&#x20;
+
+Logging will be rapidly printed to the terminal window. See the log below for example logging.&#x20;
+
+Press _****_ and hold the Control key and then press the C key three times to terminate Firehose and end all processes.
 
 ```shell-session
 2022-09-05T12:25:01.208-0700 INFO (<n/a>) registering development exporters from environment variables
@@ -328,13 +328,11 @@ INFO [09-05|12:25:13.377] Looking for peers                        peercount=0 t
 
 ```
 
-The next step in the process of working with Firehose is full synchronization with the target blockchain. Full sync is a data and time-intensive process and can take several days or longer to complete for full archive nodes. Further documentation is provided for [synchronizing Firehose](https://docs.google.com/document/d/1PMf\_od2VuGirl8VS3rH-WO9OrPKkZ5rAQb28BcmeN18/edit) setups.
+After Firehose has been set up it needs to be synchronized with the target blockchain. Full sync is a data and time-intensive process and can take several days or longer to complete for full archive nodes. Further documentation is provided for [synchronizing Firehose](https://docs.google.com/document/d/1PMf\_od2VuGirl8VS3rH-WO9OrPKkZ5rAQb28BcmeN18/edit).
 
 _**Fireeth Tools**_
 
-Firehose also provides tools for operators to inspect many facets of the application. For example, the tools check merged-blocks command can be used to view and investigate the block data produced by Firehose.
-
-Issue the following command to the terminal window to check the block data for the Firehose setup.
+Firehose also provides tools for operators to inspect many facets of the application. For example, the `tools check merged-blocks` command can be used to view and investigate the block data produced by Firehose.
 
 ```shell-session
 fireeth tools check merged-blocks ./sf-data/storage/merged-blocks
@@ -353,7 +351,7 @@ Checking block holes on ./sf-data/storage/merged-blocks
 
 ### **Problems**
 
-To fix the signing issues for macOS, remove the quarantine attribute on the file using the following command.
+It may be necessary to remove the quarantine attribute on the Geth and Firehose binary files to resolve signing issues on macOS.
 
 ```shell-session
 xattr -d com.apple.quarantine fireeth
