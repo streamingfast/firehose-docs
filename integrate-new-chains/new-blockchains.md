@@ -50,6 +50,8 @@ git add -A .
 git commit -m "Initial commit"
 ```
 
+### ACME References
+
 Three references to "ACME" exist within Firehose-ACME that need to be updated to reflect the new chain name. _Note, the capitalization of letters, or casing, is different for all three versions of "ACME."_
 
 * acme -> \<newchainname>
