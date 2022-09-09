@@ -24,7 +24,7 @@ This directory is the home directory of the custom integration being created.
 
 ### Firehose-ACME
 
-StreamingFast provides the Firehose-ACME repository to serve as a starting point to create the required chain-specific code and files. To use Firehose-ACME as starting point many aspects of the project and code need to be renamed. __ Three exact reference types need to be updated, acme, Acme, and ACME.
+StreamingFast provides the [Firehose-ACME repository](https://github.com/streamingfast/firehose-acme) to serve as a starting point to create the required chain-specific code and files. To use Firehose-ACME as starting point many aspects of the project and code need to be renamed. __ Three exact reference types need to be updated, acme, Acme, and ACME.
 
 The new Firehose setup will replace "_\<newchainname>_" with the name of the new chain being integrated.
 
