@@ -14,10 +14,6 @@ The process of instrumenting a node is mandatory for blockchains without existin
 
 Integrating new blockchains is an intricate process. Attention to detail is paramount during node instrumentation and while creating Protocol Buffer schemas.
 
-### Firehose-ACME
-
-StreamingFast provides the Firehose-ACME repository to serve as a starting point to create the required chain-specific code and files. To use Firehose-ACME as starting point many aspects of the project and code need to be renamed. __ Three exact reference types need to be updated, acme, Acme, and ACME.
-
 ### Integration Directory
 
 Select a location on the target computer for all Firehose files including the data that will be extracted and stored, and all other integration artifacts.&#x20;
@@ -28,7 +24,7 @@ This directory is the home directory of the custom integration being created.
 
 ### Firehose-ACME
 
-Using a sensible name for the new project that the Firehose-ACME template is being cloned into is imperative.&#x20;
+StreamingFast provides the Firehose-ACME repository to serve as a starting point to create the required chain-specific code and files. To use Firehose-ACME as starting point many aspects of the project and code need to be renamed. __ Three exact reference types need to be updated, acme, Acme, and ACME.
 
 The new Firehose setup will replace "_\<newchainname>_" with the name of the new chain being integrated.
 
