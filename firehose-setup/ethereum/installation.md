@@ -88,7 +88,7 @@ macOS
 
 To check the status of the Geth setup run the binary and pass it the version flag. The Geth version will be displayed in the terminal window. This aids in ensuring the correct Geth version was downloaded.
 
-_Note, see the_ [_Problems_](https://docs.google.com/document/d/1PMf\_od2VuGirl8VS3rH-WO9OrPKkZ5rAQb28BcmeN18/edit) _section of this document to resolve issues related to signing, or digital signatures, encountered on macOS for this step._
+_Note, see the Problems section of this document to resolve issues related to signing, or digital signatures, encountered on macOS for this step._
 
 `./geth_linux version`
 
