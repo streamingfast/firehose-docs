@@ -6,7 +6,7 @@ description: StreamingFast Substreams with Firehose documentation
 
 ### Firehose vs Substreams
 
-It's important to realize that Firehose and Substreams are two unique, separate applications. With that said, Firehose does expose some Substreams functionality in its core install. In addition, Substreams uses the data produced by Firehose. So, while there is some overlap between the applications, they aren't the same thing. The installation and operation procedures are both. different
+It's important to realize that Firehose and Substreams are two unique, separate applications. With that said, Firehose does expose some Substreams functionality in its core install. In addition, Substreams does rely on data produced by Firehose. So, while there is some overlap between the applications, they aren't the same thing. The installation and operation procedures are both. different
 
 ### Enable Substreams Engine
 
