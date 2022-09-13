@@ -25,6 +25,7 @@
 * [Cosmos](setup/cosmos/README.md)
   * [Synchronization](setup/cosmos/synchronization.md)
 * [System Requirements](firehose-setup/system-requirements.md)
+* [Substreams](firehose-setup/substreams.md)
 
 ## Integrate New Chains
 
