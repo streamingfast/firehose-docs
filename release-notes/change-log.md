@@ -4,8 +4,10 @@ description: StreamingFast Firehose change log
 
 # Change Log
 
-Latest update for the different chains:
+Find detailed information for Firehose releases below.
 
-## Ethereum
+### Ethereum
 
-See the /releases page
+{% embed url="https://github.com/streamingfast/firehose-ethereum/releases/tag/v1.0.0" %}
+Firehose v1.0.0 detailed release information
+{% endembed %}
