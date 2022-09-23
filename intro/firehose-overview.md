@@ -24,6 +24,18 @@ Firehose makes paramount improvements in the speed and performance of data avail
 
 The full [StreamingFast software suite](https://github.com/streamingfast) enables low-latency processing of real-time blockchain data in the form of binary data streams. [Substreams](https://substreams.streamingfast.io/) is another application in the suite that works with Firehose to execute massive operations on historical blockchain data, in an _extremely parallelized manner_.
 
+### Benefits
+
+Firehose is built using a component-based design. Data extraction is made possible through the family of Firehose components. The Firehose components include Firehose-enabled Blockchain Node, Reader, Merger, Relayer, and Firehose gRPC Server.
+
+#### Cursors&#x20;
+
+The Firehose cursor points to a specific position in the stream of events emitted by ForkDB and the blockchain itself. The ForkDB cursor contains information that is required to reconstruct an equivalent forked or canonical instance. Consumer requests for historical blocks are fetched from persistent Firehose storage. The historical blocks are passed inside a ForkDB and sent with a cursor uniquely identifying the block and its position in the blockchain.
+
+#### Low Latency Racing Speed&#x20;
+
+Placing multiple Reader components side by side, and fronted by one or more Relayers, allows for highly available setups. A Relayer connected to multiple Readers will deduplicate incoming streams, and push the first block downstream. Two Reader components will even race to push the data out first. Firehose is designed to leverage this racing Reader feature to the benefit of the end-user by producing the lowest latency possible.
+
 ### Motivation
 
 #### Why does it exist?
