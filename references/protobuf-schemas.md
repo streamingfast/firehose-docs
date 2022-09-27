@@ -27,4 +27,9 @@ What are the important fields, their constraints and meaning. `parent_id`, `lib_
 
 ### Versioning
 
-\[discuss the general (any blockchain) considerations of versioning in the Firehose suite, when do we change the namespace, when do we bump the `version` field in the `block`.
+**Coming Soon**
+
+Discussion on general multi-chain considerations of versioning in the Firehose suite to answer questions such as:
+
+* when do we change the namespace,&#x20;
+* when do we bump the `version` field in the `block`.

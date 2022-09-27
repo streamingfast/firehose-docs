@@ -60,15 +60,13 @@ Obtain the Dummy Blockchain from GitHub.
 
 The full path into the dchain directory must be used. The path needs to be in quotes.
 
-Example path:
-
 ```shell-session
 extractor-node-path: "/Users/<User Account>/Desktop/SFFireshose/dummy-blockchain/dchain"
 ```
 
 The shell script that starts Firehose-ACME is located inside the devel/standard directory.&#x20;
 
-The following messages will be printed to the terminal window if&#x20;
+The following messages will be printed to the terminal window if:&#x20;
 
 * all of the configuration changes were made correctly,&#x20;
 * all system paths have been set correctly,
@@ -91,7 +89,9 @@ Real-world implementations don't use or rely on the Dummy Blockchain application
 
 Existing, current, and knowledgable node operators can take advantage of the pre-instrumented blockchain solutions provided by StreamingFast for their specific blockchain.
 
-Blockchains that do not currently have a StreamingFast instrumented node client solution can create their own.
+{% hint style="success" %}
+_Tip: Blockchains that do not currently have a StreamingFast instrumented node client solution can create their own._
+{% endhint %}
 
 ### Problems
 

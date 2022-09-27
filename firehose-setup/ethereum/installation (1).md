@@ -8,7 +8,7 @@ description: StreamingFast Firehose local deployment
 
 #### Local Deployments Intro
 
-Firehose setups that are created on a computer directly, as opposed to cloud-based setups are considered "local deployments." Local deployments remain on the computer the operators have direct access to and management over.
+Firehose setups that are created on a computer directly, as opposed to cloud-based setups, are considered "local deployments." Local deployments remain on the computer the operators have direct access to and management over.
 
 Use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected for the Firehose setup. Create a directory named “firehome”, or something similar that's reflective of the target setup being created.&#x20;
 
@@ -110,9 +110,9 @@ Alternatively, the JSON file can be downloaded with curl using a terminal window
 curl https://raw.githubusercontent.com/streamingfast/firehose-docs/master/configs/binance/genesis.json --output genesis.json
 ```
 
-**Polygon genesis JSON file**
+_**Polygon genesis JSON file**_
 
-Right click and save the JSON file to the main Firehose directory created in the first step of the setup process.
+Right-click and save the JSON file to the main Firehose directory created in the first step of the setup process.
 
 [https://raw.githubusercontent.com/streamingfast/firehose-docs/master/configs/polygon/genesis.json](https://raw.githubusercontent.com/streamingfast/firehose-docs/master/configs/polygon/genesis.json)
 
@@ -344,7 +344,7 @@ Firehose also provides tools for operators to inspect many facets of the applica
 fireeth tools check merged-blocks ./sf-data/storage/merged-blocks
 ```
 
-The merged blocks tool will print to the terminal window. Look for messaging similar to below to determine if the installation was successful.
+The merged blocks tool will print to the terminal window. Look for messaging similar to what's shown below to determine if the installation was successful.
 
 ```shell-session
 2022-09-05T12:39:20.096-0700 INFO (<n/a>) registering development exporters from environment variables
@@ -364,4 +364,6 @@ xattr -d com.apple.quarantine fireeth
 xattr -d com.apple.quarantine geth_mac
 ```
 
-_Note, this step will only need to be completed once._
+{% hint style="info" %}
+_Note: this step will only need to be completed once._
+{% endhint %}

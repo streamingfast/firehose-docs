@@ -12,7 +12,9 @@ Firehose was specifically designed to work with multiple blockchains beyond the 
 
 The process of instrumenting a node is mandatory for blockchains without existing StreamingFast instrumentation support.
 
-Integrating new blockchains is an intricate process. Attention to detail is paramount during node instrumentation and while creating Protocol Buffer schemas.
+{% hint style="warning" %}
+_Important: Integrating new blockchains is an intricate process. Attention to detail is paramount during node instrumentation and while creating Protocol Buffer schemas._
+{% endhint %}
 
 ### Integration Directory
 
@@ -50,15 +52,15 @@ git add -A .
 git commit -m "Initial commit"
 ```
 
-### ACME References
-
 Three references to "ACME" exist within Firehose-ACME that need to be updated to reflect the new chain name. _Note, the capitalization of letters, or casing, is different for all three versions of "ACME."_
 
 * acme -> \<newchainname>
 * Acme -> \<Newchainname>
 * ACME -> \<NEWCHAINNAME>
 
-> Don't forget to update all variants of "_\<chain>_" to the name of the new chain being integrated. For example, if the chain's name was "aptos" the updates will be "aptos", "Aptos" and "APTOS", respectively.
+{% hint style="warning" %}
+_Important: Don't forget to update all variants of "\<chain>" to the name of the new chain being integrated. For example, if the chain's name was "aptos" the updates will be "aptos", "Aptos" and "APTOS", respectively._
+{% endhint %}
 
 ### Project File Naming
 
@@ -97,13 +99,19 @@ If all changes were made correctly the updated project should compile successful
 
 ### Protobuf Data Modeling&#x20;
 
-Designing the protobuf structures for your given blockchain is one of the most important steps in an integrator's journey. It's imperative that the data structures in the protobuf's of the custom integration are represented as precisely as possible.&#x20;
+Designing the protobuf structures for your given blockchain is one of the most important steps in an integrator's journey.&#x20;
 
-The success of the integration will be proportionate to the amount of time spent on the design and implementation phase of the protobuf definitions.
+{% hint style="warning" %}
+_Important: It's imperative that the data structures in the protobuf's of the custom integration are represented as precisely as possible._&#x20;
+{% endhint %}
 
-Additional information is available in the [StreamingFast Ethereum protobuf implementation](https://github.com/streamingfast/firehose-ethereum/blob/develop/proto/sf/ethereum/type/v2/type.proto).
+{% hint style="danger" %}
+_Critical: The success of the integration will be proportionate to the amount of time spent on the design and implementation phase of the protobuf definitions._
 
-&#x20;To integrate the target blockchain modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to the custom integration's blockchain node binary.&#x20;
+_Additional information is available in the_ [_StreamingFast Ethereum protobuf implementation_](https://github.com/streamingfast/firehose-ethereum/blob/develop/proto/sf/ethereum/type/v2/type.proto)_._
+{% endhint %}
+
+To integrate the target blockchain modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to the custom integration's blockchain node binary.&#x20;
 
 #### Type Definitions
 
@@ -113,11 +121,19 @@ The proto file `sf/acme/type/v1/type.proto` needs to be updated to match the tar
 
 `reader.go` is the boundary between the custom integration process and the Firehose ingestion process.
 
-[Read the source](https://github.com/streamingfast/firehose-acme/blob/master/nodemanager/codec/consolereader.go) of the `ConsoleReader` to gain a better understanding of how it works. The majority of the customization work will be conducted in this file.
+{% hint style="info" %}
+_Note:_ [_Read the source_](https://github.com/streamingfast/firehose-acme/blob/master/nodemanager/codec/consolereader.go) _code for the `ConsoleReader` to gain a better understanding of how it works. The majority of the customization work will be conducted in this file._
+{% endhint %}
 
-Each blockchain has specific design and implementation details. There isn't a single standard or language that blockchains are written in or follow. For these reasons, it's virtually impossible to provide instructions for the instrumentation steps involved with each blockchain in the world.
+Each blockchain has specific design and implementation details and there isn't a single standard or language that blockchains are written in or follow. For these reasons, it's virtually impossible to provide instructions for the instrumentation steps involved with each blockchain in the world.
 
-Studying the StreamingFast Ethereum and other implementations and instrumentations should serve as a foundation for other custom integrations. _Ensure the custom integration has set aside a good amount of time to plan and execute the steps and tasks involved for researching and instrumenting the blockchain being targeted._&#x20;
+{% hint style="warning" %}
+_Important: Studying the StreamingFast Ethereum and other implementations and instrumentations should serve as a foundation for other custom integrations._&#x20;
+{% endhint %}
+
+{% hint style="danger" %}
+_Critical: Ensure the custom integration has set aside a good amount of time to plan and execute the steps and tasks involved for researching and instrumenting the blockchain being targeted._&#x20;
+{% endhint %}
 
 ### Data Production
 

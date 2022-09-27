@@ -12,8 +12,6 @@ Substreams consumes Firehose block stream data and provides a mechanism for deve
 
 Firehose does expose some Substreams functionality in its core install. So, while there is some overlap between the applications, they aren't the same thing. The installation and operation procedures are both different as well. The main thing to remember is Firehose and Substreams work together in harmony to provide exceptionally fast access to blockchain data for DApps and Web3 development efforts.
 
-### Enable Substreams Engine
+### Run Firehose with Substreams
 
-It's possible to enable the Substreams engine from Firehose.
-
-This is done by...
+Learn more about using Firehose with Substreams in [the documentation](https://substreams.streamingfast.io/reference-and-specs/advanced/running-locally).

@@ -22,9 +22,7 @@ The Firehose system is comprised of several key components including the:
 
 The Firehose components work together in symphony to provide blockchain data from configured and instrumented nodes to consumers through the [gRPC Server](components.md#firehose-grpc-server).
 
-{% hint style="success" %}
-_Tip: Understanding the Firehose components individually is helpful for fully comprehending the overall system and will aid with setup and operation._
-{% endhint %}
+Understanding the Firehose components individually is helpful for fully comprehending the overall system and will aid with setup and operation.
 
 ### Firehose-enabled Blockchain Node
 
@@ -32,9 +30,7 @@ _Tip: Understanding the Firehose components individually is helpful for fully co
 
 The Firehose-enabled Blockchain Node is a third-party blockchain node client, such as Ethereum, instrumented under StreamingFast practices to output data that will be read by the Firehose Reader component.&#x20;
 
-{% hint style="info" %}
-_Note: The Reader component will consume the data produced by the Firehose-enabled Blockchain Node._
-{% endhint %}
+_The Reader component will consume the data produced by the Firehose-enabled Blockchain Node._
 
 The Firehose-enabled Blockchain Node runs in tandem with the Reader component. The two components are connected either through a UNIX pipe using `stdout`, or by having the Reader component's process execute and fork the blockchain client. This is accomplished using the node-manager software included in Firehose.
 
@@ -65,17 +61,13 @@ Once the process has been started, the Reader component:&#x20;
 
 The data consumed by Firehose is provided by the Reader component.&#x20;
 
-{% hint style="success" %}
-_Tip: The Reader component is the initial and deterministic data producer for Firehose and all of its components._
-{% endhint %}
+The Reader component is the initial and deterministic data producer for Firehose and all of its components.
 
 #### Reader Nodes
 
 The Blockchain node underlying and managed by the Reader can be considered simplistic. They don't have archiving capabilities or any additional features.
 
-{% hint style="info" %}
-_Note, after Firehose has been instrumented on a node it will begin returning substantial amounts of data._
-{% endhint %}
+_Note, after Firehose has been instrumented on a node it will begin returning substantial amounts of data._&#x20;
 
 #### High Availability
 
@@ -83,9 +75,7 @@ Placing multiple Reader components side by side, and fronted by one or more Rela
 
 A Relayer connected to multiple Readers will deduplicate the incoming stream and push the first block downstream.&#x20;
 
-{% hint style="success" %}
-_Tip: Two Reader components will even race to push the data first. The system is designed to leverage this racing Reader feature to the benefit of the end-user by producing the lowest latency possible._
-{% endhint %}
+Two Reader components will even _race_ to push the data first. The system is designed to leverage this racing Reader feature to the benefit of the end-user by producing the lowest latency possible.
 
 #### Data Aggregation
 
@@ -145,9 +135,7 @@ Highly available systems usually connect to the Relayer component to receive rea
 
 Restarts from other components can be sustained and time provided for Merger components to be down when Relayer components provide 200 to 300 blocks in RAM.
 
-{% hint style="info" %}
-_Note: Merged blocks generally aren't read by other Firehose components in a running, live highly available system._
-{% endhint %}
+Merged blocks generally aren't read by other Firehose components in a running, live highly available system.
 
 ### Relayer
 
@@ -167,9 +155,7 @@ The Relayer component serves its block data through the streaming gRPC interface
 
 A Relayer component in a highly available Firehose will feed from all of the Reader nodes to gain a complete view of all possible forks.
 
-{% hint style="success" %}
-_Tip: Multiple Reader components will ensure blocks are flowing efficiently to the Relayer component and throughout Firehose._
-{% endhint %}
+Multiple Reader components will ensure blocks are flowing efficiently to the Relayer component and throughout Firehose.
 
 ### Firehose gRPC Server
 
@@ -199,9 +185,7 @@ Firehose can be scaled horizontally to provide a highly available system.&#x20;
 
 The network speed and data throughput between consumers and Firehose deployments will dictate the speed of data availability.&#x20;
 
-{% hint style="info" %}
-_Note: The network speed and data throughput between Relayer components and Firehose gRPC Server components will impact the speed of data availability._
-{% endhint %}
+In addition, the network speed and data throughput between Relayer components and Firehose gRPC Server components will impact the speed of data availability.
 
 Firehose gRPC Server components have the ability to connect to a subset of Relayer components or all Relayers available.
 

@@ -18,11 +18,9 @@ Key Firehose data storage topics include [Data Stores](data-storage.md#data-stor
 
 #### Definition
 
-Firehose Stores are abstractions sitting on top of Object Storage.
+Simply defined, Firehose Stores are abstractions sitting on top of Object Storage.
 
-{% hint style="info" %}
-_Note:_ _Object Storage is a data storage technique that manages data as objects in opposition to other data storage architectures like hierarchical file systems._
-{% endhint %}
+_Object Storage is a data storage technique that manages data as objects in opposition to other data storage architectures like hierarchical file systems._
 
 #### Abstraction Library
 
@@ -74,9 +72,7 @@ Protocol-specific decoded block objects, like Ethereum, are what circulate among
 
 In high availability configurations, one-block files are transient and ensure the `Merger` component gathers all visible forks from any Extractor components.
 
-{% hint style="warning" %}
-_Important: One-block files contain only one `bstream.Block` as a serialized Protocol Buffer._
-{% endhint %}
+One-block files contain only one `bstream.Block` as a serialized Protocol Buffer.
 
 #### One-block File Consumption & Use
 

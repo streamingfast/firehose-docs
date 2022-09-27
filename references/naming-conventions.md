@@ -10,7 +10,9 @@ description: StreamingFast Firehose naming conventions
 
 Each Firehose setup has unique naming conventions depending on versioning and the blockchain being targeted.
 
-&#x20;This page serves as a resource to provide a unified experience for developers working between the Firehose versions.
+{% hint style="info" %}
+_Note: This page serves as a resource to provide a unified experience for developers working between the Firehose versions._
+{% endhint %}
 
 #### Short & Long Form Naming
 
@@ -18,7 +20,9 @@ Each Firehose setup uses two forms of naming. The naming is taken from the targe
 
 The short form will be the shortest abbreviation of the chain name possible.  For Ethereum, the long form would be`ethereum` and the short form would be `eth`.&#x20;
 
-_Note, these forms will be referenced throughout the Firehose naming conventions documentation._
+{% hint style="warning" %}
+_Important: These naming forms will be referenced throughout the Firehose naming conventions documentation._
+{% endhint %}
 
 ### Firehose Instrumentation Naming
 
@@ -30,13 +34,21 @@ Go Ethereum uses `geth,` Solana uses`solana-validator`, and Cosmos uses `gaia`.
 
 For line-based Firehose instrumentations, each line of output should start with the word `FIRE` followed by a simple word defining what data to expect on each line.&#x20;
 
-_Note, previous implementations used `DMLOG`, for deepmind, which was the codename of StreamingFast instrumentation._
+{% hint style="info" %}
+_Note: previous implementations used `DMLOG`, for deepmind, which was the codename of StreamingFast instrumentation._
+{% endhint %}
 
 #### Libraries
 
-When using libraries for node instrumentation using `firehose` as the name of the library for all firehose helpers is preferable. _Note, `deepmind` was used in several prior Firehose implementations._
+When using libraries for node instrumentation using `firehose` as the name of the library for all firehose helpers is preferable.&#x20;
 
-Also, note that the top-level flag  `--firehose-enabled` can be used for quickly dumping massive quantities of data to standard output from Firehose.                                         &#x20;
+{% hint style="info" %}
+_Note: `deepmind` was used in several prior Firehose implementations._    &#x20;
+{% endhint %}
+
+{% hint style="warning" %}
+_Important: The top-level flag  `--firehose-enabled` can be used for quickly dumping massive quantities of data to standard output from Firehose._
+{% endhint %}
 
 ### Chain-specific Binary Changes
 
