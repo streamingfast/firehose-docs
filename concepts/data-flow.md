@@ -22,7 +22,9 @@ Each Firehose component plays an important role as the blockchain data flows thr
 
 #### Data Flow Component Relationship
 
-The StreamingFast Deepmind instrumentation feeds to Extractor components. The Extractor components feed the Relayer component. The Index and IndexProvider components work with data provided by the instrumentation through the Extractor through the Relayer. Finally, the Firehose gRPC Server component hands data back to any consumers of Firehose.
+The StreamingFast Deepmind instrumentation feeds to Extractor components. The Extractor components feed the Relayer component.&#x20;
+
+The Index and IndexProvider components work with data provided by the instrumentation through the Extractor through the Relayer. Finally, the Firehose gRPC Server component hands data back to any consumers of Firehose.
 
 #### Data Flow & Components Key Points
 
@@ -48,13 +50,17 @@ Firehose begins at the instrumentation conducted on nodes for targeted blockchai
 
 The instrumentation itself is called StreamingFast Deepmind. Deepmind is an augmentation to the target blockchain node's source code. The augmentation is placed at the points where the critical block and transaction processing occurs.
 
-StreamingFast Deepmind instrumentation is currently available for Geth, OpenEthereum, Solana, and a few other blockchains.
+{% hint style="info" %}
+_Note: StreamingFast Deepmind instrumentation is currently available for Geth, OpenEthereum, Solana, and a few other blockchains._
+{% endhint %}
 
 #### Deepmind Data Output
 
 StreamingFast Deepmind Instrumentation outputs small chunks of data using a simple text-based protocol over the operating system's standard output pipe.
 
-The StreamingFast simple text-based protocol provides simplicity, performance boosts, and reliability.
+{% hint style="success" %}
+_Tip: The StreamingFast simple text-based protocol provides simplicity, performance boosts, and reliability._
+{% endhint %}
 
 #### Deepmind Data Messages
 
@@ -107,7 +113,9 @@ Extractor components also collect and organize the various smaller chunks of dat
 
 Extractor components assemble state changes, calls, and transactions into a complete Firehose data block for a specific blockchain protocol.
 
-The fully assembled Firehose data block is a Protocol Buffer-based object generated from a custom StreamingFast protobuf definition.
+{% hint style="info" %}
+_Note: The fully assembled Firehose data block is a Protocol Buffer-based object generated from a custom StreamingFast protobuf definition._
+{% endhint %}
 
 #### Data Broadcast
 
@@ -169,7 +177,9 @@ The Indexer component consumes merged blocks files and provides a targeted summa
 
 Target summaries are created when incoming Firehose queries contain StreamingFast Transforms.
 
-Targeted summaries are variable in nature.
+{% hint style="info" %}
+_Note: Targeted summaries are variable in nature._
+{% endhint %}
 
 #### Transforms & Protocol Buffers
 
@@ -207,7 +217,9 @@ The gRPC Server component is responsible for supplying the stream of block data 
 
 Firehose gRPC Server components connect to persisted and live block data sources to serve consumer data requests.
 
-Firehose was designed to switch between the persistent and live data store as it's joining data to intelligently fulfill inbound requests from consumers.
+{% hint style="info" %}
+_Note: Firehose was designed to switch between the persistent and live data store as it's joining data to intelligently fulfill inbound requests from consumers._
+{% endhint %}
 
 #### Historical Data Requests
 
@@ -237,7 +249,9 @@ The bstream package is responsible for collaboration between all other Firehose 
 
 The bstream package abstracts details surrounding files and block streaming from instrumented blockchain nodes.
 
-The bstream package presents an extremely powerful and simplified interface for dealing will all blockchain reorganizations.
+{% hint style="success" %}
+_Tip: The bstream package presents an extremely powerful and simplified interface for dealing will all blockchain reorganizations._
+{% endhint %}
 
 #### bstream Design & Motivation
 

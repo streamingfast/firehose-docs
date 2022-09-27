@@ -51,7 +51,9 @@ start:
 
 Firehose needs to know the location of the Geth binary. The configuration file contains a reader-node-path flag specifically designed to point Firehose to the Geth binary. The binary name will be the same for the different blockchains.
 
-_Note, the names of the Geth binaries differ depending on the target operating system. The differences are indicated by “\_linux” or “\_mac” in the binaries file name. Geth can be used directly on the command line without specifying a path if it has been installed globally on the system in the `user/local/bin` directory._
+{% hint style="info" %}
+_Note: the names of the Geth binaries differ depending on the target operating system. The differences are indicated by “\_linux” or “\_mac” in the binaries file name. Geth can be used directly on the command line without specifying a path if it has been installed globally on the system in the `user/local/bin` directory._
+{% endhint %}
 
 The updated flag in the configuration file for a macOS-based Firehose setup should reflect the following.
 
@@ -80,7 +82,9 @@ The numbers for the network and chain need to be enclosed in quotes. The update 
 
 `common-network-id: “1”`
 
-The chain and network ID will be different for each of the different Ethereum-compatible chains.
+{% hint style="info" %}
+_Note: The chain and network ID will be different for each of the different Ethereum-compatible chains._
+{% endhint %}
 
 **Default Ethereum Firehose Setups**
 
@@ -152,7 +156,9 @@ As previously mentioned, Goreli does not require specific JSON files. The config
 reader-node-arguments: +--goerli --http.port=9545 --ws.port=9546 --port=40303
 ```
 
-Another important thing to note is the cache argument passed to fireeth should be updated to 1024. This is due to the smaller size of the Goreli test network.
+{% hint style="warning" %}
+_Important: The cache argument passed to fireeth should be updated to 1024. This is due to the smaller size of the Goreli test network_.
+{% endhint %}
 
 ### 6. Test Installation
 

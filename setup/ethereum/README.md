@@ -14,8 +14,8 @@ The primary tasks for running a Firehose instrumented node are&#x20;
 * reprocess history,&#x20;
 * and starting streaming data.
 
-{% hint style="success" %}
-The Ethereum Firehose integration supports multiple chains out-of-the-box:\
+{% hint style="warning" %}
+_Important: The Ethereum Firehose integration supports multiple chains out-of-the-box. Chains currently supported are listed below._\
 
 
 * Ethereum Mainnet
