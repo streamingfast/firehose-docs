@@ -12,15 +12,15 @@ description: StreamingFast Firehose documentation
 
 The [Concepts & Architecture](https://firehose.streamingfast.io/concepts-and-architeceture/components) provides an in-depth look at the decisions that drove the development team's efforts while designing Firehose.
 
-#### Find the Source Code
+#### Firehose Source Code
 
 Full source code is available in the [official Firehose Github repository](https://github.com/streamingfast/firehose).&#x20;
 
-#### Intended Audience
+**Please first refer to the general
+[StreamingFast contribution guide](https://github.com/streamingfast/streamingfast/blob/master/CONTRIBUTING.md)**,
+if you wish to contribute to this code base.
 
-This documentation exists to help the following audiences learn about and operate Firehose.
 
-* Blockchain Developers
-* System Administrators
-* DevOps
-* Blockchain Node Operators
+## License
+
+[Apache 2.0](LICENSE)
