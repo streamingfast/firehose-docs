@@ -16,6 +16,8 @@ The [Concepts & Architecture](https://firehose.streamingfast.io/concepts-and-arc
 
 Full source code is available in the [official Firehose Github repository](https://github.com/streamingfast/firehose).&#x20;
 
+## Contributing
+
 **Please first refer to the general
 [StreamingFast contribution guide](https://github.com/streamingfast/streamingfast/blob/master/CONTRIBUTING.md)**,
 if you wish to contribute to this code base.
