@@ -249,10 +249,11 @@ grpcurl -plaintext localhost:13042 list
 The available gRPC services will print the following message to the terminal window.&#x20;
 
 ```shell-session
-dfuse.bstream.v1.BlockStreamV2 
-grpc.health.v1.Health 
-grpc.reflection.v1alpha.ServerReflection 
+grpc.health.v1.Health
+grpc.reflection.v1alpha.ServerReflection
 sf.firehose.v1.Stream
+sf.firehose.v2.Stream
+sf.substreams.v1.Stream
 ```
 
 Block streaming can be accomplished through the `sf.firehose.v1.Stream` service.&#x20;
