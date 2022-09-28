@@ -14,4 +14,4 @@ Firehose does expose some Substreams functionality in its core install. So, whil
 
 ### Run Firehose with Substreams
 
-Learn more about using Firehose with Substreams in [the documentation](https://substreams.streamingfast.io/reference-and-specs/advanced/running-locally).
+Learn more about using Firehose with Substreams in [the Substreams documentation](https://substreams.streamingfast.io/reference-and-specs/advanced/running-locally).
