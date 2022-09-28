@@ -216,8 +216,8 @@ A graceful shutdown will result in a message similar to the one seen below.
 
 ```shell-session
 ...
-2022-05-30T22:39:38.322+0100 (dfuse) Received termination signal, quitting (firehose-cosmos/cmd_start.go:55)
-2022-05-30T22:39:38.322+0100 (dfuse) Waiting for all apps termination... (launcher/launcher.go:259)
+2022-05-30T22:39:38.322+0100 (streamingfast) Received termination signal, quitting (firehose-cosmos/cmd_start.go:55)
+2022-05-30T22:39:38.322+0100 (streamingfast) Waiting for all apps termination... (launcher/launcher.go:259)
 2022-05-30T22:39:38.322+0100 (merger) merger exited (merger/merger.go:69)
 2022-05-30T22:39:38.322+0100 (firehose) forcing gRPC server (over HTTP router) to stop (dgrpc/server.go:390)
 2022-05-30T22:39:38.322+0100 (firehose) firehose is now ready to accept request (firehose/app.go:177)
@@ -252,7 +252,7 @@ A graceful shutdown will result in a message similar to the one seen below.
 2022-05-30T22:39:39.414+0100 (ingestor) archiver selector is terminated (mindreader/archiver_selector.go:98)
 2022-05-30T22:39:39.414+0100 (ingestor) archiver Terminate done (mindreader/mindreader.go:275)
 2022-05-30T22:39:39.414+0100 (ingestor) consume read flow terminate (mindreader/mindreader.go:257)
-2022-05-30T22:39:39.414+0100 (dfuse) All apps terminated gracefully (launcher/launcher.go:273)
+2022-05-30T22:39:39.414+0100 (streamingfast) All apps terminated gracefully (launcher/launcher.go:273)
 ```
 
 Note, the `firehose-cosmos` extractor component is labeled `ingestor` however is functionally identical. Learn more about the Firehose [components](../../concepts/components.md) and the overall [concepts and architecture](broken-reference).
