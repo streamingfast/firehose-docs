@@ -1,3 +1,7 @@
+<a href="https://www.streamingfast.io/">
+	<img width="100%" src="assets/firehose-banner.png" alt="StreamingFast Fireshose Banner" />
+</a>
+
 ---
 description: StreamingFast Firehose documentation
 ---
