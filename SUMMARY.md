@@ -40,4 +40,4 @@
 
 ## Release Notes
 
-* [Change Log](release-notes/change-log.md)
+* [Change Log](https://github.com/streamingfast/firehose-ethereum/blob/develop/CHANGELOG.md)
