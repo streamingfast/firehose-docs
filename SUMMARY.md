@@ -41,3 +41,7 @@
 ## Release Notes
 
 * [Change Log](https://github.com/streamingfast/firehose-ethereum/blob/develop/CHANGELOG.md)
+
+***
+
+* [Firehose FAQ](firehose-faq.md)
