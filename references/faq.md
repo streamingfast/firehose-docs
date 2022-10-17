@@ -2,7 +2,7 @@
 description: StreamingFast Firehose frequently asked questions
 ---
 
-# Firehose FAQ
+# FAQ
 
 ### **What is Firehose?**
 

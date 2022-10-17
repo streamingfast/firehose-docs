@@ -86,7 +86,9 @@ Data processes triggered by Ethereum log events can benefit from having knowledg
 
 Accessing rich, complete data leads smart contract developers to emit additional events. Emitting additional events leads to increased gas fees.
 
-Enriched and complete transaction data is simply not easily or readily available.&#x20;
+{% hint style="info" %}
+_Note: Enriched and complete transaction data is simply not easily or readily available._&#x20;
+{% endhint %}
 
 #### Contract Design Issues
 
@@ -104,13 +106,17 @@ Having access to richer external data processes allows developers to simplify co
 
 The data model used by StreamingFast to ingest protocol data was created with extreme diligence and care.&#x20;
 
-StreamingFast encountered several peculiarities within many protocols during the design and development process of Firehose.
+{% hint style="success" %}
+_Tip: StreamingFast encountered several peculiarities within many protocols during the design and development process of Firehose._
+{% endhint %}
 
 #### Subtleties in Reverted Calls
 
 Interpreting subtleties in bits of data, for things like the meaning of a reverted call in an Ethereum call stack, becomes impossible farther downstream.&#x20;
 
-Firehose provides complete node data through carefully considered and implemented model definitions created with Protocol Buffer schemas.&#x20;
+{% hint style="info" %}
+_Note: Firehose provides complete node data through carefully considered and implemented model definitions created with Protocol Buffer schemas._&#x20;
+{% endhint %}
 
 #### Running Full Archive Nodes
 
@@ -134,7 +140,9 @@ Flat-file and data stream abstractions adhere to the Unix philosophy of _writing
 
 StreamingFast uses state transitions scoped to calls, indexed within transactions, indexed within a block.
 
-Blockchains typically “round up” state changes for all transactions into a block to facilitate consensus.&#x20;
+{% hint style="success" %}
+_Tip: Blockchains typically “round up” state changes for all transactions into a block to facilitate consensus._&#x20;
+{% endhint %}
 
 #### Smart Contract Execution
 
@@ -146,7 +154,9 @@ Contracts lose state precision when the state is changed in the middle of a tran
 
 Attempting to locate the balance for calculations at the exact point needed, during the processing of a log event, for example, will result in receiving the balance value at the end of the block. The balance value may have changed state in a subsequent transaction after the transaction currently being indexed.
 
-The process of querying nodes can cause substantial issues for developers wanting finite node data access.
+{% hint style="warning" %}
+_Important: The process of querying nodes can cause substantial issues for developers wanting finite node data access._
+{% endhint %}
 
 #### Blockchain Data Consumption
 
@@ -154,7 +164,9 @@ Consuming blockchain state is difficult and each blockchain presents its own iss
 
 [Solidity](https://docs.soliditylang.org/en/v0.8.16/), for example, uses `bytes32` => `bytes32` mapping, making such a data retrieval endeavour rather opaque and difficult to reason about. This data is available with additional effort, but not easily.&#x20;
 
-Developers having access to state data presents tremendous opportunities for indexing and application development.
+{% hint style="success" %}
+_Tip: Developers having access to state data presents tremendous opportunities for indexing and application development._
+{% endhint %}
 
 #### Protocol Buffers
 

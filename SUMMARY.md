@@ -37,11 +37,8 @@
 * [Naming Conventions](references/naming-conventions.md)
 * [Schemas](references/protobuf-schemas.md)
 * [Repositories](references/repositories.md)
+* [FAQ](references/faq.md)
 
 ## Release Notes
 
 * [Change Log](https://github.com/streamingfast/firehose-ethereum/blob/develop/CHANGELOG.md)
-
-***
-
-* [Firehose FAQ](firehose-faq.md)
