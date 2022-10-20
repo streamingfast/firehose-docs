@@ -7,7 +7,7 @@
 * [Firehose Overview](intro/firehose-overview.md)
 * [Prerequisites](intro/prerequisites.md)
 
-## Concepts & Architeceture
+## Concepts & Architecture
 
 * [Components](concepts/components.md)
 * [Data Flow](concepts/data-flow.md)
