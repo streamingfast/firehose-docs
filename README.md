@@ -1,4 +1,8 @@
-# 🔥 Firehose
+---
+description: StreamingFast Firehose documentation
+---
+
+# Firehose
 
 ### Firehose Documentation
 

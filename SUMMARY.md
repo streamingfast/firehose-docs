@@ -1,6 +1,6 @@
 # Table of contents
 
-* [🔥 Firehose](README.md)
+* [Firehose](README.md)
 
 ## Introduction
 
