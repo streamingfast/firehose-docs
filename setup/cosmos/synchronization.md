@@ -255,7 +255,7 @@ A graceful shutdown will result in a message similar to the one seen below.
 2022-05-30T22:39:39.414+0100 (streamingfast) All apps terminated gracefully (launcher/launcher.go:273)
 ```
 
-Note, the `firehose-cosmos` extractor component is labeled `ingestor` however is functionally identical. Learn more about the Firehose [components](../../concepts/components.md) and the overall [concepts and architecture](broken-reference).
+Note, the `firehose-cosmos` extractor component is labeled `ingestor` however is functionally identical. Learn more about the Firehose [components](../../concepts-and-architecture/components/) and the overall [concepts and architecture](broken-reference).
 
 ### Synchronization Completion
 

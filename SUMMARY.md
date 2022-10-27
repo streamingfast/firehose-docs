@@ -9,7 +9,13 @@
 
 ## Concepts & Architecture
 
-* [Components](concepts/components.md)
+* [Components](concepts-and-architecture/components/README.md)
+  * [Firehose-enabled Node](concepts-and-architecture/components/firehose-enabled-node.md)
+  * [Reader](concepts-and-architecture/components/reader.md)
+  * [Merger](concepts-and-architecture/components/merger.md)
+  * [Relayer](concepts-and-architecture/components/relayer.md)
+  * [gRPC Server](concepts-and-architecture/components/grpc-server.md)
+  * [High Availability](concepts-and-architecture/components/high-availability.md)
 * [Data Flow](concepts/data-flow.md)
 * [Data Storage](concepts/data-storage.md)
 * [Design Principles](concepts/design-principles.md)
