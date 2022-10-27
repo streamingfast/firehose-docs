@@ -12,7 +12,21 @@ Firehose installation is accomplished through a few fairly simple tasks includin
 
 It's important to note that Firehose comes in many different flavors for different blockchains. Firehose also has a legacy version and a new version. The setup process isn't difficult however having a clear idea and path in mind before you begin is recommended.&#x20;
 
-After Firehose has been installed, configured, and synchronized with the target blockchain operating the software becomes the primary goal. Documentation is provided for the various blockchains and versions of Firehose to get operators up and running as quick as possible.
+After Firehose has been installed, configured, and synchronized with the target blockchain operating the software becomes the primary goal.&#x20;
+
+Documentation is provided for the various blockchains and versions of Firehose to get operators up and running as quickly as possible.
+
+### Docker Installation
+
+Firehose for Ethereum is available as a Docker image for quick and easy installation. Visit the following link to install Firehose through Docker.
+
+[https://github.com/streamingfast/firehose-ethereum/pkgs/container/firehose-ethereum](https://github.com/streamingfast/firehose-ethereum/pkgs/container/firehose-ethereum)
+
+Install Firehose using Docker through the terminal using the following command.
+
+```
+docker pull ghcr.io/streamingfast/firehose-ethereum:40d5054
+```
 
 ### StreamingFast Geth
 
