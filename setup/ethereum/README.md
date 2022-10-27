@@ -4,8 +4,9 @@ description: StreamingFast Firehose for Ethereum
 
 # Ethereum
 
-Setting up Firehose for Ethereum is a straightforward process that uses StreamingFast's pre-instrumented code solution.\
+## Firehose Ethereum Setup
 
+Setting up Firehose for Ethereum is a straightforward process that uses StreamingFast's pre-instrumented code solution.
 
 The primary tasks for running a Firehose instrumented node are&#x20;
 
@@ -15,7 +16,7 @@ The primary tasks for running a Firehose instrumented node are&#x20;
 * and starting streaming data.
 
 {% hint style="warning" %}
-_Important: The Ethereum Firehose integration supports multiple chains out-of-the-box. Chains currently supported are listed below._\
+**Important**_: The Ethereum Firehose integration supports multiple chains out-of-the-box. Chains currently supported are listed below._\
 
 
 * Ethereum Mainnet

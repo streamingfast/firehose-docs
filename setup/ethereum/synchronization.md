@@ -4,9 +4,7 @@ description: StreamingFast Firehose Ethereum synchronization
 
 # Synchronization
 
-### Ethereum Synchronization
-
-#### Sync in Detail
+## Ethereum Synchronization
 
 Synchronization is the process of:
 
@@ -14,9 +12,9 @@ Synchronization is the process of:
 * verifying node integrity through cryptography,&#x20;
 * and building the working node's blockchain data store.&#x20;
 
-### Ethereum Mainnet Synchronization
+## Ethereum Mainnet Synchronization
 
-#### Start fireeth
+### Start fireeth
 
 The `fireeth` command is used to start Firehose and begin synchronization with the desired network. In this case, it's the Ethereum Mainnet.
 
@@ -110,38 +108,38 @@ After a short delay, the blocks begin syncing.
 ```
 
 {% hint style="success" %}
-_Tip: To terminate the Firehose processing and connection to the Ethereum network press the Control + C keys._
+**Tip**_: To terminate the Firehose processing and connection to the Ethereum network press the Control + C keys._
 
 _The Firehose sync process will shut down gracefully and continue where it left off upon the next restart._
 {% endhint %}
 
-### Synchronization Processes
+## Synchronization Processes
 
-#### Data Extraction in Detail
+### Data Extraction in Detail
 
 The `mindreader-node` is a process that runs and manages the Geth blockchain node. The `mindreader-node` also consumes the blockchain data that is extracted from the instrumented Geth node and outputs individual block data.
 
 The `mindreader-node` process will either write individual block data into separate files called one-block files, or merge one hundred blocks of data together creating a 100-blocks file.
 
-#### Merged Mode
+### Merged Mode
 
 This behavior is configurable with the `mindreader-node-merge-and-store-directly` flag.&#x20;
 
 When running the `mindreader-node` process with the `mindreader-node-merge-and-store-directly` flag enabled, the mindreader is running in merged mode. When the flag is disabled it's running in normal mode.
 
-#### Block Mergers
+### Block Mergers
 
 In the scenario where the `mindreader-node` process stores one-block files the merger process can be run on the side. When the merger process is running in this fashion one-block files are merged into 100-block files.&#x20;
 
 The `mindreader-node` process is run in merged mode during chain synchronization. After the synchronization process has completed the `mindreader-node` will store one-block files running in its regular mode of operation.
 
-#### Block File Data Storage
+### Block File Data Storage
 
 The one-block files and 100-block files will be stored in the `data-dir/storage/merged-blocks` and `data-dir/storage/one-blocks` directories, respectively. The naming convention of the block files uses the number of the first block in the file.
 
-### Data Introspection Tools
+## Data Introspection Tools
 
-#### Data Introspection in Detail
+### Data Introspection in Detail
 
 The Firehose data introspection tools allow you to introspect one-blocks and merged blocks files.
 
@@ -150,7 +148,7 @@ Data inspection becomes possible through special sfeth tooling.&#x20;
 The `tools print block` can be used to introspect the synchronized block data.
 
 {% hint style="info" %}
-_Note: Data inspection can be run after 10,000 blocks have been synced._
+**Note**_: Data inspection can be run after 10,000 blocks have been synced._
 {% endhint %}
 
 ```shell-session
@@ -177,9 +175,9 @@ In addition, one-block files can be inspected using the `tools print one-block` 
 ./fireeth tools print one-block --store ./eth-data/storage/one-blocks 0000000000
 ```
 
-### Running Firehose
+## Running Firehose
 
-#### Data Analyzation & Streaming
+### Data Analyzation & Streaming
 
 After the Ethereum network has finished synchronization the data collected can be analyzed and streamed through the `mindreader` process.
 
@@ -189,7 +187,7 @@ After the Ethereum network has finished synchronization the data collected can b
 
 Firehose, `fireeth`, is now running a `mindreader-node` process that is extracting and merging the 100-blocks of data at a time.
 
-#### Firehose & Relayer
+### Firehose & Relayer
 
 The `fireeth` command launches both the Relayer and Firehose.
 
@@ -239,7 +237,7 @@ The following message will be printed to the terminal window after launching Fir
 At its core, Firehose is a gRPC stream. The available gRPC services can be displayed using `grpcurl`.&#x20;
 
 {% hint style="info" %}
-_Note: Installation instructions for grpcurl can be found in its_ [_official GitHub repository_](https://github.com/fullstorydev/grpcurl)_._
+**Note**_: Installation instructions for grpcurl can be found in its_ [_official GitHub repository_](https://github.com/fullstorydev/grpcurl)_._
 {% endhint %}
 
 ```bash

@@ -4,17 +4,17 @@ description: StreamingFast Firehose local deployment
 
 # Local Deployment
 
-### Ethereum Local Deployment
+## Ethereum Local Deployment
 
-#### Local Deployments Intro
+### Local Deployments Intro
 
 Firehose setups that are created on a computer directly, as opposed to cloud-based setups, are considered "local deployments." Local deployments remain on the computer the operators have direct access to and management over.
 
 Use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected for the Firehose setup. Create a directory named “firehome”, or something similar that's reflective of the target setup being created.&#x20;
 
-### Firehose Configuration
+## Firehose Configuration
 
-#### Config File in Detail
+### Config File in Detail
 
 The configuration file for Firehose is stored in the main Firehose directory. The name of the file can be anything, however, using the name of the specific chain and version of Firehose is recommended for clarity.
 
@@ -47,7 +47,7 @@ start:
 
 ```
 
-#### Geth Binary Path
+### Geth Binary Path
 
 Firehose needs to know the location of the Geth binary. The configuration file contains a reader-node-path flag specifically designed to point Firehose to the Geth binary. The binary name will be the same for the different blockchains.
 
@@ -59,7 +59,7 @@ The updated flag in the configuration file for a macOS-based Firehose setup shou
 
 `reader-node-path: ./geth_mac`
 
-#### Unique chain and network ID
+### Unique chain and network ID
 
 Each blockchain has a unique, numeric ID for the chain and network. Ethereum is the default blockchain implementation; the chain and network ID for it are the numeric value of 1. The numeric value is different for the other Ethereum-compatible chains.
 
@@ -83,10 +83,10 @@ The numbers for the network and chain need to be enclosed in quotes. The update 
 `common-network-id: “1”`
 
 {% hint style="info" %}
-_Note: The chain and network ID will be different for each of the different Ethereum-compatible chains._
+**Note**_: The chain and network ID will be different for each of the different Ethereum-compatible chains._
 {% endhint %}
 
-**Default Ethereum Firehose Setups**
+### **Default Ethereum Firehose Setups**
 
 Ethereum Mainnet is the default Geth version provided by StreamingFast. For Firehose setups targeting Ethereum Mainnet the genesis file and reader-node-arguments steps below are not applicable. Proceed to the step for running Firehose.
 
@@ -94,11 +94,11 @@ For Firehose setups targeting other Ethereum-compatible blockchains, such as Pol
 
 Firehose setups targeting Goerli do not require genesis files however further modifications to the reader-node-arguments value are necessary. Additional information specific to Goerli setups is provided below.
 
-#### Download genesis JSON File
+### Download genesis JSON File
 
 Firehose requires genesis block information to begin indexing for Ethereum-compatible blockchains. The genesis block information is provided in JSON files available for download. Find the JSON file relevant to the blockchain for the Firehose setup being created.
 
-_**Binance genesis JSON file**_
+#### **Binance genesis JSON file**
 
 Right-click and save the JSON file to the main Firehose directory created in the first step of the setup process.
 
@@ -110,7 +110,7 @@ Alternatively, the JSON file can be downloaded with curl using a terminal window
 curl https://raw.githubusercontent.com/streamingfast/firehose-docs/master/configs/binance/genesis.json --output genesis.json
 ```
 
-_**Polygon genesis JSON file**_
+#### **Polygon genesis JSON file**
 
 Right-click and save the JSON file to the main Firehose directory created in the first step of the setup process.
 
@@ -122,17 +122,17 @@ Alternatively, the JSON file can be downloaded with curl using a terminal window
 curl https://raw.githubusercontent.com/streamingfast/firehose-docs/master/configs/polygon/genesis.json --output genesis.json
 ```
 
-#### Add Genesis File Reference to Config File
+### Add Genesis File Reference to Config File
 
 After the JSON files have been downloaded the configuration file needs to be updated to inform Firehose where the file is located. Add the following flag to the configuration file.
 
 `reader-node-bootstrap-data-url: ./genesis.json`
 
-#### Update reader-node-arguments in Config File
+### Update reader-node-arguments in Config File
 
 The reader-node-arguments flag provides Firehose with information it needs for startup. Use the flags provided below specific to the chain being targeted.
 
-_**Binance reader-node-arguments**_
+#### **Binance reader-node-arguments**
 
 The reader-node-arguments flag for Binance need to be updated to reflect the following.
 
@@ -140,7 +140,7 @@ The reader-node-arguments flag for Binance need to be updated to reflect the fol
 reader-node-arguments: "+--maxpeers 300 --cache 16368 --snapshot=false  --bootnodes=enode://1cc4534b14cfe351ab740a1418ab944a234ca2f702915eadb7e558a02010cb7c5a8c295a3b56bcefa7701c07752acd5539cb13df2aab8ae2d98934d712611443@52.71.43.172:30311,enode://28b1d16562dac280dacaaf45d54516b85bc6c994252a9825c5cc4e080d3e53446d05f63ba495ea7d44d6c316b54cd92b245c5c328c37da24605c4a93a0d099c4@34.246.65.14:30311,enode://5a7b996048d1b0a07683a949662c87c09b55247ce774aeee10bb886892e586e3c604564393292e38ef43c023ee9981e1f8b335766ec4f0f256e57f8640b079d5@35.73.137.11:30311"
 ```
 
-_**Polygon reader-node-arguments**_
+#### **Polygon reader-node-arguments**
 
 The reader-node-arguments flag for Polygon need to be updated to reflect the following.
 
@@ -148,7 +148,7 @@ The reader-node-arguments flag for Polygon need to be updated to reflect the fol
 reader-node-arguments: "+--bor.heimdall=https://heimdall.api.matic.network --bootnodes=enode://0cb82b395094ee4a2915e9714894627de9ed8498fb881cec6db7c65e8b9a5bd7f2f25cc84e71e89d0947e51c76e85d0847de848c7782b13c0255247a6758178c@44.232.55.71:30303,enode://88116f4295f5a31538ae409e4d44ad40d22e44ee9342869e7d68bdec55b0f83c1530355ce8b41fbec0928a7d75a5745d528450d30aec92066ab6ba1ee351d710@159.203.9.164:30303"
 ```
 
-_**Goerli reader-node-arguments**_
+#### **Goerli reader-node-arguments**
 
 As previously mentioned, Goreli does not require specific JSON files. The config file does however require modifications. The reader-node-arguments flag should be updated to reflect the value provided below. _Note, Goreli setups do not need to pass values for bootsnotes as with the Binance and Polygon setups._
 
@@ -157,10 +157,10 @@ reader-node-arguments: +--goerli --http.port=9545 --ws.port=9546 --port=40303
 ```
 
 {% hint style="warning" %}
-_Important: The cache argument passed to fireeth should be updated to 1024. This is due to the smaller size of the Goreli test network_.
+**Important**_: The cache argument passed to fireeth should be updated to 1024. This is due to the smaller size of the Goreli test network_.
 {% endhint %}
 
-### 6. Test Installation
+## Test Installation
 
 The following command is used to start Firehose. Run the command from the directory that Firehose was installed to if other than `usr/local/bin`.
 
@@ -168,7 +168,7 @@ The following command is used to start Firehose. Run the command from the direct
 ./fireeth -c eth-mainnet.yaml start
 ```
 
-_**Successful Installation Logging**_
+### **Successful Installation Logging**
 
 After issuing the start command to the terminal it can take up to thirty seconds for Firehose to begin connecting to peers and processing block data.&#x20;
 
@@ -336,7 +336,7 @@ INFO [09-05|12:25:13.377] Looking for peers                        peercount=0 t
 
 After Firehose has been set up it needs to be synchronized with the target blockchain. Full sync is a data and time-intensive process and can take several days or longer to complete for full archive nodes. Further documentation is provided for [synchronizing Firehose](../../setup/cosmos/synchronization.md).
 
-_**Fireeth Tools**_
+## **Fireeth Tools**
 
 Firehose also provides tools for operators to inspect many facets of the application. For example, the `tools check merged-blocks` command can be used to view and investigate the block data produced by Firehose.
 
@@ -355,7 +355,7 @@ Checking block holes on ./sf-data/storage/merged-blocks
 
 ```
 
-### **Problems**
+## **Problems**
 
 It may be necessary to remove the quarantine attribute on the Geth and Firehose binary files to resolve signing issues on macOS.
 

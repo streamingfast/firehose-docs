@@ -4,9 +4,7 @@ description: StreamingFast Firehose reader component
 
 # Reader
 
-### Reader
-
-#### Reader Component in Detail
+## Reader Component in Detail
 
 The Reader component is responsible for extracting data from instrumented blockchain nodes.
 
@@ -18,7 +16,7 @@ Once the process has been started, the Reader component:&#x20;
 * forwards the data downstream to other connected components including the Relayer, Firehose gRPC Server, etc.
 * flushes the data to Object Storage for durability, and for the Merger to pick up the data.
 
-#### Firehose Depends on the Reader
+### Firehose Depends on the Reader
 
 The data consumed by Firehose is provided by the Reader component.&#x20;
 
@@ -32,6 +30,6 @@ The Blockchain node underlying and managed by the Reader can be considered simpl
 **Note**_: after Firehose has been instrumented on a node it will begin returning substantial amounts of data._&#x20;
 {% endhint %}
 
-#### Reader Nomenclature
+### Reader Nomenclature
 
 The Reader component is sometimes referred to as the Mindreader. This nickname stems from history where the codebase `deepmind` was used to describe the instrumentation of nodes.

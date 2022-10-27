@@ -4,7 +4,7 @@ description: StreamingFast Firehose new blockchains
 
 # New Blockchains
 
-### Intro
+## Intro
 
 Firehose was specifically designed to work with multiple blockchains beyond the existing implementations.
 
@@ -16,7 +16,7 @@ The process of instrumenting a node is mandatory for blockchains without existin
 _Important: Integrating new blockchains is an intricate process. Attention to detail is paramount during node instrumentation and while creating Protocol Buffer schemas._
 {% endhint %}
 
-### Integration Directory
+## Integration Directory
 
 Select a location on the target computer for all Firehose files including the data that will be extracted and stored, and all other integration artifacts.&#x20;
 
@@ -24,7 +24,7 @@ The name is flexible however this directory is an important location and will be
 
 This directory is the home directory of the custom integration being created.
 
-### Firehose-ACME
+## Firehose-ACME
 
 StreamingFast provides the [Firehose-ACME repository](https://github.com/streamingfast/firehose-acme) to serve as a starting point to create the required chain-specific code and files. To use Firehose-ACME as starting point many aspects of the project and code need to be renamed. __ Three exact reference types need to be updated, acme, Acme, and ACME.
 
@@ -62,7 +62,7 @@ Three references to "ACME" exist within Firehose-ACME that need to be updated to
 _Important: Don't forget to update all variants of "\<chain>" to the name of the new chain being integrated. For example, if the chain's name was "aptos" the updates will be "aptos", "Aptos" and "APTOS", respectively._
 {% endhint %}
 
-### Project File Naming
+## Project File Naming
 
 A handful of files need to be updated to reflect the name of the new chain. The following example shows the name being updated to "_aptos_".
 
@@ -79,7 +79,7 @@ git mv ./tools/fireacme ./tools/fireaptos
 git mv ./types/pb/sf/acme ./types/pb/sf/aptos
 ```
 
-### Protocol Buffer Regeneration
+## Protocol Buffer Regeneration
 
 After updating the references to "ACME" the Protocol Buffers need to be regenerated. Use the `generate` shell script to make the updates.&#x20;
 
@@ -87,7 +87,7 @@ After updating the references to "ACME" the Protocol Buffers need to be regenera
 ./types/pb/generate.sh
 ```
 
-### Running Tests&#x20;
+## Running Tests&#x20;
 
 After completing all of the previous steps the base integration is ready for initial testing.&#x20;
 
@@ -97,49 +97,49 @@ go test ./...
 
 If all changes were made correctly the updated project should compile successfully.
 
-### Protobuf Data Modeling&#x20;
+## Protobuf Data Modeling&#x20;
 
 Designing the protobuf structures for your given blockchain is one of the most important steps in an integrator's journey.&#x20;
 
 {% hint style="warning" %}
-_Important: It's imperative that the data structures in the protobuf's of the custom integration are represented as precisely as possible._&#x20;
+**Important**_: It's imperative that the data structures in the protobuf's of the custom integration are represented as precisely as possible._&#x20;
 {% endhint %}
 
 {% hint style="danger" %}
-_Critical: The success of the integration will be proportionate to the amount of time spent on the design and implementation phase of the protobuf definitions._
+**Critical**_: The success of the integration will be proportionate to the amount of time spent on the design and implementation phase of the protobuf definitions._
 
 _Additional information is available in the_ [_StreamingFast Ethereum protobuf implementation_](https://github.com/streamingfast/firehose-ethereum/blob/develop/proto/sf/ethereum/type/v2/type.proto)_._
 {% endhint %}
 
 To integrate the target blockchain modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to the custom integration's blockchain node binary.&#x20;
 
-#### Type Definitions
+### Type Definitions
 
 The proto file `sf/acme/type/v1/type.proto` needs to be updated to match the target chain's types.&#x20;
 
-### Reader
+## Reader
 
 `reader.go` is the boundary between the custom integration process and the Firehose ingestion process.
 
 {% hint style="info" %}
-_Note:_ [_Read the source_](https://github.com/streamingfast/firehose-acme/blob/master/nodemanager/codec/consolereader.go) _code for the `ConsoleReader` to gain a better understanding of how it works. The majority of the customization work will be conducted in this file._
+**Note**_:_ [_Read the source_](https://github.com/streamingfast/firehose-acme/blob/master/nodemanager/codec/consolereader.go) _code for the `ConsoleReader` to gain a better understanding of how it works. The majority of the customization work will be conducted in this file._
 {% endhint %}
 
 Each blockchain has specific design and implementation details and there isn't a single standard or language that blockchains are written in or follow. For these reasons, it's virtually impossible to provide instructions for the instrumentation steps involved with each blockchain in the world.
 
 {% hint style="warning" %}
-_Important: Studying the StreamingFast Ethereum and other implementations and instrumentations should serve as a foundation for other custom integrations._&#x20;
+**Important**_: Studying the StreamingFast Ethereum and other implementations and instrumentations should serve as a foundation for other custom integrations._&#x20;
 {% endhint %}
 
 {% hint style="danger" %}
-_Critical: Ensure the custom integration has set aside a good amount of time to plan and execute the steps and tasks involved for researching and instrumenting the blockchain being targeted._&#x20;
+**Critical**_: Ensure the custom integration has set aside a good amount of time to plan and execute the steps and tasks involved for researching and instrumenting the blockchain being targeted._&#x20;
 {% endhint %}
 
-### Data Production
+## Data Production
 
 As the integration progresses ensure that files are being produced under the appropriate Firehose-specific data directory.
 
-### Renaming
+## Renaming
 
 Choose two names, a long-form and a short form for the custom integration following the naming conventions outlined below.
 

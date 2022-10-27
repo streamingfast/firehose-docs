@@ -4,7 +4,7 @@ description: StreamingFast Firehose documentation
 
 # Firehose
 
-### Welcome to Firehose Docs
+## Welcome to Firehose Docs
 
 Firehose is a new technology developed by StreamingFast working with [The Graph Foundation](https://thegraph.com/). The product provides previously unseen capabilities and speeds for indexing blockchain data using a files-based and streaming-first approach.
 
@@ -15,8 +15,6 @@ This documentation serves as the main resource for understanding and working wit
 [Firehose Overview](https://firehose.streamingfast.io/introduction/firehose-overview) is a great place to begin learning about the overall scope, vision, and capabilities of Firehose.
 
 The [Concepts & Architecture](https://firehose.streamingfast.io/concepts-and-architeceture/components) provides an in-depth look at the decisions that drove the development team's efforts while designing Firehose.
-
-### Firehose Source Code
 
 Full source code is available in the [official Firehose Github repository](https://github.com/streamingfast/firehose).
 

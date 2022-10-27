@@ -4,7 +4,7 @@ description: StreamingFast Firehose Firehose-enabled node component
 
 # Firehose-enabled Node
 
-### Firehose-enabled Node in Detail
+## Firehose-enabled Node in Detail
 
 The Firehose-enabled Blockchain Node is a third-party blockchain node client, such as Ethereum, instrumented under StreamingFast practices to output data that will be read by the Firehose Reader component.&#x20;
 

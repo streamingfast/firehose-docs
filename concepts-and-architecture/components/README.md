@@ -6,7 +6,7 @@ description: StreamingFast Firehose components
 
 # Components
 
-### Firehose Component Family
+## Firehose Component Family
 
 The Firehose system is comprised of several key components that work together to provide your desired functionality.
 
@@ -16,7 +16,7 @@ The Firehose system is comprised of several key components that work together to
 * [Relayer](relayer.md)
 * [Firehose gRPC Server](grpc-server.md)
 
-### Component Relationships
+## Component Relationships
 
 The Firehose components work together in symphony to provide blockchain data from configured and instrumented nodes to consumers through the [gRPC Server](grpc-server.md).
 

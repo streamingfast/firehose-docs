@@ -4,7 +4,7 @@ description: StreamingFast Firehose repositories
 
 # Repositories
 
-### Firehose implementation repositories
+## Firehose implementation repositories
 
 * [Firehose for Ethereum](https://github.com/streamingfast/sf-ethereum)
 * [Firehose for NEAR](https://github.com/streamingfast/sf-near)
@@ -13,9 +13,9 @@ description: StreamingFast Firehose repositories
 * [Firehose for Arweave](https://github.com/streamingfast/firehose-arweave)
 * [Firehose for Aptos](https://github.com/streamingfast/firehose-aptos)
 
-### Versioning
+## Versioning
 
-**Coming Soon**
+### **Coming Soon**
 
 Versioning considerations for binaries to answer questions such as:
 

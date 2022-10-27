@@ -4,33 +4,31 @@ description: StreamingFast Firehose merger component
 
 # Merger
 
-### Merger
-
-#### Merger Component in Detail
+## Merger Component in Detail
 
 The Merger component is responsible for managing and shaping data flowing out of the Reader component.&#x20;
 
-#### Blocks Files
+### Blocks Files
 
 The Merger component produces what are referred to as "100-blocks files." The Merger component receives "one-block" files from Reader components that are feeding the Merger.&#x20;
 
-#### One-block Storage
+### One-block Storage
 
 The Merger component reads the one-block object store to produce the 100-blocks files.
 
-#### Forks
+### Forks
 
 All forks visited by a Reader component will also be merged by the Merger component.
 
-#### Merging Blocks
+### Merging Blocks
 
 The merged 100-blocks files will be created each time the Merger component receives one hundred blocks of data from its associated Reader component.&#x20;
 
-#### Fork Data Awareness
+### Fork Data Awareness
 
 The Merger component will produce the files when there are no additional forks that might occur. The StreamingFast bstream ForkableHandler provides support for fork data awareness in future merged blocks.
 
-#### Merger Responsibilities
+### Merger Responsibilities
 
 * Boot and try to start where it left off if a merged-seen.gob file is available.
 * Boot and start the next bundle in the last merged-block in storage if there is _**not**_ a merged-seen.gob file available.

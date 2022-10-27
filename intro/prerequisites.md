@@ -4,9 +4,7 @@ description: StreamingFast Firehose prerequisites
 
 # Prerequisites
 
-### Prerequisites
-
-#### Essential Knowledge
+## Essential Knowledge
 
 Software Developers and Systems Administrators should have an understanding of:&#x20;
 
@@ -19,7 +17,7 @@ Software Developers and Systems Administrators should have an understanding of:&
 * compiling C and [Go](https://go.dev/) code,&#x20;
 * and [blockchain](https://en.wikipedia.org/wiki/Blockchain) technologies and terminology.
 
-#### Requirements
+## Requirements
 
 Full Firehose implementations require a functional and operating [blockchain node](https://ethereum.org/en/run-a-node/).&#x20;
 

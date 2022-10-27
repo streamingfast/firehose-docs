@@ -4,7 +4,7 @@ description: StreamingFast Firehose schemas
 
 # Schemas
 
-### Chain-specific schemas
+## Chain-specific schemas
 
 Firehose currently has Layer 1 Protocol Buffer schemas for several different blockchains. Follow the links below to find the schemas relevant to the blockchain being targeted.
 
@@ -17,7 +17,7 @@ Firehose currently has Layer 1 Protocol Buffer schemas for several different blo
 * [Arweave Protobuf Definitions](https://github.com/streamingfast/firehose-arweave/blob/develop/proto/sf/arweave/type/v1/type.proto)
 * [Aptos Protobuf Definitions](https://github.com/aptos-labs/aptos-core/blob/main/crates/aptos-protos/proto/aptos/extractor/v1/extractor.proto)
 
-### The `bstream` Block
+## The `bstream` Block
 
 The `bstream` Block is the main blockchain-agnostic object flowing throughout Firehose.&#x20;
 
@@ -25,9 +25,9 @@ The `bstream` Block is the main blockchain-agnostic object flowing throughout Fi
 **Note**: _The_ `stream` _Block is the envelope used to pass blockchain-specific Block objects, for Ethereum, as an example._
 {% endhint %}
 
-### Versioning
+## Versioning
 
-_**Coming Soon**_
+### _**Coming Soon**_
 
 Discussion on general multi-chain considerations of versioning in the Firehose suite to answer questions such as:
 

@@ -4,7 +4,7 @@ description: StreamingFast Firehose for Cosmos
 
 # Cosmos
 
-
+## Firehose Comos Setup
 
 Setting up Firehose for Cosmos is a straightforward process that uses StreamingFast's pre-instrumented code solution.\
 

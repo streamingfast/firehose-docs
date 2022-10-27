@@ -4,9 +4,9 @@ description: StreamingFast Firehose Installation
 
 # Installation
 
-### Firehose Installation
+## Firehose Installation
 
-#### Installation Intro
+### Installation Intro
 
 Firehose installation is accomplished through a few fairly simple tasks including obtaining specific binaries and some configuration steps.
 
@@ -16,7 +16,7 @@ After Firehose has been installed, configured, and synchronized with the target 
 
 Documentation is provided for the various blockchains and versions of Firehose to get operators up and running as quickly as possible.
 
-### Docker Installation
+## Docker Installation
 
 Firehose for Ethereum is available as a Docker image for quick and easy installation. Visit the following link to install Firehose through Docker.
 
@@ -28,12 +28,12 @@ Install Firehose using Docker through the terminal using the following command.
 docker pull ghcr.io/streamingfast/firehose-ethereum:40d5054
 ```
 
-### StreamingFast Geth
+## StreamingFast Geth
 
 Geth extracts raw blockchain data from Ethereum nodes. The StreamingFast Firehose-enabled Blockchain Node is an instrumented, version of the official Geth implementation.&#x20;
 
 {% hint style="info" %}
-_Note: Geth is the official Golang implementation of the Ethereum Protocol._
+**Note**_: Geth is the official Golang implementation of the Ethereum Protocol._
 {% endhint %}
 
 StreamingFast provides support for various Ethereum-compatible blockchains ready to use with Firehose. The overall setup and installation process is very similar across the different Ethereum-compatible blockchains.
@@ -41,20 +41,22 @@ StreamingFast provides support for various Ethereum-compatible blockchains ready
 Every Ethereum-compatible blockchain has specific requirements and other differences that should be taken into consideration before rolling out a production Firehose solution.&#x20;
 
 {% hint style="warning" %}
-_Important: Each blockchain has specific requirements for processing power, RAM, available disk space, and write speed that need to be considered._
+**Important**_: Each blockchain has specific requirements for processing power, RAM, available disk space, and write speed that need to be considered._
 {% endhint %}
 
-#### Available StreamingFast Geth Releases
+### Available StreamingFast Geth Releases
 
 All Firehose instrumented Geth binaries are provided on the Firehose go-ethereum [releases page](https://github.com/streamingfast/go-ethereum). Direct links to the latest Geth binaries for the supported Ethereum-compatible blockchains are also provided below.
 
 Obtaining the instrumented version of Geth for the target blockchain is the first step in the Firehose setup process. The setup process differs slightly for the different blockchains.
 
-**Default Blockchain for Geth**
+### **Default Blockchain for Geth**
 
-_Ethereum is the default implementation for firehose-ethereum_ and uses the Geth version that _does not_ contain references to any other blockchains in its release title or file name. The Geth binaries provided by StreamingFast have “fh” within the version to indicate they’re not the standard, non-instrumented, community-developed node version.
+_Ethereum is the default implementation for firehose-ethereum_ and uses the Geth version that _does not_ contain references to any other blockchains in its release title or file name.&#x20;
 
-_**Firehose Versions**_
+The Geth binaries provided by StreamingFast have “fh” within the version to indicate they’re not the standard, non-instrumented, community-developed node version.
+
+### **Firehose Versions**
 
 Firehose v1.0.0 is the most recent release of Firehose. Release versions are also provided for legacy versions of Firehose. It is recommended that new setups use the latest version and existing setups are upgraded as soon as possible.
 
@@ -66,45 +68,45 @@ Ensure that the Geth Firehose and fireeth versions match. When errors are encoun
 _Note: Current legacy **** Firehose operators can find additional information in the Update Firehose section of the documentation._
 {% endhint %}
 
-### Install Geth
+## Install Geth
 
-#### Download Binary
+### Download Binary
 
 Choose the Geth binary associated with the blockchain being targeted for the Firehose implementation being created. Firehose is currently available for Linux and macOS and binaries are provided for each operating system.
 
 Save the Geth binary to a convenient location on the computer Firehose is being set up on. StreamingFast recommends simply saving binaries to the `/usr/local/bin` directory on the target machine. This will enable system-wide calls to the apps within the StreamingFast suite, such as Firehose.
 
-_**Ethereum Geth**_
+### _**Ethereum Geth**_
 
-Linux
+#### Linux
 
 [https://github.com/streamingfast/go-ethereum/releases/download/geth-v1.10.23-fh2.1/geth\_linux](https://github.com/streamingfast/go-ethereum/releases/download/geth-v1.10.23-fh2.1/geth\_linux)
 
-macOS
+#### macOS
 
 [https://github.com/streamingfast/go-ethereum/releases/download/geth-v1.10.23-fh2.1/geth\_mac](https://github.com/streamingfast/go-ethereum/releases/download/geth-v1.10.23-fh2.1/geth\_mac)
 
-_**Binance Geth**_
+### **Binance Geth**
 
-Linux
+#### Linux
 
 [https://github.com/streamingfast/go-ethereum/releases/download/bsc-v1.1.12-fh2.2/geth\_linux](https://github.com/streamingfast/go-ethereum/releases/download/bsc-v1.1.12-fh2.2/geth\_linux)
 
-macOS
+#### macOS
 
 ****[https://github.com/streamingfast/go-ethereum/releases/download/bsc-v1.1.12-fh2.2/geth\_mac](https://github.com/streamingfast/go-ethereum/releases/download/bsc-v1.1.12-fh2.2/geth\_mac)
 
-_**Polygon Geth**_
+### **Polygon Geth**
 
-Linux
+#### Linux
 
 ****[https://github.com/streamingfast/go-ethereum/releases/download/polygon-v0.2.16-fh2.3/geth\_linux](https://github.com/streamingfast/go-ethereum/releases/download/polygon-v0.2.16-fh2.3/geth\_linux)
 
-macOS
+#### macOS
 
 [https://github.com/streamingfast/go-ethereum/releases/download/polygon-v0.2.16-fh2.3/geth\_mac](https://github.com/streamingfast/go-ethereum/releases/download/polygon-v0.2.16-fh2.3/geth\_mac)
 
-#### Run Binary & Check Version
+### Run Binary & Check Version
 
 To check the status of the Geth setup run the binary and pass it the version flag. The Geth version will be displayed in the terminal window. This aids in ensuring the correct Geth version was downloaded.
 
@@ -114,7 +116,7 @@ _Note: see the Problems section of this document to resolve issues related to si
 
 `./geth_linux version`
 
-_**Success Message**_
+### **Success Message**
 
 A message similar to the following should be displayed in the terminal window If everything is working correctly.
 
@@ -133,35 +135,35 @@ GOPATH=/Users/<User Account>/go
 GOROOT=go
 ```
 
-### Install Firehose
+## Install Firehose
 
-#### Download Firehose Binary
+### Download Firehose Binary
 
 Save the Firehose binary to the main Firehose directory. After the archive has completed downloading extract it to obtain the Firehose binary.
 
-_**Firehose for Linux**_&#x20;
+### **Firehose for Linux**&#x20;
 
 [https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_linux\_x86\_64.tar.gz](https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_linux\_x86\_64.tar.gz)
 
-_**Firehose for macOS**_&#x20;
+### **Firehose for macOS**&#x20;
 
 [https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_macOS\_x86\_64.tar.gz](https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_macOS\_x86\_64.tar.gz)
 
-_**Firehose for macOS ARM**_
+### **Firehose for macOS ARM**
 
 [https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_macOS\_arm64.tar.gz](https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_macOS\_arm64.tar.gz)
 
-#### Run Binary & Check Version
+### Run Binary & Check Version
 
 To check the status of the Firehose setup run the binary and pass it the version flag. The Firehose version will be displayed in the terminal window. This aids in ensuring the correct Firehose version was downloaded.
 
 `./fireeth --version`
 
 {% hint style="info" %}
-_Note: see the Problems section of this document to resolve issues related to signing, or digital signatures, encountered on macOS for this step._
+**Note**_: see the Problems section of this document to resolve issues related to signing, or digital signatures, encountered on macOS for this step._
 {% endhint %}
 
-_**Success Message**_
+### **Success Message**
 
 The following message will be displayed in the terminal window if Firehose is working correctly.
 
@@ -169,12 +171,12 @@ The following message will be displayed in the terminal window if Firehose is wo
 fireeth version 1.0.0 (Commit 42f870c, Built 2022-09-02T17:07:45Z)
 ```
 
-#### Next Steps
+### Next Steps
 
 The following steps will differ slightly for each blockchain. Specific configuration steps, settings, and processes are outlined for blockchains currently supported by StreamingFast.&#x20;
 
 {% hint style="success" %}
-_Tip: Other blockchains beyond the ones currently supported can be used with Firehose through the process of instrumentation. Information is provided for the instrumentation process of_ [_new blockchains_](https://firehose.streamingfast.io/integrate-new-chains/new-blockchains)_._
+**Tip**_: Other blockchains beyond the ones currently supported can be used with Firehose through the process of instrumentation. Information is provided for the instrumentation process of_ [_new blockchains_](https://firehose.streamingfast.io/integrate-new-chains/new-blockchains)_._
 {% endhint %}
 
 Another consideration is where the Firehose setup will be deployed. The next steps for full setup are determined by specifics for the target environment and blockchain. Documentation is provided for [local](<installation (1).md>) and production deployments. _Note, Firehose is also capable of running in bare-metal environments._

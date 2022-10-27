@@ -6,8 +6,6 @@ description: StreamingFast Firehose Cosmos synchronization
 
 ## Cosmos Synchronization
 
-#### Cosmos Sync in Detail
-
 Firehose for Cosmos, `firehose-cosmos,` is an application that funs a few small, isolated processes as a Firehose implementation.&#x20;
 
 The latest version of `firehose-cosmos` is available in the project's [official Github repository](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
@@ -22,11 +20,13 @@ Issue the following command to the terminal from inside the firehose-cosmos dire
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
 ```
 
-_Note, make sure to download the most recent version of `firehose-cosmos` for the latest functionality, updates, and patches._&#x20;
+{% hint style="info" %}
+**Note**_, make sure to download the most recent version of `firehose-cosmos` for the latest functionality, updates, and patches._&#x20;
+{% endhint %}
 
 Firehose Cosmos can also be installed from source. Navigate to the `firehose-cosmos` directory and issue the `make install` command to the terminal window.
 
-#### Verify Installation of Cosmos
+### Verify Cosmos Installation
 
 Issue the following command to the terminal window to verify that the Cosmos installation was successful.
 
@@ -36,7 +36,7 @@ firehose-cosmos --version
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose --version
 ```
 
-#### Indexing Cosmos
+### Indexing Cosmos
 
 To index Cosmos, the binaries must be correctly modified for the selected target blockchain.
 
@@ -44,7 +44,7 @@ Figment provides [binaries and pre-built Docker images](https://hub.docker.com/r
 
 The Dockerfiles will start the `firehose-cosmos` process for you.&#x20;
 
-#### Chain Data Volume Storage Path&#x20;
+### Chain Data Volume Storage Path&#x20;
 
 Be sure to pass the path to the chain data volume storage. If the path isn't supplied the chain will begin synchronizing at the Genesis block each time the application runs.&#x20;
 
@@ -62,7 +62,7 @@ Chain data volume storage path for CosmosHub chains.
 /app/gaia_home/data
 ```
 
-#### Running Nodes Outside Docker
+### Running Nodes Outside Docker
 
 To run a node outside of Docker update the configuration file for the binary. Check the Extractor Configuration Options to match them with the example below.
 
@@ -75,7 +75,7 @@ enabled = true
 output_file = "stdout"
 ```
 
-#### Configuration Files
+### Configuration Files
 
 Configuration files can be passed into the binary at startup. This alleviates passing in numerous command line flags, saves time and reduces errors.
 
@@ -104,7 +104,7 @@ start:
     ingestor-node-args: start
 ```
 
-#### Syncing your chain
+### Syncing your chain
 
 The first time the node runs it will begin synchronization from the genesis block. This initial sync can generally take some time, so, give the process a minute or two to get started.
 
@@ -120,7 +120,9 @@ Issue the following command to the terminal window to test the installation's ab
 grpcurl -plaintext localhost:9030 sf.firehose.v1.Stream.Blocks | jq
 ```
 
-_Note, both_ [_grpcurl_](https://github.com/fullstorydev/grpcurl) _and_ [_jq_](https://github.com/stedolan/jq) _should be installed. If they aren't available check the target computer's preferred package manager._
+{% hint style="info" %}
+**Note**_: both_ [_grpcurl_](https://github.com/fullstorydev/grpcurl) _and_ [_jq_](https://github.com/stedolan/jq) _should be installed. If they aren't available check the target computer's preferred package manager._
+{% endhint %}
 
 Issuing the `grpcurl` command will result in the following logging information being printed to the terminal.
 
@@ -207,7 +209,7 @@ After a short delay, blocks will begin syncing and printing to the terminal wind
 ```
 
 {% hint style="warning" %}
-To terminate the Firehose processing and connection to the Ethereum network press the Control + C keys.
+**Important**: To terminate the Firehose processing and connection to the Ethereum network press the Control + C keys.
 
 The Firehose sync process will shutdown gracefully and continue where it left off upon the next restart.
 {% endhint %}
@@ -257,18 +259,18 @@ A graceful shutdown will result in a message similar to the one seen below.
 
 Note, the `firehose-cosmos` extractor component is labeled `ingestor` however is functionally identical. Learn more about the Firehose [components](../../concepts-and-architecture/components/) and the overall [concepts and architecture](broken-reference).
 
-### Synchronization Completion
+## Synchronization Completion
 
-#### Successful Sync
+### Successful Sync
 
 The target computer is now successfully streaming Cosmos block data. _Congratulations!_
 
 Full searchability and discoverability of Cosmos is now possible and the underlying blockchain data can be sliced and diced into a myriad of different solutions.
 
-**Cosmoshub-4 Mainnet**
+## **Cosmoshub-4 Mainnet**
 
 Coming soon.
 
-**Osmosis-1 Mainnet**
+## **Osmosis-1 Mainnet**
 
 Coming soon.

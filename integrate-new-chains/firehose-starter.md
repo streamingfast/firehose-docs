@@ -4,9 +4,9 @@ description: StreamingFast Firehose template
 
 # Firehose ACME
 
-### Firehose ACME
+## Firehose ACME
 
-#### Firehose AMCE Intro
+### Firehose AMCE Intro
 
 Firehose-ACME is the main starting point for instrumenting new, unsupported blockchain nodes.
 
@@ -18,9 +18,7 @@ Firehose ACME is available on GitHub. Clone the repo to obtain the source code.
 git clone git@github.com:streamingfast/firehose-acme
 ```
 
-### Firehose-ACME Installation
-
-#### Installation
+## Firehose-ACME Installation
 
 The following command is used to install Firehose-ACME.
 
@@ -42,9 +40,9 @@ Firehose versioning information will display as follows.
 fireacme version dev (Built 2022-08-05T15:36:44-07:00) 
 ```
 
-### Dummy Blockchain
+## Dummy Blockchain
 
-#### Dummy Blockchain Setup
+### Dummy Blockchain Setup
 
 The Dummy Blockchain can be set up anywhere on the target computer.
 
@@ -54,9 +52,9 @@ Obtain the Dummy Blockchain from GitHub.
 
 [https://github.com/streamingfast/dummy-blockchain](https://github.com/streamingfast/dummy-blockchain)
 
-### Testing Firehose-ACME
+## Testing Firehose-ACME
 
-#### YAML Configuration
+### YAML Configuration
 
 The full path into the dchain directory must be used. The path needs to be in quotes.
 
@@ -93,9 +91,9 @@ Existing, current, and knowledgable node operators can take advantage of the pre
 _Tip: Blockchains that do not currently have a StreamingFast instrumented node client solution can create their own._
 {% endhint %}
 
-### Problems
+## Problems
 
-#### Incorrect Example Blockchain Path
+### Incorrect Example Blockchain Path
 
 The following message will be displayed in the shell if the path to the example blockchain application is incorrect.
 
