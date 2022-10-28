@@ -43,6 +43,7 @@
 * [Naming Conventions](references/naming-conventions.md)
 * [Schemas](references/protobuf-schemas.md)
 * [Repositories](references/repositories.md)
+* [Indexing](references/indexing.md)
 * [FAQ](references/faq.md)
 
 ## Release Notes
