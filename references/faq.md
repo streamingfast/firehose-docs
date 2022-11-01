@@ -77,3 +77,11 @@ StreamingFast was originally called dfuse. The company changed the name and is i
 ## **Who is StreamingFast?**
 
 StreamingFast is a protocol infrastructure company that provides a massively scalable architecture for streaming blockchain data. StreamingFast is one of the core developers working alongside The Graph Foundation.
+
+## What limits and SLAs are there for Firehose API keys?
+
+There are no rate limits for now and the endpoint should be used diligently. StreamingFast does not offer any SLAs, uptime support or uptime guarantees.
+
+## Is Firehose a production ready service?
+
+No, the public Firehose endpoint is not production ready at this point in time.
