@@ -6,8 +6,6 @@ description: StreamingFast Substreams with Firehose documentation
 
 ## Firehose vs Substreams
 
-It's important to realize that Firehose and Substreams are two unique, separate applications. Firehose consumes blockchain data and provides binary block data in a streaming fashion.
-
 Substreams consumes Firehose block stream data and provides a mechanism for developers to harness very targeted types of block data through custom protobuf schemas.
 
 So, while there is some overlap between the Firehose and Substreams, they aren't the same thing.  They work together, in conjunction to provide efficient blockchain data streaming.
