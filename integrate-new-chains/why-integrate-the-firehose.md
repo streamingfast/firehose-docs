@@ -1,0 +1,20 @@
+---
+description: Why integrate StreamingFast Firehose?
+---
+
+# Why Integrate the Firehose
+
+From a Layer 1 blockchain core development team’s perspective, making your chain `--firehose-enabled` brings you and your community the following benefits.
+
+* Immediate support for [Substreams](https://substreams.streamingfast.io/), and its high-speed parallel processing engine.
+* Immediate integration into The Graph, through Substreams-based Subgraphs.
+* Immediate support for dozens of sinks (think loading to PostgreSQL, MongoDB, CDC replication, Kafka, Flink, writing to buckets for ingestion by BigQuery, AWS Redshift, Clickhouse, etc.).
+* Activates a community of developers that already know how to index blockchain data, and are going to be happy to discover your blockchain’s data model and activity.
+
+From a Layer 1’s users’ perspective, you’ll get the following benefits.
+
+* The capability to quickly index and sift through your favorite blockchain’s history.
+* Stream its output with low latency.
+* Hook it to any data systems you have, trading bots, cross-chain bridges, databases.
+* All of it in an extremely reliable way.
+* Benefit from the anti-fragility brought by The Graph network.
