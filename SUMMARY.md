@@ -7,18 +7,17 @@
 * [Firehose Overview](intro/firehose-overview.md)
 * [Prerequisites](intro/prerequisites.md)
 
-## Concepts & Architecture
+## Architecture
 
-* [Components](concepts-and-architecture/components/README.md)
-  * [Firehose-enabled Node](concepts-and-architecture/components/firehose-enabled-node.md)
-  * [Reader](concepts-and-architecture/components/reader.md)
-  * [Merger](concepts-and-architecture/components/merger.md)
-  * [Relayer](concepts-and-architecture/components/relayer.md)
-  * [gRPC Server](concepts-and-architecture/components/grpc-server.md)
-  * [High Availability](concepts-and-architecture/components/high-availability.md)
-* [Data Flow](concepts/data-flow.md)
-* [Data Storage](concepts/data-storage.md)
-* [Design Principles](concepts/design-principles.md)
+* [Components](architecture/components/README.md)
+  * [Firehose-enabled Node](architecture/components/firehose-enabled-node.md)
+  * [Reader](architecture/components/reader.md)
+  * [Merger](architecture/components/merger.md)
+  * [Relayer](architecture/components/relayer.md)
+  * [gRPC Server](architecture/components/grpc-server.md)
+  * [High Availability](architecture/components/high-availability.md)
+* [Data Flow](architecture/data-flow.md)
+* [Data Storage](architecture/data-storage.md)
 
 ## Firehose Setup
 
@@ -37,6 +36,7 @@
 
 * [New Blockchains](integrate-new-chains/new-blockchains.md)
 * [Firehose ACME](integrate-new-chains/firehose-starter.md)
+* [Design Principles](integrate-new-chains/design-principles.md)
 * [Why Integrate the Firehose](integrate-new-chains/why-integrate-the-firehose.md)
 
 ## References

@@ -12,7 +12,7 @@ description: StreamingFast Firehose data flow
 
 The path and process of how data flows through the Firehose component family are important facets to understand when using the application.
 
-Blockchain data flows from instrumented nodes to the gRPC server through the Firehose [component family](../concepts-and-architecture/components/).
+Blockchain data flows from instrumented nodes to the gRPC server through the Firehose [component family](components/).
 
 ### Data Flows Through Components
 

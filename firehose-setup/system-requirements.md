@@ -10,7 +10,7 @@ description: StreamingFast Firehose System Requirements
 
 Firehose is extremely elastic and can support networks of varied sizes and shapes.&#x20;
 
-Firehose is _very heavy_ on data. Ensure to gain a solid __ understanding of the different [data stores](../concepts/data-storage.md), artifacts, and databases required for operation.
+Firehose is _very heavy_ on data. Ensure to gain a solid __ understanding of the different [data stores](../architecture/data-storage.md), artifacts, and databases required for operation.
 
 Deployment efforts will match the size of history, and the density of the blockchain being consumed.
 

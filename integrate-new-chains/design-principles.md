@@ -35,7 +35,7 @@ Firehose was designed with the following truths and assumptions taken into excru
 StreamingFast strives to create the shortest path available from the deterministic execution of blocks and transactions down into a flat file. High-level goals surrounding the extraction process were identified and conceptualized including:
 
 * The development of simple, robust, laser-focused processes.&#x20;
-* Create core system [components](../concepts-and-architecture/components/) including the Extractor, Merger, Relayer, and gRPC Server.
+* Create core system [components](../architecture/components/) including the Extractor, Merger, Relayer, and gRPC Server.
 * Avoid the coupling of extraction and indexing and any other services.
 * Guarantee maximum node performance during data extraction for instrumented nodes, for all protocols.
 

@@ -44,15 +44,15 @@ Merged blocks are binary files that use the [dbin](https://github.com/streamingf
 
 ### Merged Block Creation
 
-Firehose uses [Firehose-enabled node](../concepts-and-architecture/components/firehose-enabled-node.md) components that have been set with a special flag to work in _catch-up_ mode to create merged blocks.
+Firehose uses [Firehose-enabled node](components/firehose-enabled-node.md) components that have been set with a special flag to work in _catch-up_ mode to create merged blocks.
 
 ### Highly-available Merged Blocks
 
-In [high-availability](../concepts-and-architecture/components/high-availability.md) Firehose configurations, merged blocks will be created by the [Merger](../concepts-and-architecture/components/merger.md) component. The [Firehose-enabled node](../concepts-and-architecture/components/firehose-enabled-node.md) component will provide the Merger component with one-block files.
+In [high-availability](components/high-availability.md) Firehose configurations, merged blocks will be created by the [Merger](components/merger.md) component. The [Firehose-enabled node](components/firehose-enabled-node.md) component will provide the Merger component with one-block files.
 
 ### Block Bundles
 
-The [Merger](../concepts-and-architecture/components/merger.md) component will also collate all of the one-block files into a single bundle of blocks.
+The [Merger](components/merger.md) component will also collate all of the one-block files into a single bundle of blocks.
 
 ### One Hundred Blocks Files
 
@@ -70,7 +70,7 @@ Protocol-specific decoded block objects, like Ethereum, are what circulate among
 
 ### One Block Files in Detail
 
-In [high availability](../concepts-and-architecture/components/high-availability.md) configurations, one-block files are transient and ensure the [Merger](../concepts-and-architecture/components/merger.md) component gathers all visible forks from any [Firehose-enabled Node](../concepts-and-architecture/components/firehose-enabled-node.md) components.
+In [high availability](components/high-availability.md) configurations, one-block files are transient and ensure the [Merger](components/merger.md) component gathers all visible forks from any [Firehose-enabled Node](components/firehose-enabled-node.md) components.
 
 {% hint style="warning" %}
 **Important**_: One-block files contain only one `bstream.Block` as a serialized protocol buffer._
