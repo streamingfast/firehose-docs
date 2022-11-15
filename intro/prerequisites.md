@@ -4,21 +4,17 @@ description: StreamingFast Firehose prerequisites
 
 # Prerequisites
 
-## Essential Knowledge
+We expect Software Developers and Systems Administrators using Firehose to have good knowledge of standard tools like [shell scripting](https://en.wikipedia.org/wiki/Shell\_script) and [command line interface](https://en.wikipedia.org/wiki/Command-line\_interface).
 
-Software Developers and Systems Administrators should have an understanding of:&#x20;
+## Technologies Used
 
-* [Linux](https://en.wikipedia.org/wiki/Linux) operating systems,&#x20;
-* [shell scripting](https://en.wikipedia.org/wiki/Shell\_script),&#x20;
-* using the [command line](https://en.wikipedia.org/wiki/Command-line\_interface),&#x20;
-* computer programming,&#x20;
-* web-based application development,&#x20;
-* [Git](https://git-scm.com/),&#x20;
-* compiling C and [Go](https://go.dev/) code,&#x20;
-* and [blockchain](https://en.wikipedia.org/wiki/Blockchain) technologies and terminology.
+* [Golang](https://go.dev/)
+* [Google Protocol Buffers](https://developers.google.com/protocol-buffers)
+* [gRPC](https://grpc.io/)
+* [Blockchain](https://en.wikipedia.org/wiki/Blockchain) technologies and terminology
 
 ## Requirements
 
-Full Firehose implementations require a functional and operating [blockchain node](https://ethereum.org/en/run-a-node/).&#x20;
+Full Firehose spins up a full node blockchain node (an [Ethereum full node](https://ethereum.org/en/run-a-node/) on Ethereum, a [NEAR full node](https://near-nodes.io/rpc) on NEAR, etc.)&#x20;
 
 Each blockchain has specific hardware and internet connection requirements. Refer to the specific vendor's documentation for the target blockchain.&#x20;
