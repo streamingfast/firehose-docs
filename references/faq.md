@@ -56,7 +56,7 @@ Firehose is made available as an open-source project and there are no fees invol
 
 Yes! Join the StreamingFast Discord by clicking the link below.
 
-[https://discord.gg/Ugc7KtkA](https://discord.gg/Ugc7KtkA)
+[https://discord.gg/Ugc7KtkA](https://discord.gg/mYPcRAzeVN)
 
 ## **Is StreamingFast on Twitter?**
 
