@@ -114,12 +114,12 @@ curl https://raw.githubusercontent.com/streamingfast/firehose-docs/master/config
 
 Right-click and save the JSON file to the main Firehose directory created in the first step of the setup process.
 
-[https://raw.githubusercontent.com/streamingfast/firehose-docs/master/configs/polygon/genesis.json](https://raw.githubusercontent.com/streamingfast/firehose-docs/master/configs/polygon/genesis.json)
+[https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FVgApTPXzd7Z9BUUosaeF%2Fuploads%2FyshZBel3YKwFIOYYvyGf%2Fgenesis.json](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FVgApTPXzd7Z9BUUosaeF%2Fuploads%2FyshZBel3YKwFIOYYvyGf%2Fgenesis.json)
 
 Alternatively, the JSON file can be downloaded with curl using a terminal window. Issue the following command to the terminal, making sure the shell session is in the main Firehose setup directory.
 
 ```shell-session
-curl https://raw.githubusercontent.com/streamingfast/firehose-docs/master/configs/polygon/genesis.json --output genesis.json
+curl https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FVgApTPXzd7Z9BUUosaeF%2Fuploads%2FyshZBel3YKwFIOYYvyGf%2Fgenesis.json --output genesis.json
 ```
 
 ### Add Genesis File Reference to Config File
