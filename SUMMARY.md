@@ -24,11 +24,13 @@
 * [Overview](setup/README.md)
 * [Ethereum](setup/ethereum/README.md)
   * [Installation](firehose-setup/ethereum/installation.md)
-  * [Local Deployment](<firehose-setup/ethereum/installation (1).md>)
+  * [Single-Machine Deployment](firehose-setup/ethereum/installation.md)
   * [Reprocessing history](setup/ethereum/reprocessing-history.md)
   * [Synchronization](setup/ethereum/synchronization.md)
 * [Cosmos](setup/cosmos/README.md)
-  * [Synchronization](setup/cosmos/synchronization.md)
+  * [Single-Machine Deployment](setup/cosmos/synchronization.md)
+* [NEAR](setup/near/README.md)
+  * [Single-Machine Deployment](firehose-setup/near/installation.md)
 * [System Requirements](firehose-setup/system-requirements.md)
 
 ## Integrate New Chains

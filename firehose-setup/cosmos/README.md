@@ -1,17 +1,14 @@
 ---
-description: StreamingFast Firehose for Cosmos
+description: Firehose for Cosmos
 ---
 
 # Cosmos
 
-## Firehose Comos Setup
+## Firehose Cosmos Setup
 
-Setting up Firehose for Cosmos is a straightforward process that uses StreamingFast's pre-instrumented code solution.\
+Setting up Firehose for Cosmos is a straightforward process that uses pre-instrumented code solution. The primary tasks for running a Cosmos Firehose instance:
 
-
-The primary tasks for running a Cosmos Firehose instrumented node are
-
-* install all dependencies,
-* deploy the instances,
-* reprocess history,
-* and starting streaming data.
+* Install dependencies
+* Deploy the instance
+* Reprocess history
+* Starting streaming data
