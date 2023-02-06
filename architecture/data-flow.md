@@ -18,21 +18,21 @@ Blockchain data flows from instrumented nodes to the gRPC server through the Fir
 
 Each Firehose component plays an important role as the blockchain data flows through it.
 
-![StreamingFast Firehose architecture diagram](../images/general\_architecture.png)
+![StreamingFast Firehose architecture diagram](../assets/general-architecture.png)
 
 ### Data Flow Component Relationship
 
-The StreamingFast Deepmind instrumentation feeds to Extractor components. The Extractor components feed the Relayer component.&#x20;
+The StreamingFast Instrumentation feeds to Reader components. The Reader components feed the Relayer component.
 
-The Index and IndexProvider components work with data provided by the instrumentation through the Extractor through the Relayer. Finally, the Firehose gRPC Server component hands data back to any consumers of Firehose.
+The Index and IndexProvider components work with data provided by the instrumentation through the Reader through the Relayer. Finally, the Firehose gRPC Server component hands data back to any consumers of Firehose.
 
 ### Key Points
 
 * An instrumented version of the native blockchain node process streams pieces of block data in a custom StreamingFast text-based protocol.
-* Firehose Extractor components read data streams from instrumented blockchain nodes.
-* Extractor components will then write the data to persistent storage. The data is then broadcast to the rest of the components in Firehose.
-* The Relayer component reads block data provided by one or more Extractor components and provides a live data source for the other Firehose components.
-* The Merger component combines blocks created by Extractor components into batches of one hundred individually merged blocks. The merged blocks are stored in an object store or written to disk.
+* Firehose Reader components read data streams from instrumented blockchain nodes.
+* Reader components will then write the data to persistent storage. The data is then broadcast to the rest of the components in Firehose.
+* The Relayer component reads block data provided by one or more Reader components and provides a live data source for the other Firehose components.
+* The Merger component combines blocks created by Reader components into batches of one hundred individually merged blocks. The merged blocks are stored in an object store or written to disk.
 * The Indexer component provides a targeted summary of the contents of each 100-blocks file that was created by the Merger component. The indexed 100-blocks files are tracked and cataloged in an index file created by the Indexer component.
 * The IndexProvider component reads index files created by the Indexer component and provides fast responses about the contents of block data for filtering purposes.
 * The Firehose gRPC server component receives blocks from either:
@@ -42,29 +42,21 @@ The Index and IndexProvider components work with data provided by the instrument
 * The Firehose gRPC Server component then joins and returns the block data to its consumers.
 * _Tradeoffs and benefits are presented for how data is stored and how it flows from the instrumented blockchain nodes through Firehose._
 
-## Extractor Data Flow
+## Reader Data Flow
 
-### Deepmind Instrumentation
+### Firehose Instrumentation
 
 Firehose begins at the instrumentation conducted on nodes for targeted blockchains.
 
-The instrumentation itself is called StreamingFast Deepmind. Deepmind is an augmentation to the target blockchain node's source code. The augmentation is placed at the points where the critical block and transaction processing occurs.
+The instrumentation itself is called Firehose Instrumentation and generate Firehose Logs. Firehose instrumentation is an augmentation to the target blockchain node's source code. The instrumentation is placed within the node where blockchain state synchronization happen, when the chain receives block from the P2P network and execute the transactions it contains locally to update its internal global state.
 
-{% hint style="info" %}
-_Note: StreamingFast Deepmind instrumentation is currently available for Geth, OpenEthereum, Solana, and a few other blockchains._
-{% endhint %}
+### Firehose Logs
 
-### Deepmind Data Output
+Firehose logs outputs small chunks of data processed using a simple text-based protocol over the operating system's standard output pipe.
 
-StreamingFast Deepmind Instrumentation outputs small chunks of data using a simple text-based protocol over the operating system's standard output pipe.
+### Firehose Logs Messages
 
-{% hint style="success" %}
-_Tip: The StreamingFast simple text-based protocol provides simplicity, performance boosts, and reliability._
-{% endhint %}
-
-### Deepmind Data Messages
-
-The Deepmind Instrumentation works with block data event messages. The six types of block data event messages include:
+The Firehose Logs are specific for each blockchain although quite similar from one chain to another. There is no standardized format today, each chain implemented it's own format. The Firehose logs are usually modeled using "events" for example:
 
 * `START BLOCK`
 * `START TRANSACTION`
@@ -73,59 +65,40 @@ The Deepmind Instrumentation works with block data event messages. The six types
 * `STOP TRANSACTION`
 * `STOP BLOCK`
 
-Each message contains the specific payload for the event. The start block for instance contains the block number and block hash.
+Each message contains the specific payload for the event. The start block for instance contains the block number and block hash. The small chunk of messages are assembled by the reader node to form a final chain specific protobuf block model.
 
-### Example Deepmind Messages
+### Example Firehose Logs Messages
 
-Example block data event messages from a Deepmind instrumented Ethereum client:
+Example block data event messages from a Firehose instrumented Ethereum `geth` client:
 
 ```shell
-DMLOG BEGIN_BLOCK 33
-DMLOG BEGIN_APPLY_TRX 52e3ea8d63f66bfa65a5c9e5ba3f03fd80c5cf8f0b3fcbb2aa2ddb8328825141 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 0de0b6b3a7640000 0bfa f219f658459a2533c5a5c918d95ba1e761fc84e6d35991a45ed8c5204bb5a61a 43ff7909bb4049c77bd72750d74498cfa3032c859e2cc0864d744876aeba3221 21040 01 32 .
-DMLOG TRX_FROM ea143138dab9a14e11d1ae91e669851e6cc72131
-DMLOG BALANCE_CHANGE 0 ea143138dab9a14e11d1ae91e669851e6cc72131 ffffffffffffffffffffffffffffffffffffffffffffffd65ddbe509d1bbf1 ffffffffffff        ffffffffffffffffffffffffffffffffffd65ddbe509d169c1 gas_buy
-DMLOG GAS_CHANGE 0 21040 40 intrinsic_gas
-DMLOG NONCE_CHANGE 0 ea143138dab9a14e11d1ae91e669851e6cc72131 32 33
-DMLOG EVM_RUN_CALL CALL 1
-DMLOG BALANCE_CHANGE 1 ea143138dab9a14e11d1ae91e669851e6cc72131 ffffffffffffffffffffffffffffffffffffffffffffffd65ddbe509d169c1 ffffffffffffffffffffffffffffffffffffffffffffffc87d2531626d69c1 transfer
-DMLOG BALANCE_CHANGE 1 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 . 0de0b6b3a7640000 transfer
-DMLOG EVM_PARAM CALL 1 ea143138dab9a14e11d1ae91e669851e6cc72131 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 0de0b6b3a7640000 40 .
-DMLOG EVM_END_CALL 1 0 .
-DMLOG BALANCE_CHANGE 0 ea143138dab9a14e11d1ae91e669851e6cc72131 ffffffffffffffffffffffffffffffffffffffffffffffc87d2531626d69c1 ffffffffffffffffffffffffffffffffffffffffffffffc87d2531626dbbf1 reward_transaction_fee
-DMLOG END_APPLY_TRX 21040 . 21040 00...00 []
-DMLOG FINALIZE_BLOCK 33
-DMLOG END_BLOCK 33 717 {"header":{"parentHash":"0x538473df2d1a762473cf9f8f6c69e6526e3030f4c2450c8fa5f0df8ab18bf156","sha3Uncles":"0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347","miner":"0x0000000000000000000000000000000000000000","stateRoot":"0xf7293dc5f7d868e03da71aa8ce8cf70cfe4e481ede1e8c37dabb723192acebb5","transactionsRoot":"0x8b89cee82fae3c1b51dccc5aa2d50d127ce265ed2de753000452f125b2921050","receiptsRoot":"0xa5d9213276fa6b513343456f2cad9c9dae28d7cd1c58df338695b747cb70327d","logsBloom":"0x00...00","difficulty":"0x2","number":"0x21","gasLimit":"0x59a5380","gasUsed":"0x5230","timestamp":"0x5ddfd179","extraData":"0xd983010908846765746888676f312e31332e318664617277696e000000000000e584572f63ccfbda7a871f6ad0bab9473001cb60597fa7693b7c103c0607d5ef3705d84f79e0a4cc9186c65f573b5b6e98011b3c26df20c368f99bcd7ab6d1d601","mixHash":"0x0000000000000000000000000000000000000000000000000000000000000000","nonce":"0x0000000000000000","hash":"0x38daac54143e832715197781503b5a6e8068065cc273b64f65ea10d1ec5ee41d"},"uncles":[]}
+FIRE BEGIN_BLOCK 33
+FIRE BEGIN_APPLY_TRX 52e3ea8d63f66bfa65a5c9e5ba3f03fd80c5cf8f0b3fcbb2aa2ddb8328825141 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 0de0b6b3a7640000 0bfa f219f658459a2533c5a5c918d95ba1e761fc84e6d35991a45ed8c5204bb5a61a 43ff7909bb4049c77bd72750d74498cfa3032c859e2cc0864d744876aeba3221 21040 01 32 .
+FIRE TRX_FROM ea143138dab9a14e11d1ae91e669851e6cc72131
+FIRE BALANCE_CHANGE 0 ea143138dab9a14e11d1ae91e669851e6cc72131 ffffffffffffffffffffffffffffffffffffffffffffffd65ddbe509d1bbf1 ffffffffffff        ffffffffffffffffffffffffffffffffffd65ddbe509d169c1 gas_buy
+FIRE GAS_CHANGE 0 21040 40 intrinsic_gas
+FIRE NONCE_CHANGE 0 ea143138dab9a14e11d1ae91e669851e6cc72131 32 33
+FIRE EVM_RUN_CALL CALL 1
+FIRE BALANCE_CHANGE 1 ea143138dab9a14e11d1ae91e669851e6cc72131 ffffffffffffffffffffffffffffffffffffffffffffffd65ddbe509d169c1 ffffffffffffffffffffffffffffffffffffffffffffffc87d2531626d69c1 transfer
+FIRE BALANCE_CHANGE 1 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 . 0de0b6b3a7640000 transfer
+FIRE EVM_PARAM CALL 1 ea143138dab9a14e11d1ae91e669851e6cc72131 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 0de0b6b3a7640000 40 .
+FIRE EVM_END_CALL 1 0 .
+FIRE BALANCE_CHANGE 0 ea143138dab9a14e11d1ae91e669851e6cc72131 ffffffffffffffffffffffffffffffffffffffffffffffc87d2531626d69c1 ffffffffffffffffffffffffffffffffffffffffffffffc87d2531626dbbf1 reward_transaction_fee
+FIRE END_APPLY_TRX 21040 . 21040 00...00 []
+FIRE FINALIZE_BLOCK 33
+FIRE END_BLOCK 33 717 {"header":{"parentHash":"0x538473df2d1a762473cf9f8f6c69e6526e3030f4c2450c8fa5f0df8ab18bf156","sha3Uncles":"0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347","miner":"0x0000000000000000000000000000000000000000","stateRoot":"0xf7293dc5f7d868e03da71aa8ce8cf70cfe4e481ede1e8c37dabb723192acebb5","transactionsRoot":"0x8b89cee82fae3c1b51dccc5aa2d50d127ce265ed2de753000452f125b2921050","receiptsRoot":"0xa5d9213276fa6b513343456f2cad9c9dae28d7cd1c58df338695b747cb70327d","logsBloom":"0x00...00","difficulty":"0x2","number":"0x21","gasLimit":"0x59a5380","gasUsed":"0x5230","timestamp":"0x5ddfd179","extraData":"0xd983010908846765746888676f312e31332e318664617277696e000000000000e584572f63ccfbda7a871f6ad0bab9473001cb60597fa7693b7c103c0607d5ef3705d84f79e0a4cc9186c65f573b5b6e98011b3c26df20c368f99bcd7ab6d1d601","mixHash":"0x0000000000000000000000000000000000000000000000000000000000000000","nonce":"0x0000000000000000","hash":"0x38daac54143e832715197781503b5a6e8068065cc273b64f65ea10d1ec5ee41d"},"uncles":[]}
 ```
 
-### Deepmind & Extractor Coordination
+### Firehose Logs & Reader Coordination
 
-The block data event messages provided by the Deepmind instrumentation are read by one or more Extractor components.
+The block data event messages provided by the Firehose instrumentation are read by the reader component.
 
-The Extractor components:
+The `reader` component deals with:
+* Launching instrumented native node process and manages its lifecycle (start/stop/monitor).
+* Connects to the native node process' standard output pipe.
+* Read the Firehose logs event messages and assembles a chain specific protobuf Block model
 
-* launch instrumented Deepmind processes.
-* connect to the operating system's standard output pipe.
-* read the block data event messages or, `DMLOG`messages.
-
-## Data Collection & Formation
-
-Extractor components also collect and organize the various smaller chunks of data.
-
-Extractor components assemble state changes, calls, and transactions into a complete Firehose data block for a specific blockchain protocol.
-
-{% hint style="info" %}
-_Note: The fully assembled Firehose data block is a Protocol Buffer-based object generated from a custom StreamingFast protobuf definition._
-{% endhint %}
-
-### Data Broadcast
-
-After a block has been formed, it is serialized into binary format, stored in persistent storage, and simultaneously broadcast to all gRPC streaming subscribers.
-
-### Historical Data Access
-
-The persistent block enables historical access to all data in the blockchain without reliance on native node processes.
-
-### Convenient Data Manipulation
+After a block has been formed, it is serialized into binary format, stored in persistent storage, and simultaneously broadcast to all gRPC streaming subscribers. The persistent block enables historical access to all data in the blockchain without reliance on native node processes.
 
 The easily accessible block data enables StreamingFast's highly parallelized reprocessing tools to read and manipulate different sections of the chain at the developer's convenience.
 
@@ -133,11 +106,11 @@ The easily accessible block data enables StreamingFast's highly parallelized rep
 
 ### Relayer Data Flow in Detail
 
-The Relayer component is responsible for connecting to one or more Extractor components and receiving live block data from them.
+The Relayer component is responsible for connecting to one or more Reader components and receiving live block data from them.
 
 ### Multiple Relayer Connections
 
-The Relayer component uses multiple connections to provide data redundancy for scenarios where Extractor components have crashed or require maintenance. The Relayer also deduplicates incoming blocks resulting in speeds that match the fastest Extractor available to read data from.
+The Relayer component uses multiple connections to provide data redundancy for scenarios where Reader components have crashed or require maintenance. The Relayer also deduplicates incoming blocks resulting in speeds that match the fastest Reader available to read data from.
 
 ### Racing Relayer Data
 
@@ -147,9 +120,9 @@ The design of the Relayer component enables them to race to push data to consume
 
 The Relayer component can function as a live data source for blocks in Firehose.
 
-### Relayer & Extractor Overlap
+### Relayer & Reader Overlap
 
-Relayer components serve the same interface as Extractor components in simple setups without the need for high availability.
+Relayer components serve the same interface as Reader components in simple setups without the need for high availability.
 
 ## Merger Data Flow
 
@@ -218,7 +191,7 @@ The gRPC Server component is responsible for supplying the stream of block data 
 Firehose gRPC Server components connect to persisted and live block data sources to serve consumer data requests.
 
 {% hint style="info" %}
-_Note: Firehose was designed to switch between the persistent and live data store as it's joining data to intelligently fulfill inbound requests from consumers._
+_Firehose was designed to switch between the persistent and live data store as it's joining data to intelligently fulfill inbound requests from consumers._
 {% endhint %}
 
 ### Historical Data Requests

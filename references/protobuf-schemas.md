@@ -19,7 +19,7 @@ Firehose currently has Layer 1 Protocol Buffer schemas for several different blo
 
 ## The `bstream` Block
 
-The `bstream` Block is the main blockchain-agnostic object flowing throughout Firehose.&#x20;
+The `bstream` Block is the main blockchain-agnostic object flowing throughout Firehose.
 
 {% hint style="info" %}
 **Note**: _The_ `stream` _Block is the envelope used to pass blockchain-specific Block objects, for Ethereum, as an example._
@@ -31,5 +31,5 @@ The `bstream` Block is the main blockchain-agnostic object flowing throughout Fi
 
 Discussion on general multi-chain considerations of versioning in the Firehose suite to answer questions such as:
 
-* when do we change the namespace,&#x20;
+* when do we change the namespace,
 * when do we bump the `version` field in the `block`.

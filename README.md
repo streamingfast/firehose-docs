@@ -12,9 +12,9 @@ This documentation serves as the main resource for understanding and working wit
 
 ### Where to Start
 
-[Firehose Overview](https://firehose.streamingfast.io/introduction/firehose-overview) is a great place to begin learning about the overall scope, vision, and capabilities of Firehose.
+[Firehose Overview](./intro/firehose-overview.md) is a great place to begin learning about the overall scope, vision, and capabilities of Firehose.
 
-The [Concepts & Architecture](https://firehose.streamingfast.io/concepts-and-architeceture/components) provides an in-depth look at the decisions that drove the development team's efforts while designing Firehose.
+The [Concepts & Architecture](./architecture/components/README.md) provides an in-depth look at the decisions that drove the development team's efforts while designing Firehose.
 
 Full source code is available in the [official Firehose Github repository](https://github.com/streamingfast/firehose).
 

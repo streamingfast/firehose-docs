@@ -8,7 +8,7 @@ description: StreamingFast Firehose new blockchains
 
 Firehose was specifically designed to work with multiple blockchains beyond the existing implementations.
 
-[Firehose-ACME](firehose-starter.md) is the starting point for working with blockchains that do not have a pre-existing StreamingFast instrumented node client solution.
+[Firehose-Acme](firehose-starter.md) is the starting point for working with blockchains that do not have a pre-existing StreamingFast instrumented node client solution.
 
 The process of instrumenting a node is mandatory for blockchains without existing StreamingFast instrumentation support.
 
@@ -18,25 +18,25 @@ _Important: Integrating new blockchains is an intricate process. Attention to de
 
 ## Integration Directory
 
-Select a location on the target computer for all Firehose files including the data that will be extracted and stored, and all other integration artifacts.&#x20;
+Select a location on the target computer for all Firehose files including the data that will be extracted and stored, and all other integration artifacts.
 
-The name is flexible however this directory is an important location and will be frequented often during the integration and operation of Firehose.&#x20;
+The name is flexible however this directory is an important location and will be frequented often during the integration and operation of Firehose.
 
 This directory is the home directory of the custom integration being created.
 
-## Firehose-ACME
+## Firehose-Acme
 
-StreamingFast provides the [Firehose-ACME repository](https://github.com/streamingfast/firehose-acme) to serve as a starting point to create the required chain-specific code and files. To use Firehose-ACME as starting point many aspects of the project and code need to be renamed. __ Three exact reference types need to be updated, acme, Acme, and ACME.
+StreamingFast provides the [Firehose-Acme repository](https://github.com/streamingfast/firehose-acme) to serve as a starting point to create the required chain-specific code and files. To use Firehose-Acme as starting point many aspects of the project and code need to be renamed. __ Three exact reference types need to be updated, acme, Acme, and Acme.
 
 The new Firehose setup will replace "_\<newchainname>_" with the name of the new chain being integrated.
 
-Firehose-ACME is available through GitHub and can be obtained through cloning the project.
+Firehose-Acme is available through GitHub and can be obtained through cloning the project.
 
-```shell-session
+```bash
 git clone git@github.com:streamingfast/firehose-acme.git firehose-<newchainname>
 ```
 
-To eradicate the previous history associated with the Firehose-ACME repository remove the `.git` directory.
+To eradicate the previous history associated with the Firehose-Acme repository remove the `.git` directory.
 
 ```
 cd firehose-<newchainname>
@@ -44,7 +44,7 @@ rm -rf .git
 git init
 ```
 
-The first commit of the project will serve as a clean point in time the repository can be reverted to if need be.&#x20;
+The first commit of the project will serve as a clean point in time the repository can be reverted to if need be.
 
 ```
 cd firehose-<newchainname>
@@ -52,11 +52,11 @@ git add -A .
 git commit -m "Initial commit"
 ```
 
-Three references to "ACME" exist within Firehose-ACME that need to be updated to reflect the new chain name. _Note, the capitalization of letters, or casing, is different for all three versions of "ACME."_
+Three references to "Acme" exist within Firehose-Acme that need to be updated to reflect the new chain name. _Note, the capitalization of letters, or casing, is different for all three versions of "Acme."_
 
 * acme -> \<newchainname>
 * Acme -> \<Newchainname>
-* ACME -> \<NEWCHAINNAME>
+* Acme -> \<NEWCHAINNAME>
 
 {% hint style="warning" %}
 _Important: Don't forget to update all variants of "\<chain>" to the name of the new chain being integrated. For example, if the chain's name was "aptos" the updates will be "aptos", "Aptos" and "APTOS", respectively._
@@ -81,15 +81,15 @@ git mv ./types/pb/sf/acme ./types/pb/sf/aptos
 
 ## Protocol Buffer Regeneration
 
-After updating the references to "ACME" the Protocol Buffers need to be regenerated. Use the `generate` shell script to make the updates.&#x20;
+After updating the references to "Acme" the Protocol Buffers need to be regenerated. Use the `generate` shell script to make the updates.
 
 ```
 ./types/pb/generate.sh
 ```
 
-## Running Tests&#x20;
+## Running Tests
 
-After completing all of the previous steps the base integration is ready for initial testing.&#x20;
+After completing all of the previous steps the base integration is ready for initial testing.
 
 ```
 go test ./...
@@ -97,12 +97,12 @@ go test ./...
 
 If all changes were made correctly the updated project should compile successfully.
 
-## Protobuf Data Modeling&#x20;
+## Protobuf Data Modeling
 
-Designing the protobuf structures for your given blockchain is one of the most important steps in an integrator's journey.&#x20;
+Designing the protobuf structures for your given blockchain is one of the most important steps in an integrator's journey.
 
 {% hint style="warning" %}
-**Important**_: It's imperative that the data structures in the protobuf's of the custom integration are represented as precisely as possible._&#x20;
+**Important**_: It's imperative that the data structures in the protobuf's of the custom integration are represented as precisely as possible._
 {% endhint %}
 
 {% hint style="danger" %}
@@ -111,11 +111,11 @@ Designing the protobuf structures for your given blockchain is one of the most i
 _Additional information is available in the_ [_StreamingFast Ethereum protobuf implementation_](https://github.com/streamingfast/firehose-ethereum/blob/develop/proto/sf/ethereum/type/v2/type.proto)_._
 {% endhint %}
 
-To integrate the target blockchain modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to the custom integration's blockchain node binary.&#x20;
+To integrate the target blockchain modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to the custom integration's blockchain node binary.
 
 ### Type Definitions
 
-The proto file `sf/acme/type/v1/type.proto` needs to be updated to match the target chain's types.&#x20;
+The proto file `sf/acme/type/v1/type.proto` needs to be updated to match the target chain's types.
 
 ## Reader
 
@@ -128,11 +128,11 @@ The proto file `sf/acme/type/v1/type.proto` needs to be updated to match the tar
 Each blockchain has specific design and implementation details and there isn't a single standard or language that blockchains are written in or follow. For these reasons, it's virtually impossible to provide instructions for the instrumentation steps involved with each blockchain in the world.
 
 {% hint style="warning" %}
-**Important**_: Studying the StreamingFast Ethereum and other implementations and instrumentations should serve as a foundation for other custom integrations._&#x20;
+**Important**_: Studying the StreamingFast Ethereum and other implementations and instrumentations should serve as a foundation for other custom integrations._
 {% endhint %}
 
 {% hint style="danger" %}
-**Critical**_: Ensure the custom integration has set aside a good amount of time to plan and execute the steps and tasks involved for researching and instrumenting the blockchain being targeted._&#x20;
+**Critical**_: Ensure the custom integration has set aside a good amount of time to plan and execute the steps and tasks involved for researching and instrumenting the blockchain being targeted._
 {% endhint %}
 
 ## Data Production

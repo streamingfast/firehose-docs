@@ -8,11 +8,11 @@ description: StreamingFast Firehose for Ethereum
 
 Setting up Firehose for Ethereum is a straightforward process that uses StreamingFast's pre-instrumented code solution.
 
-The primary tasks for running a Firehose instrumented node are&#x20;
+The primary tasks for running a Firehose instrumented node are
 
-* install all dependencies,&#x20;
+* install all dependencies,
 * deploy the instances,
-* reprocess history,&#x20;
+* reprocess history,
 * and starting streaming data.
 
 {% hint style="warning" %}

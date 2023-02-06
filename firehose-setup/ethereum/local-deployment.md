@@ -10,7 +10,7 @@ description: StreamingFast Firehose local deployment
 
 Firehose setups that are created on a computer directly, as opposed to cloud-based setups, are considered "local deployments." Local deployments remain on the computer the operators have direct access to and management over.
 
-Use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected for the Firehose setup. Create a directory named “firehome”, or something similar that's reflective of the target setup being created.&#x20;
+Use the target computer's home directory to begin If a dedicated directory hasn't yet been identified or selected for the Firehose setup. Create a directory named “firehome”, or something similar that's reflective of the target setup being created.
 
 ## Firehose Configuration
 
@@ -22,7 +22,7 @@ The example below assumes a default Ethereum-based Firehose configuration is bei
 
 Use the content provided below for the configuration file. The settings provided are ready-to-go for default Ethereum setups. Additional information is provided for the other Ethereum-compatible chains.
 
-```shell-session
+```bash
 start:
   args:
   # Define Firehose components that will be used for this setup
@@ -44,7 +44,6 @@ start:
     # Find specific values in the Firehose Ethereum Setup Documentation
     reader-node-arguments: "+--cache 8192 --maxpeers 100 --metrics --metrics.port 6061 --port=30303 --http.port=8545 --snapshot=true --txlookuplimit=1000"
     reader-node-log-to-zap: false
-
 ```
 
 ### Geth Binary Path
@@ -65,7 +64,7 @@ Each blockchain has a unique, numeric ID for the chain and network. Ethereum is 
 
 Use the table below to locate the chain and network ID for the blockchain used in the Firehose setup. Both of the following flags need to be updated in the configuration file.
 
-`common-chain-id`&#x20;
+`common-chain-id`
 
 `common-network-id`
 
@@ -78,7 +77,7 @@ Use the table below to locate the chain and network ID for the blockchain used i
 
 The numbers for the network and chain need to be enclosed in quotes. The update for Ethereum, for example, will read as the following. Note, the space between the colon and the starting quote.
 
-`common-chain-id: “1”`&#x20;
+`common-chain-id: “1”`
 
 `common-network-id: “1”`
 
@@ -106,7 +105,7 @@ Right-click and save the JSON file to the main Firehose directory created in the
 
 Alternatively, the JSON file can be downloaded with curl using a terminal window. Issue the following command to the terminal, making sure the shell session is in the main Firehose setup directory.
 
-```shell-session
+```bash
 curl https://raw.githubusercontent.com/streamingfast/firehose-docs/master/configs/binance/genesis.json --output genesis.json
 ```
 
@@ -118,7 +117,7 @@ Right-click and save the JSON file to the main Firehose directory created in the
 
 Alternatively, the JSON file can be downloaded with curl using a terminal window. Issue the following command to the terminal, making sure the shell session is in the main Firehose setup directory.
 
-```shell-session
+```bash
 curl https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FVgApTPXzd7Z9BUUosaeF%2Fuploads%2FyshZBel3YKwFIOYYvyGf%2Fgenesis.json --output genesis.json
 ```
 
@@ -136,7 +135,7 @@ The reader-node-arguments flag provides Firehose with information it needs for s
 
 The reader-node-arguments flag for Binance need to be updated to reflect the following.
 
-```shell-session
+```bash
 reader-node-arguments: "+--maxpeers 300 --cache 16368 --snapshot=false  --bootnodes=enode://1cc4534b14cfe351ab740a1418ab944a234ca2f702915eadb7e558a02010cb7c5a8c295a3b56bcefa7701c07752acd5539cb13df2aab8ae2d98934d712611443@52.71.43.172:30311,enode://28b1d16562dac280dacaaf45d54516b85bc6c994252a9825c5cc4e080d3e53446d05f63ba495ea7d44d6c316b54cd92b245c5c328c37da24605c4a93a0d099c4@34.246.65.14:30311,enode://5a7b996048d1b0a07683a949662c87c09b55247ce774aeee10bb886892e586e3c604564393292e38ef43c023ee9981e1f8b335766ec4f0f256e57f8640b079d5@35.73.137.11:30311"
 ```
 
@@ -144,7 +143,7 @@ reader-node-arguments: "+--maxpeers 300 --cache 16368 --snapshot=false  --bootno
 
 The reader-node-arguments flag for Polygon need to be updated to reflect the following.
 
-```shell-session
+```bash
 reader-node-arguments: "+--bor.heimdall=https://heimdall.api.matic.network --bootnodes=enode://0cb82b395094ee4a2915e9714894627de9ed8498fb881cec6db7c65e8b9a5bd7f2f25cc84e71e89d0947e51c76e85d0847de848c7782b13c0255247a6758178c@44.232.55.71:30303,enode://88116f4295f5a31538ae409e4d44ad40d22e44ee9342869e7d68bdec55b0f83c1530355ce8b41fbec0928a7d75a5745d528450d30aec92066ab6ba1ee351d710@159.203.9.164:30303"
 ```
 
@@ -152,7 +151,7 @@ reader-node-arguments: "+--bor.heimdall=https://heimdall.api.matic.network --boo
 
 As previously mentioned, Goreli does not require specific JSON files. The config file does however require modifications. The reader-node-arguments flag should be updated to reflect the value provided below. _Note, Goreli setups do not need to pass values for bootsnotes as with the Binance and Polygon setups._
 
-```shell-session
+```bash
 reader-node-arguments: +--goerli --http.port=9545 --ws.port=9546 --port=40303
 ```
 
@@ -164,19 +163,19 @@ reader-node-arguments: +--goerli --http.port=9545 --ws.port=9546 --port=40303
 
 The following command is used to start Firehose. Run the command from the directory that Firehose was installed to if other than `usr/local/bin`.
 
-```shell-session
+```bash
 ./fireeth -c eth-mainnet.yaml start
 ```
 
 ### **Successful Installation Logging**
 
-After issuing the start command to the terminal it can take up to thirty seconds for Firehose to begin connecting to peers and processing block data.&#x20;
+After issuing the start command to the terminal it can take up to thirty seconds for Firehose to begin connecting to peers and processing block data.
 
-Logging will be rapidly printed to the terminal window. See the log below for example logging.&#x20;
+Logging will be rapidly printed to the terminal window. See the log below for example logging.
 
 Press _****_ and hold the Control key and then press the C key three times to terminate Firehose and end all processes.
 
-```shell-session
+```bash
 2022-09-05T12:25:01.208-0700 INFO (<n/a>) registering development exporters from environment variables
 2022-09-05T12:25:01.208-0700 INFO (fireeth) starting with config file 'config.yaml'
 2022-09-05T12:25:01.209-0700 INFO (fireeth) launching applications: combined-index-builder,firehose,merger,reader-node,relayer
@@ -248,46 +247,46 @@ Press _****_ and hold the Control key and then press the C key three times to te
 2022-09-05T12:25:02.213-0700 INFO (reader) starting consume flow
 2022-09-05T12:25:02.213-0700 INFO (reader) successfully start service
 2022-09-05T12:25:02.213-0700 INFO (reader) operator ready to receive commands
-INFO [09-05|12:25:02.260] Initializing firehose 
+INFO [09-05|12:25:02.260] Initializing firehose
 INFO [09-05|12:25:02.267] Firehose initialized                     enabled=true sync_instrumentation_enabled=true mining_enabled=false block_progress_enabled=false compaction_disabled=false archive_blocks_to_keep=0 genesis_provenance="Geth Default" firehose_version=2.0 geth_version=1.10.23-fh2 chain_variant=geth
 2022-09-05T12:25:02.267-0700 INFO (reader) read firehose instrumentation init line {"dm_version": "2.0", "node_variant": "geth", "node_version": "1.10.23-fh2-e7f3686b"}
-INFO [09-05|12:25:02.268] Enabling metrics collection 
+INFO [09-05|12:25:02.268] Enabling metrics collection
 INFO [09-05|12:25:02.270] Maximum peer count                       ETH=100 LES=0 total=100
 WARN [09-05|12:25:02.274] Sanitizing cache to Go's GC limits       provided=8192 updated=5461
 INFO [09-05|12:25:02.275] Set global gas cap                       cap=50,000,000
 INFO [09-05|12:25:02.276] Allocated trie memory caches             clean=819.00MiB dirty=1.33GiB
 INFO [09-05|12:25:02.276] Allocated cache and file handles         database=/Users/<User Account>/sf-firehose/sf-data/reader/data/geth/chaindata cache=2.67GiB handles=5120
 INFO [09-05|12:25:02.608] Opened ancient database                  database=/Users/<User Account>/sf-firehose/sf-data/reader/data/geth/chaindata/ancient/chain readonly=false
-INFO [09-05|12:25:02.608] Writing default main-net genesis block 
+INFO [09-05|12:25:02.608] Writing default main-net genesis block
 INFO [09-05|12:25:02.991] Persisted trie from memory database      nodes=12356 size=1.78MiB time=28.732231ms gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
-INFO [09-05|12:25:03.008]  
-INFO [09-05|12:25:03.008] --------------------------------------------------------------------------------------------------------------------------------------------------------- 
-INFO [09-05|12:25:03.009] Chain ID:  1 (mainnet) 
-INFO [09-05|12:25:03.009] Consensus: Beacon (proof-of-stake), merging from Ethash (proof-of-work) 
-INFO [09-05|12:25:03.009]  
-INFO [09-05|12:25:03.009] Pre-Merge hard forks: 
-INFO [09-05|12:25:03.009]  - Homestead:                   1150000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/homestead.md) 
-INFO [09-05|12:25:03.009]  - DAO Fork:                    1920000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/dao-fork.md) 
-INFO [09-05|12:25:03.009]  - Tangerine Whistle (EIP 150): 2463000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/tangerine-whistle.md) 
-INFO [09-05|12:25:03.009]  - Spurious Dragon/1 (EIP 155): 2675000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/spurious-dragon.md) 
-INFO [09-05|12:25:03.009]  - Spurious Dragon/2 (EIP 158): 2675000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/spurious-dragon.md) 
-INFO [09-05|12:25:03.009]  - Byzantium:                   4370000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/byzantium.md) 
-INFO [09-05|12:25:03.009]  - Constantinople:              7280000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/constantinople.md) 
-INFO [09-05|12:25:03.009]  - Petersburg:                  7280000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/petersburg.md) 
-INFO [09-05|12:25:03.009]  - Istanbul:                    9069000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/istanbul.md) 
-INFO [09-05|12:25:03.009]  - Muir Glacier:                9200000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/muir-glacier.md) 
-INFO [09-05|12:25:03.009]  - Berlin:                      12244000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/berlin.md) 
-INFO [09-05|12:25:03.009]  - London:                      12965000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/london.md) 
-INFO [09-05|12:25:03.009]  - Arrow Glacier:               13773000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/arrow-glacier.md) 
-INFO [09-05|12:25:03.009]  - Gray Glacier:                15050000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/gray-glacier.md) 
-INFO [09-05|12:25:03.009]  
-INFO [09-05|12:25:03.009] Merge configured: 
-INFO [09-05|12:25:03.009]  - Hard-fork specification:    https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/paris.md 
-INFO [09-05|12:25:03.009]  - Network known to be merged: false 
-INFO [09-05|12:25:03.009]  - Total terminal difficulty:  58750000000000000000000 
-INFO [09-05|12:25:03.009]  - Merge netsplit block:       <nil> 
-INFO [09-05|12:25:03.009] --------------------------------------------------------------------------------------------------------------------------------------------------------- 
-INFO [09-05|12:25:03.009]  
+INFO [09-05|12:25:03.008]
+INFO [09-05|12:25:03.008] ---------------------------------------------------------------------------------------------------------------------------------------------------------
+INFO [09-05|12:25:03.009] Chain ID:  1 (mainnet)
+INFO [09-05|12:25:03.009] Consensus: Beacon (proof-of-stake), merging from Ethash (proof-of-work)
+INFO [09-05|12:25:03.009]
+INFO [09-05|12:25:03.009] Pre-Merge hard forks:
+INFO [09-05|12:25:03.009]  - Homestead:                   1150000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/homestead.md)
+INFO [09-05|12:25:03.009]  - DAO Fork:                    1920000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/dao-fork.md)
+INFO [09-05|12:25:03.009]  - Tangerine Whistle (EIP 150): 2463000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/tangerine-whistle.md)
+INFO [09-05|12:25:03.009]  - Spurious Dragon/1 (EIP 155): 2675000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/spurious-dragon.md)
+INFO [09-05|12:25:03.009]  - Spurious Dragon/2 (EIP 158): 2675000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/spurious-dragon.md)
+INFO [09-05|12:25:03.009]  - Byzantium:                   4370000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/byzantium.md)
+INFO [09-05|12:25:03.009]  - Constantinople:              7280000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/constantinople.md)
+INFO [09-05|12:25:03.009]  - Petersburg:                  7280000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/petersburg.md)
+INFO [09-05|12:25:03.009]  - Istanbul:                    9069000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/istanbul.md)
+INFO [09-05|12:25:03.009]  - Muir Glacier:                9200000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/muir-glacier.md)
+INFO [09-05|12:25:03.009]  - Berlin:                      12244000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/berlin.md)
+INFO [09-05|12:25:03.009]  - London:                      12965000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/london.md)
+INFO [09-05|12:25:03.009]  - Arrow Glacier:               13773000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/arrow-glacier.md)
+INFO [09-05|12:25:03.009]  - Gray Glacier:                15050000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/gray-glacier.md)
+INFO [09-05|12:25:03.009]
+INFO [09-05|12:25:03.009] Merge configured:
+INFO [09-05|12:25:03.009]  - Hard-fork specification:    https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/paris.md
+INFO [09-05|12:25:03.009]  - Network known to be merged: false
+INFO [09-05|12:25:03.009]  - Total terminal difficulty:  58750000000000000000000
+INFO [09-05|12:25:03.009]  - Merge netsplit block:       <nil>
+INFO [09-05|12:25:03.009] ---------------------------------------------------------------------------------------------------------------------------------------------------------
+INFO [09-05|12:25:03.009]
 INFO [09-05|12:25:03.010] Disk storage enabled for ethash caches   dir=/Users/<User Account>/sf-firehose/sf-data/reader/data/geth/ethash count=3
 INFO [09-05|12:25:03.010] Disk storage enabled for ethash DAGs     dir=/Users/<User Account>/Library/Ethash count=2
 INFO [09-05|12:25:03.010] Initialising Ethereum protocol           network=1 dbversion=<nil>
@@ -295,11 +294,11 @@ INFO [09-05|12:25:03.010] Loaded most recent local header          number=0 hash
 INFO [09-05|12:25:03.010] Loaded most recent local full block      number=0 hash=d4e567..cb8fa3 td=17,179,869,184 age=53y5mo1w
 INFO [09-05|12:25:03.010] Loaded most recent local fast block      number=0 hash=d4e567..cb8fa3 td=17,179,869,184 age=53y5mo1w
 WARN [09-05|12:25:03.010] Failed to load snapshot, regenerating    err="missing or corrupted snapshot"
-INFO [09-05|12:25:03.010] Rebuilding state snapshot 
+INFO [09-05|12:25:03.010] Rebuilding state snapshot
 INFO [09-05|12:25:03.011] Resuming state snapshot generation       root=d7f897..0f0544 accounts=0 slots=0 storage=0.00B dangling=0 elapsed="269.406µs"
 INFO [09-05|12:25:03.058] Generated state snapshot                 accounts=8893 slots=0 storage=409.64KiB dangling=0 elapsed=47.595ms
 INFO [09-05|12:25:03.145] Regenerated local transaction journal    transactions=0 accounts=0
-WARN [09-05|12:25:03.145] Chain pre-merge, sync via PoW (ensure beacon client is ready) 
+WARN [09-05|12:25:03.145] Chain pre-merge, sync via PoW (ensure beacon client is ready)
 INFO [09-05|12:25:03.145] Gasprice oracle is ignoring threshold set threshold=2
 WARN [09-05|12:25:03.145] Error reading unclean shutdown markers   error="leveldb: not found"
 WARN [09-05|12:25:03.145] Engine API enabled                       protocol=eth
@@ -340,13 +339,13 @@ After Firehose has been set up it needs to be synchronized with the target block
 
 Firehose also provides tools for operators to inspect many facets of the application. For example, the `tools check merged-blocks` command can be used to view and investigate the block data produced by Firehose.
 
-```shell-session
+```bash
 fireeth tools check merged-blocks ./sf-data/storage/merged-blocks
 ```
 
 The merged blocks tool will print to the terminal window. Look for messaging similar to what's shown below to determine if the installation was successful.
 
-```shell-session
+```bash
 2022-09-05T12:39:20.096-0700 INFO (<n/a>) registering development exporters from environment variables
 Checking block holes on ./sf-data/storage/merged-blocks
 2022-09-05T12:39:20.096-0700 INFO (dstore) sanitized base path {"original_base_path": "./sf-data/storage/merged-blocks", "sanitized_base_path": "sf-data/storage/merged-blocks"}
@@ -359,7 +358,7 @@ Checking block holes on ./sf-data/storage/merged-blocks
 
 It may be necessary to remove the quarantine attribute on the Geth and Firehose binary files to resolve signing issues on macOS.
 
-```shell-session
+```bash
 xattr -d com.apple.quarantine fireeth
 xattr -d com.apple.quarantine geth_mac
 ```

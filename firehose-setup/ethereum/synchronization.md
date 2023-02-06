@@ -8,9 +8,9 @@ description: StreamingFast Firehose Ethereum synchronization
 
 Synchronization is the process of:
 
-* collecting data from other peer nodes on the network,&#x20;
-* verifying node integrity through cryptography,&#x20;
-* and building the working node's blockchain data store.&#x20;
+* collecting data from other peer nodes on the network,
+* verifying node integrity through cryptography,
+* and building the working node's blockchain data store.
 
 ## Ethereum Mainnet Synchronization
 
@@ -24,7 +24,7 @@ The `fireeth` command is used to start Firehose and begin synchronization with t
 
 The data being processed by the connected node will be displayed as processing occurs. The data los will be presented in the following format.
 
-```shell-session
+```bash
 2022-03-19T10:28:26.666-0400 (fireeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
 2022-03-19T10:28:26.666-0400 (<n/a>) registering development exporters from environment variables
 2022-03-19T10:28:26.666-0400 (fireeth) starting with config file 'eth-mainnet.yaml'
@@ -99,7 +99,7 @@ The data being processed by the connected node will be displayed as processing o
 
 After a short delay, the blocks begin syncing.
 
-```shell-session
+```bash
 ...
 2022-03-19T10:28:57.497-0400 (merger) downloading one block file {"canonical_name": "0000000038-20150730T153109.0-b624ded0-d3f13e32-1"}
 2022-03-19T10:28:57.498-0400 (merger) downloading one block file {"canonical_name": "0000000039-20150730T153112.0-5c99c0f7-b624ded0-1"}
@@ -123,13 +123,13 @@ The `mindreader-node` process will either write individual block data into separ
 
 ### Merged Mode
 
-This behavior is configurable with the `mindreader-node-merge-and-store-directly` flag.&#x20;
+This behavior is configurable with the `mindreader-node-merge-and-store-directly` flag.
 
 When running the `mindreader-node` process with the `mindreader-node-merge-and-store-directly` flag enabled, the mindreader is running in merged mode. When the flag is disabled it's running in normal mode.
 
 ### Block Mergers
 
-In the scenario where the `mindreader-node` process stores one-block files the merger process can be run on the side. When the merger process is running in this fashion one-block files are merged into 100-block files.&#x20;
+In the scenario where the `mindreader-node` process stores one-block files the merger process can be run on the side. When the merger process is running in this fashion one-block files are merged into 100-block files.
 
 The `mindreader-node` process is run in merged mode during chain synchronization. After the synchronization process has completed the `mindreader-node` will store one-block files running in its regular mode of operation.
 
@@ -143,7 +143,7 @@ The one-block files and 100-block files will be stored in the `data-dir/storage/
 
 The Firehose data introspection tools allow you to introspect one-blocks and merged blocks files.
 
-Data inspection becomes possible through special sfeth tooling.&#x20;
+Data inspection becomes possible through special sfeth tooling.
 
 The `tools print block` can be used to introspect the synchronized block data.
 
@@ -151,13 +151,13 @@ The `tools print block` can be used to introspect the synchronized block data.
 **Note**_: Data inspection can be run after 10,000 blocks have been synced._
 {% endhint %}
 
-```shell-session
+```bash
 ./fireeth tools print blocks --store ./eth-data/storage/merged-blocks 100000
 ```
 
 Block data will be displayed in the following format.
 
-```shell-session
+```bash
 ...
 Block #10000 (dc2d938) (prev: b9ecd2d): 0 transactions, 1 balance changes
 Block #10001 (7e86236) (prev: dc2d938): 0 transactions, 1 balance changes
@@ -171,7 +171,7 @@ Block #10006 (dffaa95) (prev: 7cd875c): 0 transactions, 2 balance changes
 
 In addition, one-block files can be inspected using the `tools print one-block` command.
 
-```shell-session
+```bash
 ./fireeth tools print one-block --store ./eth-data/storage/one-blocks 0000000000
 ```
 
@@ -181,7 +181,7 @@ In addition, one-block files can be inspected using the `tools print one-block` 
 
 After the Ethereum network has finished synchronization the data collected can be analyzed and streamed through the `mindreader` process.
 
-```shell-session
+```bash
 ./fireeth -c eth-mainnet.yaml start mindreader-node
 ```
 
@@ -193,13 +193,13 @@ The `fireeth` command launches both the Relayer and Firehose.
 
 The two processes work together to provide the Firehose data stream. The Firehose process is running and listening on port 13042.
 
-```shell-session
+```bash
 ./fireeth -c eth-mainnet.yaml start relayer firehose
 ```
 
 The following message will be printed to the terminal window after launching Firehose.
 
-```shell-session
+```bash
 2022-08-17T09:51:26.807-0700 (<n/a>) registering development exporters from environment variables
 2022-08-17T09:51:26.807-0700 (fireeth) starting atomic level switcher {"listen_addr": "localhost:1065"}
 2022-08-17T09:51:26.807-0700 (fireeth) ulimit max open files before adjustment {"current_value": 256}
@@ -234,7 +234,7 @@ The following message will be printed to the terminal window after launching Fir
 ...
 ```
 
-At its core, Firehose is a gRPC stream. The available gRPC services can be displayed using `grpcurl`.&#x20;
+At its core, Firehose is a gRPC stream. The available gRPC services can be displayed using `grpcurl`.
 
 {% hint style="info" %}
 **Note**_: Installation instructions for grpcurl can be found in its_ [_official GitHub repository_](https://github.com/fullstorydev/grpcurl)_._
@@ -244,9 +244,9 @@ At its core, Firehose is a gRPC stream. The available gRPC services can be displ
 grpcurl -plaintext localhost:13042 list
 ```
 
-The available gRPC services will print the following message to the terminal window.&#x20;
+The available gRPC services will print the following message to the terminal window.
 
-```shell-session
+```bash
 grpc.health.v1.Health
 grpc.reflection.v1alpha.ServerReflection
 sf.firehose.v1.Stream
@@ -254,12 +254,12 @@ sf.firehose.v2.Stream
 sf.substreams.v1.Stream
 ```
 
-Block streaming can be accomplished through the `sf.firehose.v1.Stream` service.&#x20;
+Block streaming can be accomplished through the `sf.firehose.v1.Stream` service.
 
 The following command will begin the Firehose block streaming capability.
 
 {% code overflow="wrap" %}
-```shell-session
+```bash
 grpcurl -plaintext -d '{"start_block_num": 10}' localhost:13042 sf.firehose.v1.Stream.Blocks
 ```
 {% endcode %}

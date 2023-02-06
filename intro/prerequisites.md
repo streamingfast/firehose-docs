@@ -15,6 +15,6 @@ We expect Software Developers and Systems Administrators using Firehose to have 
 
 ## Requirements
 
-Full Firehose spins up a full node blockchain node (an [Ethereum full node](https://ethereum.org/en/run-a-node/) on Ethereum, a [NEAR full node](https://near-nodes.io/rpc) on NEAR, etc.)&#x20;
+Full Firehose spins up a full node blockchain node (an [Ethereum full node](https://ethereum.org/en/run-a-node/) on Ethereum, a [NEAR full node](https://near-nodes.io/rpc) on NEAR, etc.)
 
-Each blockchain has specific hardware and internet connection requirements. Refer to the specific vendor's documentation for the target blockchain.&#x20;
+Each blockchain has specific hardware and internet connection requirements. Refer to the specific vendor's documentation for the target blockchain.

@@ -11,11 +11,11 @@ Components, flow of data, and method of data storage are important topics to und
 
 ### Concepts & Architecture Overview
 
-Core concepts for understanding Firehose concepts and architecture include:&#x20;
+Core concepts for understanding Firehose concepts and architecture include:
 
-* [components](components.md),&#x20;
-* the [flow of data](data-flow.md) through the system,&#x20;
-* how [data is stored](data-storage.md),&#x20;
+* [components](components.md),
+* the [flow of data](data-flow.md) through the system,
+* how [data is stored](data-storage.md),
 * and the underlying [design principles](design-principles.md).
 
 ### Top-level Overview
@@ -24,7 +24,7 @@ At the topmost level, Firehose extracts data from instrumented blockchain nodes 
 
 #### Firehose Data for Consumers
 
-From the consumer standpoint, Firehose is simply a gRPC service.&#x20;
+From the consumer standpoint, Firehose is simply a gRPC service.
 
 #### Firehose Component Family
 
@@ -42,7 +42,7 @@ To utilize Firehose, instrumentation must be integrated and enabled on a _full p
 
 Firehose was designed with high availability (HA), especially in mind, and is available with a few extra steps and components.
 
-Firehose provides an ordered, _yet fork-aware_, stream of blocks consisting of rich blockchain data with _full and deep transaction history_.&#x20;
+Firehose provides an ordered, _yet fork-aware_, stream of blocks consisting of rich blockchain data with _full and deep transaction history_.
 
 ### Firehose Blocks
 
@@ -50,7 +50,7 @@ Firehose provides an ordered, _yet fork-aware_, stream of blocks consisting of r
 
 The Firehose blocks provide built-in cursoring enabling developers to stop and restart at the exact block needed; even for forked blocks. Firehose blocks contain details about consensus metadata, transactions, traces of transaction executions, and even blockchain state changes.
 
-The StreamingFast vision is that Firehose blocks are sufficient as the single source of data for any possible blockchain API imaginable.&#x20;
+The StreamingFast vision is that Firehose blocks are sufficient as the single source of data for any possible blockchain API imaginable.
 
 #### Resolve RPC Issues by Design
 
@@ -58,7 +58,7 @@ An important design goal for the Firehose system was to circumvent the need for 
 
 #### Firehose & Protocol Buffers
 
-For each protocol, a strict and complete definition of its data structure is defined in carefully designed Protocol Buffer schemas.&#x20;
+For each protocol, a strict and complete definition of its data structure is defined in carefully designed Protocol Buffer schemas.
 
 <mark style="color:yellow;">\[LINK to Ethereum block models, and Solana block models, etc, etc.. or a pointer to our docs where we discuss those block models.</mark>
 
@@ -83,4 +83,4 @@ The Firehose system is split up into separate [components](components.md) that w
 
 #### Firehose Component in Detail
 
-The next step is to learn about the individual Firehose [components](components.md) and how they work together.&#x20;
+The next step is to learn about the individual Firehose [components](components.md) and how they work together.

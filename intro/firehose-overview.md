@@ -12,7 +12,7 @@ Firehose is a core component of StreamingFast’s suite of open-source blockchai
 
 ### Streaming-first & Files-based
 
-Firehose provides a files-based and streaming-first approach to processing blockchain data.&#x20;
+Firehose provides a files-based and streaming-first approach to processing blockchain data.
 
 ### Blockchain Data Extraction
 
@@ -28,11 +28,11 @@ The full [StreamingFast software suite](https://github.com/streamingfast) enable
 
 Firehose is built using a component-based design. Data extraction is made possible through the family of Firehose components. The Firehose components include Firehose-enabled Blockchain Node, Reader, Merger, Relayer, and Firehose gRPC Server.
 
-### Cursors&#x20;
+### Cursors
 
 The Firehose cursor points to a specific position in the stream of events emitted by ForkDB and the blockchain itself. The ForkDB cursor contains information that is required to reconstruct an equivalent forked or canonical instance. Consumer requests for historical blocks are fetched from persistent Firehose storage. The historical blocks are passed inside a ForkDB and sent with a cursor uniquely identifying the block and its position in the blockchain.
 
-### Low Latency Racing Speed&#x20;
+### Low Latency Racing Speed
 
 Placing multiple Reader components side by side, and fronted by one or more Relayers, allows for highly available setups. A Relayer connected to multiple Readers will deduplicate incoming streams, and push the first block downstream. Two Reader components will even race to push the data out first. Firehose is designed to leverage this racing Reader feature to the benefit of the end-user by producing the lowest latency possible.
 
@@ -40,7 +40,7 @@ Placing multiple Reader components side by side, and fronted by one or more Rela
 
 ### Why does it exist?
 
-Firehose was created to increase the speed and performance of blockchain data extraction from problems encountered in deployed, real-world applications.&#x20;
+Firehose was created to increase the speed and performance of blockchain data extraction from problems encountered in deployed, real-world applications.
 
 ### Firehose Prevents Downtime
 
@@ -48,7 +48,7 @@ Companies experienced up to three week-long periods of downtime due to the repro
 
 ### Unrivaled Blockchain Data Processing Speeds
 
-Firehose was designed to process blockchain at speeds that were previously unseen and _thought to be impossible_.&#x20;
+Firehose was designed to process blockchain at speeds that were previously unseen and _thought to be impossible_.
 
 ### Resolving Slow JSON-RPC Responses
 
@@ -58,7 +58,7 @@ Another factor that heavily contributed to the design of Firehose is the brittle
 
 ### How it works
 
-The Firehose instrumentation service is added to a node for efficient capture and simple storage of blockchain data.&#x20;
+The Firehose instrumentation service is added to a node for efficient capture and simple storage of blockchain data.
 
 ### Data Extraction, Storage, & Access
 
@@ -74,7 +74,7 @@ Firehose is intended to stand as a replacement for The Graph’s original blockc
 
 ### Technical Overview
 
-To get started with Firehose, the first step is to learn about its core concepts and technical architecture, beginning with the [component family](https://firehose.streamingfast.io/concepts-and-architeceture/components).&#x20;
+To get started with Firehose, the first step is to learn about its core concepts and technical architecture, beginning with the [component family](https://firehose.streamingfast.io/concepts-and-architeceture/components).
 
 ### Existing Firehose Users
 

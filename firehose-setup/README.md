@@ -18,4 +18,4 @@ Firehose can be set up for blockchains that have already been instrumented by St
 
 ### New Blockchains & Firehose in Detail
 
-New blockchains can also be instrumented to feed Firehose with its necessary data. The Firehose-ACME template, custom Google Protocol Buffs, and node instrumentation are all tasks required for setting up Firehose with blockchains that don't currently have an instrumented node client solution in place.
+New blockchains can also be instrumented to feed Firehose with its necessary data. The Firehose-Acme template, custom Google Protocol Buffs, and node instrumentation are all tasks required for setting up Firehose with blockchains that don't currently have an instrumented node client solution in place.

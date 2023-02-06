@@ -6,11 +6,11 @@ description: StreamingFast Firehose merger component
 
 ## Merger Component in Detail
 
-The Merger component is responsible for managing and shaping data flowing out of the Reader component.&#x20;
+The Merger component is responsible for managing and shaping data flowing out of the Reader component.
 
 ### Blocks Files
 
-The Merger component produces what are referred to as "100-blocks files." The Merger component receives "one-block" files from Reader components that are feeding the Merger.&#x20;
+The Merger component produces what are referred to as "100-blocks files." The Merger component receives "one-block" files from Reader components that are feeding the Merger.
 
 ### One-block Storage
 
@@ -22,7 +22,7 @@ All forks visited by a Reader component will also be merged by the Merger compon
 
 ### Merging Blocks
 
-The merged 100-blocks files will be created each time the Merger component receives one hundred blocks of data from its associated Reader component.&#x20;
+The merged 100-blocks files will be created each time the Merger component receives one hundred blocks of data from its associated Reader component.
 
 ### Fork Data Awareness
 

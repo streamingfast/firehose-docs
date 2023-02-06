@@ -10,11 +10,11 @@ The Firehose gRPC Server component is responsible for providing the extracted, f
 
 ### Historical Data
 
-Firehose will use merged blocks from data storage directly for historical requests.&#x20;
+Firehose will use merged blocks from data storage directly for historical requests.
 
 ### Live Data
 
-Live blocks are received from the Relayer component.&#x20;
+Live blocks are received from the Relayer component.
 
 ### Relayer & Reader Coordination
 

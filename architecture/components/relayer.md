@@ -8,7 +8,7 @@ description: StreamingFast Firehose relayer component
 
 The Relayer component is responsible for providing executed block data to other Firehose components.
 
-The Relayer component feeds from all available Reader nodes to get a comprehensive view of all possible forks.&#x20;
+The Relayer component feeds from all available Reader nodes to get a comprehensive view of all possible forks.
 
 The Relayer "fans out", or relays, block information to the other Firehose components.
 

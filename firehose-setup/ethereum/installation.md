@@ -1,5 +1,5 @@
 ---
-description: StreamingFast Firehose Installation
+description: StreamingFast Firehose Ethereum Installation
 ---
 
 # Installation
@@ -10,9 +10,9 @@ description: StreamingFast Firehose Installation
 
 Firehose installation is accomplished through a few fairly simple tasks including obtaining specific binaries and some configuration steps.
 
-It's important to note that Firehose comes in many different flavors for different blockchains. Firehose also has a legacy version and a new version. The setup process isn't difficult however having a clear idea and path in mind before you begin is recommended.&#x20;
+It's important to note that Firehose comes in many different flavors for different blockchains. Firehose also has a legacy version and a new version. The setup process isn't difficult however having a clear idea and path in mind before you begin is recommended.
 
-After Firehose has been installed, configured, and synchronized with the target blockchain operating the software becomes the primary goal.&#x20;
+After Firehose has been installed, configured, and synchronized with the target blockchain operating the software becomes the primary goal.
 
 Documentation is provided for the various blockchains and versions of Firehose to get operators up and running as quickly as possible.
 
@@ -30,7 +30,7 @@ docker pull ghcr.io/streamingfast/firehose-ethereum:40d5054
 
 ## StreamingFast Geth
 
-Geth extracts raw blockchain data from Ethereum nodes. The StreamingFast Firehose-enabled Blockchain Node is an instrumented, version of the official Geth implementation.&#x20;
+Geth extracts raw blockchain data from Ethereum nodes. The StreamingFast Firehose-enabled Blockchain Node is an instrumented, version of the official Geth implementation.
 
 {% hint style="info" %}
 **Note**_: Geth is the official Golang implementation of the Ethereum Protocol._
@@ -38,7 +38,7 @@ Geth extracts raw blockchain data from Ethereum nodes. The StreamingFast Firehos
 
 StreamingFast provides support for various Ethereum-compatible blockchains ready to use with Firehose. The overall setup and installation process is very similar across the different Ethereum-compatible blockchains.
 
-Every Ethereum-compatible blockchain has specific requirements and other differences that should be taken into consideration before rolling out a production Firehose solution.&#x20;
+Every Ethereum-compatible blockchain has specific requirements and other differences that should be taken into consideration before rolling out a production Firehose solution.
 
 {% hint style="warning" %}
 **Important**_: Each blockchain has specific requirements for processing power, RAM, available disk space, and write speed that need to be considered._
@@ -52,7 +52,7 @@ Obtaining the instrumented version of Geth for the target blockchain is the firs
 
 ### **Default Blockchain for Geth**
 
-_Ethereum is the default implementation for firehose-ethereum_ and uses the Geth version that _does not_ contain references to any other blockchains in its release title or file name.&#x20;
+_Ethereum is the default implementation for firehose-ethereum_ and uses the Geth version that _does not_ contain references to any other blockchains in its release title or file name.
 
 The Geth binaries provided by StreamingFast have “fh” within the version to indicate they’re not the standard, non-instrumented, community-developed node version.
 
@@ -122,8 +122,8 @@ A message similar to the following should be displayed in the terminal window If
 
 The version seen in the message printed to the terminal should match the version of the Firehose binary downloaded in the following steps.
 
-```shell-session
-INFO [09-02|09:42:23.128] Initializing firehose 
+```bash
+INFO [09-02|09:42:23.128] Initializing firehose
 INFO [09-02|09:42:23.136] Firehose initialized                     enabled=false sync_instrumentation_enabled=true mining_enabled=false block_progress_enabled=false compaction_disabled=false archive_blocks_to_keep=0 genesis_provenance="Geth Default" firehose_version=2.0 geth_version=1.10.23-fh2 chain_variant=geth
 Geth
 Version: 1.10.23-fh2
@@ -141,11 +141,11 @@ GOROOT=go
 
 Save the Firehose binary to the main Firehose directory. After the archive has completed downloading extract it to obtain the Firehose binary.
 
-### **Firehose for Linux**&#x20;
+### **Firehose for Linux**
 
 [https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_linux\_x86\_64.tar.gz](https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_linux\_x86\_64.tar.gz)
 
-### **Firehose for macOS**&#x20;
+### **Firehose for macOS**
 
 [https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_macOS\_x86\_64.tar.gz](https://github.com/streamingfast/firehose-ethereum/releases/download/v1.0.0/fireeth\_1.0.0\_macOS\_x86\_64.tar.gz)
 
@@ -167,16 +167,12 @@ To check the status of the Firehose setup run the binary and pass it the version
 
 The following message will be displayed in the terminal window if Firehose is working correctly.
 
-```shell-session
+```bash
 fireeth version 1.0.0 (Commit 42f870c, Built 2022-09-02T17:07:45Z)
 ```
 
 ### Next Steps
 
-The following steps will differ slightly for each blockchain. Specific configuration steps, settings, and processes are outlined for blockchains currently supported by StreamingFast.&#x20;
+The following steps will differ slightly for each blockchain. Specific configuration steps, settings, and processes are outlined for blockchains currently supported by StreamingFast.
 
-{% hint style="success" %}
-**Tip**_: Other blockchains beyond the ones currently supported can be used with Firehose through the process of instrumentation. Information is provided for the instrumentation process of_ [_new blockchains_](https://firehose.streamingfast.io/integrate-new-chains/new-blockchains)_._
-{% endhint %}
-
-Another consideration is where the Firehose setup will be deployed. The next steps for full setup are determined by specifics for the target environment and blockchain. Documentation is provided for [local](<installation (1).md>) and production deployments. _Note, Firehose is also capable of running in bare-metal environments._
+Another consideration is where the Firehose setup will be deployed. The next steps for full setup are determined by specifics for the target environment and blockchain. Documentation is provided for [single-machine deployment](./local-deployment.md) for now.

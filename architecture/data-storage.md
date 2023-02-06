@@ -10,7 +10,7 @@ description: StreamingFast Firehose data storage
 
 ### Data Storage in Detail
 
-Data and the locations where it is stored are important facets of Firehose deployment and operation.&#x20;
+Data and the locations where it is stored are important facets of Firehose deployment and operation.
 
 Key Firehose data storage topics include [Data Stores](data-storage.md#data-stores), [Merged blocks files](data-storage.md#merged-blocks-files), [serialization](data-storage.md#serialization), [one block files](data-storage.md#one-block-files), and [100-blocks files](data-storage.md#one-hundred-blocks-files).
 
@@ -56,7 +56,7 @@ The [Merger](components/merger.md) component will also collate all of the one-bl
 
 ### One Hundred Blocks Files
 
-Up to one hundred blocks can be contained within a single 100-blocks file.&#x20;
+Up to one hundred blocks can be contained within a single 100-blocks file.
 
 The 100-blocks files can include multiple versions such as a fork block or a given block number, ensuring continuity through the previous block link.
 

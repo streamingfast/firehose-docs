@@ -19,6 +19,6 @@ description: StreamingFast Firehose repositories
 
 Versioning considerations for binaries to answer questions such as:
 
-* How are upstream binaries tracked?&#x20;
+* How are upstream binaries tracked?
 * How is Firehose instrumentation properly versioned, etc.?
 

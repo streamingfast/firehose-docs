@@ -30,12 +30,11 @@
 * [Cosmos](setup/cosmos/README.md)
   * [Synchronization](setup/cosmos/synchronization.md)
 * [System Requirements](firehose-setup/system-requirements.md)
-* [Substreams](firehose-setup/substreams.md)
 
 ## Integrate New Chains
 
 * [New Blockchains](integrate-new-chains/new-blockchains.md)
-* [Firehose ACME](integrate-new-chains/firehose-starter.md)
+* [Firehose Acme](integrate-new-chains/firehose-starter.md)
 * [Design Principles](integrate-new-chains/design-principles.md)
 * [Why Integrate the Firehose](integrate-new-chains/why-integrate-the-firehose.md)
 

@@ -26,7 +26,7 @@ Yes, Firehose provides data for subgraphs through the Graph Node and subgraphs. 
 
 ## **Is Firehose made by The Graph?**
 
-Firehose was created by StreamingFast working as a core developer with The Graph Foundation.&#x20;
+Firehose was created by StreamingFast working as a core developer with The Graph Foundation.
 
 ## **Can I use Firehose for production deployments?**
 
@@ -40,7 +40,7 @@ Authentication tokens are required to connect to the public Firehose endpoint pr
 
 ## **My Firehose authentication token isn’t working, what do I do?**
 
-The StreamingFast team is available in Discord to assist with problems related to obtaining or using authentication tokens.&#x20;
+The StreamingFast team is available in Discord to assist with problems related to obtaining or using authentication tokens.
 
 [https://discord.gg/Ugc7KtkA](https://discord.gg/Ugc7KtkA)
 

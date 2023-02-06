@@ -6,22 +6,22 @@ description: StreamingFast Firehose Cosmos synchronization
 
 ## Cosmos Synchronization
 
-Firehose for Cosmos, `firehose-cosmos,` is an application that funs a few small, isolated processes as a Firehose implementation.&#x20;
+Firehose for Cosmos, `firehose-cosmos,` is an application that funs a few small, isolated processes as a Firehose implementation.
 
-The latest version of `firehose-cosmos` is available in the project's [official Github repository](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
+The latest version of `firehose-cosmos` is available in the project's [official Github repository](https://github.com/figment-networks/firehose-cosmos/releases).
 
-Firehose for Cosmos is also available at [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) and the latest release is listed on the [Github releases page](https://github.com/figment-networks/firehose-cosmos/releases).&#x20;
+Firehose for Cosmos is also available at [Figment's Docker Hub](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) and the latest release is listed on the [Github releases page](https://github.com/figment-networks/firehose-cosmos/releases).
 
 StreamingFast recommends using the `firehose-cosmos` Dockerfile.
 
 Issue the following command to the terminal from inside the firehose-cosmos directory.
 
-```shell-session
+```bash
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose help
 ```
 
 {% hint style="info" %}
-**Note**_, make sure to download the most recent version of `firehose-cosmos` for the latest functionality, updates, and patches._&#x20;
+**Note**_, make sure to download the most recent version of `firehose-cosmos` for the latest functionality, updates, and patches._
 {% endhint %}
 
 Firehose Cosmos can also be installed from source. Navigate to the `firehose-cosmos` directory and issue the `make install` command to the terminal window.
@@ -30,7 +30,7 @@ Firehose Cosmos can also be installed from source. Navigate to the `firehose-cos
 
 Issue the following command to the terminal window to verify that the Cosmos installation was successful.
 
-```shell-session
+```bash
 firehose-cosmos --version
 # or
 docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose --version
@@ -40,19 +40,19 @@ docker run --rm -it figmentnetworks/firehose-cosmos:0.4.0 /app/firehose --versio
 
 To index Cosmos, the binaries must be correctly modified for the selected target blockchain.
 
-Figment provides [binaries and pre-built Docker images](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) for CosmosHub and Osmosis. _Note, Mainnet and Testnet versions are available._&#x20;
+Figment provides [binaries and pre-built Docker images](https://hub.docker.com/r/figmentnetworks/firehose-cosmos/tags) for CosmosHub and Osmosis. _Note, Mainnet and Testnet versions are available._
 
-The Dockerfiles will start the `firehose-cosmos` process for you.&#x20;
+The Dockerfiles will start the `firehose-cosmos` process for you.
 
-### Chain Data Volume Storage Path&#x20;
+### Chain Data Volume Storage Path
 
-Be sure to pass the path to the chain data volume storage. If the path isn't supplied the chain will begin synchronizing at the Genesis block each time the application runs.&#x20;
+Be sure to pass the path to the chain data volume storage. If the path isn't supplied the chain will begin synchronizing at the Genesis block each time the application runs.
 
-Modify the command below to reference the version of the chain node being indexed.&#x20;
+Modify the command below to reference the version of the chain node being indexed.
 
 Example command for Osmosis Testnet v7.0.4.
 
-```shell-session
+```bash
 docker run --rm -it -v data:/app/osmosis_home/data figmentnetworks/firehose-cosmos:fh-v0.4.0-osmosis1-testnet-v7.0.4 /app/firehose start
 ```
 
@@ -64,11 +64,11 @@ Chain data volume storage path for CosmosHub chains.
 
 ### Running Nodes Outside Docker
 
-To run a node outside of Docker update the configuration file for the binary. Check the Extractor Configuration Options to match them with the example below.
+To run a node outside of Docker update the configuration file for the binary. Check the Reader Configuration Options to match them with the example below.
 
 ```ini
 #######################################################
-###       Extractor Configuration Options           ###
+###       Reader Configuration Options           ###
 #######################################################
 [extractor]
 enabled = true
@@ -110,7 +110,7 @@ The first time the node runs it will begin synchronization from the genesis bloc
 
 If the setup has been configured properly blocks of data will begin streaming and printing to the terminal window.
 
-For Cosmos deployments running locally the node's status is viewable by pointing a web browser to the following address.&#x20;
+For Cosmos deployments running locally the node's status is viewable by pointing a web browser to the following address.
 
 [http://localhost:26657/status](http://localhost:26657/status)
 
@@ -126,7 +126,7 @@ grpcurl -plaintext localhost:9030 sf.firehose.v1.Stream.Blocks | jq
 
 Issuing the `grpcurl` command will result in the following logging information being printed to the terminal.
 
-```shell-session
+```bash
 2022-05-30T22:30:11.142+0100 (ingestor) creating mindreader plugin (mindreader/mindreader.go:99) {"archive_store_url": "file:///../fh-data/storage/one-blocks", "merge_archive_store_url": "file:///../fh-data/storage/merged-blocks", "oneblock_suffix": "", "batch_mode": false, "merge_threshold_age": "2562047h47m16.854775807s", "working_directory": "/../fh-data/workdir", "start_block_num": 0, "stop_block_num": 0, "channel_capacity": 0, "with_head_block_update_func": true, "with_shutdown_func": true, "fail_on_non_continuous_blocks": true, "wait_upload_complete_on_shutdown": "10s"}
 2022-05-30T22:30:11.142+0100 (ingestor) creating new mindreader plugin (mindreader/mindreader.go:185)
 2022-05-30T22:30:11.143+0100 (merger) running merger (merger/app.go:60) {"config": {"StorageOneBlockFilesPath":"file:///../fh-data/storage/one-blocks","StorageMergedBlocksFilesPath":"file:///../fh-data/storage/merged-blocks","GRPCListenAddr":"0.0.0.0:9020","WritersLeewayDuration":10000000000,"TimeBetweenStoreLookups":5000000000,"StateFile":"/../fh-data/merger/merger.seen.gob","OneBlockDeletionThreads":10,"MaxOneBlockOperationsBatchSize":2000,"NextExclusiveHighestBlockLimit":0}}
@@ -168,7 +168,7 @@ Issuing the `grpcurl` command will result in the following logging information b
 
 After a short delay, blocks will begin syncing and printing to the terminal window.
 
-```shell-session
+```bash
 ...
 2022-05-30T22:39:36.919+0100 (firehose.hub.js) incoming live block (bstream/joiningsource.go:333) {"block": "#5200802 (F7FBEE7A1C978EADD63FE86DE131E72BE7E0DBC78B099FF4BFAD60FF61099A6F)", "live_pass_through": false}
 2022-05-30T22:39:36.919+0100 (firehose.hub.js) added live block to buffer (bstream/joiningsource.go:374) {"block": "#5200802 (F7FBEE7A1C978EADD63FE86DE131E72BE7E0DBC78B099FF4BFAD60FF61099A6F)", "buffer_size": 11}
@@ -176,35 +176,35 @@ After a short delay, blocks will begin syncing and printing to the terminal wind
 10:39PM INF executed block height=5200803 module=state num_invalid_txs=0 num_valid_txs=0
 10:39PM INF commit synced commit=436F6D6D697449447B5B31313420313433203134342031363920323133203536203232203233372031323420313131203337203233372031333520323437203720393820323532203130203232332031332031363420323220313131203130352038312037372032323420313720382033203131392035325D3A3446354241337D
 10:39PM INF committed state app_hash=728F90A9D53816ED7C6F25ED87F70762FC0ADF0DA4166F69514DE01108037734 height=5200803 module=state num_txs=0
-10:39PM INF finalized dmlog block block=5200803 module=deepmind
+10:39PM INF finalized firehose log block block=5200803 module=firehose
 2022-05-30T22:39:37.115+0100 (firehose.hub.js) incoming live block (bstream/joiningsource.go:333) {"block": "#5200803 (E9D938A1AE9FB576155BCC99CFBE715079F0DBC3918B0E1E67B3D27E5AF6EF7A)", "live_pass_through": false}
 2022-05-30T22:39:37.115+0100 (firehose.hub.js) added live block to buffer (bstream/joiningsource.go:374) {"block": "#5200803 (E9D938A1AE9FB576155BCC99CFBE715079F0DBC3918B0E1E67B3D27E5AF6EF7A)", "buffer_size": 12}
 10:39PM INF indexed block height=5200803 module=txindex
 10:39PM INF executed block height=5200804 module=state num_invalid_txs=0 num_valid_txs=0
 10:39PM INF commit synced commit=436F6D6D697449447B5B34362032313120323334203138322031333120333320373620343020313530203235203130302031323120363620393520313434203520313233203233312032313720383120313434203233372031393720362032353120313431203230372031353420343620393620313330203132375D3A3446354241347D
 10:39PM INF committed state app_hash=2ED3EAB683214C2896196479425F90057BE7D95190EDC506FB8DCF9A2E60827F height=5200804 module=state num_txs=0
-10:39PM INF finalized dmlog block block=5200804 module=deepmind
+10:39PM INF finalized firehose log block block=5200804 module=firehose
 2022-05-30T22:39:37.293+0100 (firehose.hub.js) incoming live block (bstream/joiningsource.go:333) {"block": "#5200804 (8B5405A8714B66E7A3DD21537E7F4C6B650123085FE06EF3018163337C6C13AF)", "live_pass_through": false}
 2022-05-30T22:39:37.293+0100 (firehose.hub.js) added live block to buffer (bstream/joiningsource.go:374) {"block": "#5200804 (8B5405A8714B66E7A3DD21537E7F4C6B650123085FE06EF3018163337C6C13AF)", "buffer_size": 13}
 10:39PM INF indexed block height=5200804 module=txindex
 10:39PM INF executed block height=5200805 module=state num_invalid_txs=0 num_valid_txs=0
 10:39PM INF commit synced commit=436F6D6D697449447B5B313535203234352031363820323130203136312031323420313835203132342031333920353620313435203234362032332035203539203130322033332032302032333120323030203130372032333120313137203136382034332031383520313420313734203231342034332033352031395D3A3446354241357D
 10:39PM INF committed state app_hash=9BF5A8D2A17CB97C8B3891F617053B662114E7C86BE775A82BB90EAED62B2313 height=5200805 module=state num_txs=0
-10:39PM INF finalized dmlog block block=5200805 module=deepmind
+10:39PM INF finalized firehose block block=5200805 module=firehose
 2022-05-30T22:39:37.486+0100 (firehose.hub.js) incoming live block (bstream/joiningsource.go:333) {"block": "#5200805 (0904A4BCC13F76FECBB518DD4A7483C8AF68F9D3484ECAC3B8D9294FE7253E08)", "live_pass_through": false}
 2022-05-30T22:39:37.486+0100 (firehose.hub.js) added live block to buffer (bstream/joiningsource.go:374) {"block": "#5200805 (0904A4BCC13F76FECBB518DD4A7483C8AF68F9D3484ECAC3B8D9294FE7253E08)", "buffer_size": 14}
 10:39PM INF indexed block height=5200805 module=txindex
 10:39PM INF executed block height=5200806 module=state num_invalid_txs=0 num_valid_txs=1
 10:39PM INF commit synced commit=436F6D6D697449447B5B323337203736203138322032323620313336203136302031323420313035203132352037372038302034352032343620313032203430203233332032343020313334203232352033332031353220323433203131302032333320383820313931203233382038352031323920313837203138332037325D3A3446354241367D
 10:39PM INF committed state app_hash=ED4CB6E288A07C697D4D502DF66628E9F086E12198F36EE958BFEE5581BBB748 height=5200806 module=state num_txs=1
-10:39PM INF finalized dmlog block block=5200806 module=deepmind
+10:39PM INF finalized firehose block block=5200806 module=firehose
 2022-05-30T22:39:37.662+0100 (firehose.hub.js) incoming live block (bstream/joiningsource.go:333) {"block": "#5200806 (3516D766EBCC3D9886CD7DA197419A079525EB2928C8D8D9FF7E96E3E846B61F)", "live_pass_through": false}
 2022-05-30T22:39:37.662+0100 (firehose.hub.js) added live block to buffer (bstream/joiningsource.go:374) {"block": "#5200806 (3516D766EBCC3D9886CD7DA197419A079525EB2928C8D8D9FF7E96E3E846B61F)", "buffer_size": 15}
 10:39PM INF indexed block height=5200806 module=txindex
 10:39PM INF executed block height=5200807 module=state num_invalid_txs=0 num_valid_txs=0
 10:39PM INF commit synced commit=436F6D6D697449447B5B3132372032303820313538203832203132332032333720313230203132382031313820313631203835203235352032343020313833203233392039382031343220312036312032302031363020313437203430203734203234302032303820323138203133382032353520323533203637203132305D3A3446354241377D
 10:39PM INF committed state app_hash=7FD09E527BED788076A155FFF0B7EF628E013D14A093284AF0D0DA8AFFFD4378 height=5200807 module=state num_txs=0
-10:39PM INF finalized dmlog block block=5200807 module=deepmind
+10:39PM INF finalized firehose log block block=5200807 module=firehose
 ...
 ```
 
@@ -216,7 +216,7 @@ The Firehose sync process will shutdown gracefully and continue where it left of
 
 A graceful shutdown will result in a message similar to the one seen below.
 
-```shell-session
+```bash
 ...
 2022-05-30T22:39:38.322+0100 (streamingfast) Received termination signal, quitting (firehose-cosmos/cmd_start.go:55)
 2022-05-30T22:39:38.322+0100 (streamingfast) Waiting for all apps termination... (launcher/launcher.go:259)
@@ -235,7 +235,7 @@ A graceful shutdown will result in a message similar to the one seen below.
 10:39PM INF executed block height=5200810 module=state num_invalid_txs=0 num_valid_txs=0
 10:39PM INF commit synced commit=436F6D6D697449447B5B36312036342036392032323820363820362032382036342031333620313336203137382031313920363620313620323535203136302031322034322031332032343520313833203133342039392031373820382033362031353620323236203136372031353320323039203131385D3A3446354241417D
 10:39PM INF committed state app_hash=3D4045E444061C408888B2774210FFA00C2A0DF5B78663B208249CE2A799D176 height=5200810 module=state num_txs=0
-10:39PM INF finalized dmlog block block=5200810 module=deepmind
+10:39PM INF finalized firehose log block block=5200810 module=firehose
 2022-05-30T22:39:38.444+0100 (firehose.hub.js) incoming live block (bstream/joiningsource.go:333) {"block": "#5200810 (119D8EC24EE734EB93895B89CA9629D721E5C63AC941933F582BDEB47BEB3107)", "live_pass_through": false}
 2022-05-30T22:39:38.444+0100 (firehose.hub.js) added live block to buffer (bstream/joiningsource.go:374) {"block": "#5200810 (119D8EC24EE734EB93895B89CA9629D721E5C63AC941933F582BDEB47BEB3107)", "buffer_size": 19}
 2022-05-30T22:39:38.819+0100 (firehose.hub.js.file) reading from blocks store: file does not (yet?) exist, retrying in (bstream/filesource.go:194) {"filename": "/../fh-data/storage/merged-blocks/0005200700.dbin.zst", "base_filename": "0005200700", "retry_delay": "4s", "secondary_blocks_stores_count": 0}

@@ -16,9 +16,9 @@ _Note: This page serves as a resource to provide a unified experience for develo
 
 ### Short & Long Form Naming
 
-Each Firehose setup uses two forms of naming. The naming is taken from the target blockchain's protocol name. The two forms establish a _long_ and a _short_ form of the protocol name.&#x20;
+Each Firehose setup uses two forms of naming. The naming is taken from the target blockchain's protocol name. The two forms establish a _long_ and a _short_ form of the protocol name.
 
-The short form will be the shortest abbreviation of the chain name possible.  For Ethereum, the long form would be`ethereum` and the short form would be `eth`.&#x20;
+The short form will be the shortest abbreviation of the chain name possible. For Ethereum, the long form would be `ethereum` and the short form would be `eth`.
 
 {% hint style="warning" %}
 _Important: These naming forms will be referenced throughout the Firehose naming conventions documentation._
@@ -28,33 +28,21 @@ _Important: These naming forms will be referenced throughout the Firehose naming
 
 ### Instrumentation Naming in Detail
 
-Codebases of blockchain nodes that integrate Firehose use the following naming conventions.
-
-Go Ethereum uses `geth,` Solana uses`solana-validator`, and Cosmos uses `gaia`.
-
-For line-based Firehose instrumentations, each line of output should start with the word `FIRE` followed by a simple word defining what data to expect on each line.&#x20;
-
-{% hint style="info" %}
-**Note**_: previous implementations used `DMLOG`, for deepmind, which was the codename of StreamingFast instrumentation._
-{% endhint %}
+For line-based Firehose instrumentations, each line of output should start with the word `FIRE` followed by a simple word defining what data to expect on each line.
 
 ### Libraries
 
-When using libraries for node instrumentation using `firehose` as the name of the library for all firehose helpers is preferable.&#x20;
-
-{% hint style="info" %}
-**Note**_: `deepmind` was used in several prior Firehose implementations._    &#x20;
-{% endhint %}
+Code used for instrumentation within the native node should be bundled together using `firehose` as the name of the module/crate/package is preferable.
 
 {% hint style="warning" %}
-**Important**_: The top-level flag  `--firehose-enabled` can be used for quickly dumping massive quantities of data to standard output from Firehose._
+**Important**: _The top-level flag  `--firehose-enabled` can be used for quickly dumping massive quantities of data to standard output from Firehose._
 {% endhint %}
 
 ## Chain-specific Binary Changes
 
 ### Chain-specific Binary Changes Intro
 
-Replace `acme` with the chain you are instrumenting for the following items.&#x20;
+Replace `acme` with the chain you are instrumenting for the following items.
 
 In a sample scenario instrumenting the Tezos blockchain acme would be replaced by the two forms of Tezos; something similar to `tezos` and `tez`.
 
@@ -87,27 +75,15 @@ _**Types Directory -**_ `/types`
 
 The types directory contains rendered protobuf types and some helpers. \
 \
-For example:&#x20;
+For example:
 
 `/types/pb/sf/acme/type/v1;pbacme`, using the _short form_ package name prefixed with `pb`.\
 \
 For Tezos it would be something similar to:\
 `/types/pb/sf/acme/type/v1;pbtezos`\
 
-
 `/types/go.mod`: to be able to import `github.com/streamingfast/firehose-acme/types` and pull only a limited number of dependencies.
 
 _**Codec Directory -**_ `/codec`
 
 The `codec` directory contains all of the coding and decoding methods used to manipulate the stream of data coming from the Firehose-enabled Blockchain Node. _Note,_ t_his library is concerned only with the data wrangling, and not the management of nodes._
-
-## Prior Naming Convention Changes
-
-The `reader` component has historically been known as the `mindreader.` The `reader` component has its own twist on the `deepmind` instrumentation originally created by StreamingFast.
-
-### Going Forward
-
-* The `mindreader` component is now called the `reader` component in the Firehose documentation.
-* The _app within_ the `fireacme` binary is now called`reader.`Previous names for the component included `mindreader,` `extractor` and `ingestor.`
-* Flags for other components would follow the naming convention of the different types of nodes handled by the `fireacme` binary. For example `--reader-node-config-1-2-3`, alongside: `--peering-node-config123` and `--miner-node-config123.`
-* Pods will also be named `reader` instead of `mindreader` throughout Firehose setups.

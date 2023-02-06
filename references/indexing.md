@@ -17,11 +17,11 @@ Firehose indexes function in _two_ primary fashions.
 
 Blockchains have varying levels of support for indexes. For example, `firehose-ethereum` has support while `firehose-arweave` currently does not.
 
-Enabling indexes for Firehose is accomplished through flags passed to the binary when running the fireeth executable. When enabling indexes, ensure the flags are set and the URL makes logical sense for the deployment being created.&#x20;
+Enabling indexes for Firehose is accomplished through flags passed to the binary when running the fireeth executable. When enabling indexes, ensure the flags are set and the URL makes logical sense for the deployment being created.
 
-Use the following flag for valid index bundle sizes when looking for block indexes.&#x20;
+Use the following flag for valid index bundle sizes when looking for block indexes.
 
-`--common-block-index-sizes [ints]`                 &#x20;
+`--common-block-index-sizes [ints]`
 
 {% hint style="info" %}
 **Note**: _The default values are 100000,100000,10000,1000._
@@ -29,10 +29,10 @@ Use the following flag for valid index bundle sizes when looking for block index
 
 Common store URL, with prefix, to read and write index files.
 
-`--common-index-store-url [string]`                &#x20;
+`--common-index-store-url [string]`
 
 {% hint style="info" %}
-**Note**: The default value is:&#x20;
+**Note**: The default value is:
 
 `file://{sf-data-dir}/storage/index`
 {% endhint %}
@@ -41,7 +41,7 @@ Common store URL, with prefix, to read and write index files.
 
 The Firehose Index Builder provides functionality for generating index files. Developers can utilize this tool through the combined-index-builder application provided by the Firehose fireeth binary.
 
-The Firehose Index Builder can be run sequentially to produce indexes as merged-blocks are produced.&#x20;
+The Firehose Index Builder can be run sequentially to produce indexes as merged-blocks are produced.
 
 Alternatively The Firehose Index Builder can be run multiple times in parallel over different block ranges to quickly process millions of blocks.
 
@@ -97,7 +97,7 @@ The command will return the following blocks.
 [15289746(startBlock, no transactions), 15295215, 15307816, 15307882, 15308252(stopBlock, no transactions)]
 ```
 
-Example addresses:&#x20;
+Example addresses:
 
 \[0xa5b7f12346048e8a3e780dbeb4c2f469be8ffcef, 0xfeaf24248e04ac7ad0ea6e7e617182cff429d4e5]
 

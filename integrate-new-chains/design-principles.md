@@ -34,8 +34,8 @@ Firehose was designed with the following truths and assumptions taken into excru
 
 StreamingFast strives to create the shortest path available from the deterministic execution of blocks and transactions down into a flat file. High-level goals surrounding the extraction process were identified and conceptualized including:
 
-* The development of simple, robust, laser-focused processes.&#x20;
-* Create core system [components](../architecture/components/) including the Extractor, Merger, Relayer, and gRPC Server.
+* The development of simple, robust, laser-focused processes.
+* Create core system [components](../architecture/components/) including the Reader, Merger, Relayer, and gRPC Server.
 * Avoid the coupling of extraction and indexing and any other services.
 * Guarantee maximum node performance during data extraction for instrumented nodes, for all protocols.
 
@@ -43,30 +43,30 @@ StreamingFast strives to create the shortest path available from the determinist
 
 ### Full Data Extraction
 
-Firehose achieves data completeness through the extraction of all available data from instrumented nodes.&#x20;
+Firehose achieves data completeness through the extraction of all available data from instrumented nodes.
 
 Revisiting instrumented nodes is avoided by Firehose due to the complete, rich, verifiable data collected during the extraction process.
 
 ### Finite Data Tracking
 
-During a transaction, the balance for an address could change from `100` to `200.` Firehose will save the storage key that was altered, and the previous and next values.&#x20;
+During a transaction, the balance for an address could change from `100` to `200.` Firehose will save the storage key that was altered, and the previous and next values.
 
 ### Integrity & Fidelity
 
-Forward and backward atomic updates and integrity checks are made possible due to the fidelity of data being tracked by Firehose.&#x20;
+Forward and backward atomic updates and integrity checks are made possible due to the fidelity of data being tracked by Firehose.
 
 In the example above, `200` should be the next changed value for the `previous_data` key. If a discrepancy is encountered it means there is an issue with the extraction mechanism and data quality will be negatively impacted.
 
 ### Complete Data in Detail
 
-Complete data means accounting for:&#x20;
+Complete data means accounting for:
 
-* the relationships between a transaction,&#x20;
-* the transaction's block’s schedule,&#x20;
-* transaction execution,&#x20;
+* the relationships between a transaction,
+* the transaction's block’s schedule,
+* transaction execution,
 * transaction expiration,
 * events produced by any transaction side effects,
-* the transaction call tree, and each call’s state transition and effects.&#x20;
+* the transaction call tree, and each call’s state transition and effects.
 
 ### Transaction Relationships & Data
 
@@ -85,12 +85,12 @@ Data processes triggered by Ethereum log events can benefit from having knowledg
 Accessing rich, complete data leads smart contract developers to emit additional events. Emitting additional events leads to increased gas fees.
 
 {% hint style="info" %}
-_Note: Enriched and complete transaction data is simply not easily or readily available._&#x20;
+_Note: Enriched and complete transaction data is simply not easily or readily available._
 {% endhint %}
 
 ### Contract Design Issues
 
-The lack of availability of rich data also has effects on contract design.&#x20;
+The lack of availability of rich data also has effects on contract design.
 
 Contract designers are required to reason and plan out how stored data will be queried and consumed by their application.
 
@@ -102,7 +102,7 @@ Having access to richer external data processes allows developers to simplify co
 
 ### Data Model for Ingestion
 
-The data model used by StreamingFast to ingest protocol data was created with extreme diligence and care.&#x20;
+The data model used by StreamingFast to ingest protocol data was created with extreme diligence and care.
 
 {% hint style="success" %}
 **Tip**_: StreamingFast encountered several peculiarities within many protocols during the design and development process of Firehose._
@@ -110,10 +110,10 @@ The data model used by StreamingFast to ingest protocol data was created with ex
 
 ### Subtleties in Reverted Calls
 
-Interpreting subtleties in bits of data, for things like the meaning of a reverted call in an Ethereum call stack, becomes impossible farther downstream.&#x20;
+Interpreting subtleties in bits of data, for things like the meaning of a reverted call in an Ethereum call stack, becomes impossible farther downstream.
 
 {% hint style="info" %}
-**Note**_: Firehose provides complete node data through carefully considered and implemented model definitions created with Protocol Buffer schemas._&#x20;
+**Note**_: Firehose provides complete node data through carefully considered and implemented model definitions created with Protocol Buffer schemas._
 {% endhint %}
 
 ### Running Full Archive Nodes
@@ -139,7 +139,7 @@ Flat-file and data stream abstractions adhere to the Unix philosophy of _writing
 StreamingFast uses state transitions scoped to calls, indexed within transactions, indexed within a block.
 
 {% hint style="success" %}
-**Tip**_: Blockchains typically “round up” state changes for all transactions into a block to facilitate consensus._&#x20;
+**Tip**_: Blockchains typically “round up” state changes for all transactions into a block to facilitate consensus._
 {% endhint %}
 
 ### Smart Contract Execution
@@ -148,7 +148,7 @@ The basic unit of execution always remains a single smart contract execution res
 
 ### Keeping Track of State
 
-Contracts lose state precision when the state is changed in the middle of a transaction or block. &#x20;
+Contracts lose state precision when the state is changed in the middle of a transaction or block.
 
 Attempting to locate the balance for calculations at the exact point needed, during the processing of a log event, for example, will result in receiving the balance value at the end of the block. The balance value may have changed state in a subsequent transaction after the transaction currently being indexed.
 
@@ -160,7 +160,7 @@ Attempting to locate the balance for calculations at the exact point needed, dur
 
 Consuming blockchain state is difficult and each blockchain presents its own issues.
 
-[Solidity](https://docs.soliditylang.org/en/v0.8.16/), for example, uses `bytes32` => `bytes32` mapping, making such a data retrieval endeavour rather opaque and difficult to reason about. This data is available with additional effort, but not easily.&#x20;
+[Solidity](https://docs.soliditylang.org/en/v0.8.16/), for example, uses `bytes32` => `bytes32` mapping, making such a data retrieval endeavour rather opaque and difficult to reason about. This data is available with additional effort, but not easily.
 
 {% hint style="success" %}
 **Tip**_: Developers having access to state data presents tremendous opportunities for indexing and application development._

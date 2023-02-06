@@ -2,110 +2,99 @@
 description: StreamingFast Firehose template
 ---
 
-# Firehose ACME
+# Firehose Acme
 
-## Firehose ACME
+Instrumenting a new chain from scratch requires the node native code to be instrumented to output Firehose logs, but this is only one side of the coin. A Firehose instrumentation of a new chain requires also a `firehose-<chain>` repository that contains the chain specific code to run the Firehose stack.
 
-### Firehose AMCE Intro
+This `firehose-<chain>` is a Golang project that contains the CLI, the reader code necessary to assemble Firehose Logs into chain specific logs and a bunch of other small boilerplate code around the Firehose set of libraries.
 
-Firehose-ACME is the main starting point for instrumenting new, unsupported blockchain nodes.
+To ease the work of Firehose implementors, we provide a "template" project [firehose-acme](https://github.com/streamingfast/firehose-acme) that is the main starting point for instrumenting new, unsupported blockchain nodes.
 
-It consists of basic code and a faux data provision application called the Dummy Blockchain, or `dchain.`
+It consists of basic code and a faux data provision application called the Dummy Blockchain, or `dchain`. The idea is that you can even play with this [firehose-acme](https://github.com/streamingfast/firehose-acme) instance to see blocks produced and test how Firehose looks like in its core.
 
-Firehose ACME is available on GitHub. Clone the repo to obtain the source code.
+{% hint style="info" %}
+A [Go](https://go.dev/doc/install) installation is required for the command below to work and the path where Golang install binaries should be available in your `PATH` (can be added with `export PATH=$PATH:$(go env GOPATH)/bin`, see [GOPATH](https://go.dev/doc/gopath_code#GOPATH) for further details).
+{% endhint %}
 
-```shell-session
+## `firehose-acme` Installation
+
+Clone the repository:
+
+```bash
 git clone git@github.com:streamingfast/firehose-acme
 ```
 
-## Firehose-ACME Installation
+Install the `fireacme` binary:
 
-The following command is used to install Firehose-ACME.
-
-```shell-session
-go install -v ./cmd/fireacme
+```bash
+cd firehose-acme
+go install ./cmd/fireacme
 ```
 
-The installation process copies the `fireacme` binary file into the computer's default Go binary directory, `~/go/bin`.&#x20;
+And validate that everything is working as expected:
 
-Additional information can be generated from Firehose when the --`version` flag is passed into the `fireacme` command.
-
-```shell-session
+```bash
 fireacme --version
+fireacme version dev (Built 2023-02-02T13:42:20-05:00)
 ```
 
-Firehose versioning information will display as follows.
-
-```shell-session
-fireacme version dev (Built 2022-08-05T15:36:44-07:00) 
-```
+{% hint style="info" %}
+When doing the `fireacme --version` command, if you see instead a message like `command not found: fireacme`, it's most probably because `$(go env GOPATH)/bin` is not in your `PATH` environment variable.
+{% endhint %}
 
 ## Dummy Blockchain
 
-### Dummy Blockchain Setup
+Obtain the Dummy Blockchain by installing from source:
 
-The Dummy Blockchain can be set up anywhere on the target computer.
+```bash
+go install github.com/streamingfast/dummy-blockchain@latest
+```
 
-The Dummy Blockchain should be started and allowed to run for at least a few minutes. This will enable the application enough time and processing facilities to generate faux blockchain data for Firehose to consume.
+And validate that it was installed correctly:
 
-Obtain the Dummy Blockchain from GitHub.
+```bash
+dummy-blockchain --version
+dummy-blockchain version 0.0.1 (build-commit="-" build-time="-")
+```
 
-[https://github.com/streamingfast/dummy-blockchain](https://github.com/streamingfast/dummy-blockchain)
-
-## Testing Firehose-ACME
+## Testing `firehose-acme`
 
 ### YAML Configuration
 
-The full path into the dchain directory must be used. The path needs to be in quotes.
+A simple shell script that starts `firehose-acme` with sane default is located at [devel/standard/start.sh](https://github.com/streamingfast/firehose-acme/blob/master/devel/standard/start.sh). The configuration file used to launch all the applications at once is located at [devel/standard/standard.yaml](https://github.com/streamingfast/firehose-acme/blob/master/devel/standard/standard.yaml)
 
-```shell-session
-extractor-node-path: "/Users/<User Account>/Desktop/SFFireshose/dummy-blockchain/dchain"
+Run the script from your local cloned `firehose-acme` version as done in [firehose-acme installation section](#firehose-acme-installation):
+
+```bash
+./devel/standard/start.sh
 ```
 
-The shell script that starts Firehose-ACME is located inside the devel/standard directory.&#x20;
+The following messages will be printed to the terminal window if:
+* All of the configuration changes were made correctly,
+* All system paths have been set correctly,
+* And the Dummy Blockchain was installed and set up correctly.
 
-The following messages will be printed to the terminal window if:&#x20;
-
-* all of the configuration changes were made correctly,&#x20;
-* all system paths have been set correctly,
-* &#x20;and the Dummy Blockchain was installed and set up correctly.
-
-```shell-session
-2022-08-03T11:22:30.744-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
-2022-08-03T11:22:30.750-0700 INFO (fireacme) launching applications: extractor-node,firehose,merger,relayer
-start --store-dir=/Users/<User Account>/Desktop/dfuse/integrate/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
-2022-08-03T11:22:31.924-0700 INFO (extractor.acme) level=info msg="initializing node"
-2022-08-03T11:22:31.927-0700 INFO (extractor.acme) level=info msg="initializing store"
-2022-08-03T11:22:31.928-0700 INFO (extractor.acme) level=info msg="loading last block" tip=165
-2022-08-03T11:22:31.929-0700 INFO (extractor.acme) level=info msg="initializing engine"
-2022-08-03T11:22:31.948-0700 INFO (extractor.acme) level=info msg="starting block producer" rate=10s
-2022-08-03T11:22:31.948-0700 INFO (extractor.acme) level=info msg="starting server" addr="0.0.0.0:8080"
-2022-08-03T11:22:41.931-0700 INFO (extractor.acme) level=info msg="processing block" hash=e0f05da93a0f5a86a3be5fc0e301606513c9f7e59dac2357348aa0f2f47db984 height=166
+```bash
+2023-02-02T13:54:25.882-0500 INFO (dtracing) registering development exporters from environment variables
+2023-02-02T13:54:25.882-0500 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
+2023-02-02T13:54:25.882-0500 INFO (fireacme) launching applications: firehose,merger,reader-node,relayer
+start --store-dir=/Users/maoueh/work/sf/firehose-acme/devel/standard/firehose-data/reader/data --firehose-enabled --block-rate=60
+...
+2023-02-02T13:54:25.883-0500 INFO (reader) created acme superviser {"superviser": {"binary": "dummy-blockchain", "arguments": ["start", "--store-dir=/Users/maoueh/work/sf/firehose-acme/devel/standard/firehose-data/reader/data", "--firehose-enabled", "--block-rate=60"], "data_dir": "/Users/maoueh/work/sf/firehose-acme/devel/standard/firehose-data/reader/data", "last_block_seen": 0, "server_id": ""}}
+...
+2023-02-02T13:54:25.884-0500 INFO (reader) creating new command instance and launch read loop {"binary": "dummy-blockchain", "arguments": ["start", "--store-dir=/Users/maoueh/work/sf/firehose-acme/devel/standard/firehose-data/reader/data", "--firehose-enabled", "--block-rate=60"]}
+...
+2023-02-02T13:54:28.677-0500 INFO (bstream) hub is now Ready
+2023-02-02T13:54:28.677-0500 INFO (firehose) launching gRPC firehose server {"live_support": true}
+2023-02-02T13:54:28.677-0500 INFO (firehose) launching gRPC server {"listen_addr": ":18015"}
+2023-02-02T13:54:28.677-0500 INFO (firehose) serving gRPC (over HTTP router) (plain-text) {"listen_addr": ":18015"}
+2023-02-02T13:54:28.899-0500 INFO (reader.acme) level=info msg="processing block" hash=4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce height=3
+2023-02-02T13:54:29.897-0500 INFO (reader.acme) level=info msg="processing block" hash=4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a height=4
+2023-02-02T13:54:30.897-0500 INFO (reader.acme) level=info msg="processing block" hash=ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d height=5
+...
 ```
 
-Real-world implementations don't use or rely on the Dummy Blockchain application or its data.
-
-Existing, current, and knowledgable node operators can take advantage of the pre-instrumented blockchain solutions provided by StreamingFast for their specific blockchain.
-
-{% hint style="success" %}
-_Tip: Blockchains that do not currently have a StreamingFast instrumented node client solution can create their own._
+{% hint style="info" %}
+We want to emphasis that `firehose-acme` is only a template project showcasing how Firehose works and used by implementors to bootstrap instrumentation of their chain.
+Real-world Firehose implementations don't use or rely on the Dummy Blockchain application or its data, they deal with the blockchain's specific native process and specific `firehose-<chain>` repository.
 {% endhint %}
-
-## Problems
-
-### Incorrect Example Blockchain Path
-
-The following message will be displayed in the shell if the path to the example blockchain application is incorrect.
-
-```shell-session
-2022-08-02T14:50:42.153-0700 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
-2022-08-02T14:50:42.171-0700 INFO (fireacme) launching applications: extractor-node,firehose,merger,relayer
-start --store-dir=/Users/<User Account>/Desktop/SFFirehose/firehose-acme/devel/standard/firehose-data/extractor/data --dm-enabled --block-rate=6
-2022-08-02T14:50:43.181-0700 ERRO (fireacme) 
-################################################################
-Fatal error in app extractor-node:
-instance "acme" stopped (exit code: -1), shutting down
-################################################################
-2022-08-02T14:50:43.181-0700 ERRO (extractor) {"status": {"Cmd":"/Users/<User Account>/Desktop/SFFirehose/dummy-blockchain","PID":0,"Exit":-1,"Error":{"Op":"fork/exec","Path":"/Users/<User Account>/Desktop/SFFirehose/dummy-blockchain","Err":13},"StartTs":1659477043178396000,"StopTs":1659477043181083000,"Runtime":0,"Stdout":null,"Stderr":null}} command terminated with non-zero status, last log lines:
-<None>
-```
