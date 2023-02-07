@@ -31,11 +31,12 @@ Hardware requirements should follow NEAR full node requirements found at https:/
 First install the `firenear` binary:
 
 ```bash
-# # Use correct binary for your platform, `linux_x86_64` in the command below can be replaced by `darwin_x86_64` or `darwin_arm64`
+# Use correct binary for your platform, `linux_x86_64` in the command below can be replaced by `darwin_x86_64` or `darwin_arm64`
 TAG=$(curl -s https://api.github.com/repos/streamingfast/firehose-near/releases/latest | grep "tag_name" | cut -f 4 -d '"')
 LINK=$(curl -s https://api.github.com/repos/streamingfast/firehose-near/releases/latest | grep -Eo "https://.*linux_x86_64.tar.gz")
 curl -L $LINK  | tar zxf -
 
+# Copy result to be available system-wide
 cp firenear "/usr/local/bin/firenear-$TAG"
 ln -fs /usr/local/bin/firenear-$TAG /usr/local/bin/firenear
 ```
@@ -60,7 +61,7 @@ Second step is to have the Firehose instrumented node binary. In the case of NEA
 
 To avoid any compatibility issues, we are going to compile the binary directly on the machine that will execute the binary.
 
-It's an important that you pick the current active version to sync with the network, the [NEAR latest stable releases](https://github.com/near/nearcore/tags) page lists the most recent version that is needed to sync with Mainnet. As new versions of `neard` are published, new versions of [`near-firehose-indexer`](https://github.com/streamingfast/near-firehose-indexer) will be made available by us, so be sure to subscribe to [`near-firehose-indexer` releases](https://github.com/streamingfast/near-firehose-indexer/releases)] to be informed when a new release is out.
+It's an important that you pick the current active version to sync with the network, the [NEAR latest stable releases](https://github.com/near/nearcore/tags) page lists the most recent version that is needed to sync with Mainnet. As new versions of `neard` are published, new versions of [`near-firehose-indexer`](https://github.com/streamingfast/near-firehose-indexer) will be made available by us, so be sure to subscribe to [`near-firehose-indexer` releases](https://github.com/streamingfast/near-firehose-indexer/releases) to be informed when a new release is out.
 
 {% hint style="warning" %}
 It's important that you subscribe to NEAR update announcements to ensure you correctly continue to synchronize with the network. Some versions upgrade are hard forks which mean that if you don't upgrade in time, you will be unable to follow the canonical chain when the hard fork is activated on the network. It's your responsibility to monitor new NEAR releases and hard forks.
