@@ -21,15 +21,15 @@
 
 ## Firehose Setup
 
-* [Overview](setup/README.md)
+* [Overview](firehose-setup/overview.md)
 * [Ethereum](setup/ethereum/README.md)
   * [Installation](firehose-setup/ethereum/installation.md)
-  * [Single-Machine Deployment](firehose-setup/ethereum/installation.md)
+  *
   * [Reprocessing history](setup/ethereum/reprocessing-history.md)
   * [Synchronization](setup/ethereum/synchronization.md)
 * [Cosmos](setup/cosmos/README.md)
-  * [Single-Machine Deployment](setup/cosmos/synchronization.md)
-* [NEAR](setup/near/README.md)
+  * [Single-Machine Deployment](firehose-setup/cosmos/single-machine-deployment.md)
+* [NEAR](firehose-setup/near/README.md)
   * [Single-Machine Deployment](firehose-setup/near/installation.md)
 * [System Requirements](firehose-setup/system-requirements.md)
 

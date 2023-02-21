@@ -12,6 +12,7 @@ description: StreamingFast Firehose repositories
 * [Firehose for Solana](https://github.com/streamingfast/sf-solana)
 * [Firehose for Arweave](https://github.com/streamingfast/firehose-arweave)
 * [Firehose for Aptos](https://github.com/streamingfast/firehose-aptos)
+* [Firehose for Antelope](https://github.com/pinax-network/firehose-antelope)
 
 ## Versioning
 
@@ -21,4 +22,3 @@ Versioning considerations for binaries to answer questions such as:
 
 * How are upstream binaries tracked?
 * How is Firehose instrumentation properly versioned, etc.?
-
