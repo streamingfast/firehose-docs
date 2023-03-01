@@ -6,19 +6,12 @@ description: StreamingFast Firehose repositories
 
 ## Firehose implementation repositories
 
-* [Firehose for Ethereum](https://github.com/streamingfast/sf-ethereum)
-* [Firehose for NEAR](https://github.com/streamingfast/sf-near)
-* [Firehose for Cosmos](https://github.com/figment-networks/firehose-cosmos)
-* [Firehose for Solana](https://github.com/streamingfast/sf-solana)
-* [Firehose for Arweave](https://github.com/streamingfast/firehose-arweave)
-* [Firehose for Aptos](https://github.com/streamingfast/firehose-aptos)
-* [Firehose for Antelope](https://github.com/pinax-network/firehose-antelope)
+* [Firehose for Ethereum](https://github.com/streamingfast/sf-ethereum) (by StreamingFast)
+* [Firehose for NEAR](https://github.com/streamingfast/sf-near) (by StreamingFast)
+* [Firehose for Cosmos](https://github.com/figment-networks/firehose-cosmos) (by Figment)
+* [Firehose for Solana](https://github.com/streamingfast/sf-solana) (by StreamingFast)
+* [Firehose for Arweave](https://github.com/streamingfast/firehose-arweave) (by ChainSafe)
+* [Firehose for Aptos](https://github.com/streamingfast/firehose-aptos) (by Aptos)
+* [Firehose for Antelope](https://github.com/pinax-network/firehose-antelope) (by Pinax Network)
+* [Firehose for StarkNet](https://github.com/starknet-graph/firehose-starknet) (by zkLend)
 
-## Versioning
-
-### **Coming Soon**
-
-Versioning considerations for binaries to answer questions such as:
-
-* How are upstream binaries tracked?
-* How is Firehose instrumentation properly versioned, etc.?
