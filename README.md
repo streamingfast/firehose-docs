@@ -12,11 +12,21 @@ This documentation serves as the main resource for understanding and working wit
 
 ### Where to Start
 
-[Firehose Overview](./intro/firehose-overview.md) is a great place to begin learning about the overall scope, vision, and capabilities of Firehose.
+[Firehose Overview](intro/firehose-overview.md) is a great place to begin learning about the overall scope, vision, and capabilities of Firehose.
 
-The [Concepts & Architecture](./architecture/components/README.md) provides an in-depth look at the decisions that drove the development team's efforts while designing Firehose.
+The [Concepts & Architecture](architecture/components/) provides an in-depth look at the decisions that drove the development team's efforts while designing Firehose.
 
 Full source code is available in the [official Firehose Github repository](https://github.com/streamingfast/firehose).
+
+Learn about Firehose in these short videos and understand how to run a Firehose as an Operator.
+
+{% embed url="https://www.youtube.com/watch?v=y-NM4LMeqwM" %}
+Running Firehose for the First Time
+{% endembed %}
+
+{% embed url="https://www.youtube.com/watch?v=SosSG2c9p1w" %}
+Intro to Firehose for Operators
+{% endembed %}
 
 ### Community
 
