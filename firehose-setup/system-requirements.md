@@ -10,7 +10,7 @@ description: StreamingFast Firehose System Requirements
 
 Firehose is extremely elastic and can support networks of varied sizes and shapes.
 
-Firehose is _very heavy_ on data. Ensure to gain a solid __ understanding of the different [data stores](../architecture/data-storage.md), artifacts, and databases required for operation.
+Ensure to gain a solid understanding of the different [data stores](../architecture/data-storage.md), artifacts, and databases required for operation.
 
 Deployment efforts will match the size of history, and the density of the blockchain being consumed.
 
@@ -24,8 +24,8 @@ In order to scale easily, components that run in a single process need to be dec
 
 The storage requirements will vary depending on the following metrics.
 
-* _History length -_ The status of whether or not all the blocks are serving  through Firehose.
-* _Throughput in transactions and calls -_ Calls on Ethereum are the smallest units of execution to produce meaningful data, transaction overhead becomes negligible once you have two or three calls in a transaction. A single ERC20 transfer generally has one call, or two calls when there is a proxy contract involved. In addition, Uniswap swap transactions are usually composed of a few dozen of calls.
+* _History length -_ The status of whether or not all the blocks are serving through Firehose.
+* _Throughput in transactions and calls -_ Calls on Ethereum are the smallest units of execution to produce meaningful data, transaction overhead becomes negligible once you have two or three calls in a transaction. A simple ERC20 transfer generally has one call, or two calls when there is a proxy contract involved. Uniswap swap transactions, for instance, are usually composed of a few dozen of calls.
 
 ### Limiting Factors
 
