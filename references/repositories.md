@@ -2,11 +2,11 @@
 description: StreamingFast Firehose repositories
 ---
 
-# Repositories
+# Supported Protocols
 
 ## Firehose implementation repositories
 
-* [Firehose for Ethereum](https://github.com/streamingfast/sf-ethereum), Polygon, BNB (by StreamingFast)
+* [Firehose for Ethereum](https://github.com/streamingfast/sf-ethereum), Görli, Ropsten, Polygon, BNB (by StreamingFast)
 * [Firehose for NEAR](https://github.com/streamingfast/sf-near) (by StreamingFast)
 * [Firehose for Cosmos](https://github.com/figment-networks/firehose-cosmos), Osmosis and Juno (by Figment)
 * [Firehose for Solana](https://github.com/streamingfast/sf-solana) (by StreamingFast)
