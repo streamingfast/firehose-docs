@@ -149,7 +149,7 @@ reader-node-arguments: "+--bor.heimdall=https://heimdall.api.matic.network --boo
 
 #### **Goerli reader-node-arguments**
 
-As previously mentioned, Goreli does not require specific JSON files. The config file does however require modifications. The reader-node-arguments flag should be updated to reflect the value provided below. _Note, Goreli setups do not need to pass values for bootsnotes as with the Binance and Polygon setups._
+As previously mentioned, Goerli does not require specific JSON files. The config file does however require modifications. The reader-node-arguments flag should be updated to reflect the value provided below. _Note, Goreli setups do not need to pass values for bootsnotes as with the Binance and Polygon setups._
 
 ```bash
 reader-node-arguments: +--goerli --http.port=9545 --ws.port=9546 --port=40303
