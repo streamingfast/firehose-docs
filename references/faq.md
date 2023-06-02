@@ -30,7 +30,7 @@ Firehose was created by StreamingFast working as a core developer with The Graph
 
 ## **Can I use Firehose for production deployments?**
 
-Firehose is currently in development and the source code available is provided as a developer preview. Fully deployed Firehose setups are not recommended or supported at this time. The StreamingFast team is diligently working to bring production support to Firehose.
+Firehose has been tried and tested for many years. It is deemed production ready and is used in production settings all over the world.
 
 ## **How do I get a Firehose authentication token?**
 
