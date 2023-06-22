@@ -22,5 +22,6 @@ The primary tasks for running a Firehose instrumented node are
 * Ropsten
 * Göerli
 * Polygon
+* Mumbai (Polygon Testnet)
 * BSC
 {% endhint %}
