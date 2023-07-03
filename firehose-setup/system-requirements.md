@@ -39,5 +39,5 @@ The CPU/RAM requirements will depend on these factors:
 Firehose requires native instrumentation of the binary of the chain you want to sync with, a vanilla binary of the chain without Firehose support built in it is not going to work. So you can only today synchronize with Firehose enabled chains.
 
 {% hint style="success" %}
-Other blockchains beyond the ones currently supported can be used with Firehose through the process of instrumentation. Information is provided for the instrumentation process of [_new blockchains_](../integrate-new-chains/new-blockchains.md)
+Other blockchains beyond the ones currently supported can be used with Firehose through the process of instrumentation. Information is provided for the instrumentation process of [_new blockchains_](../integrate-new-chains/integration-overview.md)
 {% endhint %}

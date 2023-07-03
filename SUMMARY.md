@@ -35,10 +35,10 @@
 
 ## Integrate New Chains
 
-* [New Blockchains](integrate-new-chains/new-blockchains.md)
-* [Firehose Acme](integrate-new-chains/firehose-starter.md)
+* [Benefits](integrate-new-chains/benefits.md)
+* [Integration overview](integrate-new-chains/integration-overview.md)
 * [Design Principles](integrate-new-chains/design-principles.md)
-* [Why Integrate the Firehose](integrate-new-chains/why-integrate-the-firehose.md)
+* [Firehose Acme](integrate-new-chains/firehose-starter.md)
 
 ## References
 

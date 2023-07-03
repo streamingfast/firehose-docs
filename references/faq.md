@@ -18,19 +18,15 @@ Substreams and Firehose can be used together and typically are. The two compleme
 
 ## **Does Firehose work with GraphQL?**
 
-Firehose does not work directly with GraphQL. Subgraphs use GraphQL and Substreams can be used with subgraphs. Firehose extracts data from blockchain nodes and provides it to Substreams.
+Firehose does not work directly with GraphQL. Subgraphs use GraphQL and Substreams can be used to populate subgraphs. Firehose extracts data from blockchain nodes and provides it to Substreams. Substreams sinks are responsible for bringing data to storage engines that can then be queries by different means.
 
 ## **Do subgraphs work with Firehose?**
 
-Yes, Firehose provides data for subgraphs through the Graph Node and subgraphs. Substreams can also be used between Firehose and subgraphs to provide features and functionality that are not available using only subgraphs.
+In a way, the `graph-node` software, which powers Subgraphs, can connect directly to Firehose for Ethereum and Cosmos, and power the traditional Subgraphs there. Substreams can also be used directly to power Subgraphs, in which case Firehose is not directly involved (only as an implementation detail within Substreams).
 
 ## **Is Firehose made by The Graph?**
 
 Firehose was created by StreamingFast working as a core developer with The Graph Foundation.
-
-## **Can I use Firehose for production deployments?**
-
-Firehose has been tried and tested for many years. It is deemed production ready and is used in production settings all over the world.
 
 ## **How do I get a Firehose authentication token?**
 
@@ -50,25 +46,19 @@ The authentication documentation also provides general instructions surrounding 
 
 ## **How much does Firehose cost?**
 
-Firehose is made available as an open-source project and there are no fees involved.
+Firehose is made available as an open-source project, published under the Apache 2.0 license. As such, there are no direct fees involved. Running the Firehose and serving live blockchain data is a service that is offered by StreamingFast and other providers, with the goal of being served directly on The Graph network.
 
 ## **Does StreamingFast have a Discord?**
 
-Yes! Join the StreamingFast Discord by clicking the link below.
-
-[https://discord.gg/Ugc7KtkA](https://discord.gg/mYPcRAzeVN)
+Yes! [Join the StreamingFast Discord today](https://discord.com/invite/mYPcRAzeVN)!
 
 ## **Is StreamingFast on Twitter?**
 
-Yes! Find StreamingFast on their official Twitter account.
-
-[https://twitter.com/streamingfastio](https://twitter.com/streamingfastio)
+Yes! Find StreamingFast on their official Twitter account: [https://twitter.com/streamingfastio](https://twitter.com/streamingfastio)
 
 ## **Is StreamingFast on YouTube?**
 
-Yes! Find StreamingFast on their official YouTube account.
-
-[https://www.youtube.com/c/streamingfast](https://www.youtube.com/c/streamingfast)
+Yes! Find StreamingFast on their official YouTube account: [https://www.youtube.com/c/streamingfast](https://www.youtube.com/c/streamingfast)
 
 ## **Who is dfuse?**
 
@@ -76,12 +66,12 @@ StreamingFast was originally called dfuse. The company changed the name and is i
 
 ## **Who is StreamingFast?**
 
-StreamingFast is a protocol infrastructure company that provides a massively scalable architecture for streaming blockchain data. StreamingFast is one of the core developers working alongside The Graph Foundation.
+[StreamingFast](https://streamingfast.io) is a protocol infrastructure company that provides a massively scalable architecture for streaming blockchain data. StreamingFast is one of the core developers working within [The Graph ](https://thegraph.com)ecosystem.
 
 ## What limits and SLAs are there for Firehose API keys?
 
-There are no rate limits for now and the endpoint should be used diligently. StreamingFast does not offer any SLAs, uptime support or uptime guarantees.
+The public StreamingFast endpoints are rate-limited and offer no guaranteed support or SLAs. Reach out to us for production usage keys.
 
-## Is Firehose a production ready service?
+## Is Firehose a production-ready service?
 
-No, the public Firehose endpoint is not production ready at this point in time.
+Yes, the Firehose has been battle tested for many years and is ready for prime time. Its sibling technology, [Substreams](http://localhost:5000/o/rLHDhggcHly9IAY4HRzU/s/erQrzMtqELZRGAdugCR2/), is also ready for prime time. Reach out to us for production usages.

@@ -6,15 +6,11 @@ description: StreamingFast Firehose design principles
 
 # Design Principles
 
-## Firehose Design Principles
-
 Firehose was heavily inspired by large-scale data science machinery and other processes previously developed by the StreamingFast team.
 
 ## The Firehose "North Star"
 
-### Truths & Assumptions
-
-Firehose was designed with the following truths and assumptions taken into excruciatingly careful consideration.
+Principles and assumptions:
 
 * Flat files provide more efficiency than live running CPU and RAM-consuming and intensive processes.
 * Fast iteration is preferred for data processes because data is inherently messy.
@@ -30,95 +26,24 @@ Firehose was designed with the following truths and assumptions taken into excru
 
 ## Extraction
 
-### Minding Deterministic Block Execution
+During the extraction phase, our goals are:
 
-StreamingFast strives to create the shortest path available from the deterministic execution of blocks and transactions down into a flat file. High-level goals surrounding the extraction process were identified and conceptualized including:
+* All data captured should be deterministic, with the single exception of the block number at which the chain reaches finality (this number can vary depending on a node's relative topology to the network, and it could, for certain chains, not arrive at the same moment for all).
+* Performance-wise, we want the impact to be minimal on the node that is usually doing write operations.
 
-* The development of simple, robust, laser-focused processes.
-* Create core system [components](../architecture/components/) including the Reader, Merger, Relayer, and gRPC Server.
-* Avoid the coupling of extraction and indexing and any other services.
-* Guarantee maximum node performance during data extraction for instrumented nodes, for all protocols.
+Deep data extraction is also one of the goals of our design, for the purposes of rich indexing downstream. For example:
 
-## Data Completeness
+* Extracting both the previous value, and the new value on balance changes, and state changes to accounts, storage locations, key/value stores, etc. This also helps with integrity checking (to know if any changes were missing, all  `prev -> new` pairs can be checked to match up, for a given storage key).
+* Extracting all the relationships, between blocks and transactions, between transactions and single function/calls executions within a transaction, call trees, and a thing we call **total ordering**, meaning having an **ordinal** that can help order all things tracked (beginning/end of transactions, function calls, state changes, events emitted during execution, etc..) all relative to one another. For example, Ethereum has log indexes, allowing ordering of a log vs another log. But it doesn't allow for ordering a log versus a state change, or a log within a tree of calls (where perhaps the input of the call is what you're watching).
+  * Some blockchains allow you to query state, and query events separately. Oftentime, it's not possible to link those things. We like to instrumented to be link changes to the source of events, to be able to build better downstream systems, and not lose relations between state and events.
+  * Most indexing strategies hinge on events, but having state changes allows for new opportunities of indexing, triggering on the actual values being mutated. On certain chains, this allows you to avoid some gas costs by limiting the events, as you're able to trigger "virtual" events based on state changes.
+  * Picking up on those changes can also avoid needing to (re-)design contracts when new data is needed, and wasn't thought of at first.
 
-### Full Data Extraction
+Also, when building an extractor is to **extract all the data necessary to recreate an archive node**. If nothing is missing, then someone indexing downstream should be satisfied.
 
-Firehose achieves data completeness through the extraction of all available data from instrumented nodes.
+Another principle is: like in any database, **transactions/calls are the true boundaries of state changes**, blocks exist only to facilitate and accelerate consensus (there would be great overhead if networks needed to agree on each individual transaction) but are as such an artificial boundary.
 
-Revisiting instrumented nodes is avoided by Firehose due to the complete, rich, verifiable data collected during the extraction process.
-
-### Finite Data Tracking
-
-During a transaction, the balance for an address could change from `100` to `200.` Firehose will save the storage key that was altered, and the previous and next values.
-
-### Integrity & Fidelity
-
-Forward and backward atomic updates and integrity checks are made possible due to the fidelity of data being tracked by Firehose.
-
-In the example above, `200` should be the next changed value for the `previous_data` key. If a discrepancy is encountered it means there is an issue with the extraction mechanism and data quality will be negatively impacted.
-
-### Complete Data in Detail
-
-Complete data means accounting for:
-
-* the relationships between a transaction,
-* the transaction's block’s schedule,
-* transaction execution,
-* transaction expiration,
-* events produced by any transaction side effects,
-* the transaction call tree, and each call’s state transition and effects.
-
-### Transaction Relationships & Data
-
-Detailed transaction relationship information is difficult to obtain from typical blockchain data.
-
-Firehose provides thorough and complete transaction data to avoid missed opportunities for potential data application development efforts.
-
-### Transaction & State Data Together
-
-Query requests for either transaction status or state are available for some JSON-RPC protocols. Both status and state however aren't available.
-
-Data processes triggered by Ethereum log events can benefit from having knowledge of their source. The event could have been generated by the current contract, its parent (contract), or another known and trusted contact.
-
-### Reduced Need for Smart Contract Events
-
-Accessing rich, complete data leads smart contract developers to emit additional events. Emitting additional events leads to increased gas fees.
-
-{% hint style="info" %}
-_Note: Enriched and complete transaction data is simply not easily or readily available._
-{% endhint %}
-
-### Contract Design Issues
-
-The lack of availability of rich data also has effects on contract design.
-
-Contract designers are required to reason and plan out how stored data will be queried and consumed by their application.
-
-### Contract Simplification & Cost Reduction
-
-Having access to richer external data processes allows developers to simplify contracts reducing on-chain operation costs.
-
-## Modeling With Extreme Care
-
-### Data Model for Ingestion
-
-The data model used by StreamingFast to ingest protocol data was created with extreme diligence and care.
-
-{% hint style="success" %}
-**Tip**_: StreamingFast encountered several peculiarities within many protocols during the design and development process of Firehose._
-{% endhint %}
-
-### Subtleties in Reverted Calls
-
-Interpreting subtleties in bits of data, for things like the meaning of a reverted call in an Ethereum call stack, becomes impossible farther downstream.
-
-{% hint style="info" %}
-**Note**_: Firehose provides complete node data through carefully considered and implemented model definitions created with Protocol Buffer schemas._
-{% endhint %}
-
-### Running Full Archive Nodes
-
-Firehose provides enough comprehensive data to conceptually boot and run a full archive node.
+RPC nodes usually round up things to the block level, but with Firehose, data should be extracted in a way that makes the transaction, or even the individual smart contract calls, the unit of change. Concretely, this means state changes should be modeled at the lowest level.
 
 ## Pure Data, Files & Streams
 

@@ -54,6 +54,12 @@ The instrumentation itself is called Firehose Instrumentation and generate Fireh
 
 Firehose logs outputs small chunks of data processed using a simple text-based protocol over the operating system's standard output pipe.
 
+{% hint style="danger" %}
+Note: This describes the **current methods** of instrumentation for Ethereum. It is our goal though that the integration point here gets simplified to the point where a single message would arrive for each block, on any given chain, well formatted in a nice protobuf bytestream.
+
+Contact the team if you're about to do a new chain integration. Also read the [integration overview](../integrate-new-chains/integration-overview.md).&#x20;
+{% endhint %}
+
 ### Firehose Logs Messages
 
 The Firehose Logs are specific for each blockchain although quite similar from one chain to another. There is no standardized format today, each chain implemented it's own format. The Firehose logs are usually modeled using "events" for example:
@@ -94,6 +100,7 @@ FIRE END_BLOCK 33 717 {"header":{"parentHash":"0x538473df2d1a762473cf9f8f6c69e65
 The block data event messages provided by the Firehose instrumentation are read by the reader component.
 
 The `reader` component deals with:
+
 * Launching instrumented native node process and manages its lifecycle (start/stop/monitor).
 * Connects to the native node process' standard output pipe.
 * Read the Firehose logs event messages and assembles a chain specific protobuf Block model
