@@ -6,7 +6,7 @@ description: StreamingFast Firehose new blockchains
 
 ## Introduction
 
-Firehose is blockchain agnostic. It requires two main elements:
+Firehose is blockchain agnostic. It requires three main elements:
 
 * a method of data extraction, specific to the blockchain's core codebase
 * a Protocol Buffers data model for the chain
@@ -28,7 +28,7 @@ For EVM chains, this is the recommended method, as this would provide drop-in su
 
 ### Indexing frameworks
 
-Some blockchains, like NEAR, offer a native indexing framework: node extensions or libraries that allow you to tap into the native chain's codebase. The integration then transforms those indexing frameworks into the streaming + flat files structure of Firehose, and can then feed engines like [Substreams](http://localhost:5000/o/rLHDhggcHly9IAY4HRzU/s/erQrzMtqELZRGAdugCR2/) of the `graph-node` from The Graph.
+Some blockchains, like NEAR, offer a native indexing framework: node extensions or libraries that allow you to tap into the native chain's codebase. The integration then transforms those indexing frameworks into the streaming + flat files structure of Firehose, and can then feed engines like [Substreams](http://127.0.0.1:5000/o/rLHDhggcHly9IAY4HRzU/s/erQrzMtqELZRGAdugCR2/) of the `graph-node` from The Graph.
 
 The downside of this method is that often state changes, full ordering and deeper relational data is lost in transit (or never captured by these frameworks).
 
