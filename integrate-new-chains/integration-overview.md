@@ -20,7 +20,7 @@ The first and most powerful integration of Firehose was done through direct node
 
 This allowed us to dig into state changes (which are _usually_ the bread and butter of databases), and have clarity on the total ordering of events (like the ordinals). This way, we can have a more reliable understanding of what is happening on-chain.
 
-* Example: here is the patch for the Ethereum `go-ethereum` codebase, to support Firehose: [https://github.com/streamingfast/go-ethereum/compare/v1.9.10...streamingfast:go-ethereum:firehose-v2](https://github.com/streamingfast/go-ethereum/compare/v1.9.10...streamingfast:go-ethereum:firehose-v2)
+* Example: here is the patch for the Ethereum `go-ethereum` codebase, to support Firehose: [https://github.com/streamingfast/go-ethereum/compare/v1.10.1...streamingfast:go-ethereum:firehose-fh2.3](https://github.com/streamingfast/go-ethereum/compare/v1.10.1...streamingfast:go-ethereum:firehose-fh2.3)
   * Search `firehose.` in there to get a grasp of the integration, or skip to the `.go` files.
 * Here is a diff required by the OpenEthereum stack in Rust: [https://github.com/openethereum/openethereum/compare/v3.0.1...streamingfast:openethereum:release/oe-3.0.x-dm](https://github.com/openethereum/openethereum/compare/v3.0.1...streamingfast:openethereum:release/oe-3.0.x-dm) . This gives an idea of what is needed for deep node instrumentation.
 
