@@ -173,7 +173,7 @@ After issuing the start command to the terminal it can take up to thirty seconds
 
 Logging will be rapidly printed to the terminal window. See the log below for example logging.
 
-Press _****_ and hold the Control key and then press the C key three times to terminate Firehose and end all processes.
+Press and hold the Control key and then press the C key three times to terminate Firehose and end all processes.
 
 ```bash
 2022-09-05T12:25:01.208-0700 INFO (<n/a>) registering development exporters from environment variables
