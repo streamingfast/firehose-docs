@@ -65,7 +65,7 @@ It’s important that the Geth binary file’s version matches the Firehose for 
 Ensure that the Geth Firehose and fireeth versions match. When errors are encountered during Firehose setup it’s often because of this versioning between Geth and fireeth. Double-check both binaries using the appropriate versioning commands provided in this documentation.
 
 {% hint style="info" %}
-_Note: Current legacy **** Firehose operators can find additional information in the Update Firehose section of the documentation._
+_Note: Current legacy Firehose operators can find additional information in the Update Firehose section of the documentation._
 {% endhint %}
 
 ## Install Geth
@@ -94,13 +94,13 @@ Save the Geth binary to a convenient location on the computer Firehose is being 
 
 #### macOS
 
-****[https://github.com/streamingfast/go-ethereum/releases/download/bsc-v1.1.12-fh2.2/geth\_mac](https://github.com/streamingfast/go-ethereum/releases/download/bsc-v1.1.12-fh2.2/geth\_mac)
+[https://github.com/streamingfast/go-ethereum/releases/download/bsc-v1.1.12-fh2.2/geth\_mac](https://github.com/streamingfast/go-ethereum/releases/download/bsc-v1.1.12-fh2.2/geth\_mac)
 
 ### **Polygon Geth**
 
 #### Linux
 
-****[https://github.com/streamingfast/go-ethereum/releases/download/polygon-v0.2.16-fh2.3/geth\_linux](https://github.com/streamingfast/go-ethereum/releases/download/polygon-v0.2.16-fh2.3/geth\_linux)
+[https://github.com/streamingfast/go-ethereum/releases/download/polygon-v0.2.16-fh2.3/geth\_linux](https://github.com/streamingfast/go-ethereum/releases/download/polygon-v0.2.16-fh2.3/geth\_linux)
 
 #### macOS
 
