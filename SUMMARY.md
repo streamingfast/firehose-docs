@@ -50,4 +50,5 @@
 
 ## Release Notes
 
-* [Change Log](https://github.com/streamingfast/firehose-ethereum/blob/develop/CHANGELOG.md)
+* [Change logs](release-notes/change-logs/README.md)
+  * [Nov 8th 2023 Polygon Update](release-notes/change-logs/nov-8th-2023-polygon-update.md)
