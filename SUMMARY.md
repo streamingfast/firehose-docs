@@ -31,11 +31,13 @@
   * [Single-Machine Deployment](firehose-setup/cosmos/local-deployment.md)
 * [NEAR](firehose-setup/near/README.md)
   * [Single-Machine Deployment](firehose-setup/near/installation.md)
-* [Starknet](firehose-setup/starknet/README.md)
-  * [Networks and nodes](firehose-setup/starknet/networks-and-nodes.md)
-  * [Local deployment with Docker](firehose-setup/starknet/local-deployment-with-docker.md)
-  * [Local deployment without Docker](firehose-setup/starknet/local-deployment-without-docker.md)
 * [System Requirements](firehose-setup/system-requirements.md)
+
+## Community Integrations
+* [Starknet](community-integrations/starknet/README.md)
+  * [Networks and nodes](community-integrations/starknet/networks-and-nodes.md)
+  * [Local deployment with Docker](community-integrations/starknet/local-deployment-with-docker.md)
+  * [Local deployment without Docker](community-integrations/starknet/local-deployment-without-docker.md)
 
 ## Integrate New Chains
 
