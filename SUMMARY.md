@@ -33,6 +33,12 @@
   * [Single-Machine Deployment](firehose-setup/near/installation.md)
 * [System Requirements](firehose-setup/system-requirements.md)
 
+## Community Integrations
+* [Starknet](community-integrations/starknet/README.md)
+  * [Networks and nodes](community-integrations/starknet/networks-and-nodes.md)
+  * [Local deployment with Docker](community-integrations/starknet/local-deployment-with-docker.md)
+  * [Local deployment without Docker](community-integrations/starknet/local-deployment-without-docker.md)
+
 ## Integrate New Chains
 
 * [Benefits](integrate-new-chains/benefits.md)
