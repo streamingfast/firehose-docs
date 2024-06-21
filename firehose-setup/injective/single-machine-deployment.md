@@ -60,8 +60,8 @@ Now, you have all the necessary tools installed.
 In this tutorial, you will deploy all the Firehose components in the same machine (i.e. this is a single-machine deployment). **This is NOT the recommended set-up, as you may run into memory issues.**
 
 To avoid data corruption issues, you will deploy two Firecore processes:
-- **Process 1** will run the following components: `firehose`, `substreams-tier1` and `substreams-tier2`.
-- **Process 2** will run the following components: `reader-node`, `merger` and `relayer`.
+- **Process 1** will run the following components: `reader-node`, `merger` and `relayer`.
+- **Process 2** will run the following components: `firehose`, `substreams-tier1` and `substreams-tier2`.
 
 These two processes will share the same folder to persist the data, which is called `firehose-data` by default. It is important that both processes have concurrent access to the data folder.
 
@@ -72,27 +72,7 @@ These two processes will share the same folder to persist the data, which is cal
 $ mkdir my-injective-firehose
 ```
 
-1. Create the configuration file for _Process 1_, called `firehose-substreams.yaml`:
-
-```yaml
-start:
-  args: # 1.
-  - firehose
-  - substreams-tier1
-  - substreams-tier2
-  flags:
-    common-first-streamable-block: 72560211 # 2.
-    common-live-blocks-addr: localhost:10014 # 3.
-    substreams-tier1-block-type: sf.cosmos.type.v2.Block # 4.
-    substreams-tier1-grpc-listen-addr: :9000 # 5.
-```
-1. Specifies the components to spin up.
-2. Specifies the first block to stream.
-3. Specifies the port where other Firehose processes should communicate.
-4. `substreams-tier1` component flag: specifies the data model of the extracted data.
-5. `substreams-tier1` component flag: specifies where the Substreams server listens for connections.
-
-1. Create the configuration file for _Process 2_, called `reader-merger-relayer.yaml`:
+1. Create the configuration file for _Process 1_, called `reader-merger-relayer.yaml`:
 
 ```yaml
 start:
@@ -119,13 +99,32 @@ In this case, the _RPC Poller_ mode is used with `72560211` as starting block nu
 5. Specifies how many blocks must be fetched from the RPC at a time. For example, if it is set to `20`, a batch of 20 blocks will be requested to the RPC.
 6. Specifies the RPC endpoint. You can specify several endpoints.
 
+1. Create the configuration file for _Process 2_, called `firehose-substreams.yaml`:
+
+```yaml
+start:
+  args: # 1.
+  - firehose
+  - substreams-tier1
+  - substreams-tier2
+  flags:
+    common-first-streamable-block: 72560211 # 2.
+    common-live-blocks-addr: localhost:10014 # 3.
+    substreams-tier1-block-type: sf.cosmos.type.v2.Block # 4.
+    substreams-tier1-grpc-listen-addr: :9000 # 5.
+```
+1. Specifies the components to spin up.
+2. Specifies the first block to stream.
+3. Specifies the address where to reach the `relayer` component running in its own isolated Firehose process.
+4. `substreams-tier1` component flag: specifies the data model of the extracted data.
+5. `substreams-tier1` component flag: specifies where the Substreams server listens for connections.
 
 1. Lastly, start two Firecore processes in two different command-line terminals.
 
 ```bash
-firecore start -c firehose-substreams.yaml
+firecore start -c reader-merger-relayer.yaml
 ```
 
 ```bash
-firecore start -c reader-merger-relayer.yaml
+firecore start -c firehose-substreams.yaml
 ```
