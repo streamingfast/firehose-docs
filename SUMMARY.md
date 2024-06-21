@@ -28,7 +28,7 @@
   * [Reprocessing history](setup/ethereum/reprocessing-history.md)
   * [Synchronization](setup/ethereum/synchronization.md)
 * [Injective](firehose-setup/injective/README.md)
-  *[Single-Machine Deployment](firehose-setup/injective/single-machine-deployment.md)
+  * [Single-Machine Deployment](firehose-setup/injective/single-machine-deployment.md)
 * [NEAR](firehose-setup/near/README.md)
   * [Single-Machine Deployment](firehose-setup/near/installation.md)
 * [System Requirements](firehose-setup/system-requirements.md)
