@@ -12,7 +12,6 @@ Firehose currently has Layer 1 Protocol Buffer schemas for several different blo
 * [NEAR Protobuf Definitions](https://github.com/streamingfast/firehose-near/blob/develop/proto/sf/near/type/v1/type.proto)
 * Solana Protobuf Definitions:
   * [Version 1](https://github.com/streamingfast/sf-solana/blob/develop/proto/sf/solana/type/v1/type.proto), original Solana data model
-  * [Version 2](https://github.com/streamingfast/sf-solana/blob/develop/proto/sf/solana/type/v2/type.proto), StreamingFast enriched data model
 * [Cosmos Protobuf Definitions](https://github.com/figment-networks/proto-cosmos/blob/main/sf/cosmos/type/v1/type.proto)
 * [Arweave Protobuf Definitions](https://github.com/streamingfast/firehose-arweave/blob/develop/proto/sf/arweave/type/v1/type.proto)
 * [Aptos Protobuf Definitions](https://github.com/aptos-labs/aptos-core/blob/main/crates/aptos-protos/proto/aptos/extractor/v1/extractor.proto)
