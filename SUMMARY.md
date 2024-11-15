@@ -31,9 +31,12 @@
   * [Single-Machine Deployment](firehose-setup/injective/single-machine-deployment.md)
 * [NEAR](firehose-setup/near/README.md)
   * [Single-Machine Deployment](firehose-setup/near/installation.md)
+* [Solana](firehose-setup/solana/README.md)
+  * [Single-machine Deployment](firehose-setup/solana/single-machine-deployment.md)
 * [System Requirements](firehose-setup/system-requirements.md)
 
 ## Community Integrations
+
 * [Starknet](community-integrations/starknet/README.md)
   * [Networks and nodes](community-integrations/starknet/networks-and-nodes.md)
   * [Local deployment with Docker](community-integrations/starknet/local-deployment-with-docker.md)
