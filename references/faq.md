@@ -38,7 +38,7 @@ Authentication tokens are required to connect to the public Firehose endpoint pr
 
 The StreamingFast team is available in Discord to assist with problems related to obtaining or using authentication tokens.
 
-[https://discord.gg/Ugc7KtkA](https://discord.gg/Ugc7KtkA)
+[https://discord.gg/Ugc7KtkA](https://discord.gg/jZwqxJAvRs)
 
 The authentication documentation also provides general instructions surrounding authentication tokens.
 
@@ -50,7 +50,7 @@ Firehose is made available as an open-source project, published under the Apache
 
 ## **Does StreamingFast have a Discord?**
 
-Yes! [Join the StreamingFast Discord today](https://discord.com/invite/mYPcRAzeVN)!
+Yes! [Join the StreamingFast Discord today](https://discord.gg/jZwqxJAvRs)!
 
 ## **Is StreamingFast on Twitter?**
 
