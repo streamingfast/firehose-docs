@@ -2,38 +2,42 @@
 
 * [Firehose](README.md)
 
-## Introduction
+## Getting Started
 
 * [Firehose Overview](intro/firehose-overview.md)
 * [Prerequisites](intro/prerequisites.md)
+* [Quick Start Guide](getting-started/quick-start.md)
 
-## Architecture
+## Core Firehose (Chain-Agnostic)
 
-* [Components](architecture/components/README.md)
-  * [Firehose-enabled Node](architecture/components/firehose-enabled-node.md)
-  * [Reader](architecture/components/reader.md)
-  * [Merger](architecture/components/merger.md)
-  * [Relayer](architecture/components/relayer.md)
-  * [gRPC Server](architecture/components/grpc-server.md)
-  * [High Availability](architecture/components/high-availability.md)
-* [Data Flow](architecture/data-flow.md)
-* [Data Storage](architecture/data-storage.md)
+* [Architecture](architecture/README.md)
+  * [Components](architecture/components/README.md)
+    * [Firehose-enabled Node](architecture/components/firehose-enabled-node.md)
+    * [Reader](architecture/components/reader.md)
+    * [Merger](architecture/components/merger.md)
+    * [Relayer](architecture/components/relayer.md)
+    * [gRPC Server](architecture/components/grpc-server.md)
+    * [High Availability](architecture/components/high-availability.md)
+  * [Data Flow](architecture/data-flow.md)
+  * [Data Storage](architecture/data-storage.md)
+* [CLI Reference](core/cli-reference.md)
+* [Deployment Guide](core/deployment-guide.md)
+  * [System Requirements](core/deployment/system-requirements.md)
 
-## Firehose Setup
+## Chain-Specific Implementations
 
-* [Overview](firehose-setup/overview.md)
-* [Ethereum](setup/ethereum/README.md)
+* [Supported Chains](chains/supported-chains.md)
+* [Ethereum](chains/ethereum/README.md)
   * [Installation](firehose-setup/ethereum/installation.md)
   * [Single-Machine Deployment](firehose-setup/ethereum/local-deployment.md)
   * [Reprocessing history](setup/ethereum/reprocessing-history.md)
   * [Synchronization](setup/ethereum/synchronization.md)
-* [Injective](firehose-setup/injective/README.md)
-  * [Single-Machine Deployment](firehose-setup/injective/single-machine-deployment.md)
-* [NEAR](firehose-setup/near/README.md)
-  * [Single-Machine Deployment](firehose-setup/near/installation.md)
 * [Solana](firehose-setup/solana/README.md)
   * [Single-machine Deployment](firehose-setup/solana/single-machine-deployment.md)
-* [System Requirements](firehose-setup/system-requirements.md)
+* [NEAR](firehose-setup/near/README.md)
+  * [Single-Machine Deployment](firehose-setup/near/installation.md)
+* [Injective](firehose-setup/injective/README.md)
+  * [Single-Machine Deployment](firehose-setup/injective/single-machine-deployment.md)
 
 ## Community Integrations
 
@@ -46,6 +50,7 @@
 
 * [Benefits](integrate-new-chains/benefits.md)
 * [Integration overview](integrate-new-chains/integration-overview.md)
+* [Integration Template](integrate-new-chains/integration-template.md)
 * [Design Principles](integrate-new-chains/design-principles.md)
 * [Firehose Acme](integrate-new-chains/firehose-starter.md)
 
