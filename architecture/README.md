@@ -53,32 +53,38 @@ All components running on one machine for development or small-scale use:
 ┌─────────────────────────────────────────┐
 │              Single Machine             │
 ├─────────────────────────────────────────┤
-│  Blockchain Node  │  Firehose Stack    │
+│  Reader Process    │  Firehose Stack    │
 │  ┌─────────────┐   │  ┌──────────────┐  │
 │  │   Node      │   │  │ Reader       │  │
-│  │   Process   │───┼──│ Merger       │  │
+│  │ (subprocess)│───┼──│ Merger       │  │
 │  │             │   │  │ Relayer      │  │
-│  └─────────────┘   │  │ gRPC Server  │  │
+│  └─────────────┘   │  │ Firehose &   │  │
+│                    │  │ Substreams   │  │
 │                    │  └──────────────┘  │
 └─────────────────────────────────────────┘
 ```
+
+{% hint style="info" %}
+The blockchain node runs as a subprocess of the Reader component, which manages the node's lifecycle and extracts block data.
+{% endhint %}
 
 ### Distributed Deployment
 Components spread across multiple machines for production scale:
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Blockchain     │    │   Firehose      │    │   Storage &     │
-│  Nodes          │    │   Processing    │    │   Serving       │
+│  Reader         │    │   Firehose      │    │   Storage &     │
+│  Processes      │    │   Processing    │    │   Serving       │
 ├─────────────────┤    ├─────────────────┤    ├─────────────────┤
 │ ┌─────────────┐ │    │ ┌─────────────┐ │    │ ┌─────────────┐ │
-│ │   Node 1    │ │    │ │  Reader 1   │ │    │ │   Storage   │ │
-│ │   Node 2    │─┼────┼─│  Reader 2   │─┼────┼─│   (Cloud)   │ │
-│ │   Node 3    │ │    │ │   Merger    │ │    │ │             │ │
+│ │Node1(subproc│ │    │ │  Reader 1   │ │    │ │   Storage   │ │
+│ │Node2(subproc│─┼────┼─│  Reader 2   │─┼────┼─│   (Cloud)   │ │
+│ │Node3(subproc│ │    │ │   Merger    │ │    │ │             │ │
 │ └─────────────┘ │    │ │   Relayer   │ │    │ └─────────────┘ │
 │                 │    │ └─────────────┘ │    │ ┌─────────────┐ │
-│                 │    │                 │    │ │ gRPC Server │ │
-│                 │    │                 │    │ │  (Load Bal) │ │
+│                 │    │                 │    │ │ Firehose &  │ │
+│                 │    │                 │    │ │ Substreams  │ │
+│                 │    │                 │    │ │ (via gRPC)  │ │
 │                 │    │                 │    │ └─────────────┘ │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
@@ -93,6 +99,8 @@ Components spread across multiple machines for production scale:
 ### Streaming API
 - gRPC-based streaming interface
 - Real-time and historical data access
+- Fork-aware streaming with automatic reorg handling
+- Cursor-based resumption for reliable data delivery
 - Filtering and transformation capabilities
 
 ### Storage Efficiency
