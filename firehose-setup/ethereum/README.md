@@ -4,24 +4,19 @@ description: StreamingFast Firehose for Ethereum
 
 # Ethereum
 
-## Firehose Ethereum Setup
+## Supported Node Clients
 
-Setting up Firehose for Ethereum is a straightforward process that uses StreamingFast's pre-instrumented code solution.
+Firehose for Ethereum supports **Geth and Geth forks only**. This includes:
 
-The primary tasks for running a Firehose instrumented node are
+* Ethereum Mainnet (Geth)
+* Polygon (Geth fork)
+* BSC (Geth fork)
+* Other EVM-compatible chains using Geth-based clients
 
-* install all dependencies,
-* deploy the instances,
-* reprocess history,
-* and starting streaming data.
-
-{% hint style="warning" %}
-**Important**_: The Ethereum Firehose integration supports multiple chains out-of-the-box. Chains currently supported are listed below._\
-
-
-* Ethereum Mainnet
-* Ropsten
-* Göerli
-* Polygon
-* BSC
+{% hint style="info" %}
+For node operation requirements and configuration, refer to the official documentation of the specific Geth client you're using. Firehose acts as a data reader on top of the node client.
 {% endhint %}
+
+## Binary Information
+
+Ethereum uses the `fireeth` binary (found at [firehose-ethereum](https://github.com/streamingfast/firehose-ethereum)) instead of the standard `firecore` binary. The `fireeth` binary includes all `firecore` functionality plus Ethereum-specific features.

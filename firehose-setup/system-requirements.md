@@ -34,6 +34,19 @@ The CPU/RAM requirements will depend on these factors:
 * _High Availability -_ Highly available deployments will require _two, or more times the resources_ listed in the following examples, as a general rule.
 * _Throughput of queries -_ Firehose is built for horizontal scalability. As the need for requests per second increase the deployment increases in size and more CPU/RAM is required in the deployment cluster.
 
+### Network Ports
+
+Firehose uses the following default ports:
+
+#### Firehose & Substreams (Tier1) gRPC Entry Point
+- **Default Port**: `:9000`
+- **Description**: Main gRPC endpoint for Firehose and Substreams API access
+- **Configurable via**: `--grpc-listen-addr` flag
+
+{% hint style="info" %}
+Use `firecore start --help` to verify current default port values as they may change between versions.
+{% endhint %}
+
 ### Instrumented Chain's Native Binary
 
 Firehose requires native instrumentation of the binary of the chain you want to sync with, a vanilla binary of the chain without Firehose support built in it is not going to work. So you can only today synchronize with Firehose enabled chains.

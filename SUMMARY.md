@@ -21,6 +21,7 @@
   * [Data Storage](architecture/data-storage.md)
 * [Deployment Guide](firehose-setup/overview.md)
   * [System Requirements](firehose-setup/system-requirements.md)
+* [CLI Reference](references/cli-reference.md)
 
 ## Chain-Specific Implementations
 

@@ -1,9 +1,9 @@
-# Overview
+# Deployment Guide
 
-Usually, to set up a Firehose environment you need:
+To set up a Firehose environment you need:
 
 * A [Firecore](https://github.com/streamingfast/firehose-core) binary, which spins up the different components needed (reader, merger, relayer...).
-* A Firehose chain-specific binary, which is used as a bridge between Firecore and the blockchain.
+* A supported blockchain node client (see [Chain-Specific Implementations](../firehose-setup/ethereum/README.md))
 * A full instrumented node or an RPC to fetch the blockchain data.
 
 ## The Firecore
@@ -12,11 +12,28 @@ Firecore allows you to spin up all the different Firehose component needed, such
 
 You can download the latest version of Firecore from the [release page of GitHub](https://github.com/streamingfast/firehose-core/releases).
 
-## The Chain-Specific Binary
+# For all chains except Ethereum compatible ones
 
-Every chain has a different data model (e.g. Ethereum vs Solana), therefore, Firehose needs to extract the data of every blockchain differently. In order for Firehose to support a new chain, a new extraction layer must be created. This extraction layer is then used by Firecore to interact with the different _base components_.
+Use the `firecore` binary for all blockchain integrations except Ethereum-compatible chains.
 
-Essentially, Firecore acts as the coordinator and uses the chain-specific binary. Some examples of chain-specific binaries are [firehose-ethereum](https://github.com/streamingfast/firehose-ethereum) or [firehose-solana](https://github.com/streamingfast/firehose-solana).
+{% hint style="info" %}
+`firecore` commands/flags are a subset of `fireeth` (which contains Ethereum specific commands and flags). We will use `firecore` in the deployment guide for simplicity - `fireeth` should work exactly the same.
+{% endhint %}
+
+## Basic Deployment Example
+
+Here's a basic example using command-line flags (recommended approach):
+
+```bash
+firecore start \
+  --reader-node-path="/usr/local/bin/geth" \
+  --reader-node-arguments="--datadir /data --syncmode full" \
+  --grpc-listen-addr=":9000"
+```
+
+{% hint style="info" %}
+Configuration files are also supported. Refer to the [CLI Reference](../references/cli-reference.md) for details on both flag and config file usage.
+{% endhint %}
 
 ## Instrumented Node or RPC
 
