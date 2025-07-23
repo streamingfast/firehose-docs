@@ -57,6 +57,7 @@ The Reader manages the blockchain node and extracts block data.
 ```bash
 # Terminal 1: Start the Reader
 firecore start reader-node \
+  --config-file="" \
   --data-dir="./reader-data" \
   --advertise-block-id-encoding="hex" \
   --advertise-chain-name="acme-dummy-blockchain" \
@@ -78,7 +79,7 @@ The Reader runs the `dummy-blockchain` as a subprocess and extracts block data t
 ls /shared-storage/firehose-data/one-blocks/
 
 # Inspect a one-block file
-firecore tools print one-blocks /shared-storage/firehose-data/one-blocks/ 0000000001 --output=text
+firecore tools print one-block /shared-storage/firehose-data/one-blocks 1 --output=text
 ```
 
 ## Component 2: Merger
@@ -88,6 +89,7 @@ The Merger combines one-block files into merged block files for efficient storag
 ```bash
 # Terminal 2: Start the Merger
 firecore start merger \
+  --config-file="" \
   --data-dir="./merger-data" \
   --advertise-block-id-encoding="hex" \
   --advertise-chain-name="acme-dummy-blockchain" \
@@ -107,7 +109,7 @@ The Merger processes one-block files from shared storage and creates optimized m
 ls /shared-storage/firehose-data/merged-blocks/
 
 # Inspect a merged block file
-firecore tools print merged-blocks /shared-storage/firehose-data/merged-blocks/ 0000000100 --output=text
+firecore tools print merged-blocks /shared-storage/firehose-data/merged-blocks 100 --output=text
 ```
 
 ## Component 3: Relayer
@@ -117,6 +119,7 @@ The Relayer provides live block streaming capabilities.
 ```bash
 # Terminal 3: Start the Relayer
 firecore start relayer \
+  --config-file="" \
   --data-dir="./relayer-data" \
   --advertise-block-id-encoding="hex" \
   --advertise-chain-name="acme-dummy-blockchain" \
@@ -143,12 +146,13 @@ The Firehose component serves historical and live block data via gRPC.
 ```bash
 # Terminal 4: Start Firehose
 firecore start firehose \
+  --config-file="" \
   --data-dir="./firehose-data" \
   --advertise-block-id-encoding="hex" \
   --advertise-chain-name="acme-dummy-blockchain" \
   --common-one-block-store-url="${SHARED_STORAGE_URL}/one-blocks" \
   --common-merged-blocks-store-url="${SHARED_STORAGE_URL}/merged-blocks" \
-  --firehose-grpc-listen-addr=":9000" \
+  --firehose-grpc-listen-addr=":10015" \
   --relayer-addr="localhost:10012"
 ```
 
@@ -157,7 +161,7 @@ firecore start firehose \
 ```bash
 # Test the Firehose gRPC API
 grpcurl -plaintext -d '{"start_block_num": 1, "stop_block_num": 5}' \
-  localhost:9000 sf.firehose.v2.Stream/Blocks
+  localhost:10015 sf.firehose.v2.Stream/Blocks
 ```
 
 ## Component 5: Substreams Tier 1
@@ -167,12 +171,13 @@ Substreams Tier 1 handles data transformation and filtering.
 ```bash
 # Terminal 5: Start Substreams Tier 1
 firecore start substreams-tier1 \
+  --config-file="" \
   --data-dir="./substreams-tier1-data" \
   --advertise-block-id-encoding="hex" \
   --advertise-chain-name="acme-dummy-blockchain" \
   --common-one-block-store-url="${SHARED_STORAGE_URL}/one-blocks" \
   --common-merged-blocks-store-url="${SHARED_STORAGE_URL}/merged-blocks" \
-  --substreams-tier1-grpc-listen-addr=":9001" \
+  --substreams-tier1-grpc-listen-addr=":10016" \
   --relayer-addr="localhost:10012"
 ```
 
@@ -183,19 +188,20 @@ Substreams Tier 2 provides additional processing capabilities and caching.
 ```bash
 # Terminal 6: Start Substreams Tier 2
 firecore start substreams-tier2 \
+  --config-file="" \
   --data-dir="./substreams-tier2-data" \
   --advertise-block-id-encoding="hex" \
   --advertise-chain-name="acme-dummy-blockchain" \
-  --substreams-tier2-grpc-listen-addr=":9002" \
-  --substreams-tier1-addr="localhost:9001"
+  --substreams-tier2-grpc-listen-addr=":10017" \
+  --substreams-tier1-addr="localhost:10016"
 ```
 
 ### Verify Substreams Operation
 
 ```bash
 # List available Substreams services
-grpcurl -plaintext localhost:9001 list | grep substreams
-grpcurl -plaintext localhost:9002 list | grep substreams
+grpcurl -plaintext localhost:10016 list | grep substreams
+grpcurl -plaintext localhost:10017 list | grep substreams
 ```
 
 ## Load Balancer / API Gateway
@@ -205,12 +211,12 @@ In production, you would typically put a load balancer or API gateway in front o
 ```bash
 # Example nginx configuration for load balancing
 # upstream firehose_backend {
-#     server localhost:9000;
+#     server localhost:10015;
 # }
 # 
 # upstream substreams_backend {
-#     server localhost:9001;
-#     server localhost:9002;
+#     server localhost:10016;
+#     server localhost:10017;
 # }
 # 
 # server {
@@ -230,12 +236,12 @@ Monitor each component's health:
 
 ```bash
 # Check component health via gRPC health checks
-grpcurl -plaintext localhost:10010 grpc.health.v1.Health/Check
-grpcurl -plaintext localhost:10011 grpc.health.v1.Health/Check
-grpcurl -plaintext localhost:10012 grpc.health.v1.Health/Check
-grpcurl -plaintext localhost:9000 grpc.health.v1.Health/Check
-grpcurl -plaintext localhost:9001 grpc.health.v1.Health/Check
-grpcurl -plaintext localhost:9002 grpc.health.v1.Health/Check
+grpcurl -plaintext localhost:10010 grpc.health.v1.Health/Check  # Reader
+grpcurl -plaintext localhost:10011 grpc.health.v1.Health/Check  # Merger
+grpcurl -plaintext localhost:10012 grpc.health.v1.Health/Check  # Relayer
+grpcurl -plaintext localhost:10015 grpc.health.v1.Health/Check  # Firehose
+grpcurl -plaintext localhost:10016 grpc.health.v1.Health/Check  # Substreams Tier1
+grpcurl -plaintext localhost:10017 grpc.health.v1.Health/Check  # Substreams Tier2
 ```
 
 ## Production Considerations
@@ -300,4 +306,3 @@ Scale components based on load:
 {% hint style="success" %}
 You now have a distributed Firehose deployment! This architecture can be adapted to any cloud provider or orchestration platform for production use.
 {% endhint %}
-
