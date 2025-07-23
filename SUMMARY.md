@@ -20,7 +20,8 @@
   * [Data Flow](architecture/data-flow.md)
   * [Data Storage](architecture/data-storage.md)
 * [Deployment Guide](firehose-setup/overview.md)
-  * [System Requirements](firehose-setup/system-requirements.md)
+  * [Single Machine Deployment](firehose-setup/single-machine-deployment.md)
+  * [Distributed Deployment](firehose-setup/distributed-deployment.md)
 * [CLI Reference](references/cli-reference.md)
 
 ## Chain-Specific Implementations
