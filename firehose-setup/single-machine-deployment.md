@@ -73,7 +73,7 @@ firecore start \
 - **Relayer**: `:10014` (gRPC - live block streaming)
 - **Merger**: `:10012` (gRPC - internal merger protocol)
 - **Substreams Tier1**: `:10016` (gRPC - [sf.substreams.rpc.v2.Stream](https://buf.build/streamingfast/substreams/docs/main:sf.substreams.rpc.v2))
-- **Substreams Tier2**: `:10017` (gRPC - [sf.substreams.rpc.v2.Stream](https://buf.build/streamingfast/substreams/docs/main:sf.substreams.rpc.v2))
+- **Substreams Tier2**: `:10017` (gRPC - internal tier1 <=> tier2 protocol)
 
 The `--config-file=""` flag disables automatic config file loading switching into a flags only mode.
 {% endhint %}
@@ -172,7 +172,6 @@ By default, all data is stored under `./firehose-data/storage`:
 
 - **One-blocks**: `./firehose-data/storage/one-blocks` (controlled by `--common-one-block-store-url`)
 - **Merged blocks**: `./firehose-data/storage/merged-blocks` (controlled by `--common-merged-blocks-store-url`)
-- **Indexes**: `./firehose-data/storage/indexes` (controlled by `--common-index-store-url`)
 
 These paths are shared among all components and can be customized using the respective flags. The `--data-dir` flag sets the base directory for all storage locations.
 
