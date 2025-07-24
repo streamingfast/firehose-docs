@@ -7,16 +7,16 @@ This guide shows how to deploy Firehose components as separate processes using s
 In this deployment, each component (`reader-node`, `merger`, `relayer`, `firehose`, `substreams-tier1`, `substreams-tier2`) runs as a separate process. Components communicate through shared object storage and gRPC endpoints.
 
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Reader         │    │   Processing    │    │   Serving       │
-│  Process        │    │   Components    │    │   Components    │
-├─────────────────┤    ├─────────────────┤    ├─────────────────┤
-│ ┌─────────────┐ │    │ ┌─────────────┐ │    │ ┌─────────────┐ │
+┌─────────────────-┐    ┌─────────────────┐    ┌─────────────────┐
+│  Reader          │    │   Processing    │    │   Serving       │
+│  Process         │    │   Components    │    │   Components    │
+├─────────────────-┤    ├─────────────────┤    ├─────────────────┤
+│ ┌─────────────┐  │    │ ┌─────────────┐ │    │ ┌─────────────┐ │
 │ │dummy-blockchain│    │ │   Merger    │ │    │ │  Firehose   │ │
-│ │ (subprocess)│ │    │ │   Relayer   │ │    │ │ Substreams  │ │
-│ │   Reader    │ │    │ │             │ │    │ │ (Tier1&2)   │ │
-│ └─────────────┘ │    │ └─────────────┘ │    │ └─────────────┘ │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+│ │ (subprocess)│  │    │ │   Relayer   │ │    │ │  Substreams │ │
+│ │   Reader    │  │    │ │             │ │    │ │             │ │
+│ └─────────────┘  │    │ └─────────────┘ │    │ └─────────────┘ │
+└─────────────────-┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          └───────────────────────┼───────────────────────┘
                                  │
@@ -33,7 +33,7 @@ While this guide shows all components running on a single machine for simplicity
 
 ## Prerequisites
 
-1. **Shared Object Storage**: Set up cloud storage (AWS S3, Google Cloud Storage, etc.)
+1. **Shared Object Storage**: Set up cloud storage (AWS S3, Google Cloud Storage, etc.) or On-Premise Storage Solution compatible with S3 like Ceph (*recommended*).
 2. **Binaries**: Install `firecore` and `dummy-blockchain` as described in [Prerequisites](overview.md#prerequisites)
 
 ## Storage Configuration
@@ -42,7 +42,7 @@ First, configure your shared object storage. For this example, we'll use a local
 
 ```bash
 # Create shared storage directory (in production, this would be cloud storage)
-mkdir -p /shared-storage/firehose-data
+mkdir -p ./shared-storage/firehose-data
 export SHARED_STORAGE_URL="file:///shared-storage/firehose-data"
 
 # For cloud storage, you would use URLs like:
@@ -213,12 +213,12 @@ In production, you would typically put a load balancer or API gateway in front o
 # upstream firehose_backend {
 #     server localhost:10015;
 # }
-# 
+#
 # upstream substreams_backend {
 #     server localhost:10016;
 #     server localhost:10017;
 # }
-# 
+#
 # server {
 #     listen 80;
 #     location /firehose/ {
