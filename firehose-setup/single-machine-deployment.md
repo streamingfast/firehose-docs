@@ -42,15 +42,12 @@ netstat -tulpn | grep -E ':(10010|10012|10014|10015|10016|10017)'
 
 ## Step 1: Basic Configuration
 
-Create a working directory and basic configuration:
+Create a working directory:
 
 ```bash
 # Create working directory
-mkdir firehose-deployment
-cd firehose-deployment
-
-# Create data directory
-mkdir -p firehose-data
+mkdir firehose-workspace
+cd firehose-workspace
 ```
 
 ## Step 2: Start the Firehose Stack
@@ -66,23 +63,23 @@ firecore start \
   --advertise-chain-name="acme-dummy-blockchain" \
   --reader-node-path="dummy-blockchain" \
   --reader-node-data-dir="./firehose-data/reader-node" \
-  --reader-node-arguments="start --tracer=firehose --store-dir=./firehose-data/reader-node --block-rate=120 --genesis-height=0 --genesis-block-burst=100"
+  --reader-node-arguments="start --tracer=firehose --store-dir={data-dir}/reader --block-rate=120"
 ```
 
 {% hint style="info" %}
 **Default Ports Used:**
-- **Firehose**: `:10015` (main gRPC API)
-- **Reader**: `:10010` 
-- **Relayer**: `:10014`
-- **Merger**: `:10012`
-- **Substreams Tier1**: `:10016`
-- **Substreams Tier2**: `:10017`
+- **Firehose**: `:10015` (gRPC - [sf.firehose.v2.Stream](https://buf.build/streamingfast/firehose/docs/main:sf.firehose.v2))
+- **Reader**: `:10010` (gRPC - internal reader protocol)
+- **Relayer**: `:10014` (gRPC - live block streaming)
+- **Merger**: `:10012` (gRPC - internal merger protocol)
+- **Substreams Tier1**: `:10016` (gRPC - [sf.substreams.rpc.v2.Stream](https://buf.build/streamingfast/substreams/docs/main:sf.substreams.rpc.v2))
+- **Substreams Tier2**: `:10017` (gRPC - [sf.substreams.rpc.v2.Stream](https://buf.build/streamingfast/substreams/docs/main:sf.substreams.rpc.v2))
 
-The `--config-file=""` flag disables automatic config file loading to prevent conflicts.
+The `--config-file=""` flag disables automatic config file loading switching into a flags only mode.
 {% endhint %}
 
 {% hint style="info" %}
-The `dummy-blockchain` runs as a subprocess of the Reader component. The Reader manages its lifecycle and extracts block data from it. See [Reader Component](../architecture/components/reader.md) for more details.
+The `dummy-blockchain` runs as a subprocess of the Reader component. The Reader manages its lifecycle and extracts block data from it. Extracted data is exchanged through stdout pipe to the Reader component and contains chain's specific Protobuf block and metadata. See [Reader Component](../architecture/components/reader.md) for more details.
 {% endhint %}
 
 ## Step 3: Verify the Deployment
@@ -134,26 +131,28 @@ The Relayer provides live block streaming:
 firecore tools relayer stream localhost:10010 -o text +3
 ```
 
-This command will show the last 3 blocks and then stream new blocks as they arrive.
+This command will show the last 3 blocks and then stop the stream.
 
 {% hint style="info" %}
 The Relayer enables real-time block streaming for live applications. Learn more about [Relayer Component](../architecture/components/relayer.md).
 {% endhint %}
 
-## Step 4: Test the gRPC API
+## Step 4: Test the Firehose API
 
-Test the Firehose gRPC API to ensure it's serving blocks correctly:
+Test the Firehose API using the built-in client tools:
 
 ```bash
-# Install grpcurl if not already available
-go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+# Get blocks 1-5 from the Firehose API
+firecore tools firehose-client -p localhost:10015 -o text -- 1:5
 
-# List available services
-grpcurl -plaintext localhost:10015 list
+# Get a single block (block 5)
+firecore tools firehose-single-block-client -p localhost:10015 -o text -- 5
 
-# Get blocks from the Firehose API
-grpcurl -plaintext -d '{"start_block_num": 1, "stop_block_num": 5}' \
-  localhost:10015 sf.firehose.v2.Stream/Blocks
+# View full block data in JSON format
+firecore tools firehose-single-block-client -p localhost:10015 -o protojson -- 5
+
+# Alternative JSON output
+firecore tools firehose-single-block-client -p localhost:10015 -o json -- 5
 ```
 
 ## Step 5: Test Substreams
@@ -161,59 +160,21 @@ grpcurl -plaintext -d '{"start_block_num": 1, "stop_block_num": 5}' \
 Verify that Substreams tiers are working:
 
 ```bash
-# List Substreams tier1 services
-grpcurl -plaintext localhost:10016 list
-
-# List Substreams tier2 services  
-grpcurl -plaintext localhost:10017 list
-
-# Test a simple Substreams request (if you have a .spkg file)
-# substreams run -e localhost:10016 your-substream.spkg map_blocks -s 1 -t 10
+# Test a simple Substreams request
+substreams run -e localhost:10016 -p common@v0.1.0 -s 1 -t +5
 ```
-
-{% hint style="info" %}
-Substreams runs on separate ports from Firehose:
-- **Substreams Tier1**: `:10016` (processing tier)
-- **Substreams Tier2**: `:10017` (caching tier)
-- **Firehose**: `:10015` (block streaming)
-{% endhint %}
 
 ## Configuration Options
 
 ### Storage Locations
 
-By default, all data is stored under `./firehose-data/storage/`:
+By default, all data is stored under `./firehose-data/storage`:
 
-- **One-blocks**: `./firehose-data/storage/one-blocks/`
-- **Merged blocks**: `./firehose-data/storage/merged-blocks/`
-- **Indexes**: `./firehose-data/storage/indexes/`
+- **One-blocks**: `./firehose-data/storage/one-blocks` (controlled by `--common-one-block-store-url`)
+- **Merged blocks**: `./firehose-data/storage/merged-blocks` (controlled by `--common-merged-blocks-store-url`)
+- **Indexes**: `./firehose-data/storage/indexes` (controlled by `--common-index-store-url`)
 
-### Performance Tuning
-
-For better performance, consider:
-
-```bash
-# Increase block rate for faster testing
---reader-node-arguments="start --tracer=firehose --store-dir=./firehose-data/reader-node --block-rate=300 --genesis-height=0 --genesis-block-burst=100"
-
-# Use different data directory on faster storage
---data-dir="/fast-ssd/firehose-data"
-```
-
-## Monitoring
-
-Monitor your deployment by watching the logs and checking component health:
-
-```bash
-# Watch for errors in logs
-tail -f firecore.log | grep ERROR
-
-# Check disk usage
-du -sh ./firehose-data/
-
-# Monitor block processing rate
-watch 'ls ./firehose-data/storage/one-blocks/ | wc -l'
-```
+These paths are shared among all components and can be customized using the respective flags. The `--data-dir` flag sets the base directory for all storage locations.
 
 ## Next Steps
 
