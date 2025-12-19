@@ -7,40 +7,36 @@
 * [Firehose Overview](intro/firehose-overview.md)
 * [Prerequisites](intro/prerequisites.md)
 
-## Architecture
+## Core Firehose (Chain-Agnostic)
 
-* [Components](architecture/components/README.md)
-  * [Firehose-enabled Node](architecture/components/firehose-enabled-node.md)
-  * [Reader](architecture/components/reader.md)
-  * [Merger](architecture/components/merger.md)
-  * [Relayer](architecture/components/relayer.md)
-  * [gRPC Server](architecture/components/grpc-server.md)
-  * [High Availability](architecture/components/high-availability.md)
-* [Data Flow](architecture/data-flow.md)
-* [Data Storage](architecture/data-storage.md)
+* [Architecture](architecture/README.md)
+  * [Components](architecture/components/README.md)
+    * [Firehose-enabled Node](architecture/components/firehose-enabled-node.md)
+    * [Reader](architecture/components/reader.md)
+    * [Merger](architecture/components/merger.md)
+    * [Relayer](architecture/components/relayer.md)
+    * [gRPC Server](architecture/components/grpc-server.md)
+    * [High Availability](architecture/components/high-availability.md)
+  * [Data Flow](architecture/data-flow.md)
+  * [Data Storage](architecture/data-storage.md)
+* [Deployment Guide](firehose-setup/overview.md)
+  * [Single Machine Deployment](firehose-setup/single-machine-deployment.md)
+  * [Distributed Deployment](firehose-setup/distributed-deployment.md)
+* [CLI Reference](references/cli-reference.md)
 
-## Firehose Setup
+## Chain-Specific Implementations
 
-* [Overview](firehose-setup/overview.md)
-* [Ethereum](setup/ethereum/README.md)
+* [Ethereum](firehose-setup/ethereum/README.md)
   * [Installation](firehose-setup/ethereum/installation.md)
   * [Single-Machine Deployment](firehose-setup/ethereum/local-deployment.md)
-  * [Reprocessing history](setup/ethereum/reprocessing-history.md)
-  * [Synchronization](setup/ethereum/synchronization.md)
-* [Injective](firehose-setup/injective/README.md)
-  * [Single-Machine Deployment](firehose-setup/injective/single-machine-deployment.md)
-* [NEAR](firehose-setup/near/README.md)
-  * [Single-Machine Deployment](firehose-setup/near/installation.md)
+  * [Reprocessing history](firehose-setup/ethereum/reprocessing-history.md)
+  * [Synchronization](firehose-setup/ethereum/synchronization.md)
 * [Solana](firehose-setup/solana/README.md)
   * [Single-machine Deployment](firehose-setup/solana/single-machine-deployment.md)
-* [System Requirements](firehose-setup/system-requirements.md)
-
-## Community Integrations
-
-* [Starknet](community-integrations/starknet/README.md)
-  * [Networks and nodes](community-integrations/starknet/networks-and-nodes.md)
-  * [Local deployment with Docker](community-integrations/starknet/local-deployment-with-docker.md)
-  * [Local deployment without Docker](community-integrations/starknet/local-deployment-without-docker.md)
+* [NEAR](firehose-setup/near/README.md)
+  * [Single-Machine Deployment](firehose-setup/near/installation.md)
+* [Injective](firehose-setup/injective/README.md)
+  * [Single-Machine Deployment](firehose-setup/injective/single-machine-deployment.md)
 
 ## Integrate New Chains
 
