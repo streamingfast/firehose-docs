@@ -23,7 +23,7 @@ The Merger component reads the one-block object store to produce the 100-blocks 
 
 ### Forked blocks
 
-The merger only merges finalized blocks. No forked block (also called uncled or reorg) make it into the merged blocks bundles, they are instead moved to the "forked-blocks-store"
+The merger only merges finalized blocks. No forked block (also called uncled or reorged) make it into the merged blocks bundles, they are instead moved to the forked blocks store (flag `common-forked-blocks-store-url`).
 
 ### Merger Responsibilities
 
