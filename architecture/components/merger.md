@@ -6,27 +6,24 @@ description: StreamingFast Firehose merger component
 
 ## Merger Component in Detail
 
-The Merger component is responsible for managing and shaping data flowing out of the Reader component.
+The Merger component is responsible for:
+1. Polling and Reading "one-blocks store" for files written from the Reader component
+2. Bundling finalized blocks into "merged blocks bundles"
+3. Moving the forked blocks to the "forked-blocks store"
 
-### Blocks Files
+### Merged Blocks Bundles
 
-The Merger component produces what are referred to as "100-blocks files." The Merger component receives "one-block" files from Reader components that are feeding the Merger.
+The Merger produces "merged-blocks bundles", containing all the finalized blocks in a 100-blocks boundary.
+The filename contains the lower boundary (ex: 0000010100.dbin.zst).
+It may contain less than 100 blocks if that particular chain skips blocks
 
-### One-block Storage
+### One-blocks
 
-The Merger component reads the one-block object store to produce the 100-blocks files.
+The Merger component reads the one-block object store to produce the 100-blocks bundles.
 
-### Forks
+### Forked blocks
 
-All forks visited by a Reader component will also be merged by the Merger component.
-
-### Merging Blocks
-
-The merged 100-blocks files will be created each time the Merger component receives one hundred blocks of data from its associated Reader component.
-
-### Fork Data Awareness
-
-The Merger component will produce the files when there are no additional forks that might occur. The StreamingFast bstream ForkableHandler provides support for fork data awareness in future merged blocks.
+The merger only merges finalized blocks. No forked block (also called uncled or reorged) make it into the merged blocks bundles, they are instead moved to the forked blocks store (flag `common-forked-blocks-store-url`).
 
 ### Merger Responsibilities
 
