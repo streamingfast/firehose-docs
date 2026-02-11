@@ -59,7 +59,6 @@ firecore start \
   reader-node merger relayer firehose substreams-tier1 substreams-tier2 \
   --config-file="" \
   --data-dir="./firehose-data" \
-  --advertise-block-id-encoding="hex" \
   --advertise-chain-name="acme-dummy-blockchain" \
   --reader-node-path="dummy-blockchain" \
   --reader-node-data-dir="./firehose-data/reader-node" \
