@@ -26,7 +26,17 @@ The full [StreamingFast software suite](https://github.com/streamingfast) enable
 
 ## Benefits
 
-Firehose is built using a component-based design. Data extraction is made possible through the family of Firehose components. The Firehose components include Firehose-enabled Blockchain Node, Reader, Merger, Relayer, and Firehose gRPC Server.
+Firehose is built using a component-based design. Data extraction is made possible through the family of Firehose components. The Firehose components include Firehose-enabled Blockchain Node, Reader, Merger, Relayer, Firehose gRPC Server, and Substreams.
+
+### Substreams Integration
+
+Firehose includes [Substreams](https://substreams.streamingfast.io/), a high-performance parallel data transformation engine. Running Substreams alongside Firehose provides:
+
+* **Massively Parallel Processing**: Execute data transformations across historical blockchain data in parallel, achieving processing speeds previously thought impossible.
+* **Custom Data Pipelines**: Enable users to define their own transformation logic in Rust/WASM, filtering and aggregating data exactly as needed.
+* **Ecosystem Compatibility**: Immediate support for The Graph (Substreams-powered subgraphs), and dozens of data sinks including PostgreSQL, MongoDB, Kafka, ClickHouse, BigQuery, and more.
+* **Shared Infrastructure**: Substreams reuses the same block storage and data sources as Firehose, adding powerful capabilities with minimal additional overhead.
+* **Developer Community**: Attract developers who already know Substreams and are ready to build on your infrastructure.
 
 ### Cursors
 

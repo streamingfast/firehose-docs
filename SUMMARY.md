@@ -7,46 +7,36 @@
 * [Firehose Overview](intro/firehose-overview.md)
 * [Prerequisites](intro/prerequisites.md)
 
-## Core Firehose (Chain-Agnostic)
+## Firehose
 
 * [Architecture](architecture/README.md)
   * [Components](architecture/components/README.md)
-    * [Firehose-enabled Node](architecture/components/firehose-enabled-node.md)
-    * [Reader](architecture/components/reader.md)
+    * [Reader Node](architecture/components/reader.md)
     * [Merger](architecture/components/merger.md)
     * [Relayer](architecture/components/relayer.md)
     * [gRPC Server](architecture/components/grpc-server.md)
+    * [Substreams](architecture/components/substreams.md)
     * [High Availability](architecture/components/high-availability.md)
   * [Data Flow](architecture/data-flow.md)
   * [Data Storage](architecture/data-storage.md)
 * [Deployment Guide](firehose-setup/overview.md)
   * [Single Machine Deployment](firehose-setup/single-machine-deployment.md)
   * [Distributed Deployment](firehose-setup/distributed-deployment.md)
-* [CLI Reference](references/cli-reference.md)
-
-## Chain-Specific Implementations
-
-* [Ethereum](firehose-setup/ethereum/README.md)
-  * [Installation](firehose-setup/ethereum/installation.md)
-  * [Single-Machine Deployment](firehose-setup/ethereum/local-deployment.md)
-  * [Reprocessing history](firehose-setup/ethereum/reprocessing-history.md)
-  * [Synchronization](firehose-setup/ethereum/synchronization.md)
-* [Solana](firehose-setup/solana/README.md)
-  * [Single-machine Deployment](firehose-setup/solana/single-machine-deployment.md)
-* [NEAR](firehose-setup/near/README.md)
-  * [Single-Machine Deployment](firehose-setup/near/installation.md)
-* [Injective](firehose-setup/injective/README.md)
-  * [Single-Machine Deployment](firehose-setup/injective/single-machine-deployment.md)
+  * [Ethereum](firehose-setup/ethereum/README.md)
+  * [Solana](firehose-setup/solana/README.md)
+  * [NEAR](firehose-setup/near/README.md)
+  * [Injective](firehose-setup/injective/README.md)
 
 ## Integrate New Chains
 
 * [Benefits](integrate-new-chains/benefits.md)
-* [Integration overview](integrate-new-chains/integration-overview.md)
+* [Integration Overview](integrate-new-chains/integration-overview.md)
 * [Design Principles](integrate-new-chains/design-principles.md)
 * [Firehose Acme](integrate-new-chains/firehose-starter.md)
 
 ## References
 
+* [CLI Reference](references/cli-reference.md)
 * [Supported Protocols](references/repositories.md)
 * [Naming Conventions](references/naming-conventions.md)
 * [Schemas](references/protobuf-schemas.md)

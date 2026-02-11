@@ -56,7 +56,12 @@ Both deployment patterns use the same core [Firehose architecture](../architectu
 2. **Merger**: Combines one-block files into merged block files
 3. **Relayer**: Streams live blocks to consumers
 4. **Firehose**: Serves historical and live block data via gRPC
-5. **Substreams**: Provides data transformation and filtering capabilities
+5. **Substreams Tier 1**: Handles consumer requests and coordinates parallel processing
+6. **Substreams Tier 2**: Executes WASM modules for parallel historical data transformation
+
+{% hint style="info" %}
+**About Substreams**: Substreams is a high-performance parallel data transformation engine that runs alongside Firehose. It enables users to define custom data pipelines in Rust/WASM that execute directly within your infrastructure. Running Substreams adds significant value for users while reusing the same block storage as Firehose. See [Substreams Component](../architecture/components/substreams.md) for details.
+{% endhint %}
 
 {% hint style="info" %}
 For detailed information about each component, see the [Architecture Components](../architecture/components/README.md) documentation.

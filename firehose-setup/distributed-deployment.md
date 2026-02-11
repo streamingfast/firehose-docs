@@ -43,7 +43,7 @@ First, configure your shared object storage. For this example, we'll use a local
 ```bash
 # Create shared storage directory (in production, this would be cloud storage)
 mkdir -p ./shared-storage/firehose-data
-export SHARED_STORAGE_URL="file:///shared-storage/firehose-data"
+export SHARED_STORAGE_URL="file://$(pwd)/shared-storage/firehose-data"
 
 # For cloud storage, you would use URLs like:
 # export SHARED_STORAGE_URL="gs://your-bucket/firehose-data"
@@ -65,7 +65,8 @@ firecore start reader-node \
   --reader-node-data-dir="./reader-data/node" \
   --reader-node-arguments="start --tracer=firehose --store-dir=./reader-data/node --block-rate=120 --genesis-height=0 --genesis-block-burst=100" \
   --common-one-block-store-url="${SHARED_STORAGE_URL}/one-blocks" \
-  --reader-node-grpc-listen-addr=":10010"
+  --reader-node-grpc-listen-addr=":10010" \
+  --reader-node-manager-api-addr=":10013"
 ```
 
 {% hint style="info" %}
@@ -76,10 +77,10 @@ The Reader runs the `dummy-blockchain` as a subprocess and extracts block data t
 
 ```bash
 # Check that one-block files are being created
-ls /shared-storage/firehose-data/one-blocks/
+ls ./shared-storage/firehose-data/one-blocks/
 
 # Inspect a one-block file
-firecore tools print one-block /shared-storage/firehose-data/one-blocks 1 --output=text
+firecore tools print one-block ./shared-storage/firehose-data/one-blocks 1 --output=text
 ```
 
 ## Component 2: Merger
@@ -106,10 +107,10 @@ The Merger processes one-block files from shared storage and creates optimized m
 
 ```bash
 # Check that merged block files are being created
-ls /shared-storage/firehose-data/merged-blocks/
+ls ./shared-storage/firehose-data/merged-blocks/
 
 # Inspect a merged block file
-firecore tools print merged-blocks /shared-storage/firehose-data/merged-blocks 100 --output=text
+firecore tools print merged-blocks ./shared-storage/firehose-data/merged-blocks 100 --output=text
 ```
 
 ## Component 3: Relayer
@@ -153,7 +154,7 @@ firecore start firehose \
   --common-one-block-store-url="${SHARED_STORAGE_URL}/one-blocks" \
   --common-merged-blocks-store-url="${SHARED_STORAGE_URL}/merged-blocks" \
   --firehose-grpc-listen-addr=":10015" \
-  --relayer-addr="localhost:10012"
+  --common-live-blocks-addr="localhost:10012"
 ```
 
 ### Verify Firehose Operation
@@ -166,7 +167,7 @@ grpcurl -plaintext -d '{"start_block_num": 1, "stop_block_num": 5}' \
 
 ## Component 5: Substreams Tier 1
 
-Substreams Tier 1 handles data transformation and filtering.
+Substreams Tier 1 serves as the entry point for Substreams requests, handling live blocks directly and delegating historical block processing to Tier 2 workers.
 
 ```bash
 # Terminal 5: Start Substreams Tier 1
@@ -178,12 +179,17 @@ firecore start substreams-tier1 \
   --common-one-block-store-url="${SHARED_STORAGE_URL}/one-blocks" \
   --common-merged-blocks-store-url="${SHARED_STORAGE_URL}/merged-blocks" \
   --substreams-tier1-grpc-listen-addr=":10016" \
-  --relayer-addr="localhost:10012"
+  --common-live-blocks-addr="localhost:10012" \
+  --substreams-tier1-subrequests-endpoint="localhost:10017"
 ```
 
 ## Component 6: Substreams Tier 2
 
-Substreams Tier 2 provides additional processing capabilities and caching.
+Substreams Tier 2 workers handle the actual block processing for historical data. Tier 1 delegates work to Tier 2 workers.
+
+{% hint style="info" %}
+Start Tier 2 before Tier 1, as Tier 1 connects to Tier 2 workers via `--substreams-tier1-subrequests-endpoint`.
+{% endhint %}
 
 ```bash
 # Terminal 6: Start Substreams Tier 2
@@ -192,8 +198,8 @@ firecore start substreams-tier2 \
   --data-dir="./substreams-tier2-data" \
   --advertise-block-id-encoding="hex" \
   --advertise-chain-name="acme-dummy-blockchain" \
-  --substreams-tier2-grpc-listen-addr=":10017" \
-  --substreams-tier1-addr="localhost:10016"
+  --common-merged-blocks-store-url="${SHARED_STORAGE_URL}/merged-blocks" \
+  --substreams-tier2-grpc-listen-addr=":10017"
 ```
 
 ### Verify Substreams Operation
@@ -236,7 +242,6 @@ Monitor each component's health:
 
 ```bash
 # Check component health via gRPC health checks
-grpcurl -plaintext localhost:10010 grpc.health.v1.Health/Check  # Reader
 grpcurl -plaintext localhost:10011 grpc.health.v1.Health/Check  # Merger
 grpcurl -plaintext localhost:10012 grpc.health.v1.Health/Check  # Relayer
 grpcurl -plaintext localhost:10015 grpc.health.v1.Health/Check  # Firehose

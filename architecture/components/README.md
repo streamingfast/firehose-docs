@@ -10,11 +10,11 @@ description: StreamingFast Firehose components
 
 The Firehose system is comprised of several key components that work together to provide your desired functionality.
 
-* [Firehose-enabled Blockchain Node](firehose-enabled-node.md)
-* [Reader](reader.md)
+* [Reader Node](reader.md)
 * [Merger](merger.md)
 * [Relayer](relayer.md)
 * [Firehose gRPC Server](grpc-server.md)
+* [Substreams](substreams.md)
 
 ## Component Relationships
 
