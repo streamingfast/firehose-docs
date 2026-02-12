@@ -41,7 +41,7 @@ Firehose for Injective uses an **RPC poller** approach. The poller fetches block
 
 ```
 ┌──────────────────┐     RPC      ┌──────────────────┐     stdout    ┌──────────────┐
-│  Injective RPC   │◄────────────│ fireinjective    │──────────────►│  Reader Node │
+│  Injective RPC   │◄──────────── │ fireinjective    │──────────────►│  Reader Node │
 │    Endpoint      │              │   poller         │               │  (Firehose)  │
 └──────────────────┘              └──────────────────┘               └──────────────┘
 ```
