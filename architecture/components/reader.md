@@ -87,8 +87,7 @@ The most common mode. The Reader Node spawns and manages the underlying binary a
 ```bash
 firecore start reader-node \
   --reader-node-path="geth" \
-  --reader-node-arguments="--vmtrace=firehose --datadir={node-data-dir}" \
-  --reader-node-data-dir="./data/node"
+  --reader-node-arguments="--vmtrace=firehose --datadir={node-data-dir}"
 ```
 
 ### reader-node-stdin
@@ -108,143 +107,10 @@ firecore start reader-node-firehose \
   --reader-node-firehose-endpoint="mainnet.eth.streamingfast.io:443"
 ```
 
-## Node Operator Management API
-
-The Reader Node includes a management API that allows operators to control the underlying subprocess without restarting the entire Reader Node process. This is exposed via HTTP on the `--reader-node-manager-api-addr` port (default `:10011`).
-
-### Available Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/healthz` or `/v1/healthz` | GET | Health check - returns ready/not ready status |
-| `/v1/ping` | GET | Simple ping, returns "pong" |
-| `/v1/is_running` | GET | Check if subprocess is running (JSON response) |
-| `/v1/start_command` | GET | Show the command being executed |
-| `/v1/maintenance` | POST | Stop subprocess for maintenance |
-| `/v1/resume` | POST | Start/resume the subprocess |
-| `/v1/reload` or `/v1/restart` | POST | Restart the subprocess |
-| `/v1/backup` | POST | Trigger a backup (if backup modules configured) |
-| `/v1/restore` | POST | Restore from backup |
-| `/v1/list_backups` | GET | List available backups |
-| `/v1/safely_reload` | POST | Safely reload (waits for production round on producer nodes) |
-
-### Usage Examples
-
-**Check health status:**
-```bash
-curl http://localhost:10011/v1/healthz
-```
-
-**Put node in maintenance mode (stop subprocess):**
-```bash
-curl -XPOST http://localhost:10011/v1/maintenance
-```
-
-**Resume node operation:**
-```bash
-curl -XPOST http://localhost:10011/v1/resume
-```
-
-**Restart the underlying node:**
-```bash
-curl -XPOST http://localhost:10011/v1/restart
-```
-
-**Check if subprocess is running:**
-```bash
-curl http://localhost:10011/v1/is_running
-# Returns: {"is_running":true}
-```
-
-{% hint style="info" %}
-Add `?sync=true` to POST requests to wait for the command to complete before returning.
-{% endhint %}
-
-{% hint style="success" %}
-The management API is particularly useful for maintenance operations - you can stop the blockchain node to perform backups or maintenance without affecting the Reader Node process itself.
-{% endhint %}
-
-## Configuration
-
-### Core Flags
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--reader-node-path` | Path to the binary to execute | (required) |
-| `--reader-node-arguments` | Arguments passed to the subprocess (supports templating) | |
-| `--reader-node-data-dir` | Data directory for the underlying node | `{data-dir}/reader/data` |
-| `--reader-node-working-dir` | Working directory for reader files | `{data-dir}/reader/work` |
-| `--reader-node-grpc-listen-addr` | gRPC address for streaming blocks to Relayer | `:10010` |
-| `--reader-node-manager-api-addr` | HTTP address for management API | `:10011` |
-
-### Block Range Control
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--reader-node-start-block-num` | Skip blocks before this number | `0` |
-| `--reader-node-stop-block-num` | Stop after reaching this block (inclusive) | (none) |
-| `--reader-node-discard-after-stop-num` | Discard blocks after stop number | `false` |
-
-### Performance Tuning
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--reader-node-blocks-chan-capacity` | Block channel capacity (shutdown at 90% full) | `100` |
-| `--reader-node-line-buffer-size` | Max line buffer size in bytes | `209715200` (200MB) |
-| `--reader-node-readiness-max-latency` | Max head block latency for health check | `30s` |
-| `--reader-node-one-block-suffix` | Unique suffix for one-block files | `default` |
-
-### Debug Flags
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--reader-node-debug-firehose-logs` | Print Firehose protocol logs to stdout | `false` |
-
-### Argument Templating
-
-The `--reader-node-arguments` flag supports template variables that are resolved at runtime:
-
-| Template | Resolves To |
-|----------|-------------|
-| `{data-dir}` | The `--data-dir` flag value |
-| `{node-data-dir}` | The `--reader-node-data-dir` flag value |
-| `{hostname}` | Machine hostname |
-| `{start-block-num}` | The resolved `--reader-node-start-block-num` value |
-| `{stop-block-num}` | The `--reader-node-stop-block-num` value |
-| `{first-streamable-block}` | The `--common-first-streamable-block` value |
-
-Environment variables are also expanded: `${ENV_VAR}` will be replaced with the value of `ENV_VAR`.
-
-**Example:**
-```bash
---reader-node-arguments="--datadir={node-data-dir} --port=${P2P_PORT}"
-```
-
-## Backup Support
-
-The Reader Node supports automated backups through backup modules. Configure backups using the `--reader-node-backups` flag:
-
-```bash
---reader-node-backups="type=gke-pvc-snapshot prefix=backup tag=v1 freq-blocks=1000"
-```
-
-Backup parameters:
-- `type`: Backup module type (e.g., `gke-pvc-snapshot`)
-- `prefix`: Backup name prefix
-- `tag`: Backup tag/version
-- `freq-blocks`: Trigger backup every N blocks
-- `freq-time`: Trigger backup by time interval
-
-Backups can also be triggered manually via the management API:
-```bash
-curl -XPOST http://localhost:10011/v1/backup
-```
-
 ## Output: One-Block Files
 
-The Reader Node produces **one-block files** - individual files containing a single block's data in Protocol Buffer format. These files are written to the path specified by `--common-one-block-store-url`.
+The Reader Node produces **one-block files** - individual files containing a single block's data in Protocol Buffer format. These files:
 
-One-block files:
 - Are named with the block number and hash for uniqueness
 - Enable parallel processing by the Merger
 - Capture all forks seen by this Reader
@@ -277,3 +143,7 @@ The node does **not** need:
 - Any special storage configuration
 
 This minimal configuration reduces resource requirements and operational complexity.
+
+## Configuration Reference
+
+For complete configuration options, flags, and the Management API reference, see [Reader Node CLI Reference](../../references/cli/reader-node.md).

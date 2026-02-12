@@ -143,83 +143,7 @@ Timeline:
 
 The transition is invisible to clients—they receive a continuous stream regardless of the underlying data source.
 
-## Configuration
-
-### Essential Flags
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--firehose-grpc-listen-addr` | gRPC listening address | `:10015` |
-| `--common-merged-blocks-store-url` | Merged blocks storage URL | `file://{data-dir}/storage/merged-blocks` |
-| `--common-one-block-store-url` | One-block files storage URL | `file://{data-dir}/storage/one-blocks` |
-| `--common-forked-blocks-store-url` | Forked blocks storage URL | `file://{data-dir}/storage/forked-blocks` |
-| `--common-live-blocks-addr` | Relayer gRPC address for live blocks | `:10014` |
-| `--common-first-streamable-block` | First block number available to stream | `0` |
-
-### Performance Tuning
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--firehose-enforce-compression` | Require gzip or zstd compression | `true` |
-| `--firehose-rate-limit-bucket-size` | Rate limit bucket size (-1 = unlimited) | `-1` |
-| `--firehose-rate-limit-bucket-fill-rate` | Rate limit refill rate | `10s` |
-| `--common-blocks-cache-enabled` | Enable disk-based block caching | `false` |
-| `--common-blocks-cache-dir` | Block cache directory | `file://{data-dir}/storage/blocks-cache` |
-
-### Discovery Service
-
-For load-balanced deployments:
-
-| Flag | Description |
-|------|-------------|
-| `--firehose-discovery-service-url` | gRPC discovery service URL |
-
-## Usage Examples
-
-### Starting Firehose
-
-```bash
-firecore start firehose \
-  --firehose-grpc-listen-addr=":10015" \
-  --common-merged-blocks-store-url="s3://my-bucket/merged-blocks" \
-  --common-one-block-store-url="s3://my-bucket/one-blocks" \
-  --common-forked-blocks-store-url="s3://my-bucket/forked-blocks" \
-  --common-live-blocks-addr="relayer.internal:10014"
-```
-
-### With Block Caching
-
-For high-traffic deployments, enable block caching to reduce repeated storage reads:
-
-```bash
-firecore start firehose \
-  --firehose-grpc-listen-addr=":10015" \
-  --common-blocks-cache-enabled=true \
-  --common-blocks-cache-dir="/fast-storage/cache" \
-  --common-blocks-cache-max-recent-entry-bytes=21474836480
-```
-
-## Client Integration
-
-### gRPC API
-
-Firehose exposes the `sf.firehose.v2.Stream` service:
-
-```protobuf
-service Stream {
-  rpc Blocks(Request) returns (stream Response);
-}
-
-message Request {
-  int64 start_block_num = 1;
-  string stop_block_num = 2;    // Empty for live streaming
-  string cursor = 3;            // Resume from cursor
-  repeated string final_blocks_only = 4;
-  repeated google.protobuf.Any transforms = 5;
-}
-```
-
-### Streaming Modes
+## Streaming Modes
 
 1. **Historical range**: Specify start and stop block numbers
 2. **Historical to live**: Specify start, omit stop to continue streaming indefinitely
@@ -243,11 +167,6 @@ For production deployments:
 3. Clients can reconnect to any instance using cursors
 4. Use discovery service for automatic instance registration
 
-### Monitoring
+## Configuration Reference
 
-Key metrics to monitor:
-
-- `firehose_active_requests`: Current number of streaming clients
-- `firehose_blocks_sent_total`: Total blocks sent to clients
-- `firehose_request_duration_seconds`: Request latency histogram
-- `firehose_cache_hits_total`: Block cache hit rate (if caching enabled)
+For complete configuration options and flags, see [Firehose CLI Reference](../../references/cli/firehose.md).

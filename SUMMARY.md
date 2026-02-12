@@ -52,6 +52,11 @@
 ## References
 
 * [CLI Reference](references/cli-reference.md)
+  * [Reader Node](references/cli/reader-node.md)
+  * [Merger](references/cli/merger.md)
+  * [Relayer](references/cli/relayer.md)
+  * [Firehose](references/cli/firehose.md)
+  * [Substreams](references/cli/substreams.md)
 * [Supported Protocols](references/repositories.md)
 * [Naming Conventions](references/naming-conventions.md)
 * [Schemas](references/protobuf-schemas.md)

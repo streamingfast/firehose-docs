@@ -69,40 +69,7 @@ When encountering failures (storage errors, network issues), the Merger implemen
 - Handles temporary storage unavailability gracefully
 - Logs warnings for holes in merged files that can be recovered
 
-## Configuration
-
-### Essential Flags
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--merger-grpc-listen-addr` | gRPC listening address for health checks | `:10012` |
-| `--common-one-block-store-url` | One-block files storage URL (input) | `file://{data-dir}/storage/one-blocks` |
-| `--common-merged-blocks-store-url` | Merged blocks storage URL (output) | `file://{data-dir}/storage/merged-blocks` |
-| `--common-forked-blocks-store-url` | Forked blocks storage URL | `file://{data-dir}/storage/forked-blocks` |
-
-### Timing Configuration
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--merger-time-between-store-lookups` | Polling interval for source store | `1s` |
-| `--merger-time-between-store-pruning` | Interval between pruning operations | `1m0s` |
-
-### Pruning Configuration
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--merger-prune-forked-blocks-after` | Blocks to retain before pruning forks | `50000` |
-| `--merger-delete-threads` | Parallel threads for file deletion | `8` |
-
-### Execution Control
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--merger-stop-block` | Stop after merging to this block | (none) |
-
-## Operational Details
-
-### Bundle Size
+## Bundle Size
 
 The Merger creates bundles of exactly **100 blocks** each. This fixed size provides:
 
@@ -110,55 +77,34 @@ The Merger creates bundles of exactly **100 blocks** each. This fixed size provi
 - Efficient batch access for historical queries
 - Consistent compression ratios
 
-### Pruning Operations
+## Pruning Operations
 
 Two concurrent pruning operations run in the background:
 
 1. **One-Block Pruner**: Removes source files after they've been merged and are beyond the pruning distance from the Last Irreversible Block (LIB)
 
-2. **Forked Blocks Pruner**: Removes forked block files that are older than `--merger-prune-forked-blocks-after` blocks
+2. **Forked Blocks Pruner**: Removes forked block files that are older than the configured pruning distance (default 50,000 blocks)
 
 {% hint style="warning" %}
 The pruning distance should be set large enough to handle chain reorganizations. The default of 50,000 blocks is conservative and suitable for most chains.
 {% endhint %}
 
-### Deletion Threading
-
-File deletion is parallelized using a configurable number of threads (`--merger-delete-threads`). This prevents deletion from becoming a bottleneck when processing large volumes of one-block files.
-
-The deletion queue:
-- Deduplicates pending deletions automatically
-- Retries failed deletions before logging warnings
-- Handles `ErrNotFound` gracefully (file already deleted)
-
-### Health Checks
-
-The Merger exposes a gRPC health check endpoint that always reports `SERVING` status. The Merger is considered healthy as long as it's running - unlike other components, it doesn't have dynamic readiness conditions.
-
-```bash
-# Check Merger health
-grpcurl -plaintext localhost:10012 grpc.health.v1.Health/Check
-```
-
-## Storage Requirements
+## Storage Access
 
 ### One-Block Storage (Input)
 
-- **Location**: Configured via `--common-one-block-store-url`
 - **Access**: Read (to fetch blocks) and Delete (to prune)
 - **Volume**: Temporary - files are deleted after merging
 - **Naming**: Files include block number and hash for uniqueness
 
 ### Merged Blocks Storage (Output)
 
-- **Location**: Configured via `--common-merged-blocks-store-url`
 - **Access**: Write (to store bundles) and Read (to detect gaps)
 - **Volume**: Permanent - the primary historical data store
 - **Format**: Compressed 100-block bundles
 
 ### Forked Blocks Storage
 
-- **Location**: Configured via `--common-forked-blocks-store-url`
 - **Access**: Write (to preserve forks) and Delete (to prune)
 - **Volume**: Moderate - pruned regularly, retains recent forks only
 - **Purpose**: Enables cursor resolution on forked blocks
@@ -172,3 +118,7 @@ When running multiple Reader Nodes, the Merger consolidates blocks from all sour
 - Forked blocks from any Reader are preserved for cursor resolution
 
 This architecture ensures no block data is lost, even when different Readers observe different blockchain states.
+
+## Configuration Reference
+
+For complete configuration options and flags, see [Merger CLI Reference](../../references/cli/merger.md).
