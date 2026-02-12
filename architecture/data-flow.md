@@ -24,7 +24,7 @@ Each Firehose component plays an important role as the blockchain data flows thr
 
 The StreamingFast Instrumentation feeds to Reader components. The Reader components feed the Relayer component.
 
-The Index and IndexProvider components work with data provided by the instrumentation through the Reader through the Relayer. Finally, the Firehose gRPC Server component hands data back to any consumers of Firehose.
+Finally, the Firehose component hands data back to any consumers through its gRPC API.
 
 ### Key Points
 
@@ -33,13 +33,12 @@ The Index and IndexProvider components work with data provided by the instrument
 * Reader components will then write the data to persistent storage. The data is then broadcast to the rest of the components in Firehose.
 * The Relayer component reads block data provided by one or more Reader components and provides a live data source for the other Firehose components.
 * The Merger component combines blocks created by Reader components into batches of one hundred individually merged blocks. The merged blocks are stored in an object store or written to disk.
-* The Indexer component provides a targeted summary of the contents of each 100-blocks file that was created by the Merger component. The indexed 100-blocks files are tracked and cataloged in an index file created by the Indexer component.
-* The IndexProvider component reads index files created by the Indexer component and provides fast responses about the contents of block data for filtering purposes.
-* The Firehose gRPC server component receives blocks from either:
-  * a merged blocks file source.
-  * live block data received through the Relayer component.
-  * an indexed file source created through the collaboration between the Indexer and IndexProvider components.
-* The Firehose gRPC Server component then joins and returns the block data to its consumers.
+* The Firehose component receives blocks from:
+  * **Merged blocks storage** for historical data requests
+  * **One-block storage** for recent blocks not yet merged
+  * **Forked blocks storage** for cursor resolution on forks
+  * **Relayer** for live block data
+* The Firehose component then joins and returns the block data to its consumers through a cursor-based gRPC stream.
 * _Tradeoffs and benefits are presented for how data is stored and how it flows from the instrumented blockchain nodes through Firehose._
 
 ## Reader Data Flow
@@ -52,60 +51,81 @@ The instrumentation itself is called Firehose Instrumentation and generate Fireh
 
 ### Firehose Logs
 
-Firehose logs outputs small chunks of data processed using a simple text-based protocol over the operating system's standard output pipe.
+Firehose logs use a simple, unified text-based protocol over the operating system's standard output pipe. This protocol is **chain-agnostic** — any blockchain that implements the Firehose Logs specification automatically benefits from the entire Firehose ecosystem.
 
-{% hint style="danger" %}
-Note: This describes the **current methods** of instrumentation for Ethereum. It is our goal though that the integration point here gets simplified to the point where a single message would arrive for each block, on any given chain, well formatted in a nice protobuf bytestream.
+The protocol consists of just two message types that the instrumented node outputs to stdout.
 
-Contact the team if you're about to do a new chain integration. Also read the [integration overview](../integrate-new-chains/integration-overview.md).&#x20;
+{% hint style="info" %}
+For a reference implementation of Firehose instrumentation, see the [dummy-blockchain](https://github.com/streamingfast/dummy-blockchain) project. It demonstrates how to implement the protocol in a simple, educational blockchain node.
 {% endhint %}
 
-### Firehose Logs Messages
+### Firehose Logs Protocol
 
-The Firehose Logs are specific for each blockchain although quite similar from one chain to another. There is no standardized format today, each chain implemented it's own format. The Firehose logs are usually modeled using "events" for example:
+The Firehose Logs protocol is intentionally simple, consisting of only two messages:
 
-* `START BLOCK`
-* `START TRANSACTION`
-* `RECORD STATE CHANGE`
-* `RECORD LOG`
-* `STOP TRANSACTION`
-* `STOP BLOCK`
+#### FIRE INIT
 
-Each message contains the specific payload for the event. The start block for instance contains the block number and block hash. The small chunk of messages are assembled by the reader node to form a final chain specific protobuf block model.
+The initialization message is sent once at startup to declare the protocol version and the protobuf type used for blocks:
 
-### Example Firehose Logs Messages
+```
+FIRE INIT <version> <protobuf_block_type>
+```
 
-Example block data event messages from a Firehose instrumented Ethereum `geth` client:
+| Field | Description |
+|-------|-------------|
+| `version` | Protocol version. Supported: `1.0`, `3.0`, `3.1` |
+| `protobuf_block_type` | Fully qualified protobuf message name (e.g., `sf.acme.type.v1.Block`) |
+
+#### FIRE BLOCK
+
+Block messages are sent for each block, containing metadata and the full block payload:
+
+**Protocol version 1.0/3.0:**
+```
+FIRE BLOCK <block_num> <block_hash> <parent_num> <parent_hash> <lib_num> <timestamp_nanos> <base64_block>
+```
+
+**Protocol version 3.1 (with partial block support):**
+```
+FIRE BLOCK <block_num> <partial_idx> <block_hash> <parent_num> <parent_hash> <lib_num> <timestamp_nanos> <base64_block>
+```
+
+| Field | Description |
+|-------|-------------|
+| `block_num` | Block height/number (uint64) |
+| `partial_idx` | (v3.1 only) Partial block index. Values ≥1000 indicate final partial (actual index = value - 1000) |
+| `block_hash` | Block identifier/hash |
+| `parent_num` | Parent block number (uint64) |
+| `parent_hash` | Parent block hash |
+| `lib_num` | Last irreversible block number (uint64) |
+| `timestamp_nanos` | Block timestamp in Unix nanoseconds |
+| `base64_block` | Base64-encoded protobuf block payload |
+
+### Example Firehose Logs
+
+Example output from an instrumented blockchain node:
 
 ```shell
-FIRE BEGIN_BLOCK 33
-FIRE BEGIN_APPLY_TRX 52e3ea8d63f66bfa65a5c9e5ba3f03fd80c5cf8f0b3fcbb2aa2ddb8328825141 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 0de0b6b3a7640000 0bfa f219f658459a2533c5a5c918d95ba1e761fc84e6d35991a45ed8c5204bb5a61a 43ff7909bb4049c77bd72750d74498cfa3032c859e2cc0864d744876aeba3221 21040 01 32 .
-FIRE TRX_FROM ea143138dab9a14e11d1ae91e669851e6cc72131
-FIRE BALANCE_CHANGE 0 ea143138dab9a14e11d1ae91e669851e6cc72131 ffffffffffffffffffffffffffffffffffffffffffffffd65ddbe509d1bbf1 ffffffffffff        ffffffffffffffffffffffffffffffffffd65ddbe509d169c1 gas_buy
-FIRE GAS_CHANGE 0 21040 40 intrinsic_gas
-FIRE NONCE_CHANGE 0 ea143138dab9a14e11d1ae91e669851e6cc72131 32 33
-FIRE EVM_RUN_CALL CALL 1
-FIRE BALANCE_CHANGE 1 ea143138dab9a14e11d1ae91e669851e6cc72131 ffffffffffffffffffffffffffffffffffffffffffffffd65ddbe509d169c1 ffffffffffffffffffffffffffffffffffffffffffffffc87d2531626d69c1 transfer
-FIRE BALANCE_CHANGE 1 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 . 0de0b6b3a7640000 transfer
-FIRE EVM_PARAM CALL 1 ea143138dab9a14e11d1ae91e669851e6cc72131 1baa897024ee45b5e2f2de32a2a3f3067fe0a840 0de0b6b3a7640000 40 .
-FIRE EVM_END_CALL 1 0 .
-FIRE BALANCE_CHANGE 0 ea143138dab9a14e11d1ae91e669851e6cc72131 ffffffffffffffffffffffffffffffffffffffffffffffc87d2531626d69c1 ffffffffffffffffffffffffffffffffffffffffffffffc87d2531626dbbf1 reward_transaction_fee
-FIRE END_APPLY_TRX 21040 . 21040 00...00 []
-FIRE FINALIZE_BLOCK 33
-FIRE END_BLOCK 33 717 {"header":{"parentHash":"0x538473df2d1a762473cf9f8f6c69e6526e3030f4c2450c8fa5f0df8ab18bf156","sha3Uncles":"0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347","miner":"0x0000000000000000000000000000000000000000","stateRoot":"0xf7293dc5f7d868e03da71aa8ce8cf70cfe4e481ede1e8c37dabb723192acebb5","transactionsRoot":"0x8b89cee82fae3c1b51dccc5aa2d50d127ce265ed2de753000452f125b2921050","receiptsRoot":"0xa5d9213276fa6b513343456f2cad9c9dae28d7cd1c58df338695b747cb70327d","logsBloom":"0x00...00","difficulty":"0x2","number":"0x21","gasLimit":"0x59a5380","gasUsed":"0x5230","timestamp":"0x5ddfd179","extraData":"0xd983010908846765746888676f312e31332e318664617277696e000000000000e584572f63ccfbda7a871f6ad0bab9473001cb60597fa7693b7c103c0607d5ef3705d84f79e0a4cc9186c65f573b5b6e98011b3c26df20c368f99bcd7ab6d1d601","mixHash":"0x0000000000000000000000000000000000000000000000000000000000000000","nonce":"0x0000000000000000","hash":"0x38daac54143e832715197781503b5a6e8068065cc273b64f65ea10d1ec5ee41d"},"uncles":[]}
+FIRE INIT 3.0 sf.acme.type.v1.Block
+FIRE BLOCK 1 4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce 0 0000000000000000000000000000000000000000000000000000000000000000 0 1609459200000000000 CgRhY21lEg...
+FIRE BLOCK 2 4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a 1 4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce 0 1609459201000000000 CgRhY21lEg...
+FIRE BLOCK 3 ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d 2 4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a 1 1609459202000000000 CgRhY21lEg...
 ```
+
+The `base64_block` field contains the chain-specific block data serialized as protobuf and encoded in base64. The protobuf schema can model any blockchain's data structures while maintaining compatibility with the Firehose ecosystem.
 
 ### Firehose Logs & Reader Coordination
 
-The block data event messages provided by the Firehose instrumentation are read by the reader component.
+The Firehose logs messages are read and processed by the Reader component from `firehose-core`.
 
-The `reader` component deals with:
+The `reader` component:
 
-* Launching instrumented native node process and manages its lifecycle (start/stop/monitor).
-* Connects to the native node process' standard output pipe.
-* Read the Firehose logs event messages and assembles a chain specific protobuf Block model
+* Launches the instrumented native node process and manages its lifecycle (start/stop/monitor)
+* Connects to the native node process' standard output pipe
+* Parses `FIRE INIT` to learn the protocol version and block type
+* Parses each `FIRE BLOCK` message, decodes the base64 payload, and wraps it in a Firehose block envelope
 
-After a block has been formed, it is serialized into binary format, stored in persistent storage, and simultaneously broadcast to all gRPC streaming subscribers. The persistent block enables historical access to all data in the blockchain without reliance on native node processes.
+After a block has been received, it is stored in persistent storage and simultaneously broadcast to all gRPC streaming subscribers. The persistent blocks enable historical access to all data in the blockchain without reliance on native node processes.
 
 The easily accessible block data enables StreamingFast's highly parallelized reprocessing tools to read and manipulate different sections of the chain at the developer's convenience.
 
@@ -145,77 +165,41 @@ The Merger component assists with the reduction of storage costs, improved data 
 
 The blocks bundled by the Merger component become the file-based historical data source of blocks for all Firehose components.
 
-## Indexer Data Flow
+## Firehose Data Flow
 
-### Indexer Data Flow in Detail
+### Firehose Data Flow in Detail
 
-The Indexer component runs as a background process digesting merged block files.
+The Firehose component is responsible for supplying the stream of block data to requesting consumers. The Firehose component can be thought of as the top most component in the Firehose architectural stack.
 
-The Indexer component consumes merged blocks files and provides a targeted summary of the blocks. The targeted summaries are written to object storage as index files.
+### Data Sources
 
-### Transforms
+Firehose components connect to multiple data sources to serve consumer requests:
 
-Target summaries are created when incoming Firehose queries contain StreamingFast Transforms.
-
-{% hint style="info" %}
-**Note**_: Targeted summaries are variable in nature._
-{% endhint %}
-
-### Transforms & Protocol Buffers
-
-StreamingFast Transforms are used to locate a specific series of blocks according to search criteria provided by Firehose consumers. Transforms are created using Protocol Buffer definitions.
-
-## IndexProvider Data Flow
-
-### IndexProvider Data Flow in Detail
-
-The IndexProvider component accepts queries made to Firehose that contain StreamingFast Transforms.
-
-### Chain Agnostic
-
-The IndexProvider component is not specific to any particular blockchain's data format. The IndexProvider can be considered chain-agnostic for this reason.
-
-### IndexProvider & Transforms
-
-The IndexProvider component interprets Transforms in accordance with their Protocol Buffer definitions.
-
-### Data Filtering
-
-The Transforms are handed off to chain-specific filter functions. The desired filtering is applied to the blocks in the data stream by the IndexProvider component to limit the results it supplies.
-
-### Specific Data in Large Ranges
-
-The IndexProvider component using Transforms is able to provide knowledge about specific data in large ranges of block data. This includes the presence or absence of specific data contained within the blocks the component is filtering.
-
-## gRPC Server Data Flow
-
-### gRPC Server Data Flow in Detail
-
-The gRPC Server component is responsible for supplying the stream of block data to requesting consumers of Firehose. The gRPC Server can be thought of as the top most component in the Firehose architectural stack.
-
-### Persistent & Live Data
-
-Firehose gRPC Server components connect to persisted and live block data sources to serve consumer data requests.
+- **Merged blocks storage**: Primary source for historical data (100-block bundles)
+- **One-block storage**: Recent blocks not yet merged
+- **Forked blocks storage**: Blocks from non-canonical branches for cursor resolution
+- **Relayer**: Live blocks for real-time streaming
 
 {% hint style="info" %}
-_Firehose was designed to switch between the persistent and live data store as it's joining data to intelligently fulfill inbound requests from consumers._
+_Firehose was designed to seamlessly switch between data sources as it fulfills inbound requests from consumers._
 {% endhint %}
 
 ### Historical Data Requests
 
-Consumer requests for historical blocks are fetched from persistent storage. The historical blocks are passed inside a `ForkDB` and sent with a cursor uniquely identifying the block and its position in the blockchain.
+Consumer requests for historical blocks are fetched from merged blocks storage. The historical blocks are passed through a `ForkDB` and sent with a cursor uniquely identifying the block and its position in the blockchain.
 
 ### Fork Preservation
 
-Firehose has the ability to resume from forked blocks because all forks are preserved during node data processing.
+Firehose has the ability to resume from forked blocks because all forks are preserved in the forked blocks storage during node data processing.
 
-### gRPC Data Filtering
+### Cursor-Based Streaming
 
-The gRPC component will filter block content through Transforms passed to the IndexProvider component. The Transforms are used as filter expressions to isolate specific data points in the block data.
+Each block sent to clients includes a cursor containing:
+- Block number and hash
+- Last irreversible block information
+- Fork step (new, undo, or irreversible)
 
-Transactions that do not match the filter criteria provided in Transforms are removed from the block and execution units are flagged as either matching or not matching.
-
-Block metadata is always sent to guarantee sequentiality on the receiving end; with or without matching Transforms criteria.
+Clients can resume streaming from any cursor, even if the block was on a fork that has since been abandoned.
 
 ## `bstream`
 
@@ -286,6 +270,44 @@ The `bstream` library contains the minimally required metadata to maintain the c
 ### Block & Protocol Buffers
 
 `Block` carries a payload of Protocol Buffer bytes. The payload can be decoded by the consumer in accordance with one of the supported chain-specific `Block` definitions, for example, `sf.ethereum.type.v1.Block`.
+
+## Substreams Data Flow
+
+### Substreams Data Flow in Detail
+
+The Substreams component provides parallel data transformation capabilities on top of the Firehose data pipeline. Substreams reads from the same data sources as other Firehose components and adds a powerful processing layer.
+
+### Data Sources
+
+Substreams consumes data from:
+
+* **Merged Blocks Storage**: Historical block data processed by the Merger component
+* **One-Block Storage**: Recent blocks not yet merged
+* **Relayer**: Live blocks for real-time streaming
+
+### Two-Tier Processing
+
+Substreams uses a two-tier architecture to optimize processing:
+
+* **Tier 1**: Handles request coordination, live block streaming (from Relayer), and merges results from Tier 2 workers
+* **Tier 2**: Executes WASM modules against historical block ranges in parallel
+
+### Execution Flow
+
+1. Consumer sends a Substreams request with a `.spkg` package to Tier 1
+2. For live blocks: Tier 1 executes modules directly using blocks from the Relayer
+3. For historical blocks: Tier 1 dispatches block ranges to multiple Tier 2 instances
+4. Tier 2 instances read blocks from merged block storage and execute WASM modules
+5. Results are cached for future requests with the same modules and block ranges
+6. Tier 1 merges all results and streams them back to the consumer
+
+### Caching Strategy
+
+Substreams caches execution results at module output boundaries. This enables:
+
+* Fast subsequent requests for the same data
+* Efficient composability where downstream modules reuse cached upstream outputs
+* Reduced computational overhead for popular Substreams packages
 
 ### Data Storage in Detail
 

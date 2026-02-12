@@ -1,149 +1,117 @@
 ---
-description: StreamingFast Firehose template sample for A Company that Makes Everything
+description: StreamingFast Firehose template for new chain integrations
 ---
 
-# Firehose Acme
+# Firehose Starter
 
-Instrumenting a new chain from scratch requires the node native code to be instrumented to output Firehose logs, but this is only one side of the coin. A Firehose instrumentation of a new chain requires also a `firehose-<chain>` program that contains chain-specific code to read the data output by the instrumented node, and serves data throughout the Firehose stack.
+Instrumenting a new chain requires the blockchain node to output [Firehose Logs](../architecture/data-flow.md#firehose-logs) — a simple, unified protocol consisting of `FIRE INIT` and `FIRE BLOCK` messages. Any chain that implements this protocol automatically benefits from the entire Firehose ecosystem.
 
-This `firehose-<chain>` is a Golang project that contains the CLI, the [reader code necessary to assemble Firehose node output into chain-specific Blocks](https://github.com/streamingfast/firehose-acme/blob/master/codec/console\_reader.go), and a bunch of other small boilerplate code around the Firehose set of libraries.
+The Firehose Logs protocol is chain-agnostic: the node outputs block data as base64-encoded protobuf, and `firehose-core` handles the rest. The chain-specific parts are:
 
-To ease the work of Firehose implementors, we provide a "template" project [firehose-acme](https://github.com/streamingfast/firehose-acme) that is the main starting point for instrumenting new, unsupported blockchain nodes.
+1. **Node instrumentation**: Modify your blockchain node to output `FIRE INIT` and `FIRE BLOCK` messages
+2. **Protobuf schema**: Define your chain's block data model
 
-It consists of basic code and a Dummy Blockchain prototype. The idea is that you can play with this [firehose-acme](https://github.com/streamingfast/firehose-acme) instance to see blocks produced and test some Firehose behaviors.
+That's it — most chains only need these two pieces. No custom binary required.
 
-## Install `firehose-acme`
+## Implement Node Instrumentation
 
-Clone the repository:
+The key integration work is implementing the [Firehose Logs protocol](../architecture/data-flow.md#firehose-logs-protocol) in your blockchain node. The node must output:
 
-```bash
-git clone git@github.com:streamingfast/firehose-acme
-```
+1. `FIRE INIT` once at startup with the protocol version and protobuf block type
+2. `FIRE BLOCK` for each block with metadata and base64-encoded protobuf payload
 
-Install the `fireacme` binary:
+See the [dummy-blockchain tracer](https://github.com/streamingfast/dummy-blockchain/tree/main/tracer) for a reference implementation.
 
-```bash
-cd firehose-acme
-go install ./cmd/fireacme
-```
+## Define Protobuf Types
 
-{% hint style="info" %}
-A [Go](https://go.dev/doc/install) installation is required for the command below to work and the path where Golang install binaries should be available in your `PATH` (can be added with `export PATH=$PATH:$(go env GOPATH)/bin`, see [GOPATH](https://go.dev/doc/gopath\_code#GOPATH) for further details).
-{% endhint %}
+Create protobuf definitions that model your chain's block data structure. The block type name must match what your instrumented node outputs in the `FIRE INIT` message.
 
-And validate that everything is working as expected:
+Publish your protobuf definitions to the [Buf registry](https://buf.build) to use `firecore` directly, or keep them local if building a custom binary.
 
-```bash
-fireacme --version
-fireacme version dev (Built 2023-02-02T13:42:20-05:00)
-```
+## Using `firecore` Directly
 
-{% hint style="info" %}
-If `fireacme` is not found, please check [https://go.dev/doc/gopath\_code#GOPATH](https://go.dev/doc/gopath\_code#GOPATH)
-{% endhint %}
-
-## Install the dummy blockchain
-
-Obtain the Dummy Blockchain by installing from source:
+If your protobuf block definitions are published to the [Buf registry](https://buf.build), you can use `firecore` directly without building any chain-specific binary:
 
 ```bash
-go install github.com/streamingfast/dummy-blockchain@latest
+firecore start reader-node \
+  --reader-node-path=/path/to/your/instrumented-node \
+  --reader-node-proto-type=buf.build/myorg/mychain:sf.mychain.type.v1.Block
 ```
 
-And validate that it was installed correctly:
+This is the simplest integration path and works for most chains.
+
+## Optional: Custom `firehose-<chain>` Binary
+
+For chains that need custom CLI commands, specialized tooling, or prefer not to use the Buf registry, you can create a `firehose-<chain>` wrapper around `firehose-core`.
+
+We provide a template project [firehose-acme](https://github.com/streamingfast/firehose-acme) as a starting point. It includes scaffolding code and a [dummy-blockchain](https://github.com/streamingfast/dummy-blockchain) example.
+
+Copy the template:
 
 ```bash
-dummy-blockchain --version
-dummy-blockchain version 0.0.1 (build-commit="-" build-time="-")
+git clone git@github.com:streamingfast/firehose-acme firehose-mychain
+cd firehose-mychain
 ```
 
-## Run it
+### Rename to Your Chain
 
-A simple shell script that starts `firehose-acme` with sane default is located at [devel/standard/start.sh](https://github.com/streamingfast/firehose-acme/blob/master/devel/standard/start.sh). The configuration file used to launch all the applications at once is located at [devel/standard/standard.yaml](https://github.com/streamingfast/firehose-acme/blob/master/devel/standard/standard.yaml)
+Rename all references from "acme" to your chain's name. Choose two names:
 
-Run the script from your local cloned `firehose-acme` version as done in [firehose-acme installation section](firehose-starter.md#firehose-acme-installation):
+* **Long form**: Full chain name (e.g., `arweave`, `solana`, `ethereum`)
+* **Short form**: 3-4 letter abbreviation (e.g., `arw`, `sol`, `eth`)
+
+Perform the following replacements:
+
+* Rename `cmd/fireacme` → `cmd/fire<short>` (e.g., `cmd/firearw`)
+* Search and replace `fireacme` → `fire<short>`
+* Search and replace `acme` → `<long>` (case-sensitive for `acme`, `ACME`, `Acme`)
+
+Update the proto file path `sf/acme/type/v1/type.proto` and regenerate Go structs:
+
+```bash
+./types/pb/generate.sh
+```
+
+### Development & Testing
+
+The template includes a development script that starts Firehose with the dummy-blockchain:
 
 ```bash
 ./devel/standard/start.sh
 ```
 
-The following messages will be printed to the terminal window if:
+This uses the configuration in [devel/standard/standard.yaml](https://github.com/streamingfast/firehose-acme/blob/master/devel/standard/standard.yaml). Modify `start.flags.reader-node-path` to point to your instrumented node binary.
 
-* All of the configuration changes were made correctly,
-* All system paths have been set correctly,
-* And the Dummy Blockchain was installed and set up correctly.
+Run the test suite:
 
 ```bash
-2023-02-02T13:54:25.882-0500 INFO (dtracing) registering development exporters from environment variables
-2023-02-02T13:54:25.882-0500 INFO (fireacme) starting Firehose on Acme with config file 'standard.yaml'
-2023-02-02T13:54:25.882-0500 INFO (fireacme) launching applications: firehose,merger,reader-node,relayer
-start --store-dir=/Users/maoueh/work/sf/firehose-acme/devel/standard/firehose-data/reader/data --firehose-enabled --block-rate=60
-...
-2023-02-02T13:54:25.883-0500 INFO (reader) created acme superviser {"superviser": {"binary": "dummy-blockchain", "arguments": ["start", "--store-dir=/Users/maoueh/work/sf/firehose-acme/devel/standard/firehose-data/reader/data", "--firehose-enabled", "--block-rate=60"], "data_dir": "/Users/maoueh/work/sf/firehose-acme/devel/standard/firehose-data/reader/data", "last_block_seen": 0, "server_id": ""}}
-...
-2023-02-02T13:54:25.884-0500 INFO (reader) creating new command instance and launch read loop {"binary": "dummy-blockchain", "arguments": ["start", "--store-dir=/Users/maoueh/work/sf/firehose-acme/devel/standard/firehose-data/reader/data", "--firehose-enabled", "--block-rate=60"]}
-...
-2023-02-02T13:54:28.677-0500 INFO (bstream) hub is now Ready
-2023-02-02T13:54:28.677-0500 INFO (firehose) launching gRPC firehose server {"live_support": true}
-2023-02-02T13:54:28.677-0500 INFO (firehose) launching gRPC server {"listen_addr": ":18015"}
-2023-02-02T13:54:28.677-0500 INFO (firehose) serving gRPC (over HTTP router) (plain-text) {"listen_addr": ":18015"}
-2023-02-02T13:54:28.899-0500 INFO (reader.acme) level=info msg="processing block" hash=4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce height=3
-2023-02-02T13:54:29.897-0500 INFO (reader.acme) level=info msg="processing block" hash=4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a height=4
-2023-02-02T13:54:30.897-0500 INFO (reader.acme) level=info msg="processing block" hash=ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d height=5
-...
-```
-
-To integrate the target blockchain modify `devel/standard/standard.yaml` and change the `start.flags.mindreader-node-path` flag to point to the custom integration's blockchain node binary.
-
-## Define protobuf types
-
-Update the proto file `sf/acme/type/v1/type.proto` to model your chain's data model.
-
-### Generate structs
-
-After updating the references to "Acme" the Protocol Buffers need to be regenerated. Use the `generate` shell script to make the updates.
-
-```
-./types/pb/generate.sh
-```
-
-## Implement the reader
-
-The [`console_reader.go`](https://github.com/streamingfast/firehose-acme/blob/master/codec/console\_reader.go#L121) file is the interface between the instrumented node's output and the Firehose ingestion process.
-
-Each blockchain has specific pieces of data, and implementation details that are paticular to that blockchain. Reach out to us if you need guidance here.
-
-{% hint style="warning" %}
-**Important**_: Studying the StreamingFast Ethereum and other implementations and instrumentations should serve as a foundation for other custom integrations._
-{% endhint %}
-
-## Run tests
-
-After completing all of the previous steps the base integration is ready for initial testing.
-
-```
 go test ./...
 ```
 
-If all changes were made correctly the updated project should compile successfully.
+{% hint style="info" %}
+You can reach out to the StreamingFast team on Discord. We usually maintain these Go-side integrations and can help with the initial setup.
+{% endhint %}
 
-## Wrap up the integration
+## Register Your Chain
 
-You can reach out to the StreamingFast team on Discord. We usually maintain these Go-side integrations and keep them up-to-date. We can review, and do the renames as needed.
+Once your integration is working, register your chain in The Graph's networks registry to make it discoverable by the ecosystem.
 
-### Rename
+### The Graph Networks Registry
 
-You can also rename the project and all files and references to `acme` to your own chain's name. Choose two names, a long-form and a short form for the custom integration following the naming conventions outlined below.
+Add your chain to [The Graph Networks Registry](https://github.com/graphprotocol/networks-registry) by following their [adding/updating a chain guide](https://github.com/graphprotocol/networks-registry?tab=readme-ov-file#addingupdating-a-chain).
 
-For example:
+The registry entry includes metadata about your chain such as:
+* Chain ID and name
+* Firehose and Substreams endpoints
+* Block type information
 
-* `arweave` and `arw`
+### Update Well-Known Protobuf Descriptors
 
-Then finalize the rename:
+After your chain is registered, update `firehose-core` to include your chain's protobuf descriptors in the well-known types. This enables better tooling support across the ecosystem.
 
-* Rename `cmd/fireacme` -> `cmd/firearw` (short form)
-* Search and replace `fireacme` => `firearw` (short form)
-* Conduct a global search and replace from: `acme` => `arweave` (long form)
-* Conduct a global search to replace `ACME` => `ARWEAVE` (long form)
-* Conduct a global search to replace `Acme` => `Arweave` (long form)
+1. Run the [registry generator](https://github.com/streamingfast/firehose-core/blob/develop/proto/registry.go#L21) to regenerate the well-known descriptors
+2. Open a PR to `firehose-core` with the updated descriptors
 
+{% hint style="info" %}
+The StreamingFast team can help with this step — reach out on Discord after your chain is registered.
+{% endhint %}

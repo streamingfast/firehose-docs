@@ -7,54 +7,61 @@
 * [Firehose Overview](intro/firehose-overview.md)
 * [Prerequisites](intro/prerequisites.md)
 
-## Architecture
+## Firehose
 
-* [Components](architecture/components/README.md)
-  * [Firehose-enabled Node](architecture/components/firehose-enabled-node.md)
-  * [Reader](architecture/components/reader.md)
-  * [Merger](architecture/components/merger.md)
-  * [Relayer](architecture/components/relayer.md)
-  * [gRPC Server](architecture/components/grpc-server.md)
-  * [High Availability](architecture/components/high-availability.md)
-* [Data Flow](architecture/data-flow.md)
-* [Data Storage](architecture/data-storage.md)
-
-## Firehose Setup
-
-* [Overview](firehose-setup/overview.md)
-* [Ethereum](setup/ethereum/README.md)
-  * [Installation](firehose-setup/ethereum/installation.md)
-  * [Single-Machine Deployment](firehose-setup/ethereum/local-deployment.md)
-  * [Reprocessing history](setup/ethereum/reprocessing-history.md)
-  * [Synchronization](setup/ethereum/synchronization.md)
-* [Injective](firehose-setup/injective/README.md)
-  * [Single-Machine Deployment](firehose-setup/injective/single-machine-deployment.md)
-* [NEAR](firehose-setup/near/README.md)
-  * [Single-Machine Deployment](firehose-setup/near/installation.md)
-* [Solana](firehose-setup/solana/README.md)
-  * [Single-machine Deployment](firehose-setup/solana/single-machine-deployment.md)
-* [System Requirements](firehose-setup/system-requirements.md)
-
-## Community Integrations
-
-* [Starknet](community-integrations/starknet/README.md)
-  * [Networks and nodes](community-integrations/starknet/networks-and-nodes.md)
-  * [Local deployment with Docker](community-integrations/starknet/local-deployment-with-docker.md)
-  * [Local deployment without Docker](community-integrations/starknet/local-deployment-without-docker.md)
+* [Architecture](architecture/README.md)
+  * [Components](architecture/components/README.md)
+    * [Reader Node](architecture/components/reader.md)
+    * [Merger](architecture/components/merger.md)
+    * [Relayer](architecture/components/relayer.md)
+    * [Firehose](architecture/components/firehose.md)
+    * [Substreams](architecture/components/substreams.md)
+    * [High Availability](architecture/components/high-availability.md)
+  * [Data Flow](architecture/data-flow.md)
+  * [Data Storage](architecture/data-storage.md)
+* [Deployment Guide](firehose-setup/overview.md)
+  * [Single Machine Deployment](firehose-setup/single-machine-deployment.md)
+  * [Distributed Deployment](firehose-setup/distributed-deployment.md)
+  * [Chain Specific](firehose-setup/chains/README.md)
+    * [Ethereum](firehose-setup/ethereum/README.md)
+      * [Ethereum Mainnet](firehose-setup/ethereum/mainnet.md)
+      * [Arbitrum](firehose-setup/ethereum/arbitrum.md)
+      * [Base](firehose-setup/ethereum/base.md)
+      * [BNB Smart Chain](firehose-setup/ethereum/bsc.md)
+      * [Katana](firehose-setup/ethereum/katana.md)
+      * [Optimism](firehose-setup/ethereum/optimism.md)
+      * [Polygon](firehose-setup/ethereum/polygon.md)
+      * [Unichain](firehose-setup/ethereum/unichain.md)
+      * [Worldchain](firehose-setup/ethereum/worldchain.md)
+    * [Avalanche](firehose-setup/avalanche/README.md)
+    * [Injective](firehose-setup/injective/README.md)
+    * [NEAR](firehose-setup/near/README.md)
+    * [Sei](firehose-setup/sei/README.md)
+    * [Solana](firehose-setup/solana/README.md)
+    * [Starknet](firehose-setup/starknet/README.md)
+    * [Stellar](firehose-setup/stellar/README.md)
+    * [Tron](firehose-setup/tron/README.md)
 
 ## Integrate New Chains
 
 * [Benefits](integrate-new-chains/benefits.md)
-* [Integration overview](integrate-new-chains/integration-overview.md)
+* [Integration Overview](integrate-new-chains/integration-overview.md)
 * [Design Principles](integrate-new-chains/design-principles.md)
 * [Firehose Acme](integrate-new-chains/firehose-starter.md)
 
 ## References
 
+* [CLI Reference](references/cli-reference.md)
+  * [Reader Node](references/cli/reader-node.md)
+  * [Merger](references/cli/merger.md)
+  * [Relayer](references/cli/relayer.md)
+  * [Firehose](references/cli/firehose.md)
+  * [Substreams](references/cli/substreams.md)
 * [Supported Protocols](references/repositories.md)
 * [Naming Conventions](references/naming-conventions.md)
 * [Schemas](references/protobuf-schemas.md)
 * [Indexing](references/indexing.md)
+* [Legacy Firehose Indexing](references/legacy-indexing.md)
 * [FAQ](references/faq.md)
 
 ## Release Notes

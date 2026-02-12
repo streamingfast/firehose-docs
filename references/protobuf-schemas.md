@@ -13,7 +13,6 @@ Firehose currently has Layer 1 Protocol Buffer schemas for several different blo
 * Solana Protobuf Definitions:
   * [Solana Block data model](https://github.com/streamingfast/sf-solana/blob/develop/proto/sf/solana/type/v1/type.proto) (original)
   * [Solana Account Changes data model](https://github.com/streamingfast/firehose-solana/blob/develop/proto/sf/solana/type/v1/account.proto) (account changes only)
-* [Cosmos Protobuf Definitions](https://github.com/figment-networks/proto-cosmos/blob/main/sf/cosmos/type/v1/type.proto)
 * [Arweave Protobuf Definitions](https://github.com/streamingfast/firehose-arweave/blob/develop/proto/sf/arweave/type/v1/type.proto)
 * [Aptos Protobuf Definitions](https://github.com/aptos-labs/aptos-core/blob/main/crates/aptos-protos/proto/aptos/extractor/v1/extractor.proto)
 
