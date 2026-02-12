@@ -35,7 +35,7 @@ For line-based Firehose instrumentations, each line of output should start with 
 Code used for instrumentation within the native node should be bundled together using `firehose` as the name of the module/crate/package is preferable.
 
 {% hint style="warning" %}
-**Important**: _The top-level flag  `--firehose-enabled` can be used for quickly dumping massive quantities of data to standard output from Firehose._
+**Important**: _The node flag `--vmtrace=firehose` enables Firehose Protocol output to stdout, which the Reader Node captures and processes._
 {% endhint %}
 
 ## Chain-specific Binary Changes

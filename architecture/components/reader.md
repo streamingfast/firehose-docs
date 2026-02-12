@@ -79,7 +79,7 @@ The most common mode. The Reader Node spawns and manages the underlying binary a
 ```bash
 firecore start reader-node \
   --reader-node-path="geth" \
-  --reader-node-arguments="--firehose-enabled --datadir={node-data-dir}" \
+  --reader-node-arguments="--vmtrace=firehose --datadir={node-data-dir}" \
   --reader-node-data-dir="./data/node"
 ```
 
@@ -88,7 +88,7 @@ firecore start reader-node \
 Reads from an already-running process via stdin pipe. Useful when you need to manage the node process separately.
 
 ```bash
-geth --firehose-enabled | firecore start reader-node-stdin
+geth --vmtrace=firehose | firecore start reader-node-stdin
 ```
 
 ### reader-node-firehose

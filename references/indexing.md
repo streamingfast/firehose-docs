@@ -51,22 +51,6 @@ Use the following command to run the Firehose Index Builder to generate index fi
 fireeth start combined-index-builder --combined-index-builder-index-size=10000 --combined-index-builder-start-block=1000000 --combined-index-builder-stop-block=2000000 --common-index-store-url=s3://mybucket/mainnet-indexes --common-blocks-store-url=s3://mybucket/mainnet-blocks
 ```
 
-Some chains, such as Cosmos, may expose the Firehose Index Builder under the `tools` command.
-
-Use the following commands to run the Firehose Index Builder to generate index files for chains that expose the functionality through the `tools` command.
-
-```
-firecosmos tools generate-event-origin-index {index-url} {source-blocks-url} {start-block-num} {stop-block-num}
-```
-
-```
-firecosmos tools generate-event-type-index {index-url} {source-blocks-url} {start-block-num} {stop-block-num}
-```
-
-```
-firecosmos tools generate-message-type-index {index-url} {source-blocks-url} {start-block-num} {stop-block-num}
-```
-
 ## Using Indexes Within Firehose Requests
 
 {% hint style="warning" %}
@@ -119,10 +103,3 @@ See the CombinedFilter in the `transforms` protobuf in the following code exampl
 
 [https://github.com/streamingfast/firehose-ethereum/blob/develop/proto/sf/ethereum/transform/v1/transforms.proto#L24](https://github.com/streamingfast/firehose-ethereum/blob/develop/proto/sf/ethereum/transform/v1/transforms.proto#L24)
 
-### Cosmos
-
-The `firehose-client` tool for Cosmos does not currently implement filters.
-
-Use the following protobuf file instead.
-
-[https://github.com/figment-networks/proto-cosmos/blob/main/sf/cosmos/transform/v1/transform.proto](https://github.com/figment-networks/proto-cosmos/blob/main/sf/cosmos/transform/v1/transform.proto)

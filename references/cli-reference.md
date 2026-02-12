@@ -301,7 +301,7 @@ start:
   flags:
     data-dir: /data/firehose
     reader-node-path: /usr/local/bin/geth
-    reader-node-arguments: "--datadir {node-data-dir} --firehose-enabled"
+    reader-node-arguments: "--datadir {node-data-dir} --vmtrace=firehose"
     common-merged-blocks-store-url: "s3://my-bucket/merged-blocks"
 ```
 

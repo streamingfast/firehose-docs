@@ -4,91 +4,83 @@ description: Firehose chain-specific configuration for Injective
 
 # Injective
 
-This page provides Injective-specific configuration for Firehose. For general deployment instructions, see the [Single Machine Deployment](../single-machine-deployment.md) or [Distributed Deployment](../distributed-deployment.md) guides.
-
-{% hint style="info" %}
-This guide covers only the chain-specific Reader Node configuration. For general Firehose architecture and deployment patterns, refer to the main deployment guides.
-{% endhint %}
+This page covers Reader Node configuration specific to Injective. For general Firehose architecture and deployment, see the [Single Machine Deployment](../single-machine-deployment.md) or [Distributed Deployment](../distributed-deployment.md) guides.
 
 {% hint style="warning" %}
-This guide does not cover how to run an Injective node. For node setup, hardware requirements, and network configuration, refer to the [official Injective documentation](https://docs.injective.network/).
+Firehose for Injective uses an RPC poller approach. You can either run your own Injective node or use an RPC provider. For node setup, refer to the [official Injective documentation](https://docs.injective.network/).
 {% endhint %}
 
-## Architecture
-
-Firehose for Injective uses an **RPC poller** approach. The poller connects to an Injective RPC endpoint and converts the data into Firehose Protocol format.
+## Docker Image
 
 ```
-┌──────────────────┐     RPC      ┌──────────────┐     stdout    ┌──────────────┐
-│  Injective RPC   │◄────────────│  RPC Poller  │──────────────►│  Reader Node │
-│    Endpoint      │              │   Binary     │               │  (Firehose)  │
-└──────────────────┘              └──────────────┘               └──────────────┘
+ghcr.io/streamingfast/firehose-cosmos:<version>
 ```
+
+[View available versions on GitHub Packages](https://github.com/streamingfast/firehose-cosmos/pkgs/container/firehose-cosmos)
+
+The image contains the `firecore` and `fireinjective` binaries.
 
 ## Binary & Releases
 
 | Component | Repository | Binary |
 |-----------|------------|--------|
-| Firehose | [firehose-cosmos](https://github.com/streamingfast/firehose-cosmos) | `firecosmos` |
+| Firehose | [firehose-cosmos](https://github.com/streamingfast/firehose-cosmos) | `firecore`, `fireinjective` |
 
-Injective is built on Cosmos SDK, so it uses the `firecosmos` binary. Download releases from the [GitHub releases page](https://github.com/streamingfast/firehose-cosmos/releases).
+Download releases from the [GitHub releases page](https://github.com/streamingfast/firehose-cosmos/releases).
+
+## Networks
+
+| Network | Chain Name |
+|---------|------------|
+| Injective Mainnet | `injective-mainnet` |
+| Injective Testnet | `injective-testnet` |
+
+## Architecture
+
+Firehose for Injective uses an **RPC poller** approach. The poller fetches blocks from Injective RPC endpoints and converts them to Firehose format.
+
+```
+┌──────────────────┐     RPC      ┌──────────────────┐     stdout    ┌──────────────┐
+│  Injective RPC   │◄────────────│ fireinjective    │──────────────►│  Reader Node │
+│    Endpoint      │              │   poller         │               │  (Firehose)  │
+└──────────────────┘              └──────────────────┘               └──────────────┘
+```
 
 ## Reader Node Configuration
 
-### RPC Endpoint Requirements
-
-The Injective RPC endpoint must support:
-- Block queries with full transaction data
-- Historical block access for the range you need
-
-### Basic Configuration
+### Injective Mainnet
 
 ```bash
-firecosmos start reader-node \
-  --reader-node-path="firecosmos" \
-  --reader-node-arguments="poller --rpc-endpoint=https://sentry.tm.injective.network:443" \
-  --reader-node-data-dir="./data/injective"
+firecore start reader-node <apps> \
+  --advertise-chain-name="injective-mainnet" \
+  --common-first-streamable-block=<start-block> \
+  --reader-node-path="fireinjective" \
+  --reader-node-arguments="fetch rpc {first-streamable-block} --state-dir={node-data-dir}/poller/states --block-fetch-batch-size=4 --endpoints=<rpc-endpoint>" \
+  <other_flags...>
 ```
 
-### Full Stack Example
+### Injective Testnet
 
 ```bash
-firecosmos start reader-node merger relayer firehose \
-  --reader-node-path="firecosmos" \
-  --reader-node-arguments="poller --rpc-endpoint=${INJECTIVE_RPC_ENDPOINT} --chain-id=injective-1" \
-  --reader-node-data-dir="./data/injective" \
-  --common-first-streamable-block=1
+firecore start reader-node <apps> \
+  --reader-node-path="fireinjective" \
+  --reader-node-arguments="fetch rpc {first-streamable-block} --state-dir={node-data-dir}/poller/states --block-fetch-batch-size=1 --endpoints=<rpc-endpoint>" \
+  --common-first-streamable-block=<start-block> \
+  --advertise-chain-name="injective-testnet" \
+  <other_flags...>
 ```
 
-### Key Poller Flags
+## Key Poller Flags
 
 | Flag | Description |
 |------|-------------|
-| `--rpc-endpoint` | Injective RPC endpoint URL |
-| `--chain-id` | Chain ID (e.g., `injective-1` for mainnet) |
-| `--start-block` | Starting block height |
-| `--stop-block` | Stop at this block |
-
-## Advertise Configuration
-
-| Network | Chain Name | Block ID Encoding |
-|---------|------------|-------------------|
-| Injective Mainnet | `injective-mainnet` | `hex` |
-| Injective Testnet | `injective-testnet` | `hex` |
-
-```bash
---advertise-chain-name="injective-mainnet" \
---advertise-block-id-encoding="hex"
-```
-
-## Performance Considerations
-
-- RPC polling is slower than native Firehose instrumentation
-- Use a dedicated RPC endpoint for better performance
-- Consider running your own Injective node for best results
+| `fetch rpc` | Subcommand to run the RPC poller |
+| `{first-streamable-block}` | Variable substituted from `--common-first-streamable-block` |
+| `--state-dir` | Directory to store poller state |
+| `--block-fetch-batch-size` | Number of blocks to fetch in parallel |
+| `--endpoints` | Injective RPC endpoint URL(s), can be specified multiple times |
 
 ## Resources
 
-- [firehose-cosmos GitHub](https://github.com/streamingfast/firehose-cosmos)
 - [Injective Documentation](https://docs.injective.network/)
-- [Injective GitHub](https://github.com/InjectiveLabs)
+- [firehose-cosmos GitHub](https://github.com/streamingfast/firehose-cosmos)

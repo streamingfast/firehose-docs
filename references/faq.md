@@ -18,11 +18,11 @@ Substreams and Firehose can be used together and typically are. The two compleme
 
 ## **Does Firehose work with GraphQL?**
 
-Firehose does not work directly with GraphQL. Subgraphs use GraphQL and Substreams can be used to populate subgraphs. Firehose extracts data from blockchain nodes and provides it to Substreams. Substreams sinks are responsible for bringing data to storage engines that can then be queries by different means.
+Firehose does not work directly with GraphQL. Firehose extracts data from blockchain nodes and provides it to Substreams. Substreams sinks are responsible for bringing data to storage engines that can then be queried by different means.
 
 ## **Do subgraphs work with Firehose?**
 
-In a way, the `graph-node` software, which powers Subgraphs, can connect directly to Firehose for Ethereum and Cosmos, and power the traditional Subgraphs there. Substreams can also be used directly to power Subgraphs, in which case Firehose is not directly involved (only as an implementation detail within Substreams).
+Yes, the `graph-node` software, which powers Subgraphs, can connect directly to Firehose for Ethereum and power the traditional Subgraphs there.
 
 ## **Is Firehose made by The Graph?**
 

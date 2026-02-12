@@ -34,7 +34,7 @@ Firehose includes [Substreams](https://substreams.streamingfast.io/), a high-per
 
 * **Massively Parallel Processing**: Execute data transformations across historical blockchain data in parallel, achieving processing speeds previously thought impossible.
 * **Custom Data Pipelines**: Enable users to define their own transformation logic in Rust/WASM, filtering and aggregating data exactly as needed.
-* **Ecosystem Compatibility**: Immediate support for The Graph (Substreams-powered subgraphs), and dozens of data sinks including PostgreSQL, MongoDB, Kafka, ClickHouse, BigQuery, and more.
+* **Ecosystem Compatibility**: Immediate support for dozens of data sinks including PostgreSQL, MongoDB, Kafka, ClickHouse, BigQuery, and more.
 * **Shared Infrastructure**: Substreams reuses the same block storage and data sources as Firehose, adding powerful capabilities with minimal additional overhead.
 * **Developer Community**: Attract developers who already know Substreams and are ready to build on your infrastructure.
 

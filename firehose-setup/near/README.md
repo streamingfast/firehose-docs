@@ -4,79 +4,91 @@ description: Firehose chain-specific configuration for NEAR
 
 # NEAR
 
-This page provides NEAR-specific configuration for Firehose. For general deployment instructions, see the [Single Machine Deployment](../single-machine-deployment.md) or [Distributed Deployment](../distributed-deployment.md) guides.
-
-{% hint style="info" %}
-This guide covers only the chain-specific Reader Node configuration. For general Firehose architecture and deployment patterns, refer to the main deployment guides.
-{% endhint %}
+This page covers Reader Node configuration specific to NEAR. For general Firehose architecture and deployment, see the [Single Machine Deployment](../single-machine-deployment.md) or [Distributed Deployment](../distributed-deployment.md) guides.
 
 {% hint style="warning" %}
 This guide does not cover how to run a NEAR node. For node setup, hardware requirements, and network configuration, refer to the [official NEAR documentation](https://docs.near.org/).
 {% endhint %}
+
+## Docker Image
+
+```
+ghcr.io/streamingfast/near-firehose-indexer:<version>-fh3.0
+```
+
+[View available versions on GitHub Packages](https://github.com/streamingfast/near-firehose-indexer/pkgs/container/near-firehose-indexer)
+
+The image contains both the Firehose-patched NEAR indexer binary and `firenear`.
 
 ## Binary & Releases
 
 | Component | Repository | Binary |
 |-----------|------------|--------|
 | Firehose | [firehose-near](https://github.com/streamingfast/firehose-near) | `firenear` |
+| NEAR Indexer | [near-firehose-indexer](https://github.com/streamingfast/near-firehose-indexer) | `near-firehose-indexer` |
 
-Download releases from the [GitHub releases page](https://github.com/streamingfast/firehose-near/releases).
+Download releases from the GitHub releases pages.
 
-## Supported Approaches
+## Networks
 
-NEAR Firehose supports two data extraction methods:
-
-| Method | Description | Use Case |
-|--------|-------------|----------|
-| Firehose-enabled Node | NEAR node with Firehose patches | Best performance, full data |
-| Lake Indexer | Reads from NEAR Lake (S3) | Easier setup, historical data |
+| Network | Chain Name |
+|---------|------------|
+| NEAR Mainnet | `near-mainnet` |
+| NEAR Testnet | `near-testnet` |
 
 ## Reader Node Configuration
 
-### Using Firehose-Enabled NEAR Node
+NEAR Firehose uses a custom indexer binary (`near-firehose-indexer`) that wraps the NEAR node with Firehose instrumentation.
+
+### NEAR Mainnet
 
 ```bash
-firenear start reader-node \
-  --reader-node-path="neard" \
-  --reader-node-arguments="--home={node-data-dir} run --firehose-enabled" \
-  --reader-node-data-dir="./data/near"
+firenear start reader-node <apps> \
+  --advertise-chain-name="near-mainnet" \
+  --reader-node-path="near-firehose-indexer" \
+  --reader-node-config-file=/path/to/config.json \
+  --reader-node-genesis-file=/path/to/genesis.json \
+  --reader-node-key-file=/path/to/node_key.json \
+  --reader-node-arguments="--home={node-data-dir} run" \
+  <other_flags...>
 ```
 
-### Using NEAR Lake
-
-NEAR Lake is a data availability layer that stores NEAR blockchain data in S3-compatible storage.
+### NEAR Testnet
 
 ```bash
-firenear start reader-node \
-  --reader-node-path="firenear" \
-  --reader-node-arguments="lake --bucket=near-lake-data-mainnet --region=eu-central-1 --start-block=0" \
-  --reader-node-data-dir="./data/near"
+firenear start reader-node <apps> \
+  --advertise-chain-name="near-testnet" \
+  --reader-node-path="near-firehose-indexer" \
+  --reader-node-config-file=/path/to/config.json \
+  --reader-node-genesis-file=/path/to/genesis.json \
+  --reader-node-key-file=/path/to/node_key.json \
+  --reader-node-arguments="--home={node-data-dir} run" \
+  <other_flags...>
 ```
 
-### Full Stack Example
+## Key Configuration Files
 
-```bash
-firenear start reader-node merger relayer firehose \
-  --reader-node-path="neard" \
-  --reader-node-arguments="--home={node-data-dir} run --firehose-enabled" \
-  --reader-node-data-dir="./data/near" \
-  --common-first-streamable-block=0
-```
+NEAR requires several configuration files:
 
-## Advertise Configuration
+| File | Description |
+|------|-------------|
+| `config.json` | NEAR node configuration |
+| `genesis.json` | Network genesis file |
+| `node_key.json` | Node identity key |
 
-| Network | Chain Name | Block ID Encoding |
-|---------|------------|-------------------|
-| NEAR Mainnet | `near-mainnet` | `base58` |
-| NEAR Testnet | `near-testnet` | `base58` |
+Download network-specific configuration files from the [NEAR documentation](https://docs.near.org/).
 
-```bash
---advertise-chain-name="near-mainnet" \
---advertise-block-id-encoding="base58"
-```
+## Key Reader Node Flags
+
+| Flag | Description |
+|------|-------------|
+| `--reader-node-config-file` | Path to NEAR config.json |
+| `--reader-node-genesis-file` | Path to NEAR genesis.json |
+| `--reader-node-key-file` | Path to NEAR node_key.json |
+| `--home` | Node data directory (use `{node-data-dir}` template) |
 
 ## Resources
 
 - [firehose-near GitHub](https://github.com/streamingfast/firehose-near)
+- [near-firehose-indexer GitHub](https://github.com/streamingfast/near-firehose-indexer)
 - [NEAR Documentation](https://docs.near.org/)
-- [NEAR Lake Framework](https://github.com/near/near-lake-framework)

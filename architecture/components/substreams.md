@@ -15,7 +15,7 @@ Running Substreams alongside Firehose provides significant value to operators an
 * **Value-Added Service**: Offer more than raw block data. Substreams enables users to transform, filter, and aggregate blockchain data in real-time.
 * **Infrastructure Reuse**: Substreams shares the same storage and data sources as Firehose. Running it adds minimal overhead while significantly expanding your service capabilities.
 * **Parallel Processing**: Substreams processes historical blockchain data in a massively parallelized manner, enabling processing speeds previously thought impossible.
-* **Ecosystem Compatibility**: Immediate support for The Graph (Substreams-powered subgraphs), dozens of data sinks (PostgreSQL, MongoDB, Kafka, ClickHouse, BigQuery, etc.), and the broader StreamingFast ecosystem.
+* **Ecosystem Compatibility**: Immediate support for dozens of data sinks (PostgreSQL, MongoDB, Kafka, ClickHouse, BigQuery, etc.), and the broader StreamingFast ecosystem.
 * **Developer Attraction**: Activate a community of developers who already know Substreams and will be eager to use your infrastructure.
 
 ### How Substreams Works
@@ -142,7 +142,6 @@ With Substreams, your users can build:
 * **Real-time Analytics**: Live dashboards, trading signals, protocol metrics
 * **Custom Indexers**: Purpose-built indexes for specific protocols or use cases
 * **Data Pipelines**: ETL workflows feeding databases, data warehouses, or message queues
-* **The Graph Subgraphs**: Substreams-powered subgraphs with dramatically improved sync times
 * **Cross-Chain Applications**: Consistent data processing across multiple blockchains
 
 {% hint style="success" %}
