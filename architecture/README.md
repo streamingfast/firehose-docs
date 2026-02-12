@@ -34,7 +34,7 @@ Detailed information about each component in the Firehose stack:
 - **[Reader Node](components/reader.md)** - Wraps blockchain nodes and extracts block data
 - **[Merger](components/merger.md)** - Combines individual blocks into larger files
 - **[Relayer](components/relayer.md)** - Provides real-time streaming and high availability
-- **[gRPC Server](components/grpc-server.md)** - Serves the Firehose API to clients
+- **[Firehose](components/firehose.md)** - Serves the Firehose gRPC API to clients
 - **[Substreams](components/substreams.md)** - High-performance parallel data transformation engine
 - **[High Availability](components/high-availability.md)** - Redundancy and failover strategies
 
@@ -101,7 +101,6 @@ Components spread across multiple machines for production scale:
 - Real-time and historical data access
 - Fork-aware streaming with automatic reorg handling
 - Cursor-based resumption for reliable data delivery
-- Filtering and transformation capabilities
 
 ### Storage Efficiency
 - Compressed block files

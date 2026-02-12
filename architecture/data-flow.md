@@ -24,7 +24,7 @@ Each Firehose component plays an important role as the blockchain data flows thr
 
 The StreamingFast Instrumentation feeds to Reader components. The Reader components feed the Relayer component.
 
-The Index and IndexProvider components work with data provided by the instrumentation through the Reader through the Relayer. Finally, the Firehose gRPC Server component hands data back to any consumers of Firehose.
+Finally, the Firehose component hands data back to any consumers through its gRPC API.
 
 ### Key Points
 
@@ -33,13 +33,12 @@ The Index and IndexProvider components work with data provided by the instrument
 * Reader components will then write the data to persistent storage. The data is then broadcast to the rest of the components in Firehose.
 * The Relayer component reads block data provided by one or more Reader components and provides a live data source for the other Firehose components.
 * The Merger component combines blocks created by Reader components into batches of one hundred individually merged blocks. The merged blocks are stored in an object store or written to disk.
-* The Indexer component provides a targeted summary of the contents of each 100-blocks file that was created by the Merger component. The indexed 100-blocks files are tracked and cataloged in an index file created by the Indexer component.
-* The IndexProvider component reads index files created by the Indexer component and provides fast responses about the contents of block data for filtering purposes.
-* The Firehose gRPC server component receives blocks from either:
-  * a merged blocks file source.
-  * live block data received through the Relayer component.
-  * an indexed file source created through the collaboration between the Indexer and IndexProvider components.
-* The Firehose gRPC Server component then joins and returns the block data to its consumers.
+* The Firehose component receives blocks from:
+  * **Merged blocks storage** for historical data requests
+  * **One-block storage** for recent blocks not yet merged
+  * **Forked blocks storage** for cursor resolution on forks
+  * **Relayer** for live block data
+* The Firehose component then joins and returns the block data to its consumers through a cursor-based gRPC stream.
 * _Tradeoffs and benefits are presented for how data is stored and how it flows from the instrumented blockchain nodes through Firehose._
 
 ## Reader Data Flow
@@ -166,77 +165,41 @@ The Merger component assists with the reduction of storage costs, improved data 
 
 The blocks bundled by the Merger component become the file-based historical data source of blocks for all Firehose components.
 
-## Indexer Data Flow
+## Firehose Data Flow
 
-### Indexer Data Flow in Detail
+### Firehose Data Flow in Detail
 
-The Indexer component runs as a background process digesting merged block files.
+The Firehose component is responsible for supplying the stream of block data to requesting consumers. The Firehose component can be thought of as the top most component in the Firehose architectural stack.
 
-The Indexer component consumes merged blocks files and provides a targeted summary of the blocks. The targeted summaries are written to object storage as index files.
+### Data Sources
 
-### Transforms
+Firehose components connect to multiple data sources to serve consumer requests:
 
-Target summaries are created when incoming Firehose queries contain StreamingFast Transforms.
-
-{% hint style="info" %}
-**Note**_: Targeted summaries are variable in nature._
-{% endhint %}
-
-### Transforms & Protocol Buffers
-
-StreamingFast Transforms are used to locate a specific series of blocks according to search criteria provided by Firehose consumers. Transforms are created using Protocol Buffer definitions.
-
-## IndexProvider Data Flow
-
-### IndexProvider Data Flow in Detail
-
-The IndexProvider component accepts queries made to Firehose that contain StreamingFast Transforms.
-
-### Chain Agnostic
-
-The IndexProvider component is not specific to any particular blockchain's data format. The IndexProvider can be considered chain-agnostic for this reason.
-
-### IndexProvider & Transforms
-
-The IndexProvider component interprets Transforms in accordance with their Protocol Buffer definitions.
-
-### Data Filtering
-
-The Transforms are handed off to chain-specific filter functions. The desired filtering is applied to the blocks in the data stream by the IndexProvider component to limit the results it supplies.
-
-### Specific Data in Large Ranges
-
-The IndexProvider component using Transforms is able to provide knowledge about specific data in large ranges of block data. This includes the presence or absence of specific data contained within the blocks the component is filtering.
-
-## gRPC Server Data Flow
-
-### gRPC Server Data Flow in Detail
-
-The gRPC Server component is responsible for supplying the stream of block data to requesting consumers of Firehose. The gRPC Server can be thought of as the top most component in the Firehose architectural stack.
-
-### Persistent & Live Data
-
-Firehose gRPC Server components connect to persisted and live block data sources to serve consumer data requests.
+- **Merged blocks storage**: Primary source for historical data (100-block bundles)
+- **One-block storage**: Recent blocks not yet merged
+- **Forked blocks storage**: Blocks from non-canonical branches for cursor resolution
+- **Relayer**: Live blocks for real-time streaming
 
 {% hint style="info" %}
-_Firehose was designed to switch between the persistent and live data store as it's joining data to intelligently fulfill inbound requests from consumers._
+_Firehose was designed to seamlessly switch between data sources as it fulfills inbound requests from consumers._
 {% endhint %}
 
 ### Historical Data Requests
 
-Consumer requests for historical blocks are fetched from persistent storage. The historical blocks are passed inside a `ForkDB` and sent with a cursor uniquely identifying the block and its position in the blockchain.
+Consumer requests for historical blocks are fetched from merged blocks storage. The historical blocks are passed through a `ForkDB` and sent with a cursor uniquely identifying the block and its position in the blockchain.
 
 ### Fork Preservation
 
-Firehose has the ability to resume from forked blocks because all forks are preserved during node data processing.
+Firehose has the ability to resume from forked blocks because all forks are preserved in the forked blocks storage during node data processing.
 
-### gRPC Data Filtering
+### Cursor-Based Streaming
 
-The gRPC component will filter block content through Transforms passed to the IndexProvider component. The Transforms are used as filter expressions to isolate specific data points in the block data.
+Each block sent to clients includes a cursor containing:
+- Block number and hash
+- Last irreversible block information
+- Fork step (new, undo, or irreversible)
 
-Transactions that do not match the filter criteria provided in Transforms are removed from the block and execution units are flagged as either matching or not matching.
-
-Block metadata is always sent to guarantee sequentiality on the receiving end; with or without matching Transforms criteria.
+Clients can resume streaming from any cursor, even if the block was on a fork that has since been abandoned.
 
 ## `bstream`
 

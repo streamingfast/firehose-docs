@@ -80,18 +80,11 @@ These flags are shared across multiple components and prefixed with `--common-`.
 | `--common-auto-mem-limit-percent` | Auto-set GOMEMLIMIT percentage from cgroup | `0` |
 | `--common-system-shutdown-signal-delay` | Delay between SIGTERM and shutdown | `0` |
 
-### Blocks Cache Flags
+### Index Flags (Legacy)
 
-Enable disk-based block caching to reduce RAM usage:
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--common-blocks-cache-enabled` | Enable disk-based block caching | `false` |
-| `--common-blocks-cache-dir` | Cache directory path | `file://{data-dir}/storage/blocks-cache` |
-| `--common-blocks-cache-max-recent-entry-bytes` | Max bytes for recent blocks cache | `21474836480` (20GB) |
-| `--common-blocks-cache-max-entry-by-age-bytes` | Max bytes for oldest blocks cache | `21474836480` (20GB) |
-
-### Index Flags
+{% hint style="warning" %}
+Index flags are for legacy graph-node integration. For new projects, use Substreams instead.
+{% endhint %}
 
 | Flag | Description | Default |
 |------|-------------|---------|
@@ -126,7 +119,12 @@ Configuration for the `reader-node` component.
 
 ### Argument Templating
 
-The `--reader-node-arguments` flag supports these template variables:
+The `--reader-node-arguments` flag is parsed using standard shell quoting rules, allowing you to:
+- Use double quotes for values with spaces: `--flag "value with spaces"`
+- Use single quotes for literal strings
+- Escape special characters as needed
+
+The flag also supports these template variables:
 
 | Template | Description |
 |----------|-------------|
@@ -307,14 +305,29 @@ start:
 
 ## Environment Variables
 
-Flags can be set via environment variables:
+Flags can be set via environment variables. Convert flag names by replacing `-` with `_` and uppercasing.
 
-| Pattern | Example |
-|---------|---------|
-| Global flags: `FIRECORE_GLOBAL_<FLAG>` | `FIRECORE_GLOBAL_DATA_DIR=/data` |
-| Start command flags: `FIRECORE_<FLAG>` | `FIRECORE_READER_NODE_PATH=/usr/bin/geth` |
+### Global Flags
 
-Convert flag names: replace `-` with `_` and uppercase.
+Global flags (those available on all commands like `--data-dir`, `--log-format`) use the `FIRECORE_GLOBAL_` prefix:
+
+| Flag | Environment Variable |
+|------|---------------------|
+| `--data-dir` | `FIRECORE_GLOBAL_DATA_DIR` |
+| `--log-format` | `FIRECORE_GLOBAL_LOG_FORMAT` |
+| `--metrics-listen-addr` | `FIRECORE_GLOBAL_METRICS_LISTEN_ADDR` |
+
+### Start Command Flags
+
+Flags specific to the `start` command use the `FIRECORE_` prefix (without `GLOBAL_`):
+
+| Flag | Environment Variable |
+|------|---------------------|
+| `--common-first-streamable-block` | `FIRECORE_COMMON_FIRST_STREAMABLE_BLOCK` |
+| `--common-merged-blocks-store-url` | `FIRECORE_COMMON_MERGED_BLOCKS_STORE_URL` |
+| `--reader-node-path` | `FIRECORE_READER_NODE_PATH` |
+| `--reader-node-arguments` | `FIRECORE_READER_NODE_ARGUMENTS` |
+| `--firehose-grpc-listen-addr` | `FIRECORE_FIREHOSE_GRPC_LISTEN_ADDR` |
 
 ## Storage URLs
 
