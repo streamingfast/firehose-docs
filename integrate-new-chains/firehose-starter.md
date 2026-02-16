@@ -4,9 +4,9 @@ description: StreamingFast Firehose template for new chain integrations
 
 # Firehose Starter
 
-Instrumenting a new chain requires the blockchain node to output [Firehose Logs](../architecture/data-flow.md#firehose-logs) — a simple, unified protocol consisting of `FIRE INIT` and `FIRE BLOCK` messages. Any chain that implements this protocol automatically benefits from the entire Firehose ecosystem.
+Instrumenting a new chain requires the blockchain node to output [Firehose Protocol](../references/firehose-protocol.md) messages — a simple, unified protocol consisting of `FIRE INIT` and `FIRE BLOCK` messages. Any chain that implements this protocol automatically benefits from the entire Firehose ecosystem.
 
-The Firehose Logs protocol is chain-agnostic: the node outputs block data as base64-encoded protobuf, and `firehose-core` handles the rest. The chain-specific parts are:
+The [Firehose Protocol](../references/firehose-protocol.md) is chain-agnostic: the node outputs block data as base64-encoded protobuf, and `firehose-core` handles the rest. The chain-specific parts are:
 
 1. **Node instrumentation**: Modify your blockchain node to output `FIRE INIT` and `FIRE BLOCK` messages
 2. **Protobuf schema**: Define your chain's block data model
@@ -15,10 +15,14 @@ That's it — most chains only need these two pieces. No custom binary required.
 
 ## Implement Node Instrumentation
 
-The key integration work is implementing the [Firehose Logs protocol](../architecture/data-flow.md#firehose-logs-protocol) in your blockchain node. The node must output:
+The key integration work is implementing the [Firehose Protocol](../references/firehose-protocol.md) in your blockchain node. The node must output:
 
 1. `FIRE INIT` once at startup with the protocol version and protobuf block type
 2. `FIRE BLOCK` for each block with metadata and base64-encoded protobuf payload
+
+{% hint style="warning" %}
+**Block Hash Format**: Pay careful attention to the [block hash representation requirements](../references/firehose-protocol.md#block-hash-representation). The `parent_hash` of each block must exactly match the `block_hash` of the previous block. For new chains, use lowercase hexadecimal without the `0x` prefix.
+{% endhint %}
 
 See the [dummy-blockchain tracer](https://github.com/streamingfast/dummy-blockchain/tree/main/tracer) for a reference implementation.
 

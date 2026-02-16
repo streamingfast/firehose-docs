@@ -61,7 +61,11 @@ For a reference implementation of Firehose instrumentation, see the [dummy-block
 
 ### Firehose Logs Protocol
 
-The Firehose Logs protocol is intentionally simple, consisting of only two messages:
+The Firehose Logs protocol is intentionally simple, consisting of only two messages.
+
+{% hint style="info" %}
+For the complete protocol specification, including partial block support and block hash format requirements, see the [Firehose Protocol Reference](../references/firehose-protocol.md).
+{% endhint %}
 
 #### FIRE INIT
 
@@ -100,6 +104,10 @@ FIRE BLOCK <block_num> <partial_idx> <block_hash> <parent_num> <parent_hash> <li
 | `lib_num` | Last irreversible block number (uint64) |
 | `timestamp_nanos` | Block timestamp in Unix nanoseconds |
 | `base64_block` | Base64-encoded protobuf block payload |
+
+{% hint style="warning" %}
+**Block Hash Consistency**: The `block_hash` and `parent_hash` fields must use a consistent string format throughout the chain's lifetime. The `parent_hash` of block N must exactly match the `block_hash` of block N-1. For new chains, use lowercase hexadecimal without the `0x` prefix. See [Block Hash Representation](../references/firehose-protocol.md#block-hash-representation) for details.
+{% endhint %}
 
 ### Example Firehose Logs
 

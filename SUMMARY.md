@@ -51,6 +51,7 @@
 
 ## References
 
+* [Firehose Protocol](references/firehose-protocol.md)
 * [CLI Reference](references/cli-reference.md)
   * [Reader Node](references/cli/reader-node.md)
   * [Merger](references/cli/merger.md)

@@ -8,20 +8,22 @@ description: StreamingFast Firehose new blockchains
 
 Firehose is blockchain agnostic. It requires two main elements:
 
-* **Node instrumentation**: The blockchain node must output [Firehose Logs](../architecture/data-flow.md#firehose-logs) — a unified, chain-agnostic protocol consisting of `FIRE INIT` and `FIRE BLOCK` messages
+* **Node instrumentation**: The blockchain node must output [Firehose Protocol](../references/firehose-protocol.md) messages — a unified, chain-agnostic protocol consisting of `FIRE INIT` and `FIRE BLOCK` messages
 * **Protocol Buffers data model**: A protobuf schema defining your chain's block structure
 
-The Firehose Logs protocol is intentionally simple: the node outputs block data as base64-encoded protobuf, and `firehose-core` handles everything else (parsing, storage, streaming, flat files management). No chain-specific Go code is required for the core functionality.
+The [Firehose Protocol](../references/firehose-protocol.md) is intentionally simple: the node outputs block data as base64-encoded protobuf, and `firehose-core` handles everything else (parsing, storage, streaming, flat files management). No chain-specific Go code is required for the core functionality.
 
 ## Methods of extraction
 
 ### Node instrumentation
 
-The recommended method of extraction is direct node instrumentation, where the blockchain node outputs the [Firehose Logs protocol](../architecture/data-flow.md#firehose-logs-protocol). This provides the richest data extraction, including state changes and total ordering of events.
+The recommended method of extraction is direct node instrumentation, where the blockchain node outputs the [Firehose Protocol](../references/firehose-protocol.md). This provides the richest data extraction, including state changes and total ordering of events.
 
 The protocol is simple:
 1. Output `FIRE INIT <version> <protobuf_type>` once at startup
 2. Output `FIRE BLOCK <metadata> <base64_block>` for each block
+
+See the [Firehose Protocol Reference](../references/firehose-protocol.md) for the complete specification, including block hash format requirements and partial block support.
 
 See the [dummy-blockchain tracer](https://github.com/streamingfast/dummy-blockchain/tree/main/tracer) for a reference implementation.
 
@@ -39,7 +41,7 @@ The downside of this method is that often state changes, full ordering and deepe
 
 ### RPC Poller
 
-For chains where direct node instrumentation is not feasible, an RPC poller can fetch block data from the node's RPC interface. The poller runs alongside the node, fetching each new block via RPC, assembling it into a Firehose block, and outputting it as Firehose Logs.
+For chains where direct node instrumentation is not feasible, an RPC poller can fetch block data from the node's RPC interface. The poller runs alongside the node, fetching each new block via RPC, assembling it into a Firehose block, and outputting it using the [Firehose Protocol](../references/firehose-protocol.md).
 
 `firehose-core` provides a [blockpoller](https://github.com/streamingfast/firehose-core/tree/develop/blockpoller) library that handles the common polling logic. You implement the chain-specific RPC fetching, and the library manages cursor tracking, retries, and Firehose Logs output.
 
@@ -70,10 +72,14 @@ Please review the [Naming Conventions](../references/naming-conventions.md) and 
 
 ## Firehose Implementation
 
-Since the Firehose Logs protocol is unified and chain-agnostic, `firehose-core` handles parsing and processing out of the box. For most integrations, you only need:
+Since the [Firehose Protocol](../references/firehose-protocol.md) is unified and chain-agnostic, `firehose-core` handles parsing and processing out of the box. For most integrations, you only need:
 
-1. Instrument your node to output Firehose Logs
+1. Instrument your node to output [Firehose Protocol](../references/firehose-protocol.md) messages
 2. Define your protobuf block schema
+
+{% hint style="info" %}
+**Block Hash Format**: When implementing the protocol, pay careful attention to the [block hash representation requirements](../references/firehose-protocol.md#block-hash-representation). The format must remain consistent throughout the chain's lifetime, and `parent_hash` must exactly match the previous block's `block_hash`. For new chains, we recommend lowercase hexadecimal without the `0x` prefix.
+{% endhint %}
 
 Optionally, you can create a `firehose-<chain>` wrapper around `firehose-core` for chain-specific CLI commands or tooling. StreamingFast provides a starter template for this — see the [Firehose Acme](firehose-starter.md) page for details.
 
