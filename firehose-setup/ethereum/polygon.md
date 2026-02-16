@@ -18,9 +18,9 @@ The image contains both the Firehose-patched Bor binary and `fireeth`.
 
 ## Client Binary
 
-| Client | Repository |
-|--------|------------|
-| Bor (Firehose-patched) | [streamingfast/polygon-bor](https://github.com/streamingfast/polygon-bor) |
+| Client | Repository | Source Branch | Releases |
+|--------|------------|---------------|----------|
+| Bor (Firehose-patched) | [streamingfast/go-ethereum](https://github.com/streamingfast/go-ethereum) | [release/polygon-2.x-fh3.0](https://github.com/streamingfast/go-ethereum/tree/release/polygon-2.x-fh3.0) | [polygon-*](https://github.com/streamingfast/go-ethereum/releases?q=polygon&expanded=true) |
 
 ## Networks
 
@@ -73,4 +73,4 @@ fireeth start reader-node <apps> \
 
 - [Polygon Documentation](https://docs.polygon.technology/)
 - [Polygon Node Requirements](https://docs.polygon.technology/pos/how-to/full-node/)
-- [streamingfast/polygon-bor](https://github.com/streamingfast/polygon-bor)
+- [streamingfast/go-ethereum](https://github.com/streamingfast/go-ethereum)

@@ -18,9 +18,9 @@ The image contains both the Firehose-patched OP Geth binary and `fireeth`.
 
 ## Client Binary
 
-| Client | Repository |
-|--------|------------|
-| OP Geth (Firehose-patched) | [streamingfast/op-geth](https://github.com/streamingfast/op-geth) |
+| Client | Repository | Source Branch | Releases |
+|--------|------------|---------------|----------|
+| OP Geth (Firehose-patched) | [streamingfast/go-ethereum](https://github.com/streamingfast/go-ethereum) | [release/optimism-1.x-fh3.0](https://github.com/streamingfast/go-ethereum/tree/release/optimism-1.x-fh3.0) | [optimism-*](https://github.com/streamingfast/go-ethereum/releases?q=optimism&expanded=true) |
 
 ## Networks
 
@@ -72,5 +72,5 @@ fireeth start reader-node <apps> \
 ## Resources
 
 - [Optimism Documentation](https://docs.optimism.io/)
-- [streamingfast/op-geth](https://github.com/streamingfast/op-geth)
 - [OP Node Setup](https://docs.optimism.io/builders/node-operators/rollup-node)
+- [streamingfast/go-ethereum](https://github.com/streamingfast/go-ethereum)

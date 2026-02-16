@@ -18,9 +18,9 @@ The image contains both the Firehose-patched Geth binary and `fireeth`.
 
 ## Client Binary
 
-| Client | Repository |
-|--------|------------|
-| Geth (Firehose-patched) | [streamingfast/go-ethereum](https://github.com/streamingfast/go-ethereum) |
+| Client | Repository | Source Branch | Releases |
+|--------|------------|---------------|----------|
+| Geth (Firehose-patched) | [streamingfast/go-ethereum](https://github.com/streamingfast/go-ethereum) | [release/geth-1.x-fh3.0](https://github.com/streamingfast/go-ethereum/tree/release/geth-1.x-fh3.0) | [geth-*](https://github.com/streamingfast/go-ethereum/releases?q=geth&expanded=true) |
 
 ## Networks
 

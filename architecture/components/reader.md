@@ -70,7 +70,9 @@ Example: `FIRE INIT 3.0 sf.ethereum.type.v2.Block`
 FIRE BLOCK <block_num> <block_hash> <parent_num> <parent_hash> <lib_num> <timestamp_nanos> <base64_block>
 ```
 
-Supported protocol versions: `1.0`, `3.0`, `3.1`.
+{% hint style="warning" %}
+**Protocol Version**: Only versions `3.0` and `3.1` are supported. Version `1.0` is a legacy protocol that is no longer supported by current Firehose releases.
+{% endhint %}
 
 {% hint style="info" %}
 The Reader Node only reads from `stdout`. It does not interact with the node's database, network layer, RPC interface, or any other component. This isolation ensures Firehose has zero impact on node operation.

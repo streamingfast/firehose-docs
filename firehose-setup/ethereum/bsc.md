@@ -18,9 +18,9 @@ The image contains both the Firehose-patched BSC Geth binary and `fireeth`.
 
 ## Client Binary
 
-| Client | Repository |
-|--------|------------|
-| BSC Geth (Firehose-patched) | [streamingfast/bsc](https://github.com/streamingfast/bsc) |
+| Client | Repository | Source Branch | Releases |
+|--------|------------|---------------|----------|
+| BSC Geth (Firehose-patched) | [streamingfast/go-ethereum](https://github.com/streamingfast/go-ethereum) | [release/bnb-1.x-fh3.0](https://github.com/streamingfast/go-ethereum/tree/release/bnb-1.x-fh3.0) | [bnb-*](https://github.com/streamingfast/go-ethereum/releases?q=bnb&expanded=true) |
 
 ## Networks
 
@@ -63,5 +63,5 @@ fireeth start reader-node <apps> \
 ## Resources
 
 - [BSC Documentation](https://docs.bnbchain.org/)
-- [streamingfast/bsc](https://github.com/streamingfast/bsc)
 - [BSC Node Best Practices](https://docs.bnbchain.org/bnb-smart-chain/developers/node_operators/node_best_practices/)
+- [streamingfast/go-ethereum](https://github.com/streamingfast/go-ethereum)

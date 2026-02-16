@@ -16,7 +16,11 @@ This guide does not cover how to sync an Ethereum node. For node synchronization
 |-----------|------------|--------|
 | Firehose | [firehose-ethereum](https://github.com/streamingfast/firehose-ethereum) | `fireeth` |
 
-The `fireeth` binary includes all `firecore` functionality plus Ethereum-specific features and commands. Download releases from the [GitHub releases page](https://github.com/streamingfast/firehose-ethereum/releases).
+The `fireeth` binary includes all `firecore` functionality plus Ethereum-specific features and commands. Download releases from the [GitHub releases page](https://github.com/streamingfast/firehose-ethereum/releases) or use published Docker images from [GitHub Container Registry](https://github.com/streamingfast/firehose-ethereum/pkgs/container/firehose-ethereum).
+
+{% hint style="info" %}
+For Reader Nodes, each network provides bundle Docker images containing both `fireeth` and the network's Firehose-patched node binary. See the [network-specific guides](#supported-networks) below for Docker image references.
+{% endhint %}
 
 ## Supported Networks
 
