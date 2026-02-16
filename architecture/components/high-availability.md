@@ -4,31 +4,27 @@ description: High availability for StreamingFast Firehose  components
 
 # High Availability
 
-## Firehose-enabled Blockchain Node
+## Reader Node
 
-Coming soon.
-
-## Reader
-
-Placing multiple [Reader](reader.md) components side by side, and fronted by one or more Relayers, allows for highly available setups; a core attribute of the Firehose design.
+Placing multiple [Reader Node](reader.md) components side by side, and fronted by one or more Relayers, allows for highly available setups; a core attribute of the Firehose design.
 
 A Relayer connected to multiple Readers will deduplicate the incoming stream and push the first block downstream.
 
 {% hint style="success" %}
-_**Tip**: Two Reader components will even race to push the data first. The system is designed to leverage this racing_ [_Reader_](reader.md) _feature to the benefit of the end-user by producing the lowest latency possible._
+_**Tip**: Two Reader Node components will even race to push the data first. The system is designed to leverage this racing_ [_Reader Node_](reader.md) _feature to the benefit of the end-user by producing the lowest latency possible._
 {% endhint %}
 
 ### Data Aggregation
 
-Firehose also aggregates any forked blocks that would be seen by a single Reader component, and not seen by any other [Reader](reader.md) components.
+Firehose also aggregates any forked blocks that would be seen by a single Reader Node component, and not seen by any other [Reader Node](reader.md) components.
 
 ### Component Cooperation
 
-Adding Reader components and dispersing each one geographically will result in the components actually racing to transfer blocks to the Relayer component. This cooperation between the [Reader](reader.md) and [Relayer](relayer.md) components _significantly_ increases the performance of Firehose.
+Adding Reader Node components and dispersing each one geographically will result in the components actually racing to transfer blocks to the Relayer component. This cooperation between the [Reader Node](reader.md) and [Relayer](relayer.md) components _significantly_ increases the performance of Firehose.
 
 ## Merger
 
-A single [Merger](merger.md) component is required for Reader nodes in a highly available Firehose.
+A single [Merger](merger.md) component is required for Reader Node components in a highly available Firehose.
 
 Highly available systems usually connect to the [Relayer](relayer.md) component to receive real-time blocks. Merged blocked files are used when Relayer components can't provide the requested data or satisfy a range.
 
@@ -40,10 +36,10 @@ Restarts from other components can be sustained and time provided for [Merger](m
 
 ## Relayer
 
-A [Relayer](relayer.md) component in a highly available Firehose will feed from all of the Reader nodes to gain a complete view of all possible forks.
+A [Relayer](relayer.md) component in a highly available Firehose will feed from all of the Reader Node components to gain a complete view of all possible forks.
 
 {% hint style="success" %}
-**Tip**_: Multiple_ [_Reader_](reader.md) _components will ensure blocks are flowing efficiently to the_ [_Relayer_](relayer.md) _component and throughout Firehose._
+**Tip**_: Multiple_ [_Reader Node_](reader.md) _components will ensure blocks are flowing efficiently to the_ [_Relayer_](relayer.md) _component and throughout Firehose._
 {% endhint %}
 
 ## Firehose gRPC Server

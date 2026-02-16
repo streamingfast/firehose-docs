@@ -1,27 +1,68 @@
-# Overview
+# Deployment Guide
 
-Usually, to set up a Firehose environment you need:
+This deployment guide provides **chain-agnostic** instructions for deploying Firehose. The concepts, commands, and deployment patterns shown here can be applied to any blockchain that has Firehose support.
 
-* A [Firecore](https://github.com/streamingfast/firehose-core) binary, which spins up the different components needed (reader, merger, relayer...).
-* A Firehose chain-specific binary, which is used as a bridge between Firecore and the blockchain.
-* A full instrumented node or an RPC to fetch the blockchain data.
+{% hint style="info" %}
+We use [dummy-blockchain](https://github.com/streamingfast/dummy-blockchain) as our example throughout this guide. This is a simple test blockchain that demonstrates all Firehose concepts without the complexity of a real blockchain.
+{% endhint %}
 
-## The Firecore
+## Prerequisites
 
-Firecore allows you to spin up all the different Firehose component needed, such as the reader or the relayer. The Firecore is a binary exported in the form of a CLI, so you can easily interact with it.
+Before starting, you'll need:
 
-You can download the latest version of Firecore from the [release page of GitHub](https://github.com/streamingfast/firehose-core/releases).
+1. **Firecore binary**: Download from [firehose-core releases](https://github.com/streamingfast/firehose-core/releases)
+2. **Dummy blockchain binary**: Install the example blockchain client
 
-## The Chain-Specific Binary
+### Installing Dummy Blockchain
 
-Every chain has a different data model (e.g. Ethereum vs Solana), therefore, Firehose needs to extract the data of every blockchain differently. In order for Firehose to support a new chain, a new extraction layer must be created. This extraction layer is then used by Firecore to interact with the different _base components_.
+```bash
+# Install the dummy blockchain binary
+go install github.com/streamingfast/dummy-blockchain@latest
 
-Essentially, Firecore acts as the coordinator and uses the chain-specific binary. Some examples of chain-specific binaries are [firehose-ethereum](https://github.com/streamingfast/firehose-ethereum) or [firehose-solana](https://github.com/streamingfast/firehose-solana).
+# Verify installation
+dummy-blockchain --help
+```
 
-## Instrumented Node or RPC
+The dummy blockchain can be run standalone with:
+```bash
+dummy-blockchain start --store-dir=<data-dir> --block-rate=180
+```
 
-Firehose is only an extraction engine, so you still have to provide a valid source of data. There are two modes in which Firehose can extract data:
+## Deployment Options
 
-**- Instrumented Node:** in this case, you run a full blockchain node (e.g. `geth` for Ethereum). Note that this requires the node to share the same instrumentation interface used by Firehose, so that it is possible to extract all the data required.&#x20;
+Choose your deployment approach based on your needs:
 
-**- RPC Poller:** in this case, you are DO NOT run the full node, but rely on the RPC API of the blockchain, which usually offers you a poorer data model.
+### 🏠 [Single Machine Deployment](single-machine-deployment.md)
+**Recommended for**: Development, testing, small-scale production
+
+- All components run on one machine
+- Shared local storage between components
+- Simpler setup and management
+- Lower resource requirements
+
+### 🏢 [Distributed Deployment](distributed-deployment.md) 
+**Recommended for**: Production, high-availability, scalability
+
+- Components run as separate processes/services
+- Shared object storage (cloud storage)
+- Horizontal scalability
+- Production-ready architecture
+
+## Architecture Overview
+
+Both deployment patterns use the same core [Firehose architecture](../architecture/README.md):
+
+1. **Reader**: Manages the blockchain node and extracts block data
+2. **Merger**: Combines one-block files into merged block files
+3. **Relayer**: Streams live blocks to consumers
+4. **Firehose**: Serves historical and live block data via gRPC
+5. **Substreams Tier 1**: Handles consumer requests and coordinates parallel processing
+6. **Substreams Tier 2**: Executes WASM modules for parallel historical data transformation
+
+{% hint style="info" %}
+**About Substreams**: Substreams is a high-performance parallel data transformation engine that runs alongside Firehose. It enables users to define custom data pipelines in Rust/WASM that execute directly within your infrastructure. Running Substreams adds significant value for users while reusing the same block storage as Firehose. See [Substreams Component](../architecture/components/substreams.md) for details.
+{% endhint %}
+
+{% hint style="info" %}
+For detailed information about each component, see the [Architecture Components](../architecture/components/README.md) documentation.
+{% endhint %}
