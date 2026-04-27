@@ -13,10 +13,10 @@ Monad runs its own node stack (`monad-bft` + `monad-execution`), distributed as 
 ## Docker Image
 
 ```
-ghcr.io/streamingfast/evm-firehose-tracer-rs/monad:<version>
+ghcr.io/streamingfast/monad-firehose-tracer:<version>
 ```
 
-[View available versions on GitHub Packages](https://github.com/streamingfast/evm-firehose-tracer-rs/pkgs/container/evm-firehose-tracer-rs%2Fmonad)
+[View available versions on GitHub Packages](https://github.com/streamingfast/monad-firehose-tracer/pkgs/container/monad-firehose-tracer)
 
 The image contains both the `monad-firehose-tracer` binary and `fireeth`.
 
@@ -24,7 +24,7 @@ The image contains both the `monad-firehose-tracer` binary and `fireeth`.
 
 | Client | Repository | Releases |
 |--------|------------|----------|
-| Monad Firehose Tracer | [streamingfast/evm-firehose-tracer-rs](https://github.com/streamingfast/evm-firehose-tracer-rs) | [GitHub Packages](https://github.com/streamingfast/evm-firehose-tracer-rs/pkgs/container/evm-firehose-tracer-rs%2Fmonad) |
+| Monad Firehose Tracer | [streamingfast/monad-firehose-tracer](https://github.com/streamingfast/monad-firehose-tracer) | [GitHub Packages](https://github.com/streamingfast/monad-firehose-tracer/pkgs/container/monad-firehose-tracer) |
 
 ## Networks
 
@@ -43,8 +43,8 @@ Monad requires a running Monad BFT node alongside the tracer. Refer to the [Mona
 ```bash
 fireeth start reader-node <apps> \
   --advertise-chain-name="monad-mainnet" \
-  --reader-node-path="/path/to/monad-firehose-tracer" \
-  --reader-node-arguments="--chain-id=143 --monad-event-ring-path=/dev/hugepages/event-rings/monad-events --event-channel-buffer-size=524288" \
+  --reader-node-path="monad-firehose-tracer" \
+  --reader-node-arguments="--chain-id=143 --network-name=monad-mainnet --monad-event-ring-path=/dev/hugepages/event-rings/monad-events --event-channel-buffer-size=524288" \
   <other_flags...>
 ```
 
@@ -53,11 +53,12 @@ fireeth start reader-node <apps> \
 | Flag | Description |
 |------|-------------|
 | `--chain-id` | Monad chain ID (`143` for mainnet) |
+| `--network-name` | Network name (e.g. `monad-mainnet`) |
 | `--monad-event-ring-path` | Path to the execution event ring (e.g. `/dev/hugepages/event-rings/monad-events`) |
 | `--event-channel-buffer-size` | Internal event channel buffer size (default: `524288`) |
 
 ## Resources
 
 - [Monad Documentation](https://docs.monad.xyz/)
-- [evm-firehose-tracer-rs](https://github.com/streamingfast/evm-firehose-tracer-rs)
+- [monad-firehose-tracer](https://github.com/streamingfast/monad-firehose-tracer)
 - [firehose-ethereum GitHub](https://github.com/streamingfast/firehose-ethereum)
