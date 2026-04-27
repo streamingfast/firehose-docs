@@ -36,6 +36,7 @@ Firehose for Ethereum supports **Geth and Geth forks**. Each network requires a 
 | Optimism Mainnet, Sepolia | [Optimism](optimism.md) |
 | Polygon PoS | [Polygon](polygon.md) |
 | Unichain | [Unichain](unichain.md) |
+| Monad Mainnet | [Monad](monad.md) |
 | Worldchain | [Worldchain](worldchain.md) |
 
 ## Common Configuration
