@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "docs-only repo, no tests to run"
+
+  docker-build-amd64:
+    name: docker-build (amd64)
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "docs-only repo, no docker build"
+
+  docker-build-arm64:
+    name: docker-build (arm64)
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "docs-only repo, no docker build"
