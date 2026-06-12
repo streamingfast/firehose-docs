@@ -1,0 +1,14 @@
+# This is a dummy action doing nothing to respect StreamingFast Pull Request's required checks
+name: Build docker image
+
+on:
+  pull_request:
+
+jobs:
+  docker-build:
+    strategy:
+      matrix:
+        architecture: [amd64, arm64]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "docs-only repo, no docker build"
