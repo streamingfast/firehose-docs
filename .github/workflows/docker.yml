@@ -1,3 +1,4 @@
+# This is a dummy action doing nothing to respect StreamingFast Pull Request's required checks
 name: Build docker image
 
 on:
