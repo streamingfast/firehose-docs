@@ -26,6 +26,7 @@ Ethereum and EVM-compatible chains use `fireeth` and share similar configuration
 | [Optimism](../ethereum/optimism.md) | Native Firehose | OP Stack, requires OP Node |
 | [Polygon](../ethereum/polygon.md) | Native Firehose | Bor client |
 | [Unichain](../ethereum/unichain.md) | Native Firehose | OP Stack |
+| [Monad](../ethereum/monad.md) | Native Firehose | Monad BFT |
 | [Worldchain](../ethereum/worldchain.md) | Native Firehose | OP Stack |
 | [Avalanche](../avalanche/README.md) | RPC Poller | C-Chain via RPC |
 | [Sei](../sei/README.md) | Native Firehose | Cosmos SDK + EVM |
