@@ -1,0 +1,11 @@
+# This is a dummy action doing nothing to respect StreamingFast Pull Request's required checks
+name: test
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "docs-only repo, no tests to run"
